@@ -48,8 +48,5 @@
     //atalho para o contato
 	Router::connect('/contato', array('controller' => 'contato', 'action' => 'index'));
 
-    //encaminha outras requisicoes para o controller pages
-    Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
-	//Exemplo: /teste
 	
 ?>

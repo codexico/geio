@@ -1,1 +1,7 @@
 2010-03-02 23:15:39 Notice: Notice (1024): Please change the value of 'Security.salt' in app/config/core.php to a salt value specific to your application in [CORE/cake/libs/debugger.php, line 549]
+2010-03-13 08:12:23 Notice: Notice (8): Undefined variable: grupos in [APP/views/users/add.ctp, line 10]
+2010-03-13 08:12:48 Notice: Notice (8): Undefined variable: groups in [APP/views/users/add.ctp, line 10]
+2010-03-13 08:14:40 Notice: Notice (8): Undefined variable: groups in [APP/views/users/add.ctp, line 10]
+2010-03-13 08:26:09 Notice: Notice (8): Undefined index: Usuario in [APP/models/user.php, line 25]
+2010-03-13 08:26:09 Notice: Notice (8): Undefined variable: groups in [APP/views/users/add.ctp, line 16]
+2010-03-13 08:26:59 Notice: Notice (8): Undefined variable: groups in [APP/views/users/add.ctp, line 16]
