@@ -28,7 +28,7 @@ class User extends AppModel {
 
         return true;
     }
-    
+
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
     var $belongsTo = array(
@@ -110,5 +110,25 @@ class User extends AppModel {
 
         return true;
     }
+
+    /**
+     * After save callback
+     *
+     * Update the aro for the user.
+     *
+     * @access public
+     * @return void
+     */
+    function afterSave($created) {
+        if (!$created) {
+            $parent = $this->parentNode();
+            $parent = $this->node($parent);
+            $node = $this->node();
+            $aro = $node[0];
+            $aro['Aro']['parent_id'] = $parent[0]['Aro']['id'];
+            $this->Aro->save($aro);
+        }
+    }
+    
 }
 ?>

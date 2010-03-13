@@ -6,16 +6,21 @@ class UsersController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('*');
+        //$this->Auth->allow('*');
     }
 
 
     function login() {
-        //Auth Magic
+        if ($this->Session->read('Auth.User')) {
+            $this->Session->setFlash('You are logged in!');
+            $this->redirect('/', null, false);
+        }
     }
 
     function logout() {
-        //Leave empty for now.
+        $this->Session->setFlash('Good-Bye');
+        $this->redirect($this->Auth->logout());
+
     }
 
 
@@ -44,7 +49,7 @@ class UsersController extends AppController {
         }
         $groups = $this->User->Group->find('list', array('fields' => array('Group.name')));
         $this->set(compact('groups'));
-        
+
     }
 
     function edit($id = null) {
@@ -77,6 +82,31 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('The User could not be deleted. Please, try again.', true));
         $this->redirect(array('action' => 'index'));
     }
+
+
+
+
+
+    function initDB() {
+        $group =& $this->User->Group;
+
+        //admin
+        $group->id = 1;
+        $this->Acl->allow($group, 'controllers');
+
+        //usuarios do sistema
+        $group->id = 2;
+        $this->Acl->deny($group, 'controllers');
+        $this->Acl->allow($group, 'controllers/Promotores');
+        $this->Acl->allow($group, 'controllers/Trocas/index');
+        $this->Acl->allow($group, 'controllers/Trocas/view');
+
+        //promotores
+        $group->id = 3;
+        $this->Acl->deny($group, 'controllers');
+        $this->Acl->allow($group, 'controllers/Trocas/add');
+    }
+
 
 }
 ?>
