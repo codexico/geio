@@ -5,6 +5,7 @@
 	<?php
 		echo $form->input('id');
 		echo $form->input('nome');
+		echo $form->input('email');
 		echo $form->input('user_id');
 	?>
 	</fieldset>

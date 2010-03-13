@@ -13,7 +13,7 @@ class AppController extends Controller {
         $this->Auth->authorize = 'actions';
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
+        $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
 
         //AuthComponent needs to know about the existence of this root node
         $this->Auth->actionPath = 'controllers/';

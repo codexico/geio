@@ -4,6 +4,8 @@ class UsuariosController extends AppController {
     var $name = 'Usuarios';
     var $helpers = array('Html', 'Form');
 
+    var $uses = array('Usuario','User');
+
     function beforeFilter() {
         parent::beforeFilter();
         //$this->Auth->allowedActions = array('index', 'view');
@@ -25,6 +27,20 @@ class UsuariosController extends AppController {
 
     function add() {
         if (!empty($this->data)) {
+            debug($this->data);
+
+            //grupo dos promotores
+            $this->data['User']['group_id'] = 2; //TODO: fazer dinamico, ou usar ACL, ou usar uma CONSTANTE, ...
+
+            if($this->User->Usuario->saveall($this->data)) {// lembrar que so funciona se o mysql for InnoDB
+                $this->Session->setFlash(__('The Usuario has been saved', true));
+                $this->redirect(array('action' => 'index'));
+            }else {
+                $this->data['User']['password'] = '';//zerar o password
+                $this->Session->setFlash(__('The Usuario could not be saved. Please, try again.', true));
+            }
+
+            /*
             $this->Usuario->create();
             if ($this->Usuario->save($this->data)) {
                 $this->Session->setFlash(__('The Usuario has been saved', true));
@@ -32,6 +48,8 @@ class UsuariosController extends AppController {
             } else {
                 $this->Session->setFlash(__('The Usuario could not be saved. Please, try again.', true));
             }
+             *
+             */
         }
     }
 
@@ -58,7 +76,13 @@ class UsuariosController extends AppController {
             $this->Session->setFlash(__('Invalid id for Usuario', true));
             $this->redirect(array('action' => 'index'));
         }
-        if ($this->Usuario->del($id)) {
+
+        //nao existe um deleteAll() para deletar o modelo e o belongTo ao mesmo tempo?
+        $usuario = $this->Usuario->findById($id);
+
+        //if ($this->Usuario->del($id)) {
+        if ($this->Usuario->del($id) && $this->User->del($usuario['User']['id'])) {
+
             $this->Session->setFlash(__('Usuario deleted', true));
             $this->redirect(array('action' => 'index'));
         }

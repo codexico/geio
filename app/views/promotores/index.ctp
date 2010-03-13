@@ -1,3 +1,6 @@
+<?php 
+//debug($promotores);
+?>
 <div class="promotores index">
 <h2><?php __('Promotores');?></h2>
 <p>
@@ -8,15 +11,22 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('id');?></th>
+	<!--<th><?php echo $paginator->sort('id');?></th>-->
 	<th><?php echo $paginator->sort('nome');?></th>
 	<th><?php echo $paginator->sort('email');?></th>
-	<th><?php echo $paginator->sort('rg');?></th>
+	<th><?php echo $paginator->sort('Login','User.username');?></th>
+        <!--
 	<th><?php echo $paginator->sort('user_id');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
 	<th><?php echo $paginator->sort('modified');?></th>
+        -->
 	<th><?php echo $paginator->sort('tel');?></th>
 	<th><?php echo $paginator->sort('cel');?></th>
+
+        <!--
+	<th><?php echo $paginator->sort('rg');?></th>
+        <th><?php echo $paginator->sort('cpf');?></th>
+        -->
 	<th><?php echo $paginator->sort('obs');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -29,9 +39,11 @@ foreach ($promotores as $promotor):
 	}
 ?>
 	<tr<?php echo $class;?>>
+            <!--
 		<td>
 			<?php echo $promotor['Promotor']['id']; ?>
 		</td>
+            -->
 		<td>
 			<?php echo $promotor['Promotor']['nome']; ?>
 		</td>
@@ -39,8 +51,9 @@ foreach ($promotores as $promotor):
 			<?php echo $promotor['Promotor']['email']; ?>
 		</td>
 		<td>
-			<?php echo $promotor['Promotor']['rg']; ?>
+			<?php echo $promotor['User']['username']; ?>
 		</td>
+                <!--
 		<td>
 			<?php echo $promotor['Promotor']['user_id']; ?>
 		</td>
@@ -50,12 +63,21 @@ foreach ($promotores as $promotor):
 		<td>
 			<?php echo $promotor['Promotor']['modified']; ?>
 		</td>
+                -->
 		<td>
 			<?php echo $promotor['Promotor']['tel']; ?>
 		</td>
 		<td>
 			<?php echo $promotor['Promotor']['cel']; ?>
 		</td>
+                <!--
+		<td>
+			<?php echo $promotor['Promotor']['rg']; ?>
+		</td>
+		<td>
+			<?php echo $promotor['Promotor']['cpf']; ?>
+		</td>
+                -->
 		<td>
 			<?php echo $promotor['Promotor']['obs']; ?>
 		</td>

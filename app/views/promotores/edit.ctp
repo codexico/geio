@@ -7,7 +7,10 @@
 		echo $form->input('nome');
 		echo $form->input('email');
 		echo $form->input('rg');
-		echo $form->input('user_id');
+		echo $form->input('cpf');
+		//echo $form->hidden('user_id');
+		//echo $form->hidden('User.id');
+		//echo $form->input('User.username', array('label' => 'Login'));
 		echo $form->input('tel');
 		echo $form->input('cel');
 		echo $form->input('obs');
