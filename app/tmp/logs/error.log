@@ -21,3 +21,84 @@
 2010-03-13 14:20:24 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
 2010-03-13 17:43:04 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
 2010-03-13 17:43:50 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:16:13 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:16:49 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:17:52 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:18:21 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:18:39 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:20:03 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:20:25 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:21:14 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:22:02 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:22:42 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:24:02 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:26:07 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:28:39 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:28:53 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 19:29:55 Warning: Warning (2): preg_match() [<a href='http://php.net/function.preg-match'>function.preg-match</a>]: Delimiter must not be alphanumeric or backslash in [CORE/cake/libs/model/model.php, line 2506]
+2010-03-13 21:29:09 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [CORE/cake/libs/view/helpers/form.php, line 591]
+2010-03-13 21:29:22 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [CORE/cake/libs/view/helpers/form.php, line 591]
+2010-03-13 21:29:32 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [CORE/cake/libs/view/helpers/form.php, line 591]
+2010-03-13 21:29:45 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [CORE/cake/libs/view/helpers/form.php, line 591]
+2010-03-13 21:32:34 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [CORE/cake/libs/view/helpers/form.php, line 591]
+2010-03-13 21:33:36 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [CORE/cake/libs/view/helpers/form.php, line 591]
+2010-03-14 01:49:11 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 1
+            [username] => admin
+            [group_id] => 1
+            [created] => 2010-03-13 08:15:14
+            [modified] => 2010-03-13 08:15:14
+        )
+
+)
+
+Aco: controllers/Lojas/index in [CORE/cake/libs/controller/components/acl.php, line 239]
+2010-03-14 01:49:21 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 1
+            [username] => admin
+            [group_id] => 1
+            [created] => 2010-03-13 08:15:14
+            [modified] => 2010-03-13 08:15:14
+        )
+
+)
+
+Aco: controllers/Lojas/index in [CORE/cake/libs/controller/components/acl.php, line 239]
+2010-03-14 01:51:17 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 1
+            [username] => admin
+            [group_id] => 1
+            [created] => 2010-03-13 08:15:14
+            [modified] => 2010-03-13 08:15:14
+        )
+
+)
+
+Aco: controllers/Lojas/index in [CORE/cake/libs/controller/components/acl.php, line 239]
+2010-03-14 01:51:57 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 1
+            [username] => admin
+            [group_id] => 1
+            [created] => 2010-03-13 08:15:14
+            [modified] => 2010-03-13 08:15:14
+        )
+
+)
+
+Aco: controllers/Funcionarios/index in [CORE/cake/libs/controller/components/acl.php, line 239]

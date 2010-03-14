@@ -12,6 +12,15 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('nome');?></th>
 	<th><?php echo $paginator->sort('rg');?></th>
 	<th><?php echo $paginator->sort('cpf');?></th>
+	<th><?php echo $paginator->sort('email');?></th>
+	<th><?php echo $paginator->sort('cel');?></th>
+	<th><?php echo $paginator->sort('tel');?></th>
+	<th><?php echo $paginator->sort('sexo');?></th>
+	<th><?php echo $paginator->sort('nascimento');?></th>
+	<th><?php echo $paginator->sort('estado_civil');?></th>
+	<th><?php echo $paginator->sort('grau_de_instrucao');?></th>
+	<th><?php echo $paginator->sort('profissao');?></th>
+	<th><?php echo $paginator->sort('obs');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
 	<th><?php echo $paginator->sort('modified');?></th>
 	<th class="actions"><?php __('Actions');?></th>
@@ -36,6 +45,33 @@ foreach ($consumidores as $consumidor):
 		</td>
 		<td>
 			<?php echo $consumidor['Consumidor']['cpf']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['email']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['cel']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['tel']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['sexo']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['nascimento']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['estado_civil']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['grau_de_instrucao']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['profissao']; ?>
+		</td>
+		<td>
+			<?php echo $consumidor['Consumidor']['obs']; ?>
 		</td>
 		<td>
 			<?php echo $consumidor['Consumidor']['created']; ?>
