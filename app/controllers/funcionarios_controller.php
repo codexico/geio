@@ -27,6 +27,8 @@ class FuncionariosController extends AppController {
 				$this->Session->setFlash(__('The Funcionario could not be saved. Please, try again.', true));
 			}
 		}
+            $lojas = $this->Funcionario->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
+            $this->set(compact('lojas'));
 	}
 
 	function edit($id = null) {

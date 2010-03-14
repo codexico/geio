@@ -6,7 +6,7 @@
 		echo $form->input('razao_social');
 		echo $form->input('nome_fantasia');
 		echo $form->input('participante');
-		echo $form->input('cnpj');
+		echo $form->input('cnpj', array('label' => 'CNPJ (formato XX.XXX.XXX/XXXX-XX)'));
 		echo $form->input('numero_da_loja');
 		echo $form->input('ramo_de_atividade');
 		echo $form->input('contato');

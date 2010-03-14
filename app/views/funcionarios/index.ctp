@@ -1,3 +1,6 @@
+<?php
+//debug($funcionarios);
+?>
 <div class="funcionarios index">
 <h2><?php __('Funcionarios');?></h2>
 <p>
@@ -46,7 +49,10 @@ foreach ($funcionarios as $funcionario):
 			<?php echo $funcionario['Funcionario']['cpf']; ?>
 		</td>
 		<td>
-			<?php echo $funcionario['Funcionario']['loja_id']; ?>
+			<?php 
+                        //echo $funcionario['Funcionario']['loja_id'];
+                        echo $funcionario['Loja']['nome_fantasia'];
+                        ?>
 		</td>
 		<td>
 			<?php echo $funcionario['Funcionario']['tel']; ?>

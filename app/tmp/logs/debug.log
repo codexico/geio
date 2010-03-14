@@ -69,3 +69,6 @@
 2010-03-13 23:05:02 Notice: Notice (8): Undefined variable: data in [APP/views/consumidores/edit.ctp, line 2]
 2010-03-13 23:06:13 Notice: Notice (8): Use of undefined constant Consumidor - assumed 'Consumidor' in [APP/views/consumidores/edit.ctp, line 24]
 2010-03-13 23:06:13 Notice: Notice (8): Use of undefined constant nascimento - assumed 'nascimento' in [APP/views/consumidores/edit.ctp, line 24]
+2010-03-14 04:10:17 Notice: Notice (8): Undefined variable: groups in [APP/views/funcionarios/add.ctp, line 11]
+2010-03-14 04:10:35 Notice: Notice (8): Undefined variable: lojas in [APP/views/funcionarios/add.ctp, line 11]
+2010-03-14 04:14:04 Notice: Notice (8): Undefined variable: funcionario in [APP/views/funcionarios/index.ctp, line 2]

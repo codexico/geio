@@ -102,3 +102,4 @@ Aro: Array
 )
 
 Aco: controllers/Funcionarios/index in [CORE/cake/libs/controller/components/acl.php, line 239]
+2010-03-14 03:49:57 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1062: Duplicate entry '0' for key 'PRIMARY'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]

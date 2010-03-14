@@ -20,7 +20,7 @@ class ConsumidoresController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-                    debug($this->data);
+                    //debug($this->data);
 			$this->Consumidor->create();
 			if ($this->Consumidor->save($this->data)) {
 				$this->Session->setFlash(__('The Consumidor has been saved', true));

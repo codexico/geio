@@ -3,7 +3,6 @@ class LojasController extends AppController {
 
 	var $name = 'Lojas';
 	var $helpers = array('Html', 'Form');
-        
 
 	function index() {
 		$this->Loja->recursive = 0;
