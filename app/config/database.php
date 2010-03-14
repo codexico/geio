@@ -78,16 +78,17 @@
  */
 class DATABASE_CONFIG {
 
+
 	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => 'campanha2',
-		'prefix' => '',
+		'database' => 'geio',
+		'prefix' => 'shoppingteste_',
 	);
-
+        
 	var $test = array(
 		'driver' => 'mysql',
 		'persistent' => false,
