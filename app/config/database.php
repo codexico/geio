@@ -77,7 +77,18 @@
  *
  */
 class DATABASE_CONFIG {
-
+    /*
+    	var $default = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => '187.45.196.152',
+		'login' => 'geio',
+		'password' => 'qui20fa10',
+		'database' => 'geio',
+		'prefix' => 'shoppingteste_',
+	);
+     * 
+     */
 
 	var $default = array(
 		'driver' => 'mysql',
