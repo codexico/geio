@@ -2,13 +2,6 @@
 class Troca extends AppModel {
 
 	var $name = 'Troca';
-	var $validate = array(
-		'valor_total' => array('numeric'),
-		'qtd_CF' => array('numeric'),
-		'qtd_CP' => array('numeric'),
-		'promotor_id' => array('numeric'),
-		'consumidor_id' => array('numeric')
-	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -25,6 +18,35 @@ class Troca extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		)
+	);
+
+	var $hasMany = array(
+		'CupomFiscal' => array(
+			'className' => 'CupomFiscal',
+			'foreignKey' => 'troca_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'CupomPromocional' => array(
+			'className' => 'CupomPromocional',
+			'foreignKey' => 'troca_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 

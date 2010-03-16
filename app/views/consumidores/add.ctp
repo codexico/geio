@@ -5,7 +5,7 @@
         <?php
         echo $form->input('nome');
 
-        echo $form->input('rg', array('label' => 'RG (somente números)'));
+        echo $form->input('rg', array('label' => 'RG'));
         echo $form->input('cpf', array('label' => 'CPF (somente números)'));
         echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
 

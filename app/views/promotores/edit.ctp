@@ -7,13 +7,15 @@
 		echo $form->input('nome');
 		echo $form->input('email');
 		echo $form->input('rg');
-		echo $form->input('cpf');
 		//echo $form->hidden('user_id');
 		//echo $form->hidden('User.id');
 		//echo $form->input('User.username', array('label' => 'Login'));
-		echo $form->input('tel');
-		echo $form->input('cel');
-		echo $form->input('obs');
+        echo $form->input('cpf', array('label' => 'CPF (somente números)'));
+
+        echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+        echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+
+        echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

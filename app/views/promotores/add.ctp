@@ -14,7 +14,7 @@
         echo $form->input('nome');
         echo $form->input('email');
         
-        echo $form->input('rg', array('label' => 'RG (somente números)'));
+        echo $form->input('rg', array('label' => 'RG'));
         echo $form->input('cpf', array('label' => 'CPF (somente números)'));
         
         echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));

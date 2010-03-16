@@ -9,9 +9,6 @@ echo $paginator->counter(array(
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('valor_total');?></th>
-	<th><?php echo $paginator->sort('qtd_CF');?></th>
-	<th><?php echo $paginator->sort('qtd_CP');?></th>
 	<th><?php echo $paginator->sort('promotor_id');?></th>
 	<th><?php echo $paginator->sort('consumidor_id');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
@@ -29,15 +26,6 @@ foreach ($trocas as $troca):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php echo $troca['Troca']['id']; ?>
-		</td>
-		<td>
-			<?php echo $troca['Troca']['valor_total']; ?>
-		</td>
-		<td>
-			<?php echo $troca['Troca']['qtd_CF']; ?>
-		</td>
-		<td>
-			<?php echo $troca['Troca']['qtd_CP']; ?>
 		</td>
 		<td>
 			<?php echo $troca['Troca']['promotor_id']; ?>

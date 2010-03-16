@@ -13,7 +13,7 @@ class Funcionario extends AppModel {
                             'required' => true,
                             'message' => 'Cpf inválido'),
 
-            'rg' => array('rule' => 'numeric',
+            'rg' => array('rule' => 'notempty',
                             'required' => true,
                             'message' => 'Favor preencher o RG'),
 

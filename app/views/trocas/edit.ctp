@@ -4,9 +4,6 @@
  		<legend><?php __('Edit Troca');?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('valor_total');
-		echo $form->input('qtd_CF');
-		echo $form->input('qtd_CP');
 		echo $form->input('promotor_id');
 		echo $form->input('consumidor_id');
 	?>

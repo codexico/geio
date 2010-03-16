@@ -20,8 +20,10 @@ class Promotor extends AppModel {
                             'required' => true,
                             'message' => 'Email inválido'),
 
-            'rg' => array('numeric',
-                            'required' => true),
+            'rg' => array('rule' => 'notempty',
+                            'required' => true,
+                            'message' => 'Favor preencher o RG'),
+        
             'cpf' => array('rule' => array('cpf',true),
                             'required' => true,
                             'message' => 'Cpf inválido'),

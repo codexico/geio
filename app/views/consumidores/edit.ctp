@@ -8,12 +8,14 @@
         <?php
         echo $form->input('id');
         echo $form->input('nome');
-        echo $form->input('rg');
-        echo $form->input('cpf');
-        echo $form->input('email');
-        echo $form->input('cel');
-        echo $form->input('tel');
 
+        echo $form->input('rg', array('label' => 'RG'));
+        echo $form->input('cpf', array('label' => 'CPF (somente números)'));
+        echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+        echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+
+        echo $form->input('email');
+        
         //echo $form->input('sexo');
         echo $form->input('sexo', array('options' => array(
                 'masculino'=>'masculino',

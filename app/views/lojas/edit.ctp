@@ -9,7 +9,22 @@
 		echo $form->input('participante');
 		echo $form->input('cnpj');
 		echo $form->input('numero_da_loja');
-		echo $form->input('ramo_de_atividade');
+		//echo $form->input('ramo_de_atividade');
+
+        echo $form->input('ramo_de_atividade', array('options' => array(
+                'Calçado'=>'Calçado',
+                'Alimentação'=>'Alimentação',
+                'Confecção'=>'Confecção',
+                'Eletrônicos'=>'Eletrônicos',
+                'Brinquedos'=>'Brinquedos',
+                'Beleza e Higiene Pessoal'=>'Beleza e Higiene Pessoal',
+                'Cosméticos'=>'Cosméticos',
+                'Saúde'=>'Saúde',
+                'Serviços'=>'Serviços',
+                'outro'=>'outro'
+        ),
+        'selected'=>$this->data['Loja']['ramo_de_atividade'],
+        'empty' => true));
 		echo $form->input('contato');
 		echo $form->input('email_contato');
 		echo $form->input('telefone');

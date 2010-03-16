@@ -6,13 +6,7 @@
         echo $form->input('nome');
         echo $form->input('rg');
         echo $form->input('cpf', array('label' => 'CPF (somente números)'));
-        //echo $form->input('loja_id');
-        $label = "<label for='FuncionarioLojaId'>Loja</label>";
-        $select = $form->select('loja_id', $lojas, null, null, false);
-        echo
-        $html->div("input select",
-        $label . $select,
-        null, null, false);
+        echo $form->input('loja_id');
 
         echo $form->input('tel');
         echo $form->input('cel');
