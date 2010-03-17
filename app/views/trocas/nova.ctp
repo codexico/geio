@@ -33,7 +33,7 @@ $javascript->link(array('novatroca'), false);
                     )
                     );
                     echo $form->input('CupomFiscal.0.loja_id', array('class'=> 'nomefantasia'));
-                        echo $form->input('CupomFiscal.0.loja_razao_social',array('options'=> $lojasRazaoSocial, 'class'=>'razaosocial'));
+                    echo $form->input('CupomFiscal.0.loja_razao_social',array('options'=> $lojasRazaoSocial, 'class'=>'razaosocial'));
 
 
                     echo $form->input('CupomFiscal.0.valor');
@@ -55,7 +55,7 @@ $javascript->link(array('novatroca'), false);
                     ),
                     'selected'=>'',
                     'empty' => true));
-                    
+
                     ?>
                 </fieldset>
             </li>
@@ -65,7 +65,16 @@ $javascript->link(array('novatroca'), false);
     <?php echo $form->end('Submit');?>
 </div>
 <div class="actions">
+    <!--
     <ul>
-        <li><?php echo $html->link(__('List Trocas', true), array('action' => 'index'));?></li>
+        <li><?php 
+    //echo $html->link(__('List Trocas', true), array('action' => 'index'));?>
+    </li>
     </ul>
+
+    <?php
+    //echo $this->element('admin_links');
+    ?>
+    -->
+
 </div>

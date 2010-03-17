@@ -65,4 +65,9 @@ foreach ($cupomPromocionais as $cupomPromocional):
 	<ul>
 		<li><?php echo $html->link(__('New CupomPromocional', true), array('action' => 'add')); ?></li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

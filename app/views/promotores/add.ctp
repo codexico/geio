@@ -29,4 +29,9 @@
     <ul>
         <li><?php echo $html->link(__('List Promotores', true), array('action' => 'index'));?></li>
     </ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

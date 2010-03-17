@@ -25,4 +25,9 @@
 		<li><?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('Promotor.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Promotor.id'))); ?></li>
 		<li><?php echo $html->link(__('List Promotores', true), array('action' => 'index'));?></li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

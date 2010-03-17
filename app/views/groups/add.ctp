@@ -14,4 +14,9 @@
 		<li><?php echo $html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

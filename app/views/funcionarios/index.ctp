@@ -99,4 +99,9 @@ foreach ($funcionarios as $funcionario):
 	<ul>
 		<li><?php echo $html->link(__('New Funcionario', true), array('action' => 'add')); ?></li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

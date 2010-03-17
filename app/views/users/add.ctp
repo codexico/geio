@@ -27,4 +27,9 @@
     <ul>
         <li><?php echo $html->link(__('List Users', true), array('action' => 'index'));?></li>
     </ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

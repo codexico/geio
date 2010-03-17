@@ -99,4 +99,9 @@ foreach ($promotores as $promotor):
 	<ul>
 		<li><?php echo $html->link(__('New Promotor', true), array('action' => 'add')); ?></li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

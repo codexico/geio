@@ -37,4 +37,9 @@
 		<li><?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('Loja.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Loja.id'))); ?></li>
 		<li><?php echo $html->link(__('List Lojas', true), array('action' => 'index'));?></li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

@@ -12,7 +12,7 @@ class UsersController extends AppController {
 
     function login() {
         if ($this->Session->read('Auth.User')) {
-            $this->Session->setFlash('You are logged in!');
+            $this->Session->setFlash('Olá, '.$this->Auth->user('username').'!');
             $this->redirect('/', null, false);
         }
     }

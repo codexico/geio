@@ -35,24 +35,4 @@ $(document).ready(function() {
         })
     }
 
-/*
-
-    $('.nomefantasia').live("change", function(){
-        //var valor = $(".nomefantasia option:selected").val();
-        var valor = $(this).val();
-
-        console.log("nomefantasia =" +valor)
-        $(this).closest(".razaosocial").val(valor)
-
-    })
-
-    $('.razaosocial').live("change", function(){
-        //var valor = $(".razaosocial option:selected").val();
-        var valor = $(this).val();
-
-        console.log("razaosocial = "+valor)
-        $(this).parents().closest(".nomefantasia").val(valor)
-
-    })
-    */
 })

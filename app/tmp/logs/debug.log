@@ -108,3 +108,5 @@
 2010-03-16 19:13:40 Notice: Notice (8): Array to string conversion in [CORE/cake/libs/view/helpers/form.php, line 453]
 2010-03-16 19:14:19 Notice: Notice (8): Array to string conversion in [CORE/cake/libs/view/helper.php, line 330]
 2010-03-16 19:14:19 Notice: Notice (8): Array to string conversion in [CORE/cake/libs/view/helpers/form.php, line 453]
+2010-03-17 17:04:44 Notice: Notice (8): Undefined property: UsersController::$user in [APP/controllers/users_controller.php, line 17]
+2010-03-17 17:06:48 Notice: Notice (8): Undefined variable: user in [APP/controllers/users_controller.php, line 17]

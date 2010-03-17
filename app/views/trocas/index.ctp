@@ -57,4 +57,9 @@ foreach ($trocas as $troca):
 	<ul>
 		<li><?php echo $html->link(__('New Troca', true), array('action' => 'add')); ?></li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

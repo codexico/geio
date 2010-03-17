@@ -40,4 +40,9 @@
 		<li><?php echo $html->link(__('List Users', true), array('action' => 'index')); ?> </li>
 		<li><?php echo $html->link(__('New User', true), array('action' => 'add')); ?> </li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

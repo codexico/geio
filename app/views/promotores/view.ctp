@@ -70,4 +70,9 @@
 		<li><?php echo $html->link(__('List Promotores', true), array('action' => 'index')); ?> </li>
 		<li><?php echo $html->link(__('New Promotor', true), array('action' => 'add')); ?> </li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

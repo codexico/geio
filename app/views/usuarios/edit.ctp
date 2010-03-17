@@ -16,4 +16,9 @@
 		<li><?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('Usuario.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Usuario.id'))); ?></li>
 		<li><?php echo $html->link(__('List Usuarios', true), array('action' => 'index'));?></li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>

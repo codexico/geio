@@ -77,4 +77,9 @@ foreach ($cupomFiscais as $cupomFiscal):
 		<li><?php echo $html->link(__('List Lojas', true), array('controller' => 'lojas', 'action' => 'index')); ?> </li>
 		<li><?php echo $html->link(__('New Loja', true), array('controller' => 'lojas', 'action' => 'add')); ?> </li>
 	</ul>
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+
 </div>
