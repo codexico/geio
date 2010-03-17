@@ -124,3 +124,4 @@
 2010-03-17 17:48:38 Notice: Notice (8): Undefined variable: userauth in [APP/views/layouts/default.ctp, line 23]
 2010-03-17 17:48:38 Notice: Notice (8): Undefined property: View::$Auth in [APP/views/layouts/default.ctp, line 24]
 2010-03-17 17:48:38 Notice: Notice (8): Trying to get property of non-object in [APP/views/layouts/default.ctp, line 24]
+2010-03-17 18:04:36 Notice: Notice (8): Undefined property: View::$Auth in [APP/views/elements/admin_links.ctp, line 2]

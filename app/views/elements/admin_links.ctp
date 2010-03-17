@@ -1,4 +1,5 @@
 <ul>
+    <?php if ($session->read('Auth.User.group_id') == 1) : ?>
 
     <li><?php echo $html->link(__('List Consumidores', true), array('action' => 'index', 'controller'=>'consumidores'));?></li>
     <li><?php echo $html->link(__('New Consumidor', true), array('action' => 'add', 'controller'=>'consumidores')); ?></li>
@@ -26,5 +27,23 @@
 
     <li><?php echo $html->link(__('List Usuarios', true), array('action' => 'index', 'controller'=>'usuarios')); ?> </li>
     <li><?php echo $html->link(__('New Usuario', true), array('action' => 'add', 'controller'=>'usuarios')); ?> </li>
+
+
+    <?php elseif ($session->read('Auth.User.group_id') == 2) : /*usuario*/ ?>
+    
+    <li><?php echo $html->link(__('List Consumidores', true), array('action' => 'index', 'controller'=>'consumidores'));?></li>
+    
+    <li><?php echo $html->link(__('List Trocas', true), array('action' => 'index', 'controller'=>'trocas')); ?> </li>
+
+
+    <?php elseif ($session->read('Auth.User.group_id') == 3) : /*promotor*/ ?>
+    
+    <li><?php echo $html->link(__('New Troca', true), array('action' => 'add', 'controller'=>'trocas')); ?> </li>
+
+    
+    <?php else : ?>
+
+    
+    <?php endif; ?>
 
 </ul>
