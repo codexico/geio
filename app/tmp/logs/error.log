@@ -205,3 +205,4 @@ Aco: controllers/Trocas/nova in [CORE/cake/libs/controller/components/acl.php, l
 2010-03-16 19:13:07 Warning: Warning (2): strpos() expects parameter 1 to be string, array given in [CORE/cake/libs/view/helpers/form.php, line 452]
 2010-03-16 19:13:40 Warning: Warning (2): strpos() expects parameter 1 to be string, array given in [CORE/cake/libs/view/helpers/form.php, line 452]
 2010-03-16 19:14:19 Warning: Warning (2): strpos() expects parameter 1 to be string, array given in [CORE/cake/libs/view/helpers/form.php, line 452]
+2010-03-17 17:49:00 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/francisco/htdocs/shopping/campanha2/cake/basics.php:115) in [CORE/cake/libs/controller/controller.php, line 647]
