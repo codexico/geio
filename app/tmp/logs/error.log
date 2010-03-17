@@ -206,3 +206,7 @@ Aco: controllers/Trocas/nova in [CORE/cake/libs/controller/components/acl.php, l
 2010-03-16 19:13:40 Warning: Warning (2): strpos() expects parameter 1 to be string, array given in [CORE/cake/libs/view/helpers/form.php, line 452]
 2010-03-16 19:14:19 Warning: Warning (2): strpos() expects parameter 1 to be string, array given in [CORE/cake/libs/view/helpers/form.php, line 452]
 2010-03-17 17:49:00 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/francisco/htdocs/shopping/campanha2/cake/basics.php:115) in [CORE/cake/libs/controller/controller.php, line 647]
+2010-03-17 19:20:22 Warning: Warning (512): DbAcl::allow() - Nó inválido in [CORE/cake/libs/controller/components/acl.php, line 325]
+2010-03-17 20:06:31 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'recursive' in 'where clause'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-17 20:24:05 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Promotor.-1' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-17 20:24:10 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Promotor.-1' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]

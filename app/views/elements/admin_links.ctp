@@ -20,7 +20,7 @@
     <li><?php echo $html->link(__('New Promotor', true), array('action' => 'add', 'controller'=>'promotores')); ?> </li>
 
     <li><?php echo $html->link(__('List Trocas', true), array('action' => 'index', 'controller'=>'trocas')); ?> </li>
-    <li><?php echo $html->link(__('New Troca', true), array('action' => 'add', 'controller'=>'trocas')); ?> </li>
+    <li><?php echo $html->link(__('New Troca', true), array('action' => 'nova', 'controller'=>'trocas')); ?> </li>
 
     <li><?php echo $html->link(__('List Users', true), array('action' => 'index', 'controller'=>'users')); ?> </li>
     <li><?php echo $html->link(__('New User', true), array('action' => 'add', 'controller'=>'users')); ?> </li>

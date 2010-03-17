@@ -4,6 +4,10 @@ class TrocasController extends AppController {
     var $name = 'Trocas';
     var $helpers = array('Html', 'Form', 'Javascript');
 
+    function beforeFilter() {
+        parent::beforeFilter();
+    }
+
     function index() {
         $this->Troca->recursive = 0;
         $this->set('trocas', $this->paginate());
@@ -66,25 +70,31 @@ class TrocasController extends AppController {
 
     function nova() {
         if (!empty($this->data)) {
+            //pega o id do promotor atraves da sessao do user
+            $promotor_id = $this->Troca->Promotor->find('first', array(
+                    'recursive' => -1,
+                    'conditions' => array(
+                            'Promotor.user_id' => $this->Auth->user('id')
+            )));
+            $this->data['Troca']['promotor_id'] = $promotor_id['Promotor']['id'];
+
             $this->Troca->create();
             if ($this->Troca->saveall($this->data)) {
                 $this->Session->setFlash(__('The Troca has been saved', true));
-                $this->redirect(array('action' => 'index'));
+                //$this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The Troca could not be saved. Please, try again.', true));
             }
         }
-        $promotores = $this->Troca->Promotor->find('list', array('fields' => array('Promotor.nome')));
-        $this->set(compact('promotores'));
+
         $consumidores = $this->Troca->Consumidor->find('list', array('fields' => array('Consumidor.nome')));
-        $this->set(compact('consumidores'));
 
         $trocas = $this->Troca->find('list');
 
         $lojas = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
         $lojas_razao_social = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.razao_social')));
 
-        $this->set(compact('trocas', 'lojas', 'lojas_razao_social'));
+        $this->set(compact('consumidores', 'trocas', 'lojas', 'lojas_razao_social'));
     }
 }
 ?>

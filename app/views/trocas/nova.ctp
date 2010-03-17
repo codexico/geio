@@ -15,7 +15,6 @@ $javascript->link(array('novatroca'), false);
     <fieldset>
         <legend><?php __('Add Troca');?></legend>
         <?php
-        echo $form->input('promotor_id');
         echo $form->input('consumidor_id');
         ?>
         <ul id="cupons">
