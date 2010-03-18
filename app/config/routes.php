@@ -44,6 +44,7 @@
 	
     //atalho para o login
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	
     //atalho para o contato
 	Router::connect('/contato', array('controller' => 'contato', 'action' => 'index'));

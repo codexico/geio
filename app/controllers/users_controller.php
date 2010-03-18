@@ -106,6 +106,7 @@ class UsersController extends AppController {
         $group->id = 3;
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/Trocas/nova');
+        $this->Acl->allow($group, 'controllers/consumidores/novo');
     }
 
 

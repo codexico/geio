@@ -87,7 +87,7 @@ class TrocasController extends AppController {
             }
         }
 
-        $consumidores = $this->Troca->Consumidor->find('list', array('fields' => array('Consumidor.nome')));
+        //$consumidores = $this->Troca->Consumidor->find('list', array('fields' => array('Consumidor.nome')));
 
         $trocas = $this->Troca->find('list');
 

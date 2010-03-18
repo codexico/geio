@@ -210,3 +210,18 @@ Aco: controllers/Trocas/nova in [CORE/cake/libs/controller/components/acl.php, l
 2010-03-17 20:06:31 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'recursive' in 'where clause'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
 2010-03-17 20:24:05 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Promotor.-1' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
 2010-03-17 20:24:10 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Promotor.-1' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-18 06:01:35 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 8
+            [username] => p1
+            [group_id] => 3
+            [created] => 2010-03-13 14:41:23
+            [modified] => 2010-03-13 14:41:23
+        )
+
+)
+
+Aco: controllers/Consumidores/addAjax in [CORE/cake/libs/controller/components/acl.php, line 239]

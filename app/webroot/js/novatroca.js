@@ -35,4 +35,30 @@ $(document).ready(function() {
         })
     }
 
+//$('#ConsumidorAddAjaxForm').preventDefault();
+
+    $('#ConsumidorAddAjaxForm').submit(function(event){
+        event.preventDefault();
+
+        var dataString = $('#ConsumidorAddAjaxForm').serialize();
+        alert(dataString);
+
+        $.ajax({
+            type: "POST",
+            url: "consumidores/addAjax",
+            data: dataString,
+            success: function(xhr) {
+                //display message back to user here
+                alert("foi?")
+                return false;
+            },
+            error: function(){
+                 alert("foi erro?")
+                return false;
+            }
+        });
+        return false;
+    })
+
+
 })

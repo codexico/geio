@@ -30,20 +30,23 @@
 
 
     <?php elseif ($session->read('Auth.User.group_id') == 2) : /*usuario*/ ?>
-    
+
     <li><?php echo $html->link(__('List Consumidores', true), array('action' => 'index', 'controller'=>'consumidores'));?></li>
-    
+
     <li><?php echo $html->link(__('List Trocas', true), array('action' => 'index', 'controller'=>'trocas')); ?> </li>
 
 
     <?php elseif ($session->read('Auth.User.group_id') == 3) : /*promotor*/ ?>
-    
+
+    <li><?php echo $html->link(__('Cadastrar Consumidor', true), array('action' => 'novo', 'controller'=>'consumidores')); ?></li>
     <li><?php echo $html->link(__('New Troca', true), array('action' => 'add', 'controller'=>'trocas')); ?> </li>
 
-    
+
     <?php else : ?>
 
-    
+
+    <li><?php echo $html->link(__('Login', true), '/login'); ?> </li>
     <?php endif; ?>
+    <li><?php echo $html->link(__('Logout', true), '/logout'); ?> </li>
 
 </ul>

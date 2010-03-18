@@ -62,5 +62,37 @@ class ConsumidoresController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 
+	function addAjax() {
+		if (!empty($this->data)) {
+                    //debug($this->data);
+			$this->Consumidor->create();
+			if ($this->Consumidor->save($this->data)) {
+                            echo 'success';
+                            $this->autoRender = false;
+                            exit ();
+				//$this->Session->setFlash(__('The Consumidor has been saved', true));
+				//$this->redirect(array('action' => 'index'));
+			} else {
+                            echo 'error';
+                            $this->autoRender = false;
+                            exit ();
+				//$this->Session->setFlash(__('The Consumidor could not be saved. Please, try again.', true));
+			}
+		}
+	}
+
+
+	function novo() {
+		if (!empty($this->data)) {
+                    //debug($this->data);
+			$this->Consumidor->create();
+			if ($this->Consumidor->save($this->data)) {
+				$this->Session->setFlash(__('The Consumidor has been saved', true));
+				$this->redirect(array('controller' => 'trocas','action' => 'nova'));
+			} else {
+				$this->Session->setFlash(__('The Consumidor could not be saved. Please, try again.', true));
+			}
+		}
+	}
 }
 ?>

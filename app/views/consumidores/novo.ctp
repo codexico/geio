@@ -1,5 +1,5 @@
 <div class="consumidores form">
-    <?php echo $form->create('Consumidor');?>
+    <?php echo $form->create('Consumidor', array('action' => 'novo'));?>
     <fieldset>
         <legend><?php __('Add Consumidor');?></legend>
         <?php
