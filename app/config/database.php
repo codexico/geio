@@ -97,7 +97,7 @@ class DATABASE_CONFIG {
 		'database' => 'geio',
 		'prefix' => 'shoppingteste_',
 	);
-        
+
 	var $test = array(
 		'driver' => 'mysql',
 		'persistent' => false,
