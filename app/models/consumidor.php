@@ -13,7 +13,8 @@ class Consumidor extends AppModel {
                             'cpf-1' => array(
                                             'rule' => array('cpf',true),
                                             'required' => true,
-                                            'message' => 'Cpf inválido'),
+                                            'message' => 'Cpf inválido',
+                                            'last' => true),
                             'cpf-2' => array(
                                             'rule' => 'isUnique',
                                             'message' => 'Cpf já cadastrado')
@@ -28,7 +29,7 @@ class Consumidor extends AppModel {
                                             'rule' => 'email',
                                             'required' => false,
                                             'allowEmpty' => true,
-                                            'message' => 'Eamil inválido'
+                                            'message' => 'Email inválido'
                             ),
                             'email-2' => array(
                                             'rule' => 'isUnique',

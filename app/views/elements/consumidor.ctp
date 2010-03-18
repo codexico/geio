@@ -1,8 +1,5 @@
 <div class="consumidores view">
     <h2><?php  __('Consumidor');?></h2>
-    <p>
-<?php echo $html->link('Aceitar e ir para o cadastro de Cupons', array('controller'=>'trocas','action' => 'nova', $consumidor['Consumidor']['id'])); ?>
-    </p>
     <dl><?php $i = 0;
 $class = ' class="altrow"';?>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nome'); ?></dt>
@@ -71,7 +68,4 @@ $class = ' class="altrow"';?>
             &nbsp;
         </dd>
     </dl>
-    <p>
-<?php echo $html->link(__('Edit Consumidor', true), array('action' => 'edit', $consumidor['Consumidor']['id'])); ?>
-    </p>
 </div>

@@ -68,7 +68,17 @@ class TrocasController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
-    function nova() {
+    function nova($id = null) {
+
+        if ($id) {
+            $consumidor = $this->Troca->Consumidor->read(null, $id);
+            //debug($consumidor);
+            $this->set(compact('consumidor'));
+        }else {
+            $this->Session->setFlash('Pesquise o Consumidor antes de fazer a Troca');
+            $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+        }
+
         if (!empty($this->data)) {
             //pega o id do promotor atraves da sessao do user
             $promotor_id = $this->Troca->Promotor->find('first', array(
@@ -77,10 +87,12 @@ class TrocasController extends AppController {
                             'Promotor.user_id' => $this->Auth->user('id')
             )));
             $this->data['Troca']['promotor_id'] = $promotor_id['Promotor']['id'];
+            $this->data['Troca']['consumidor_id'] = $consumidor['Consumidor']['id'];
 
             $this->Troca->create();
             if ($this->Troca->saveall($this->data)) {
                 $this->Session->setFlash(__('The Troca has been saved', true));
+                $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
                 //$this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The Troca could not be saved. Please, try again.', true));

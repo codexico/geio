@@ -93,7 +93,7 @@ class UsersController extends AppController {
         //admin
         $group->id = 1;
         $this->Acl->allow($group, 'controllers');
-        $this->Acl->deny($group, 'controllers/Trocas/nova');
+        //$this->Acl->deny($group, 'controllers/Trocas/nova');
 
         //usuarios do sistema
         $group->id = 2;
@@ -107,7 +107,8 @@ class UsersController extends AppController {
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/Trocas/nova');
         $this->Acl->allow($group, 'controllers/consumidores/novo');
-        $this->Acl->allow($group, 'controllers/consumidores/pesquisar');
+        $this->Acl->allow($group, 'controllers/consumidores/pesquisarRgAjax');
+        $this->Acl->allow($group, 'controllers/consumidores/pesquisarCpfAjax');
     }
 
 

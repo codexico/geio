@@ -89,7 +89,7 @@ class ConsumidoresController extends AppController {
             $this->Consumidor->create();
             if ($this->Consumidor->save($this->data)) {
                 $this->Session->setFlash(__('The Consumidor has been saved', true));
-                $this->redirect(array('controller' => 'trocas','action' => 'nova'));
+                $this->redirect(array('controller' => 'trocas','action' => 'nova/'.$this->Consumidor->id));
             } else {
                 $this->Session->setFlash(__('The Consumidor could not be saved. Please, try again.', true));
             }

@@ -17,6 +17,11 @@
     </head>
     <body>
         <div id="container">
+
+    <?php
+    echo $this->element('admin_links');
+    ?>
+            
             <div id="header">
                 <h1><?php echo Configure::read('SITE_NAME'); ?> - app/views/layouts/default.ctp</h1>
                 <p>Olá <?php echo $session->read('Auth.User.username') . " ! " ?></p>

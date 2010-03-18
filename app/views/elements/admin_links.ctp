@@ -1,4 +1,6 @@
 <ul>
+    <li><?php echo $html->link(__('Início', true), '/'); ?></li>
+
     <?php if ($session->read('Auth.User.group_id') == 1) : ?>
 
     <li><?php echo $html->link(__('List Consumidores', true), array('action' => 'index', 'controller'=>'consumidores'));?></li>
@@ -38,8 +40,9 @@
 
     <?php elseif ($session->read('Auth.User.group_id') == 3) : /*promotor*/ ?>
 
-    <li><?php echo $html->link(__('Cadastrar Consumidor', true), array('action' => 'novo', 'controller'=>'consumidores')); ?></li>
-    <li><?php echo $html->link(__('New Troca', true), array('action' => 'add', 'controller'=>'trocas')); ?> </li>
+    <!-- <li><?php echo $html->link(__('Cadastrar Consumidor', true), array('action' => 'novo', 'controller'=>'consumidores')); ?></li> -->
+    <li><?php echo $html->link(__('Pesquisar Consumidor', true), array('action' => 'pesquisar', 'controller'=>'consumidores')); ?></li>
+    <!-- <li><?php echo $html->link(__('New Troca', true), array('action' => 'add', 'controller'=>'trocas')); ?> </li> -->
 
 
     <?php else : ?>
