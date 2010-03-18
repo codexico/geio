@@ -129,3 +129,6 @@
 2010-03-17 19:49:20 Notice: Notice (8): Undefined variable: session in [APP/controllers/trocas_controller.php, line 82]
 2010-03-17 19:49:46 Notice: Notice (8): Undefined variable: promotor_id in [APP/controllers/trocas_controller.php, line 83]
 2010-03-17 19:50:31 Notice: Notice (8): Undefined variable: session in [APP/controllers/trocas_controller.php, line 83]
+2010-03-18 15:39:31 Notice: Notice (8): Undefined variable: javascript in [APP/views/consumidores/pesquisar.ctp, line 2]
+2010-03-18 16:02:03 Notice: Notice (8): Undefined variable: cpf in [APP/controllers/consumidores_controller.php, line 103]
+2010-03-18 16:16:29 Notice: Notice (8): Undefined variable: consumidor in [APP/views/consumidores/pesquisar.ctp, line 5]

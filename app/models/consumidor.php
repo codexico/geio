@@ -5,22 +5,36 @@ class Consumidor extends AppModel {
 
     var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData');
 
-    
+
     var $validate = array(
             'nome' => array('notempty'),
 
-            'cpf' => array('rule' => array('cpf',true),
-                            'required' => true,
-                            'message' => 'Cpf inválido'),
+            'cpf' => array(
+                            'cpf-1' => array(
+                                            'rule' => array('cpf',true),
+                                            'required' => true,
+                                            'message' => 'Cpf inválido'),
+                            'cpf-2' => array(
+                                            'rule' => 'isUnique',
+                                            'message' => 'Cpf já cadastrado')
+            ),
 
             'rg' => array('rule' => 'notempty',
                             'required' => true,
                             'message' => 'Favor preencher o RG'),
 
-            'email' => array('rule' => array('email'),
-                            'required' => false,
-                            'allowEmpty' => true,
-                            'message' => 'Email inválido'),
+            'email' => array(
+                            'email-1' => array(
+                                            'rule' => 'email',
+                                            'required' => false,
+                                            'allowEmpty' => true,
+                                            'message' => 'Eamil inválido'
+                            ),
+                            'email-2' => array(
+                                            'rule' => 'isUnique',
+                                            'message' => 'Email já cadastrado'
+                            ),
+            ),
 
             'cel' => array('rule' => 'telefone',
                             'message' => 'Telefone inválido',
