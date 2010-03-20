@@ -4,7 +4,8 @@
 setlocale(LC_ALL, 'pt_BR', 'pt');
 Configure::write('Config.language', 'pt_BR');
 
-$config['SITE_NAME'] = 'Nome do Site';
+Configure::write('SITE_NAME', 'GEIO');
+//$config['SITE_NAME'] = 'Nome do Site';
 
 //email para o formulário de contato
 $config['EMAIL_CONTATO'] 	= 'asdf@gmail.com';

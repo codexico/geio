@@ -3,9 +3,12 @@
     <head>
         <?php echo $html->charset(); ?>
         <title>
-            <?php __('CakePHP: the rapid development php framework:'); ?>
+            <?php /* __('CakePHP: the rapid development php framework:'); */ ?>
             <?php echo $title_for_layout; ?>
-		- <?php echo Configure::read('SITE_NAME'); ?>
+		- <?php 
+                echo Configure::read('SITE_NAME');
+                //echo $config['SITE_NAME'];
+                ?>
         </title>
         <?php
         echo $html->meta('icon');

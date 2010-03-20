@@ -132,3 +132,5 @@
 2010-03-18 15:39:31 Notice: Notice (8): Undefined variable: javascript in [APP/views/consumidores/pesquisar.ctp, line 2]
 2010-03-18 16:02:03 Notice: Notice (8): Undefined variable: cpf in [APP/controllers/consumidores_controller.php, line 103]
 2010-03-18 16:16:29 Notice: Notice (8): Undefined variable: consumidor in [APP/views/consumidores/pesquisar.ctp, line 5]
+2010-03-20 14:13:16 Notice: Notice (8): Undefined variable: config in [APP/views/layouts/default.ctp, line 10]
+2010-03-20 14:13:22 Notice: Notice (8): Undefined variable: config in [APP/views/layouts/default.ctp, line 10]
