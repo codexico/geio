@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     var i = 0;
 
-    sincronizaSelectLoja();//adiciona o listener no primeiro
+    sincronizaSelectLoja(i);//adiciona o listener no primeiro
         
     $('#acrescentar-cupom').click(function(){
         i++;
@@ -13,7 +13,7 @@ $(document).ready(function() {
 
         $('ul#cupons').append("<li class=cupom>"+proximoCupom+"</li>");
 
-        sincronizaSelectLoja();//adiciona o listener no novo cupom
+        sincronizaSelectLoja(i);//adiciona o listener no novo cupom
 
     })
 
@@ -21,46 +21,20 @@ $(document).ready(function() {
      * listener para sincronizar valor de nome fantasia e razao social
      * ficou muito complexo usar o live para criar uma funcao q fizesse isso para novos elementos
      */
-    function sincronizaSelectLoja(){
-        selectnomefantasia = '#CupomFiscal'+i+'LojaId';
-        selectrazaosocial = "#CupomFiscal"+i+"LojaRazaoSocial";
+    function sincronizaSelectLoja(i){
 
-        $(selectnomefantasia).change(function(){
+        $('#CupomFiscal'+i+'LojaId').bind('change', {indice: i}, function(event){
             var valor = $(this).val();
-            $(selectrazaosocial).val(valor)
+            console.log('#CupomFiscal'+event.data.indice+'LojaRazaoSocial')
+            $('#CupomFiscal'+event.data.indice+'LojaRazaoSocial').val(valor)
         })
-        $(selectrazaosocial).change(function(){
+
+        $('#CupomFiscal'+i+'LojaRazaoSocial').bind('change', {indice: i}, function(event){
             var valor = $(this).val();
-            $(selectnomefantasia).val(valor)
+            console.log('#CupomFiscal'+event.data.indice+'LojaId')
+            $('#CupomFiscal'+event.data.indice+'LojaId').val(valor)
         })
     }
-
-    //$('#ConsumidorAddAjaxForm').preventDefault();
-
-    $('#ConsumidorAddAjaxForm').submit(function(event){
-        event.preventDefault();
-
-        var dataString = $('#ConsumidorAddAjaxForm').serialize();
-        alert(dataString);
-
-        $.ajax({
-            type: "POST",
-            url: "consumidores/addAjax",
-            data: dataString,
-            success: function(xhr) {
-                //display message back to user here
-                alert("foi?")
-                return false;
-            },
-            error: function(){
-                alert("foi erro?")
-                return false;
-            }
-        });
-        return false;
-    })
-
-
 
     /**
      * calcula o total de pontos somando os valores de acordo com as regras
@@ -95,5 +69,32 @@ $(document).ready(function() {
 
         alert("Pontos = "+pontos.toFixed(2)+ "\n\ Total de cupons = "+ totalCP + regra)
     })
+
+    /**
+     * Adiciona consumidor por ajax sem sair da pagina
+     */ /*
+    $('#ConsumidorAddAjaxForm').submit(function(event){
+        event.preventDefault();
+
+        var dataString = $('#ConsumidorAddAjaxForm').serialize();
+        alert(dataString);
+
+        $.ajax({
+            type: "POST",
+            url: "consumidores/addAjax",
+            data: dataString,
+            success: function(xhr) {
+                //display message back to user here
+                alert("foi?")
+                return false;
+            },
+            error: function(){
+                alert("foi erro?")
+                return false;
+            }
+        });
+        return false;
+    })
+    */
 
 })
