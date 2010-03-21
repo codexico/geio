@@ -3,6 +3,7 @@ $javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
 $javascript->link(array('pesquisar'), false);
 
 ?>
+                <?php $session->flash('Impressora'); ?>
 <div class="consumidores procurar">
     <fieldset>
         <legend><?php __('Procurar Consumidor');?></legend>

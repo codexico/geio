@@ -22,6 +22,7 @@ class CupomFiscaisController extends AppController {
             $this->CupomFiscal->create();
             if ($this->CupomFiscal->save($this->data)) {
                 $this->Session->setFlash(__('The CupomFiscal has been saved', true));
+                _gerarCP();
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The CupomFiscal could not be saved. Please, try again.', true));
@@ -67,5 +68,8 @@ class CupomFiscaisController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
+    function _gerarCP(){
+        debug($this->CupomFiscal);
+    }
 }
 ?>

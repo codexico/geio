@@ -7,7 +7,6 @@
             <?php echo $title_for_layout; ?>
 		- <?php 
                 echo Configure::read('SITE_NAME');
-                //echo $config['SITE_NAME'];
                 ?>
         </title>
         <?php

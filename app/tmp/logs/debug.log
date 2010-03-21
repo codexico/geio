@@ -134,3 +134,4 @@
 2010-03-18 16:16:29 Notice: Notice (8): Undefined variable: consumidor in [APP/views/consumidores/pesquisar.ctp, line 5]
 2010-03-20 14:13:16 Notice: Notice (8): Undefined variable: config in [APP/views/layouts/default.ctp, line 10]
 2010-03-20 14:13:22 Notice: Notice (8): Undefined variable: config in [APP/views/layouts/default.ctp, line 10]
+2010-03-20 21:16:09 Notice: Notice (8): Undefined variable: lojasRazaoSocial in [APP/views/trocas/nova.ctp, line 107]

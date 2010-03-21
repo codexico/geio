@@ -7,7 +7,7 @@ $javascript->link(array('novatroca'), false);
 //debug($this['Troca']['lojasRazaoSocial']);
 //debug($lojasRazaoSocial);
 ?>
-<!--
+<?php /*
 <div class="consumidores form">
     <?php echo $form->create('Consumidor', array('action' => 'addAjax'));?>
     <fieldset>
@@ -77,14 +77,15 @@ $javascript->link(array('novatroca'), false);
     </fieldset>
     <?php echo $form->end('Submit');?>
 </div>
--->
+*/ ?>
 
 
 <div class="trocas form">
 
-        <?php
-        echo $this->element('consumidor');
-        ?>
+                <?php $session->flash('Impressora'); ?>
+    <?php
+    echo $this->element('consumidor');
+    ?>
     <?php echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'], 'onsubmit'=>'return confirm("Confirma?")'));?>
     <fieldset>
         <legend><?php __('Add Troca');?></legend>
@@ -132,7 +133,8 @@ $javascript->link(array('novatroca'), false);
         </ul>
         <input id="acrescentar-cupom" type="button" value="Acrescentar Cupom Fiscal" />
     </fieldset>
-    <?php echo $form->end('Submit');?>
+        <input id="calcular-pontos" type="button" value="Calcular Pontos" />
+    <?php echo $form->end('Salvar e gerar Cupons Promocionais');?>
 </div>
 <div class="actions">
     <!--

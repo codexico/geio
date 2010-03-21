@@ -242,5 +242,5 @@
 	Cache::config('default', array('engine' => 'File'));
 	
 	//separar para deixar mais claro
-    Configure::load('custom');//carrega as constantes do site
+    //Configure::load('custom');//carrega as constantes do site
 ?>

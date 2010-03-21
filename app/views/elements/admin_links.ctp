@@ -10,7 +10,7 @@
     <li><?php echo $html->link(__('New CupomFiscal', true), array('action' => 'add', 'controller'=>'cupom_fiscais')); ?> </li>
 
     <li><?php echo $html->link(__('List CupomPromocionais', true), array('action' => 'index', 'controller'=>'cupom_promocionais')); ?> </li>
-    <li><?php echo $html->link(__('New CupomPromocional', true), array('action' => 'add', 'controller'=>'cupom_promocionais')); ?> </li>
+    <li><?php /* echo $html->link(__('New CupomPromocional', true), array('action' => 'add', 'controller'=>'cupom_promocionais')); */ ?> </li>
 
     <li><?php echo $html->link(__('List Funcionarios', true), array('action' => 'index', 'controller'=>'funcionarios')); ?> </li>
     <li><?php echo $html->link(__('New Funcionario', true), array('action' => 'add', 'controller'=>'funcionarios')); ?> </li>
