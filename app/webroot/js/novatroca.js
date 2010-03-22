@@ -25,13 +25,11 @@ $(document).ready(function() {
 
         $('#CupomFiscal'+i+'LojaId').bind('change', {indice: i}, function(event){
             var valor = $(this).val();
-            console.log('#CupomFiscal'+event.data.indice+'LojaRazaoSocial')
             $('#CupomFiscal'+event.data.indice+'LojaRazaoSocial').val(valor)
         })
 
         $('#CupomFiscal'+i+'LojaRazaoSocial').bind('change', {indice: i}, function(event){
             var valor = $(this).val();
-            console.log('#CupomFiscal'+event.data.indice+'LojaId')
             $('#CupomFiscal'+event.data.indice+'LojaId').val(valor)
         })
     }
@@ -41,7 +39,9 @@ $(document).ready(function() {
      */
     $('#calcular-pontos').click(function(){
         var pontos = new Number(0);
+        var count_CF = 0;
         $("li.cupom").each(function(){
+            count_CF++;
             valor = ($(this).find("input[name*=valor]").val())
             if( isNaN( parseFloat(valor) ) ){
                 valor = 0
@@ -67,7 +67,7 @@ $(document).ready(function() {
 
         totalCP = Math.floor(pontos/100);
 
-        alert("Pontos = "+pontos.toFixed(2)+ "\n\ Total de cupons = "+ totalCP + regra)
+        alert("\n Total de cupons fiscais= "+ count_CF +"\n Pontos = " + Math.floor(pontos) + "\n Total de cupons promocionais= "+ totalCP + regra)
     })
 
     /**

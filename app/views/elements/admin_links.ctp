@@ -30,6 +30,11 @@
     <li><?php echo $html->link(__('List Usuarios', true), array('action' => 'index', 'controller'=>'usuarios')); ?> </li>
     <li><?php echo $html->link(__('New Usuario', true), array('action' => 'add', 'controller'=>'usuarios')); ?> </li>
 
+    <ul class="relatorios">
+        <h4>Relatórios</h4>
+        <li><?php echo $html->link(__('Trocas de Hoje', true), array('action' => 'hoje', 'controller'=>'trocas')); ?> </li>
+    </ul>
+    <br />
 
     <?php elseif ($session->read('Auth.User.group_id') == 2) : /*usuario*/ ?>
 
@@ -37,6 +42,11 @@
 
     <li><?php echo $html->link(__('List Trocas', true), array('action' => 'index', 'controller'=>'trocas')); ?> </li>
 
+    <ul class="relatorios">
+        <h4>Relatórios</h4>
+        <li><?php echo $html->link(__('Trocas de Hoje', true), array('action' => 'hoje', 'controller'=>'trocas')); ?> </li>
+    </ul>
+    <br />
 
     <?php elseif ($session->read('Auth.User.group_id') == 3) : /*promotor*/ ?>
 

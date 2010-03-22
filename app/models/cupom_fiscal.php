@@ -7,7 +7,8 @@ class CupomFiscal extends AppModel {
                             'rule' => 'isUnique',
                             'message' => 'Este cupom já foi cadastrado'
             ),
-            'troca_id' => array('numeric'),
+
+            //'troca_id' => array('numeric'),
             'loja_id' => array('numeric'),
             'forma_de_pagamento' => array('notempty'),
             'valor' => array(
