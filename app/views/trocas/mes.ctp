@@ -1,5 +1,5 @@
 <div class="trocas index">
-<h2><?php __('Trocas de Hoje');?></h2>
+<h2><?php __('Trocas Últimos 30(31) dias');?></h2>
 
 <div class="relatorio">
     <p><?php echo "Total de trocas de hoje: " . $countTrocas; ?></p>
@@ -15,7 +15,6 @@
     <p><?php echo "Número de consumidores novos que compraram com VISA: " . $numConsumidoresNovosVISA; ?></p>
     <p><?php echo "Número de consumidores que não compraram com VISA: " . $numConsumidoresNotVISA; ?></p>
     <p><?php echo "Número de consumidores novos que não compraram com VISA: " . $numConsumidoresNovosNotVISA; ?></p>
-
 <?php /* debug($mediaValorTroca); */ ?>
 </div>
 <br />
@@ -72,9 +71,9 @@ foreach ($trocas as $troca):
 		</td>
                 <?php /*
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action' => 'view', $troca['Troca']['id'])); ?>                    
+			<?php echo $html->link(__('View', true), array('action' => 'view', $troca['Troca']['id'])); ?>
 			<?php echo $html->link(__('Edit', true), array('action' => 'edit', $troca['Troca']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action' => 'delete', $troca['Troca']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $troca['Troca']['id'])); ?>                    
+			<?php echo $html->link(__('Delete', true), array('action' => 'delete', $troca['Troca']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $troca['Troca']['id'])); ?>
 		</td>
                 */ ?>
 	</tr>

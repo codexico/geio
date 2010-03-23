@@ -1,5 +1,5 @@
 <div class="consumidores form">
-    <?php echo $form->create('Consumidor', array('action' => 'novo'));?>
+    <?php echo $form->create('Consumidor', array('action' => 'novo', 'onsubmit'=>'return confirm("Confirma?")'));?>
     <fieldset>
         <legend><?php __('Add Consumidor');?></legend>
         <?php

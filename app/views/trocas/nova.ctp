@@ -111,8 +111,8 @@ $javascript->link(array('novatroca'), false);
 
                     echo $form->input('CupomFiscal.0.forma_de_pagamento', array('options' => array(
                             'Dinheiro'=>'Dinheiro',
-                            'Débito'=>'Débito',
-                            'Crédito'=>'Crédito'
+                            'Debito'=>'Débito',
+                            'Credito'=>'Crédito'
                     )));
 
                     echo $form->input('CupomFiscal.0.bandeira', array('options' => array(

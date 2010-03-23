@@ -49,7 +49,7 @@ $(document).ready(function() {
             forma_de_pagamento = ($(this).find("[name*=forma_de_pagamento]").val())
             bandeira = ($(this).find("[name*=bandeira]").val())
 
-            if(forma_de_pagamento=="Crédito" && bandeira=="VISA"){
+            if(forma_de_pagamento=="Credito" && bandeira=="VISA"){
                 pontos += parseFloat(valor)*2
             }else{
                 pontos += parseFloat(valor)*1

@@ -98,6 +98,7 @@ class UsersController extends AppController {
         //usuarios do sistema
         $group->id = 2;
         $this->Acl->deny($group, 'controllers');
+        $this->Acl->allow($group, 'controllers/logout');
         $this->Acl->allow($group, 'controllers/Promotores');
         $this->Acl->allow($group, 'controllers/Trocas/index');
         $this->Acl->allow($group, 'controllers/Trocas/view');
@@ -105,6 +106,7 @@ class UsersController extends AppController {
         //promotores
         $group->id = 3;
         $this->Acl->deny($group, 'controllers');
+        $this->Acl->allow($group, 'controllers/logout');
         $this->Acl->allow($group, 'controllers/Trocas/nova');
         $this->Acl->allow($group, 'controllers/consumidores/novo');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisar');
