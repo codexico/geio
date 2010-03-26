@@ -44,30 +44,8 @@
 
 
 
-	//separar para deixar mais claro
-    Configure::load('custom');//carrega as constantes do site
-/*
-//http://book.cakephp.org/view/163/Localization-in-CakePHP
-setlocale(LC_ALL, 'pt_BR', 'pt');
-Configure::write('Config.language', 'pt_BR');
-date_default_timezone_set('America/Sao_Paulo');
+//separar para deixar mais claro
+Configure::load('custom');//carrega as constantes do site
+Configure::load('regras');//carrega as regras da campanha
 
-Configure::write('SITE_NAME', 'GEIO');
-//$config['SITE_NAME'] = 'Nome do Site';
-
-//email para o formulário de contato
-Configure::write('EMAIL_CONTATO', 'asdf@gmail.com');
-Configure::write('HOST_CONTATO', 'smtp.asdf.com.br');
-Configure::write('USERNAME_CONTATO', 'asdf@asdf.com.br');
-Configure::write('PASSWORD_CONTATO', 'xxxx');
-
-Configure::write('WEBMASTER_EMAIL', 'asdf@gmail.com');
-
-
-
-Configure::write('Regras.Dinheiro', 2000);
-Configure::write('Regras.Visa', 150);
-Configure::write('Regras.MasterCard', 100);
-
-*/
 ?>

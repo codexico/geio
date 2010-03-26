@@ -71,95 +71,166 @@ class TrocasController extends AppController {
     }
 
     function nova($id = null) {
-
         if ($id) {
-            $consumidor = $this->Troca->Consumidor->recursive = -1;
-            $consumidor = $this->Troca->Consumidor->read(null, $id);
-            if($consumidor) {//debug($consumidor);
-                $this->set(compact('consumidor'));
-            }else {
+            $this->Troca->Consumidor->recursive = -1;
+            $consumidor = $this->Troca->Consumidor->read(null, $id);//debug($consumidor);
+
+            if(!$consumidor) {
                 $this->Session->setFlash('Cosumidor '. $id . ' não existe');
                 $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
             }
+            //pega o id do promotor atraves da sessao do user
+            $promotor = $this->Troca->Promotor->find('first', array(
+                    'recursive' => -1,
+                    'conditions' => array( 'Promotor.user_id' => $this->Auth->user('id') )
+            ));//debug($promotor);
+
+            $this->set(compact('consumidor', 'promotor'));
         }else {
             $this->Session->setFlash('Pesquise o Consumidor antes de fazer a Troca');
             $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
         }
 
         if (!empty($this->data)) {
-            //pega o id do promotor atraves da sessao do user
-            $promotor_id = $this->Troca->Promotor->find('first', array(
-                    'recursive' => -1,
-                    'conditions' => array(
-                            'Promotor.user_id' => $this->Auth->user('id')
-            )));
-
-            $this->data['Troca']['promotor_id'] = $promotor_id['Promotor']['id'];
+            $this->data['Troca']['promotor_id'] = $promotor['Promotor']['id'];
             $this->data['Troca']['consumidor_id'] = $consumidor['Consumidor']['id'];
 
-            //unset ($this->data['razao_social']);//dado desnecessario
-
-            //criar os cupons promocionais
-            $totalCP = floor($this->_calculaCP($this->data['CupomFiscal']));
-            for ($i = 0; $i < $totalCP; $i++) {
-                $this->data['CupomPromocional'][$i]['promotor_id'] = $promotor_id['Promotor']['id'];
-                $this->data['CupomPromocional'][$i]['consumidor_id'] = $consumidor['Consumidor']['id'];
+            if( Configure::read('Regras.Brinde.true') ) {
+                //$this->_calculaBrinde();//TODO
+            }else {
+                $valoresCP = $this->_calculaCupomPromocional();//debug($valoresCP);
             }
 
-            //dados extras para colocar na troca e economizar processamento nos SELECTs
-            $this->data['Troca']['qtd_cf'] = count($this->data['CupomFiscal']);
-            $this->data['Troca']['valor_total'] = $this->_calculaValorTotalTroca($this->data['CupomFiscal']);
-            $this->data['Troca']['qtd_cp'] = $totalCP;
-            $this->data['Troca']['pontos'] = $this->_calculapontosTotal($this->data['CupomFiscal']);
-
             $this->Troca->create();
-            //if ($this->Troca->saveall($this->data)) {
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));
 
-                if($this->_imprimirCP($this->data['CupomFiscal'], $consumidor, $promotor_id)) {
-                    $imprimiu = true;
-                    debug("imprimiu");
+                if( !Configure::read('Regras.Brinde.true') ) {
+                    $this->_imprimirCP();
+                }
+                if( Configure::read('Regras.Saldo.true') ) {
+                    $this->_atualizaSaldo($valoresCP);
                 }
 
-                $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
-                //$this->redirect(array('action' => 'index'));
-
+                //$this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
             } else {
                 $this->Session->setFlash(__('The Troca could not be saved. Please, try again.', true));
             }
-
         }
-
         $lojas = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
         $lojas_razao_social = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.razao_social')));
         $this->set(compact('lojas', 'lojas_razao_social'));
     }
 
-    function _imprimirCP($cfs, $consumidor, $promotor_id) {
-        $totalCP = floor($this->_calculaCP($cfs));
-        debug('$totalCP = ' . $totalCP);
-        $CPimpresso = 0;
-        for ($i = 0; $i < $totalCP; $i++) {
-            //imprimir
-            //($this->CupomPromocional->save();
-            $CPimpresso++;
+
+    ////////////////
+    ////////////
+    ////
+    //// REGRAS
+    ////
+    ////////////
+    ////////////////
+
+    /**
+     * Soma os cupons fiscais de acordo com o tipo de compra e calcula a quantidade de cupons
+     * e o resto
+     *
+     * @return array    array associativo(valorOutros, restoOutros, valorBandeira, restoBandeira, qtd_CP)
+     */
+    function _calculaCupomPromocional() {
+        $regras = Configure::read('Regras'); //debug($regras);
+        $c = $valorOutros = $valorBandeira = $restoOutros = $restoBandeira = 0;
+
+        if($regras['Saldo']['true']) {           
+            $saldos = $this->Troca->Consumidor->read(array('saldo_bandeira', 'saldo_outros'));
+            $restoBandeira = $saldos['Consumidor']['saldo_bandeira'];
+            $restoOutros = $saldos['Consumidor']['saldo_outros'];
         }
-        if($CPimpresso == $totalCP) {
-            debug("impressos = " . $CPimpresso);
-            $this->Session->setFlash('Impressos '.$CPimpresso.' cupons', 'default', null, 'Impressora');
-            return true;
+        //soma os valores dos cupons fiscais enviados
+        foreach ($this->data['CupomFiscal'] as $cf) { //debug($cf);
+            if( up($cf['bandeira']) != up($regras['Bandeira']['nome']) ) {
+                $valorOutros += $cf['valor']; //debug("dinheiro = " . $valorDinheiro);
+            }else {
+                $valorBandeira += $cf['valor']; //debug('bandeira = ' . $valorBandeira);
+            }
         }
-        debug("impressos errados = " . ($totalCP - $CPimpresso) );
-        return false;
+        //calcula as trocas
+        $restoOutros += $valorOutros ;
+        if( $restoOutros >= $regras['Valor'] ) {//trocar dinheiro
+            $c += floor( ($restoOutros) / $regras['Valor'] );
+            $restoOutros = ($restoOutros) % $regras['Valor']; //resto da divisao
+        }
+        $restoBandeira += $valorBandeira;
+        if( $restoBandeira >= $regras['Valor'] ) {// trocar bandeira
+            $c += floor( ($restoBandeira) / $regras['Valor'] ) * $regras['Bandeira']['valor'];
+            $restoBandeira = ($restoBandeira) % $regras['Valor']; //resto da divisao
+        }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
+        if( ($restoOutros + $restoBandeira) >= $regras['Valor'] ) {//troca os restinhos
+            $c++;
+            $restoBandeira = ($restoOutros + $restoBandeira) - $regras['Valor']; //restinho final
+            $restoOutros = 0;
+        }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
+
+        //criar os cupons promocionais
+        for ($i = 0; $i < $c; $i++) {
+            $this->data['CupomPromocional'][$i]['promotor_id'] = $this->data['Troca']['promotor_id'];
+            $this->data['CupomPromocional'][$i]['consumidor_id'] = $this->data['Troca']['consumidor_id'];
+        }
+        //dados extras para colocar na troca e economizar processamento nos SELECTs
+        $this->data['Troca']['qtd_cf'] = count($this->data['CupomFiscal']);
+        $this->data['Troca']['valor_total'] = $valorBandeira +  $valorOutros;
+        $this->data['Troca']['valor_bandeira'] = $valorBandeira;
+        $this->data['Troca']['valor_outros'] = $valorOutros;
+        $this->data['Troca']['qtd_cp'] = (int)$c;
+
+        return array(
+                'valorOutros' => $valorOutros,
+                'restoOutros' => $restoOutros,
+                'valorBandeira' => $valorBandeira,
+                'restoBandeira' => $restoBandeira,
+                'qtd_CP' => (int)$c);
     }
 
 
+    function _imprimirCP() {
+        $CPimpresso = 0;
+        for ($i = 0; $i < $this->data['Troca']['qtd_cp']; $i++) {
+            //TODO: metodo q manda para impressora e detecta se imprimiu corretamente, ou só mostra os pdfs
+            $CPimpresso++;
+        }
+        if($CPimpresso == $this->data['Troca']['qtd_cp']) {//debug("impressos = " . $CPimpresso);
+            $this->Session->setFlash('Impressos '.$CPimpresso.' cupons.', 'default', null, 'Impressora');
+        }else {
+            $this->Session->setFlash(($totalCP - $CPimpresso) . ' cupons impressos errados.', 'default', null, 'Impressora');
+        }
+    }
+
+
+    function _atualizaSaldo($valoresCP) {//debug($valoresCP);
+        $data_consumidor = array(
+                'Consumidor' => array(
+                        'updated' => false,
+                        'saldo_outros' => $valoresCP['restoOutros'],
+                        'saldo_bandeira' => $valoresCP['restoBandeira']
+        ));
+        $params_consumidor = array(
+                'validate' => false,
+                'fieldList' => array('saldo_bandeira', 'saldo_outros'),
+                'callbacks' => false
+        );
+        $this->Troca->Consumidor->save($data_consumidor, $params_consumidor);
+    }
+
+
+    ///////////////////
+    //funcoes nao mais utilizadas
+    ///////////////////
+/*
     function _calculaCP($cfs) {
 
         $pontos = $this->_calculaPontosTotal($cfs);
 
-        $totalCP = $pontos/100;
+        $totalCP = $pontos/Configure::read('Regras.Pontos');
         //debug('calcula_calculaValorTotalTrocaCP = ' . $totalCP);
         return $totalCP;
 
@@ -185,7 +256,7 @@ class TrocasController extends AppController {
     function _calculaPontosCF($valor, $forma_de_pagamento, $bandeira) {
         $pontos = 0;
         if($forma_de_pagamento == "Credito" && $bandeira == "VISA") {
-            $pontos = $valor*2;
+            $pontos = $valor*Configure::read('Regras.Credito.Visa');
         }else {
             $pontos = $valor;
         }
@@ -199,6 +270,20 @@ class TrocasController extends AppController {
         }
         return $total;
     }
+
+    function _calculaSaldo($pontos) {
+        return $pontos%Configure::read('Regras.Pontos');
+    }
+ * 
+ */
+
+    ////////////////////////////////////////
+    ////////////////////////
+    ////
+    //// RELATORIOS
+    ////
+    ////////////////////////
+    ////////////////////////////////////////
 
     function hoje() {
         //buscar trocas de hoje

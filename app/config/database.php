@@ -78,25 +78,25 @@
  */
 class DATABASE_CONFIG {
 
-    	var $default = array(
-		'driver' => 'mysql',
-		'persistent' => false,
-		'host' => '187.45.196.152',
-		'login' => 'geio',
-		'password' => 'qui20fa10',
-		'database' => 'geio',
-		'prefix' => 'shoppingteste_',
-	);
-
-//	var $default = array(
+//    	var $default = array(
 //		'driver' => 'mysql',
 //		'persistent' => false,
-//		'host' => 'localhost',
-//		'login' => 'root',
-//		'password' => '',
+//		'host' => '187.45.196.152',
+//		'login' => 'geio',
+//		'password' => 'qui20fa10',
 //		'database' => 'geio',
 //		'prefix' => 'shoppingteste_',
 //	);
+
+	var $default = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'root',
+		'password' => '',
+		'database' => 'geio',
+		'prefix' => 'shoppingteste_',
+	);
 
 	var $test = array(
 		'driver' => 'mysql',
