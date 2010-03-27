@@ -20,7 +20,41 @@ class TrocasController extends AppController {
             $this->Session->setFlash(__('Invalid Troca', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('troca', $this->Troca->read(null, $id));
+        //$this->set('troca', $this->Troca->read(null, $id));
+        $this->Troca->recursive = 0;
+        $troca = $this->Troca->read(null, $id);//debug($troca);
+
+        $this->paginate = array(
+                'conditions' => array('troca_id' => $id),
+                'limit' => 50,
+                'recursive' => 0
+        );
+        $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais);
+
+        $this->set( compact('troca', 'cupom_fiscais'));
+    }
+
+    function consumidor($id = null) {
+        if (!$id) {
+            $this->Session->setFlash('Cosumidor '. $id . ' não existe');
+            $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+        }
+        $this->Troca->Consumidor->recursive = -1;
+        $consumidor = $this->Troca->Consumidor->read(null, $id);//debug($consumidor);
+
+        if(!$consumidor) {
+            $this->Session->setFlash('Cosumidor '. $id . ' não existe');
+            $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+        }
+        $this->set(compact('consumidor'));
+
+        $this->paginate = array(
+                'conditions' => array("Troca.consumidor_id" => $id),
+                'limit' => 50,
+                'recursive' => 0
+        );
+        $trocas = $this->paginate('Troca');//debug($trocas);
+        $this->set('trocas', $this->paginate());
     }
 
     function add() {
@@ -112,7 +146,7 @@ class TrocasController extends AppController {
                     $this->_atualizaSaldo($valoresCP);
                 }
 
-                //$this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+                $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
             } else {
                 $this->Session->setFlash(__('The Troca could not be saved. Please, try again.', true));
             }
@@ -141,7 +175,7 @@ class TrocasController extends AppController {
         $regras = Configure::read('Regras'); //debug($regras);
         $c = $valorOutros = $valorBandeira = $restoOutros = $restoBandeira = 0;
 
-        if($regras['Saldo']['true']) {           
+        if($regras['Saldo']['true']) {
             $saldos = $this->Troca->Consumidor->read(array('saldo_bandeira', 'saldo_outros'));
             $restoBandeira = $saldos['Consumidor']['saldo_bandeira'];
             $restoOutros = $saldos['Consumidor']['saldo_outros'];
@@ -225,7 +259,7 @@ class TrocasController extends AppController {
     ///////////////////
     //funcoes nao mais utilizadas
     ///////////////////
-/*
+    /*
     function _calculaCP($cfs) {
 
         $pontos = $this->_calculaPontosTotal($cfs);
@@ -275,7 +309,7 @@ class TrocasController extends AppController {
         return $pontos%Configure::read('Regras.Pontos');
     }
  * 
- */
+    */
 
     ////////////////////////////////////////
     ////////////////////////
@@ -285,6 +319,7 @@ class TrocasController extends AppController {
     ////////////////////////
     ////////////////////////////////////////
 
+
     function hoje() {
         //buscar trocas de hoje
         $inicio = date('Y-m-d', strtotime("-0 days"));
@@ -293,66 +328,50 @@ class TrocasController extends AppController {
         $conditions_data_cf = array("CupomFiscal.created > " => $inicio);
         $conditions_data_cp = array("CupomPromocional.created > " => $inicio);
 
-        //$this->paginate['Troca'] = $conditions;
-        //$trocas = $this->paginate('Troca');
-
-//        $this->Troca->recursive = -1;
-//        $trocas = $this->Troca->find('all', array('conditions' => $conditions));
-//        $this->set('trocas', $this->paginate());
-
-
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
-                'limit' => 50
+                'limit' => 50,
+                'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
 
 
-
-        //total de trocas efetuadas
+        //.total de trocas efetuadas
         $count_trocas = $this->Troca->find('count', array('conditions' => $conditions_data_troca));
 
-//        .Numero consumidores atendidos
+        //.Numero consumidores atendidos
         $conditions_num_consumidores_atendidos = array(
                 'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
                 'conditions' => $conditions_data_troca
         );
         $num_consumidores_atendidos = $this->Troca->find('count', $conditions_num_consumidores_atendidos );
 
-//        .Cupons Fiscais Diarios (R$)
+        //.Cupons Fiscais Diarios (R$)
         $conditions_valor_cupons_fiscais = array(
                 'fields' => "SUM(CupomFiscal.valor) AS 'total'",
                 'conditions' => $conditions_data_troca
         );
         $valor_cupons_fiscais = $this->Troca->CupomFiscal->find('first', $conditions_valor_cupons_fiscais);
 
-//        .Numero consumidores novos
+        //.Numero consumidores novos
         $conditions_num_consumidores_novos = array(
                 'conditions' => $conditions_data_consumidor
         );
         $num_consumidores_novos = $this->Troca->Consumidor->find('count', $conditions_num_consumidores_novos);
 
-//        .Numero de cupons fiscais trocados
+        //.Numero de cupons fiscais trocados
         $conditions_num_cupons_fiscais = array(
                 'conditions' => $conditions_data_cf
         );
         $num_cupons_fiscais = $this->Troca->CupomFiscal->find('count', $conditions_num_cupons_fiscais);
 
-//        .Quantidade de cupons promocionais impressos
+        //.Quantidade de cupons promocionais impressos
         $conditions_num_cupons_promocionais = array(
                 'conditions' => $conditions_data_cp
         );
         $num_cupons_promocionais = $this->Troca->CupomPromocional->find('count', $conditions_num_cupons_promocionais);
 
-//        .Média ticket compra
-        /*
-        $conditions_valor_cupons_fiscais = array(
-                'fields' => "AVG(Troca.valor_total) AS 'total'",
-                'conditions' => array("Troca.created > " => date('Y-m-d', strtotime("-0 days"))),
-                'recursive' => -1
-        );
-        $media_valor_troca = $this->Troca->find('first', $conditions_valor_cupons_fiscais);
-        */
+        //.Média ticket compra (Media de cada troca e de cada cupom fiscal)
         $media = $media_valor_troca = 0; //para evitar divisao por zero a seguir
         if($count_trocas != 0) {
             //.Média ticket compra
@@ -362,181 +381,25 @@ class TrocasController extends AppController {
             $media = number_format($valor_cupons_fiscais[0]['total']/$num_cupons_fiscais, 2);
         }
 
+        ////////////////
+        //dados relacionados a campanhas com bandeira promocional
+        ////////////////
 
-        //Total de pontos
-        $conditions_total_pontos = array(
-                'fields' => "SUM(Troca.pontos) AS 'total'",
-                'conditions' => $conditions_data_troca
-        );
-        $total_pontos = $this->Troca->find('first', $conditions_total_pontos);
-
-
-        //.Quantidade de consumidores que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $subQuery_num_consumidores_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_VISA = $this->Troca->find('count', $conditions_num_consumidores_VISA );
+        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
+        $num_consumidores_bandeira = $this->_num_consumidores_bandeira($inicio);
         //debug($num_consumidores_VISA);
 
-//	.Quantidade de consumidores que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'NOT' => array(
-                        'AND' => array(
-                                'CF.bandeira' => 'VISA',
-                                'CF.forma_de_pagamento' => 'Credito')),
-                'CF.created > ' => $inicio);
+        //.Quantidade de consumidores que compraram sem VISA/MASTER
+        $num_consumidores_not_bandeira = $this->_num_consumidores_not_bandeira($inicio);
+        //debug($num_consumidores_not_bandeira);
 
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
+        //.Quantidade de consumidores novos que compraram com VISA/MASTER
+        $num_consumidores_novos_bandeira = $this->_num_consumidores_novos_bandeira($inicio);
+        //debug($num_consumidores_novos_bandeira);
 
-        $subQuery_num_consumidores_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_not_VISA );
-        //debug($num_consumidores_not_VISA);
-
-//	.Quantidade de consumidores novos que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created > ' => $inicio);
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_VISA);
-        $conditions_num_consumidores_novos_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_VISA );
-        //debug($num_consumidores_novos_VISA);
-
-//	.Quantidade de consumidores novos que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira <> ' => 'VISA',
-                'CF.forma_de_pagamento <> ' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created > ' => $inicio);
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_not_VISA);
-        $conditions_num_consumidores_novos_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_not_VISA );
-        //debug($num_consumidores_novos_not_VISA);
-
+        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
+        $num_consumidores_novos_not_bandeira = $this->_num_consumidores_novos_not_bandeira($inicio);
+        //debug($num_consumidores_novos_not_bandeira);
 
 
         $this->set(compact('trocas',
@@ -544,25 +407,8 @@ class TrocasController extends AppController {
                 'num_consumidores_atendidos', 'num_consumidores_novos',
                 'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
                 'num_cupons_promocionais',
-                'num_consumidores_VISA', 'num_consumidores_not_VISA', 'num_consumidores_novos_VISA', 'num_consumidores_novos_not_VISA'));
-
-
-
-
-        /*
-        $params = array(
-	'conditions' => array('Model.field' => $thisValue), //array of conditions
-	'recursive' => 1, //int
-	'fields' => array('Model.field1', 'DISTINCT Model.field2'), //array of field names
-	'order' => array('Model.created', 'Model.field3 DESC'), //string or array defining order
-	'group' => array('Model.field'), //fields to GROUP BY
-	'limit' => n, //int
-	'page' => n, //int
-	'offset'=>n, //int
-	'callbacks' => true //other possible values are false, 'before', 'after'
-        );
-        *
-        */
+                'num_consumidores_bandeira', 'num_consumidores_not_bandeira',
+                'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
     }
 
     function ontem() {
@@ -619,185 +465,28 @@ class TrocasController extends AppController {
             $media = number_format($valor_cupons_fiscais[0]['total']/$num_cupons_fiscais, 2);
         }
 
-        //Total de pontos
-        $conditions_total_pontos = array(
-                'fields' => "SUM(Troca.pontos) AS 'total'",
-                'conditions' => $conditions_data_troca
-        );
-        $total_pontos = $this->Troca->find('first', $conditions_total_pontos);
 
+        ////////////////
+        //dados relacionados a campanhas com bandeira promocional
+        ////////////////
 
+        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
+        $num_consumidores_bandeira = $this->_num_consumidores_bandeira($inicio, $fim);
 
-        //.Quantidade de consumidores que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        //.Quantidade de consumidores que compraram sem VISA/MASTER
+        $num_consumidores_not_bandeira = $this->_num_consumidores_not_bandeira($inicio, $fim);
 
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
+        //.Quantidade de consumidores novos que compraram com VISA/MASTER
+        $num_consumidores_novos_bandeira = $this->_num_consumidores_novos_bandeira($inicio, $fim);
 
-        $subQuery_num_consumidores_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_VISA = $this->Troca->find('count', $conditions_num_consumidores_VISA );
-        //debug($num_consumidores_VISA);
-
-//	.Quantidade de consumidores que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'NOT' => array(
-                        'AND' => array(
-                                'CF.bandeira' => 'VISA',
-                                'CF.forma_de_pagamento' => 'Credito')),
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $subQuery_num_consumidores_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_not_VISA );
-        //debug($num_consumidores_not_VISA);
-
-//	.Quantidade de consumidores novos que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_VISA);
-        $conditions_num_consumidores_novos_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_VISA );
-        //debug($num_consumidores_novos_VISA);
-
-//	.Quantidade de consumidores novos que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira <> ' => 'VISA',
-                'CF.forma_de_pagamento <> ' => 'Credito',
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_not_VISA);
-        $conditions_num_consumidores_novos_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_not_VISA );
-        //debug($num_consumidores_novos_not_VISA);
+        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
+        $num_consumidores_novos_not_bandeira = $this->_num_consumidores_novos_not_bandeira($inicio, $fim);
 
 
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
-                'limit' => 50
+                'limit' => 50,
+                'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
 
@@ -806,12 +495,11 @@ class TrocasController extends AppController {
                 'num_consumidores_atendidos', 'num_consumidores_novos',
                 'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
                 'num_cupons_promocionais',
-                'num_consumidores_VISA', 'num_consumidores_not_VISA', 'num_consumidores_novos_VISA', 'num_consumidores_novos_not_VISA'));
+                'num_consumidores_bandeira', 'num_consumidores_not_bandeira', 'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
 
     }
 
     function semana() {
-        //buscar trocas de ontem
         $inicio = date('Y-m-d', strtotime("-1 week"));
         $conditions_data_troca = array("Troca.created > " => $inicio);
         $conditions_data_consumidor = array("Consumidor.created > " => $inicio);
@@ -862,185 +550,28 @@ class TrocasController extends AppController {
             $media = number_format($valor_cupons_fiscais[0]['total']/$num_cupons_fiscais, 2);
         }
 
-        //Total de pontos
-        $conditions_total_pontos = array(
-                'fields' => "SUM(Troca.pontos) AS 'total'",
-                'conditions' => $conditions_data_troca
-        );
-        $total_pontos = $this->Troca->find('first', $conditions_total_pontos);
 
+        ////////////////
+        //dados relacionados a campanhas com bandeira promocional
+        ////////////////
 
+        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
+        $num_consumidores_bandeira = $this->_num_consumidores_bandeira($inicio);
 
-        //.Quantidade de consumidores que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created > ' => $inicio);
+        //.Quantidade de consumidores que compraram sem VISA/MASTER
+        $num_consumidores_not_bandeira = $this->_num_consumidores_not_bandeira($inicio);
 
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
+        //.Quantidade de consumidores novos que compraram com VISA/MASTER
+        $num_consumidores_novos_bandeira = $this->_num_consumidores_novos_bandeira($inicio);
 
-        $subQuery_num_consumidores_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_VISA = $this->Troca->find('count', $conditions_num_consumidores_VISA );
-        //debug($num_consumidores_VISA);
-
-//	.Quantidade de consumidores que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'NOT' => array(
-                        'AND' => array(
-                                'CF.bandeira' => 'VISA',
-                                'CF.forma_de_pagamento' => 'Credito')),
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $subQuery_num_consumidores_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_not_VISA );
-        //debug($num_consumidores_not_VISA);
-
-//	.Quantidade de consumidores novos que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created > ' => $inicio);
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_VISA);
-        $conditions_num_consumidores_novos_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_VISA );
-        //debug($num_consumidores_novos_VISA);
-
-//	.Quantidade de consumidores novos que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira <> ' => 'VISA',
-                'CF.forma_de_pagamento <> ' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created > ' => $inicio);
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_not_VISA);
-        $conditions_num_consumidores_novos_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_not_VISA );
-        //debug($num_consumidores_novos_not_VISA);
+        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
+        $num_consumidores_novos_not_bandeira = $this->_num_consumidores_novos_not_bandeira($inicio);
 
 
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
-                'limit' => 50
+                'limit' => 50,
+                'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
 
@@ -1049,12 +580,11 @@ class TrocasController extends AppController {
                 'num_consumidores_atendidos', 'num_consumidores_novos',
                 'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
                 'num_cupons_promocionais',
-                'num_consumidores_VISA', 'num_consumidores_not_VISA', 'num_consumidores_novos_VISA', 'num_consumidores_novos_not_VISA'));
+                'num_consumidores_bandeira', 'num_consumidores_not_bandeira', 'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
 
     }
 
     function mes() {
-        //buscar trocas de ontem
         $inicio = date('Y-m-d', strtotime("-1 month"));
         $conditions_data_troca = array("Troca.created > " => $inicio);
         $conditions_data_consumidor = array("Consumidor.created > " => $inicio);
@@ -1063,33 +593,28 @@ class TrocasController extends AppController {
 
         //.total de trocas efetuadas
         $count_trocas = $this->Troca->find('count', array('conditions' => $conditions_data_troca));
-
         //.Numero consumidores atendidos
         $conditions_num_consumidores_atendidos = array(
                 'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
                 'conditions' => $conditions_data_troca
         );
         $num_consumidores_atendidos = $this->Troca->find('count', $conditions_num_consumidores_atendidos );
-
         //.Cupons Fiscais Diarios (R$)
         $conditions_valor_cupons_fiscais = array(
                 'fields' => "SUM(CupomFiscal.valor) AS 'total'",
                 'conditions' => $conditions_data_troca
         );
         $valor_cupons_fiscais = $this->Troca->CupomFiscal->find('first', $conditions_valor_cupons_fiscais);
-
         //.Numero consumidores novos
         $conditions_num_consumidores_novos = array(
                 'conditions' => $conditions_data_consumidor
         );
         $num_consumidores_novos = $this->Troca->Consumidor->find('count', $conditions_num_consumidores_novos);
-
         //.Numero de cupons fiscais trocados
         $conditions_num_cupons_fiscais = array(
                 'conditions' => $conditions_data_cf
         );
         $num_cupons_fiscais = $this->Troca->CupomFiscal->find('count', $conditions_num_cupons_fiscais);
-
         //.Quantidade de cupons promocionais impressos
         $conditions_num_cupons_promocionais = array(
                 'conditions' => $conditions_data_cp
@@ -1100,190 +625,26 @@ class TrocasController extends AppController {
         if($count_trocas != 0) {
             //.Média ticket compra
             $media_valor_troca = number_format($valor_cupons_fiscais[0]['total']/$count_trocas, 2);
-
             //.media de valor dos cupons fiscais
             $media = number_format($valor_cupons_fiscais[0]['total']/$num_cupons_fiscais, 2);
         }
 
-        //Total de pontos
-        $conditions_total_pontos = array(
-                'fields' => "SUM(Troca.pontos) AS 'total'",
-                'conditions' => $conditions_data_troca
-        );
-        $total_pontos = $this->Troca->find('first', $conditions_total_pontos);
-
-
-
-        //.Quantidade de consumidores que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $subQuery_num_consumidores_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_VISA = $this->Troca->find('count', $conditions_num_consumidores_VISA );
-        //debug($num_consumidores_VISA);
-
-//	.Quantidade de consumidores que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'NOT' => array(
-                        'AND' => array(
-                                'CF.bandeira' => 'VISA',
-                                'CF.forma_de_pagamento' => 'Credito')),
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $subQuery_num_consumidores_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) ';
-        $conditions_num_consumidores_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_not_VISA );
-        //debug($num_consumidores_not_VISA);
-
-//	.Quantidade de consumidores novos que compraram com VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira' => 'VISA',
-                'CF.forma_de_pagamento' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created > ' => $inicio);
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_VISA);
-        $conditions_num_consumidores_novos_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_VISA );
-        //debug($num_consumidores_novos_VISA);
-
-//	.Quantidade de consumidores novos que compraram sem VISA/MASTER
-        $conditionsSubQuery = array(
-                'CF.bandeira <> ' => 'VISA',
-                'CF.forma_de_pagamento <> ' => 'Credito',
-                'CF.created > ' => $inicio);
-
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-
-        $conditionsSubQuery2 = array(
-                'Consumidor.created > ' => $inicio);
-
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-
-        $subQuery_num_consumidores_novos_not_VISA = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_not_VISA);
-        $conditions_num_consumidores_novos_not_VISA = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_not_VISA,
-                'recursive' => -1
-        );
-        $num_consumidores_novos_not_VISA = $this->Troca->find('count', $conditions_num_consumidores_novos_not_VISA );
-        //debug($num_consumidores_novos_not_VISA);
-
+        ////////////////
+        //dados relacionados a campanhas com bandeira promocional
+        ////////////////
+        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
+        $num_consumidores_bandeira = $this->_num_consumidores_bandeira($inicio);
+        //.Quantidade de consumidores que compraram sem VISA/MASTER
+        $num_consumidores_not_bandeira = $this->_num_consumidores_not_bandeira($inicio);
+        //.Quantidade de consumidores novos que compraram com VISA/MASTER
+        $num_consumidores_novos_bandeira = $this->_num_consumidores_novos_bandeira($inicio);
+        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
+        $num_consumidores_novos_not_bandeira = $this->_num_consumidores_novos_not_bandeira($inicio);
 
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
-                'limit' => 50
+                'limit' => 50,
+                'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
 
@@ -1292,8 +653,180 @@ class TrocasController extends AppController {
                 'num_consumidores_atendidos', 'num_consumidores_novos',
                 'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
                 'num_cupons_promocionais',
-                'num_consumidores_VISA', 'num_consumidores_not_VISA', 'num_consumidores_novos_VISA', 'num_consumidores_novos_not_VISA'));
+                'num_consumidores_bandeira', 'num_consumidores_not_bandeira', 'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
     }
+
+
+
+    function _num_consumidores_bandeira($inicio, $fim = null ) {
+        if(is_null($fim)) {
+            $fim = date('Y-m-d', strtotime("+1 days"));
+        }
+        $conditionsSubQuery = array(
+                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
+                //'CF.forma_de_pagamento' => 'Credito',,//se interessar somente credito ou debito
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->CupomFiscal->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this->CupomFiscal),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),//retirar essas condições null?
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this->CupomFiscal
+        );
+        $subQuery_num_consumidores_bandeira = ' Troca.id IN ( ' . $subQuery .' ) ';
+        //debug($subQuery_num_consumidores_bandeira);
+        $conditions_num_consumidores_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_bandeira );
+    }
+
+    function _num_consumidores_not_bandeira($inicio, $fim = null) {
+        if(is_null($fim)) {
+            $fim = date('Y-m-d', strtotime("+1 days"));
+        }
+        $conditionsSubQuery = array(
+                'NOT' => array(
+                        'AND' => array(
+                                'CF.bandeira' => Configure::read('Regras.Bandeira.nome')
+                        )),
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->CupomFiscal->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this->CupomFiscal),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this->CupomFiscal
+        );
+        $subQuery_num_consumidores_not_bandeira = ' Troca.id IN ( ' . $subQuery .' ) ';
+        //debug($subQuery_num_consumidores_not_bandeira);
+        $conditions_num_consumidores_not_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_not_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_not_bandeira );
+    }
+
+    function _num_consumidores_novos_bandeira($inicio, $fim = null) {
+        if(is_null($fim)) {
+            $fim = date('Y-m-d', strtotime("+1 days"));
+        }
+        $conditionsSubQuery = array(
+                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->CupomFiscal->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this->CupomFiscal),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this->CupomFiscal
+        );
+        $conditionsSubQuery2 = array(
+                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo2 = $this->Troca->Consumidor->getDataSource();
+        $subQuery2 = $dbo2->buildStatement(
+                array(
+                'fields' => array('Consumidor.id'),
+                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
+                'alias' => 'Consumidor',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery2,
+                'order' => null,
+                'group' => null
+                ),
+                $this->Troca->Consumidor
+        );
+        $subQuery_num_consumidores_novos_bandeira = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
+        //debug($subQuery_num_consumidores_novos_bandeira);
+        $conditions_num_consumidores_novos_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_novos_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_novos_bandeira );
+    }
+
+
+    function _num_consumidores_novos_not_bandeira($inicio, $fim = null) {
+        if(is_null($fim)) {
+            $fim = date('Y-m-d', strtotime("+1 days"));
+        }
+        $conditionsSubQuery = array(
+                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->CupomFiscal->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this->CupomFiscal),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this->CupomFiscal
+        );
+        $conditionsSubQuery2 = array(
+                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo2 = $this->Troca->Consumidor->getDataSource();
+        $subQuery2 = $dbo2->buildStatement(
+                array(
+                'fields' => array('Consumidor.id'),
+                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
+                'alias' => 'Consumidor',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery2,
+                'order' => null,
+                'group' => null
+                ),
+                $this->Troca->Consumidor
+        );
+        $subQuery_num_consumidores_novos_not_bandeira =
+                ' Troca.id IN ( ' . $subQuery .' )
+            AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
+        //debug($subQuery_num_consumidores_novos_not_bandeira);
+        $conditions_num_consumidores_novos_not_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_novos_not_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_novos_not_bandeira );
+    }
+
 
 }
 ?>

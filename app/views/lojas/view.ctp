@@ -63,6 +63,69 @@
 		</dd>
 	</dl>
 </div>
+<div class="cupomFiscais index">
+<h2><?php __('CupomFiscais');?></h2>
+<p>
+<?php
+echo $paginator->counter(array(
+'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+));
+$paginator->options(array('url' => $this->passedArgs));
+?></p>
+<table cellpadding="0" cellspacing="0">
+<tr>
+	<th><?php echo $paginator->sort('id');?></th>
+	<th><?php echo $paginator->sort('codigo');?></th>
+	<th><?php echo $paginator->sort('Valor R$','valor');?></th>
+	<th><?php echo $paginator->sort('forma_de_pagamento');?></th>
+	<th><?php echo $paginator->sort('bandeira');?></th>
+	<th><?php echo $paginator->sort('created');?></th>
+</tr>
+<?php
+$i = 0;
+foreach ($cupomFiscais as $cupomFiscal):
+	$class = null;
+	if ($i++ % 2 == 0) {
+		$class = ' class="altrow"';
+	}
+?>
+	<tr<?php echo $class;?>>
+		<td>
+			<?php echo $html->link($cupomFiscal['CupomFiscal']['id'], array('controller' => 'cupom_fiscais', 'action' => 'view', $cupomFiscal['CupomFiscal']['id'])); ?>
+		</td>
+		<td>
+			<?php echo $cupomFiscal['CupomFiscal']['codigo']; ?>
+		</td>
+		<td>
+			<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
+		</td>
+		<td>
+			<?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
+		</td>
+		<td>
+			<?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
+		</td>
+		<td>
+			<?php echo $cupomFiscal['CupomFiscal']['created']; ?>
+		</td>
+	</tr>
+<?php endforeach; ?>
+<tr>
+	<th><?php echo $paginator->sort('id');?></th>
+	<th><?php echo $paginator->sort('codigo');?></th>
+	<th><?php echo $paginator->sort('Valor R$','valor');?></th>
+	<th><?php echo $paginator->sort('forma_de_pagamento');?></th>
+	<th><?php echo $paginator->sort('bandeira');?></th>
+	<th><?php echo $paginator->sort('created');?></th>
+</tr>
+</table>
+</div>
+<div class="paging">
+	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
+ | 	<?php echo $paginator->numbers();?>
+	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
+</div>
+<?php /*
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Edit Loja', true), array('action' => 'edit', $loja['Loja']['id'])); ?> </li>
@@ -74,5 +137,5 @@
     <?php
     echo $this->element('admin_links');
     ?>
-
 </div>
+ */ ?>

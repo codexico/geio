@@ -569,3 +569,26 @@ Aco: controllers/Consumidores/pesquisarRgAjax in [CORE/cake/libs/controller/comp
 2010-03-25 22:46:35 Warning: Warning (2): Division by zero in [APP/controllers/trocas_controller.php, line 238]
 2010-03-25 22:46:35 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at /home/francisco/htdocs/shopping/campanha2/cake/libs/debugger.php:509) in [CORE/cake/libs/controller/controller.php, line 647]
 2010-03-26 04:17:31 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Troca.pontos' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-26 13:02:39 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Troca.pontos' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-26 13:23:26 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Troca.pontos' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-26 13:28:36 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Troca.pontos' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-26 13:29:07 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Troca.pontos' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-26 13:30:12 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Troca.pontos' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-26 14:23:04 Warning: Warning (2): Invalid argument supplied for foreach() in [APP/views/trocas/mes.ctp, line 42]
+2010-03-26 15:53:47 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 1
+            [username] => admin
+            [group_id] => 1
+            [created] => 2010-03-13 08:15:14
+            [modified] => 2010-03-13 08:15:14
+        )
+
+)
+
+Aco: controllers/Trocas/consumidor in [CORE/cake/libs/controller/components/acl.php, line 239]
+2010-03-26 15:54:43 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Consumidor.id' in 'where clause'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
+2010-03-27 01:59:17 Warning: Warning (2): Invalid argument supplied for foreach() in [APP/views/trocas/view.ctp, line 135]
