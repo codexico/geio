@@ -126,8 +126,15 @@ class TrocasController extends AppController {
         }
 
         if (!empty($this->data)) {
+            //incluir Consumidor e Promotor na Troca
             $this->data['Troca']['promotor_id'] = $promotor['Promotor']['id'];
             $this->data['Troca']['consumidor_id'] = $consumidor['Consumidor']['id'];
+
+            //incluir o Consumidor no CupomFiscal
+            $numCF = count($this->data['CupomFiscal']);
+            for ($i = 0; $i < $numCF; $i++) {
+                $this->data['CupomFiscal'][$i]['consumidor_id'] = $consumidor['Consumidor']['id'];
+            }
 
             if( Configure::read('Regras.Brinde.true') ) {
                 //$this->_calculaBrinde();//TODO

@@ -33,6 +33,13 @@ class CupomFiscal extends AppModel {
                             'conditions' => '',
                             'fields' => '',
                             'order' => ''
+            ),
+            'Consumidor' => array(
+                            'className' => 'Consumidor',
+                            'foreignKey' => 'consumidor_id',
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => ''
             )
     );
 

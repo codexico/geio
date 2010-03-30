@@ -16,8 +16,29 @@ class LojasController extends AppController {
             $this->Session->setFlash(__('Invalid Loja', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Loja->recursive = -1;
+        $this->Loja->recursive = 1;
         $loja = $this->Loja->read(null, $id);//debug($loja);
+
+        $this->CupomFiscal->Behaviors->attach('Containable');
+        $this->paginate = array(
+                'conditions' => array('loja_id' => $id),
+                'contain' => array('Consumidor'),
+                'limit' => 50,
+           //'group' => array('consumidor_id')
+                //'recursive' => -1
+        );
+        $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais);
+
+        $this->set(compact('loja', 'cupom_fiscais') );
+    }
+
+    function asdfg($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid Loja', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Loja->recursive = -1;
+        $loja = $this->Loja->read(null, $id);debug($loja);
 
         $this->paginate = array(
                 'conditions' => array('loja_id' => $id),
@@ -29,7 +50,7 @@ class LojasController extends AppController {
         $this->set(compact('loja', 'cupom_fiscais') );
     }
 
-    function add() {
+    function consumidores() {
         if (!empty($this->data)) {
             $this->Loja->create();
             if ($this->Loja->save($this->data)) {

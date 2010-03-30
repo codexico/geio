@@ -6,14 +6,23 @@ class UsersController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        //$this->Auth->allow('*');
+        $this->Auth->allow('login', 'logout');
     }
 
 
     function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('Olá, '.$this->Auth->user('username').'!');
-            $this->redirect('/', null, false);
+
+            if ($this->Session->read('Auth.User.group_id') == 3) {
+                $this->Auth->loginRedirect =array('action' => 'pesquisar', 'controller'=>'consumidores');
+            }elseif ($this->Session->read('Auth.User.group_id') == 1) {
+                $this->Auth->loginRedirect =array('action' => 'hoje', 'controller'=>'trocas');
+            }else{
+                $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
+            }
+
+            $this->redirect($this->Auth->loginRedirect);
         }
     }
 

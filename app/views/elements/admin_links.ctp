@@ -63,6 +63,9 @@
 
     <li><?php echo $html->link(__('Login', true), '/login'); ?> </li>
     <?php endif; ?>
+
+     <?php    if ($session->read('Auth.User')) : ?>
     <li><?php echo $html->link(__('Logout', true), '/logout'); ?> </li>
+    <?php endif; ?>
 
 </ul>

@@ -36,6 +36,19 @@ class Loja extends AppModel {
                             'exclusive' => '',
                             'finderQuery' => '',
                             'counterQuery' => ''
+            ),
+            'Cupom_Fiscal' => array(
+                            'className' => 'CupomFiscal',
+                            'foreignKey' => 'loja_id',
+                            'dependent' => false,
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => '',
+                            'limit' => '',
+                            'offset' => '',
+                            'exclusive' => '',
+                            'finderQuery' => '',
+                            'counterQuery' => ''
             )
     );
 

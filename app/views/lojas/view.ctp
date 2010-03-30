@@ -76,6 +76,7 @@ $paginator->options(array('url' => $this->passedArgs));
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('codigo');?></th>
+	<th><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
 	<th><?php echo $paginator->sort('Valor R$','valor');?></th>
 	<th><?php echo $paginator->sort('forma_de_pagamento');?></th>
 	<th><?php echo $paginator->sort('bandeira');?></th>
@@ -97,6 +98,9 @@ foreach ($cupomFiscais as $cupomFiscal):
 			<?php echo $cupomFiscal['CupomFiscal']['codigo']; ?>
 		</td>
 		<td>
+			<?php echo $cupomFiscal['Consumidor']['nome']; ?>
+		</td>
+		<td>
 			<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
 		</td>
 		<td>
@@ -113,6 +117,7 @@ foreach ($cupomFiscais as $cupomFiscal):
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('codigo');?></th>
+	<th><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
 	<th><?php echo $paginator->sort('Valor R$','valor');?></th>
 	<th><?php echo $paginator->sort('forma_de_pagamento');?></th>
 	<th><?php echo $paginator->sort('bandeira');?></th>
