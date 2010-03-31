@@ -6,6 +6,11 @@
 class AppController extends Controller {
 
     var $components = array('Acl', 'Auth');
+    /**
+     * @link http://api12.cakephp.org/class/auth-component
+     * @var AuthComponent
+     */
+    var $Auth;
 
     function beforeFilter() {
         //Configure AuthComponent

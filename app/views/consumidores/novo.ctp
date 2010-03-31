@@ -1,3 +1,6 @@
+<?php
+$javascript->link(array("prototype.js", "funcoes.js"), false);
+?>
 <div class="consumidores form">
     <?php echo $form->create('Consumidor', array('action' => 'novo', 'onsubmit'=>'return confirm("Confirma?")'));?>
     <fieldset>
@@ -63,6 +66,48 @@
         echo $form->input('profissao');
 
         echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
+
+
+
+
+        echo $form->input('cep', array('id'=>'cep',
+					       'style'=>'width: 100px',
+					       'onkeyup'=>'javascript:saiCep(this.value.length);')); //Quando sair do campo cep chama a função javascript saiCep()
+
+		echo $html->image('loading.gif', array('id'=>'loading',
+						       'style'=>'display:none')); //Imagem de loading no código, mas não exibida na página
+
+		$opcoes=array('label'=>'Rua/Avenida',
+			      'style'=>'width: 500px');
+		echo $form->input('endereco', $opcoes);
+
+		/*
+		* Observa o campo cujo id é 'cep', quando seu conteúdo for modificado "executa" a action 'endereco_cep'
+		* do controller 'clientes' e atualiza o resultado no campo cujo id é 'ConsumidorEndereco'
+		* Mais informações sobre observeField em: http://book.cakephp.org/pt/view/630/observeField
+		*/
+		echo $ajax->observeField('cep',
+			        array(
+			            'update' => 'ConsumidorEndereco',
+			            'url' => array('controller' => 'consumidores',
+						   'action' => 'endereco_cep')
+			        )
+			    );
+
+		$opcoes=array('label'=>'Número',
+			      'style'=>'width: 60px');
+		echo $form->input('numero', $opcoes);
+		echo $form->input('bairro', array('style'=>'width: 200px'));
+		echo $form->input('cidade', array('style'=>'width: 200px'));
+
+		echo $form->input('estado', array('options' => $estados,
+			  			  'empty'=>'Selecione'));
+
+		echo $form->input('complemento', array('style'=>'width: 200px'));
+
+		echo $form->input('pais', array('options' => $paises,
+					        'empty'=>'Selecione'));
+
         ?>
     </fieldset>
     <?php echo $form->end('Submit');?>

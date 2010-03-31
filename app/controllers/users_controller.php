@@ -121,6 +121,7 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/consumidores/pesquisar');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisarRgAjax');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisarCpfAjax');
+        $this->Acl->allow($group, 'controllers/consumidores/endereco_cep');
     }
 
 

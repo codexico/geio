@@ -598,3 +598,33 @@ Aco: controllers/Trocas/consumidor in [CORE/cake/libs/controller/components/acl.
 2010-03-29 12:56:19 Warning: Warning (2): Invalid argument supplied for foreach() in [CORE/cake/libs/model/datasources/dbo_source.php, line 920]
 2010-03-29 12:57:18 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Cupom_Fiscal.cupom_fiscal_id' in 'field list'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 527]
 2010-03-29 12:57:18 Warning: Warning (2): Invalid argument supplied for foreach() in [CORE/cake/libs/model/datasources/dbo_source.php, line 920]
+2010-03-30 20:46:39 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 8
+            [username] => p1
+            [group_id] => 3
+            [created] => 2010-03-13 14:41:23
+            [modified] => 2010-03-13 14:41:23
+        )
+
+)
+
+Aco: controllers/Consumidores/endereco_cep in [CORE/cake/libs/controller/components/acl.php, line 239]
+2010-03-30 20:47:57 Warning: Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:
+Aro: Array
+(
+    [User] => Array
+        (
+            [id] => 8
+            [username] => p1
+            [group_id] => 3
+            [created] => 2010-03-13 14:41:23
+            [modified] => 2010-03-13 14:41:23
+        )
+
+)
+
+Aco: controllers/Consumidores/endereco_cep in [CORE/cake/libs/controller/components/acl.php, line 239]
