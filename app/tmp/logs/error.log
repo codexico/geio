@@ -628,3 +628,9 @@ Aro: Array
 )
 
 Aco: controllers/Consumidores/endereco_cep in [CORE/cake/libs/controller/components/acl.php, line 239]
+2010-03-31 18:45:23 Warning: Warning (2): mysql_connect() [<a href='http://php.net/function.mysql-connect'>function.mysql-connect</a>]: OK packet 6 bytes shorter than expected in [CORE/cake/libs/model/datasources/dbo/dbo_mysql.php, line 454]
+2010-03-31 18:45:23 Warning: Warning (2): mysql_connect() [<a href='http://php.net/function.mysql-connect'>function.mysql-connect</a>]: mysqlnd cannot connect to MySQL 4.1+ using old authentication in [CORE/cake/libs/model/datasources/dbo/dbo_mysql.php, line 454]
+2010-03-31 18:45:23 Warning: Warning (2): mysql_select_db() expects parameter 2 to be resource, boolean given in [CORE/cake/libs/model/datasources/dbo/dbo_mysql.php, line 460]
+2010-03-31 18:45:23 Warning: Warning (2): mysql_query() expects parameter 2 to be resource, boolean given in [CORE/cake/libs/model/datasources/dbo/dbo_mysql.php, line 500]
+2010-03-31 18:45:23 Warning: Warning (2): mysql_get_server_info() expects parameter 1 to be resource, boolean given in [CORE/cake/libs/model/datasources/dbo/dbo_mysql.php, line 468]
+2010-04-01 20:27:14 Warning: Warning (2): Invalid argument supplied for foreach() in [APP/views/trocas/nova.ctp, line 24]

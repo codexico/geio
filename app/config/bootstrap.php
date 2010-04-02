@@ -43,9 +43,11 @@
 //EOF
 
 
-
 //separar para deixar mais claro
 Configure::load('custom');//carrega as constantes do site
 Configure::load('regras');//carrega as regras da campanha
+
+//tem q vir por ultimo
+require APP . 'plugins' . DS . 'cake_ptbr' . DS . 'config' . DS . 'bootstrap.php';
 
 ?>

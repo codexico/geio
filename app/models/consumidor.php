@@ -5,7 +5,6 @@ class Consumidor extends AppModel {
 
     var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData');
 
-
     var $validate = array(
             'nome' => array('notempty'),
 

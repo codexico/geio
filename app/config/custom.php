@@ -1,7 +1,5 @@
 <?php
 
-require APP . 'plugins' . DS . 'cake_ptbr' . DS . 'config' . DS . 'bootstrap.php';
-
 //http://book.cakephp.org/view/163/Localization-in-CakePHP
 setlocale(LC_ALL, 'pt_BR', 'pt');
 date_default_timezone_set('America/Sao_Paulo');

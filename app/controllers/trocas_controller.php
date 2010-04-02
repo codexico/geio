@@ -189,10 +189,12 @@ class TrocasController extends AppController {
         }
         //soma os valores dos cupons fiscais enviados
         foreach ($this->data['CupomFiscal'] as $cf) { //debug($cf);
-            if( up($cf['bandeira']) != up($regras['Bandeira']['nome']) ) {
-                $valorOutros += $cf['valor']; //debug("dinheiro = " . $valorDinheiro);
-            }else {
-                $valorBandeira += $cf['valor']; //debug('bandeira = ' . $valorBandeira);
+            if(isset ($cf['bandeira'])) {
+                if( up($cf['bandeira']) != up($regras['Bandeira']['nome']) ) {
+                    $valorOutros += $cf['valor']; //debug("dinheiro = " . $valorDinheiro);
+                }else {
+                    $valorBandeira += $cf['valor']; //debug('bandeira = ' . $valorBandeira);
+                }
             }
         }
         //calcula as trocas

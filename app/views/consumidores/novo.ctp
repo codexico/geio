@@ -1,10 +1,18 @@
 <?php
+/* @var $this View */
+/* @var $html HtmlHelper */
+/* @var $form FormHelper */
+
+//javascripts para a busca de cep
 $javascript->link(array("prototype.js", "funcoes.js"), false);
+
+//
+$javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false para ir em <head>
 ?>
 <div class="consumidores form">
     <?php echo $form->create('Consumidor', array('action' => 'novo', 'onsubmit'=>'return confirm("Confirma?")'));?>
     <fieldset>
-        <legend><?php __('Add Consumidor');?></legend>
+        <legend><?php __('Adicionar Novo Consumidor');?></legend>
         <?php
 
         echo $form->input('nome');
@@ -24,7 +32,7 @@ $javascript->link(array("prototype.js", "funcoes.js"), false);
                 'gls'=>'gls',
                 'outro'=>'outro'
         ),
-        'selected'=>'',
+        'selected'=>$this->data['Consumidor']['sexo'],
         'empty' => true));
 
         echo $form->input('nascimento',array(
@@ -39,16 +47,20 @@ $javascript->link(array("prototype.js", "funcoes.js"), false);
         );
 
         //echo $form->input('estado_civil');
+        $estado_civil ='';
+        if(isset ($this->data['Consumidor']['estado_civil'])){$estado_civil = $this->data['Consumidor']['estado_civil'];}
         echo $form->input('estado_civil', array('options' => array(
                 'solteiro'=>'solteiro',
                 'casado'=>'casado',
                 'viúvo'=>'viúvo',
                 'separado'=>'separado'
         ),
-        'selected'=>'',
+        'selected'=>$estado_civil,
         'empty' => true));
 
         //echo $form->input('grau_de_instrucao');
+        $grau_de_instrucao ='';
+        if(isset ($this->data['Consumidor']['grau_de_instrucao'])){$grau_de_instrucao = $this->data['Consumidor']['grau_de_instrucao'];}
         echo $form->input('grau_de_instrucao', array('options' => array(
                 'nenhum'=>'nenhum',
                 '1º Grau'=>'1º Grau',
@@ -60,7 +72,7 @@ $javascript->link(array("prototype.js", "funcoes.js"), false);
                 'Pós'=>'Pós',
                 'MBA'=>'MBA'
         ),
-        'selected'=>'',
+        'selected'=>$grau_de_instrucao,
         'empty' => true));
 
         echo $form->input('profissao');
@@ -70,47 +82,47 @@ $javascript->link(array("prototype.js", "funcoes.js"), false);
 
 
 
-        echo $form->input('cep', array('id'=>'cep',
-					       'style'=>'width: 100px',
-					       'onkeyup'=>'javascript:saiCep(this.value.length);')); //Quando sair do campo cep chama a função javascript saiCep()
+        echo $form->input('cep', array('id'=>'cep', 'maxlength' => 8, 'label' => 'CEP (exatamente 8 números)',
+        'style'=>'width: 108px',
+        'onkeyup'=>'javascript:saiCep(this.value.length);')); //Quando sair do campo cep chama a função javascript saiCep()
 
-		echo $html->image('loading.gif', array('id'=>'loading',
-						       'style'=>'display:none')); //Imagem de loading no código, mas não exibida na página
+        echo $html->image('loading.gif', array('id'=>'loading',
+        'style'=>'display:none')); //Imagem de loading no código, mas não exibida na página
 
-		$opcoes=array('label'=>'Rua/Avenida',
-			      'style'=>'width: 500px');
-		echo $form->input('endereco', $opcoes);
+        $opcoes=array('label'=>'Rua/Avenida',
+                'style'=>'width: 500px');
+        echo $form->input('endereco', $opcoes);
 
-		/*
+        /*
 		* Observa o campo cujo id é 'cep', quando seu conteúdo for modificado "executa" a action 'endereco_cep'
 		* do controller 'clientes' e atualiza o resultado no campo cujo id é 'ConsumidorEndereco'
 		* Mais informações sobre observeField em: http://book.cakephp.org/pt/view/630/observeField
-		*/
-		echo $ajax->observeField('cep',
-			        array(
-			            'update' => 'ConsumidorEndereco',
-			            'url' => array('controller' => 'consumidores',
-						   'action' => 'endereco_cep')
-			        )
-			    );
+        */
+        echo $ajax->observeField('cep',
+        array(
+        'update' => 'ConsumidorEndereco',
+        'url' => array('controller' => 'consumidores',
+                'action' => 'endereco_cep')
+        )
+        );
 
-		$opcoes=array('label'=>'Número',
-			      'style'=>'width: 60px');
-		echo $form->input('numero', $opcoes);
-		echo $form->input('bairro', array('style'=>'width: 200px'));
-		echo $form->input('cidade', array('style'=>'width: 200px'));
+        $opcoes=array('label'=>'Número',
+                'style'=>'width: 60px');
+        echo $form->input('numero', $opcoes);
+        echo $form->input('bairro', array('style'=>'width: 200px'));
+        echo $form->input('cidade', array('style'=>'width: 200px'));
 
-		echo $form->input('estado', array('options' => $estados,
-			  			  'empty'=>'Selecione'));
+        echo $form->input('estado', array('options' => $estados,
+        'empty'=>'Selecione'));
 
-		echo $form->input('complemento', array('style'=>'width: 200px'));
+        echo $form->input('complemento', array('style'=>'width: 200px'));
 
-		echo $form->input('pais', array('options' => $paises,
-					        'empty'=>'Selecione'));
+        echo $form->input('pais', array('options' => $paises,
+        'empty'=>'Selecione'));
 
         ?>
     </fieldset>
-    <?php echo $form->end('Submit');?>
+    <?php echo $form->end('Salvar e ir para o Cadastro de Cupons');?>
 </div>
 
 

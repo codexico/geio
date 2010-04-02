@@ -26,28 +26,6 @@ class ConsumidoresController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        /*
-        * Busca os estados e prepara um array para preencher o
-        * select na primeira vez que o formulário for carregado.
-        */
-        $estados = $this->Estado->find('list',
-                array(
-                'fields' => array('Estado.estado', 'Estado.estado'),
-                )
-        );
-        $this->set('estados', $estados);
-
-        /*
-        * Busca os paises e prepara um array para preencher o
-        * select na primeira vez que o formulário for carregado.
-        */
-        $paises = $this->Paise->find('list',
-                array(
-                'fields' => array('Paise.nome', 'Paise.nome'),
-                )
-        );
-        $this->set('paises', $paises);
-
     }
 
     function endereco_cep() {
@@ -201,12 +179,26 @@ class ConsumidoresController extends AppController {
             //debug($this->data);
             $this->Consumidor->create();
             if ($this->Consumidor->save($this->data)) {
-                $this->Session->setFlash(__('The Consumidor has been saved', true));
+                $this->Session->setFlash(__('O Consumidor foi salvo com sucesso.', true));
                 $this->redirect(array('controller' => 'trocas','action' => 'nova/'.$this->Consumidor->id));
             } else {
-                $this->Session->setFlash(__('The Consumidor could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('Ocorreu algum erro, o Consumidor não foi salvo. Confira as mensagens e tente novamente.', true));
             }
         }
+
+        /*
+        * Busca os estados e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
+        $this->set('estados', $estados);
+
+        /*
+        * Busca os paises e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
+        $this->set('paises', $paises);
     }
 
     function pesquisar() {
