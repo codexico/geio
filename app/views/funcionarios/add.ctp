@@ -1,23 +1,34 @@
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1><?php __('Inserir Funcionário');?></h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/funcionarios', array('class'=>'btn_cinza floatRight')); ?>
+</div>
+
 <div class="funcionarios form">
     <?php echo $form->create('Funcionario');?>
     <fieldset>
-        <legend><?php __('Add Funcionario');?></legend>
+        <legend><?php __('Dados Gerais');?></legend>
         <?php
-        echo $form->input('nome');
-        echo $form->input('rg');
-        echo $form->input('cpf', array('label' => 'CPF (somente números)'));
-        echo $form->input('loja_id');
+        echo $form->input('nome', array('label' => 'Nome:'));
+        echo $form->input('rg', array('label' => 'RG:'));
+        echo $form->input('cpf', array('label' => 'CPF (somente números):'));
+        echo $form->input('loja_id', array('label' => 'Loja:'));
 
-        echo $form->input('tel');
-        echo $form->input('cel');
-        echo $form->input('email');
+        echo $form->input('tel', array('label' => 'Telefone:'));
+        echo $form->input('cel', array('label' => 'Celular:'));
+        echo $form->input('email', array('label' => 'E-mail:'));
 
-        //echo $form->input('sexo');
-        echo $form->input('sexo', array('options' => array(
-                'masculino'=>'masculino',
-                'feminino'=>'feminino',
-                'gls'=>'gls',
-                'outro'=>'outro'
+        echo $form->input('sexo', array('label' => 'Sexo:', 'options' => array(
+                'masculino'=>'Masculino',
+                'feminino'=>'Feminino',
+                'gls'=>'GLS',
+                'outro'=>'Outro'
         ),
         'selected'=>'',
         'empty' => true));
@@ -40,7 +51,7 @@
         echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
         ?>
     </fieldset>
-    <?php echo $form->end('Submit');?>
+    <?php echo $form->end('ENVIAR');?>
 </div>
 <div class="actions">
     <ul>
