@@ -24,6 +24,7 @@ class UsersController extends AppController {
 
             $this->redirect($this->Auth->loginRedirect);
         }
+        $this->layout = 'login';
     }
 
     function logout() {

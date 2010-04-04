@@ -12,36 +12,118 @@
         <?php
         echo $html->meta('icon');
 
-        echo $html->css('cake.generic');
+        echo $html->css('reset');
+        echo $html->css('global');
 
         echo $scripts_for_layout;
         ?>
     </head>
     <body>
         <div id="container">
-
     <?php
     echo $this->element('admin_links');
     ?>
-            
+
             <div id="header">
-                <h1><?php echo Configure::read('SITE_NAME'); ?> - app/views/layouts/default.ctp</h1>
-                <p>Olá <?php echo $session->read('Auth.User.username') . " ! " ?></p>
+				<div class="logotipo">
+					<a href="../index.php"><?php echo $html->image('logotipo_geio.jpg', array('alt' => 'GEIO - Início'))?></a>
+				</div>
+				<div class="painel_logado">
+					<h5>LOGIN</h5>
+					<ul>
+						<li>Olá <strong><?php echo $session->read('Auth.User.username') . " ! " ?></strong></li>
+						<li>|</li>
+						<li><a href="#"><strong>Meu Perfil</strong></a></li>
+						<li>|</li>
+						<li><a href="#"><strong>Trocar Senha</strong></a></li>
+						<li>|</li>
+						<li><a href="#"><strong>Ajuda</strong></a></li>
+						<li>|</li>
+						<li><a href="../sistema/logout/"><strong>Sair</strong></a></li>
+					</ul>
+				</div>
             </div>
+
+            <!-- #menu -->
+            <div id="menu">
+				<div class="menu-content">
+                    <div class="menu-abas">
+                        <ul>
+                            <li class="aba_ativa"><a href="#">NOME DA ABA 1</a></li>
+                            <li><a href="#">NOME DA ABA 1</a></li>
+                            <li><a href="#">NOME DA ABA 1</a></li>
+                            <li><a href="#">NOME DA ABA 1</a></li>
+                        </ul>
+                    </div>
+                    
+					<div class="menu-navegacao">
+                        <ul class="first">
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li class="last"><a href="#">Aba 1</a></li>
+                        </ul>
+                        <ul>
+                            <li class="lista_aberta"><a href="#">Aberto</a>
+								<ul>
+									<li><a href="#">_Submenu 1</a></li>
+									<li><a href="#">_Submenu 2</a></li>
+									<li><a href="#">_Submenu 3</a></li>
+									<li><a href="#">_Submenu 4</a></li>
+								</ul>
+							</li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li class="last"><a href="#">Aba 1</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Controle de Gestão</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li class="last"><a href="#">Aba 1</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li class="last"><a href="#">Aba 1</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li><a href="#">Aba 1</a></li>
+                            <li class="last"><a href="#">Aba 1</a></li>
+                        </ul>
+					</div>
+	            </div>
+               	<div class="clear"></div>
+            </div>
+
             <div id="content">
-                <?php $session->flash('auth'); ?>
-                <?php $session->flash(); ?>
-
-                <?php echo $content_for_layout; ?>
-
+				<?php $session->flash('auth'); ?>
+				<?php $session->flash(); ?>
+				
+				<?php echo $content_for_layout; ?>
             </div>
             <div id="footer">
-                <?php echo $html->link(
-                $html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0")),
-                'http://www.cakephp.org/',
-                array('target'=>'_blank'), null, false
-                );
-                ?>
+				<div class="footer_conteudo">
+                    <div class="copy">
+                        <p>© 2010 - GEIO - Todos os Direitos Reservados</p>
+                    </div>
+                    <div class="links_rapidos">
+						<ul>
+							<li><a href="#">Ajuda</a></li>
+							<li>|</li>
+							<li><a href="#">Suporte</a></li>
+						</ul>
+                    </div>
+					<div class="fabricante">
+						<?php echo $html->image('logo_geio_footer.gif', array('alt' => 'GEIO'))?>
+					</div>
+				</div>
             </div>
         </div>
         <?php echo $cakeDebug; ?>

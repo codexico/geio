@@ -57,17 +57,8 @@ class PagesController extends AppController {
 
         $this->render(join('/', $path));
     }
-
-    function _tweets() {
-        // Will use the username defined in the $twitter as shown above:
-        $tweets = $this->Tweet->find('all');
-        $this->set('tweets', $tweets);
-
-    }
-    function home(){
-            $this->layout = 'homelayout';
-            //$this->_tweets();
-
+    function home() {
+        $this->layout = 'homelayout';
     }
 
 }
