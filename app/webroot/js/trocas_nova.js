@@ -135,6 +135,16 @@ $(document).ready(function() {
         alert("\n Total de cupons fiscais= "+ count_CF +"\n Total de cupons promocionais = "+ c + regra)
     })
 
+
+//    $('.remover-cupom-fiscal').click(function(){
+//        alert('remover')
+//    })
+    $('.remover-cupom-fiscal').live('click', function(){
+        $(this).closest('li.cupom').remove()
+    })
+
+
+
     /**
      * Adiciona consumidor por ajax sem sair da pagina
      */ /*

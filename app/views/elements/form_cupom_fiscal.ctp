@@ -1,6 +1,7 @@
 
-<li class="cupom">
-    <fieldset><legend>Cupom Fiscal <?=$i+1;?></legend>
+<li class="cupom" id="cupom-fiscal-<?=$i;?>">
+    <fieldset><legend>Cupom Fiscal <?=$i+1;?>&nbsp;&nbsp;
+    <input id="remover-cupom-fiscal-<?=$i;?>" class="remover-cupom-fiscal" type="button" value="Remover este Cupom" /></legend>
         <?php
         echo $form->input('CupomFiscal.'.$i.'.codigo');
 
