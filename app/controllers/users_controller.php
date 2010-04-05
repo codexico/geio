@@ -24,6 +24,7 @@ class UsersController extends AppController {
 
             $this->redirect($this->Auth->loginRedirect);
         }
+        $this->layout = 'login';
     }
 
     function logout() {
@@ -117,6 +118,8 @@ class UsersController extends AppController {
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/logout');
         $this->Acl->allow($group, 'controllers/Trocas/nova');
+        $this->Acl->allow($group, 'controllers/Trocas/imprimir');
+        $this->Acl->allow($group, 'controllers/CupomPromocionais/cupomPdf');
         $this->Acl->allow($group, 'controllers/consumidores/novo');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisar');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisarRgAjax');

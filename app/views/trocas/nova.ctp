@@ -2,6 +2,7 @@
 /* @var $this View */
 /* @var $html HtmlHelper */
 /* @var $form FormHelper */
+/* @var $javascript JavascriptHelper */
 $javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
 $javascript->link(array('trocas_nova'), false);
 ?>
@@ -13,7 +14,7 @@ $javascript->link(array('trocas_nova'), false);
     ?>
     <?php
     echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'],
-                                        'onsubmit'=>'return confirm("Confirma?")'));
+    'onsubmit'=>'return confirm("Confirma?")'));
     ?>
     <fieldset>
         <legend><?php __('Nova Troca do Consumidor');?></legend>
@@ -30,6 +31,12 @@ $javascript->link(array('trocas_nova'), false);
                 $i=0;
                 foreach ($this->data['CupomFiscal'] as $cf) {
                     echo $this->element('form_cupom_fiscal', array('i' => $i++));
+                    echo $javascript->codeBlock('
+                            $(document).ready(function() {
+                                sincronizaSelectLoja('.$i.');
+                                sincronizaSelectBandeira('.$i.');
+                            })
+                        ');
                 }
             }else {
                 echo $this->element('form_cupom_fiscal', array('i' => 0));

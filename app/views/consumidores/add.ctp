@@ -1,7 +1,22 @@
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Inserir Consumidor</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/consumidores', array('class'=>'btn_cinza floatRight')); ?>
+</div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
 <div class="consumidores form">
     <?php echo $form->create('Consumidor');?>
     <fieldset>
-        <legend><?php __('Add Consumidor');?></legend>
+        <legend>Dados Gerais</legend>
         <?php
 
         echo $form->input('nome');
@@ -65,15 +80,5 @@
         echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
         ?>
     </fieldset>
-    <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-    <ul>
-        <li><?php echo $html->link(__('List Consumidores', true), array('action' => 'index'));?></li>
-    </ul>
-
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
+    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
 </div>
