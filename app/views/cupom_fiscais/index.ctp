@@ -66,7 +66,7 @@ foreach ($cupomFiscais as $cupomFiscal):
 </div>
 <div class="paging">
 	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers();?>
+ | 	<?php echo $paginator->numbers(array('before'=>'<ul>','after'=>'</ul>','tag'=>'li','separator'=>' '));?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
 </div>
 <div class="actions">
