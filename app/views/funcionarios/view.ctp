@@ -1,7 +1,7 @@
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>
-	<h1><?php __('Visualizar Funcion&aacute;rio');?></h1>
+	<h1>Visualizar Funcion&aacute;rio</h1>
 </div>
 <div class="clear"></div>
 
@@ -9,12 +9,15 @@
 <div class="botoes">
 
 	<?php echo $html->link('Voltar', '/funcionarios', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link(__('List Funcionarios', true), array('action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link(__('Novo Funcionario', true), array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link(__('Edit Funcionario', true), array('action' => 'edit', $funcionario['Funcionario']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link(__('Delete Funcionario', true), array('action' => 'delete', $funcionario['Funcionario']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $funcionario['Funcionario']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Funcionarios', array('action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Incluir Funcionario', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Editar Funcionario', array('action' => 'edit', $funcionario['Funcionario']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Excluir Funcionario', array('action' => 'delete', $funcionario['Funcionario']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $funcionario['Funcionario']['id'])); ?>
 
 </div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
 
 <div class="funcionarios view">
 	<dl>

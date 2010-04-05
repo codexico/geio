@@ -1,7 +1,7 @@
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>
-	<h1><?php __('Inserir Funcionário');?></h1>
+	<h1>Inserir Funcionário</h1>
 </div>
 <div class="clear"></div>
 
@@ -10,10 +10,13 @@
 	<?php echo $html->link('Voltar', '/funcionarios', array('class'=>'btn_cinza floatRight')); ?>
 </div>
 
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
 <div class="funcionarios form">
     <?php echo $form->create('Funcionario');?>
     <fieldset>
-        <legend><?php __('Dados Gerais');?></legend>
+        <legend>Dados Gerais</legend>
         <?php
         echo $form->input('nome', array('label' => 'Nome:'));
         echo $form->input('rg', array('label' => 'RG:'));
@@ -32,34 +35,19 @@
         ),
         'selected'=>'',
         'empty' => true));
+        ?>
 
-        //echo $form->input('nascimento');
+		<div class="input select">
+			<label for="FuncionarioSexo">Nascimento:</label>
+			 <?php echo $form->day('nascimento', '', array('class'=>'select_dia'), true); ?>
+			 <?php echo $form->month('nascimento', '', array('class'=>'select_mes'), true); ?>
+			 <?php echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano')); ?>
+		</div>
 
-
-        echo $form->input('nascimento',array(
-        'dateFormat'=>'DMY',
-        'timeFormat'=>'NONE',
-        'minYear'=> date('Y') - 100,
-        'maxYear' => date('Y'),
-        'selected'=>'',
-        //'selected'=>strtotime('01-01-2000'),
-        'empty' => true
-        )
-        );
-
-        echo $form->input('profissao');
+		 <?php 
+        echo $form->input('profissao', array('label' => 'Profissão'));
         echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
         ?>
     </fieldset>
-    <?php echo $form->end('ENVIAR');?>
-</div>
-<div class="actions">
-    <ul>
-        <li><?php echo $html->link(__('List Funcionarios', true), array('action' => 'index'));?></li>
-    </ul>
-
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
+    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
 </div>

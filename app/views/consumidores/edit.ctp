@@ -1,10 +1,27 @@
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Editar Consumidor</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/consumidores', array('class'=>'btn_cinza floatRight')); ?>
+	<?php echo $html->link('Excluir Consumidor', array('action' => 'delete', $form->value('Consumidor.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Consumidor.id'))); ?>
+</div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
+
 <?php
 //debug($this->data);
 ?>
 <div class="consumidores form">
     <?php echo $form->create('Consumidor');?>
     <fieldset>
-        <legend><?php __('Edit Consumidor');?></legend>
+        <legend>Dados Gerais</legend>
         <?php
         echo $form->input('id');
         echo $form->input('nome');
@@ -68,16 +85,5 @@
         echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
         ?>
     </fieldset>
-    <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-    <ul>
-        <li><?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('Consumidor.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Consumidor.id'))); ?></li>
-        <li><?php echo $html->link(__('List Consumidores', true), array('action' => 'index'));?></li>
-    </ul>
-
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
+    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
 </div>

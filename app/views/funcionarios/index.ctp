@@ -4,14 +4,17 @@
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>
-	<h1><?php __('Funcion&aacute;rios');?></h1>
+	<h1>Funcion&aacute;rios</h1>
 </div>
 <div class="clear"></div>
 
 <!-- .botoes -->
 <div class="botoes">
-	<?php echo $html->link(__('Novo Funcionario', true), array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
+	<?php echo $html->link('Inserir Funcionario', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 </div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
 
 <div class="funcionarios index">
 
@@ -35,7 +38,7 @@
 			<th class="w20"><?php echo $paginator->sort('email');?></th>
 			<th class="w20"><?php echo $paginator->sort('created');?></th>
 			<th class="w20"><?php echo $paginator->sort('modified');?></th>
-			<th class="w15 actions"><?php __('Actions');?></th>
+			<th class="w15 actions"></th>
 		</tr>
 
 		<?php
@@ -85,11 +88,9 @@
 	</table>
 
 	<!-- .paginacao -->
-	<div class="pagina_atual">
-		<div class="paging">
-			<div class="pagin_anterior"><?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?></div>
-			<div class="pagin_numeros"><?php echo $paginator->numbers();?></div>
-			<div class="pagin_proximo"><?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?></div>
-		</div>
+	<div class="paginacao">
+		<div class="pagin_proximo"><?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?></div>
+		<div class="pagin_numeros"><?php echo $paginator->numbers(array('before'=>'','after'=>'','tag'=>'a','separator'=>' '));?></div>
+		<div class="pagin_anterior"><?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?></div>
 	</div>
 </div>

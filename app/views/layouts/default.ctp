@@ -50,9 +50,6 @@
 
 
             <div id="content">
-                <?php $session->flash('auth'); ?>
-                <?php $session->flash(); ?>
-
                 <?php echo $content_for_layout; ?>
             </div>
             <div id="footer">

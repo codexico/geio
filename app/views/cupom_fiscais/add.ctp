@@ -1,7 +1,27 @@
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Inserir Cupom Fiscal</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/cupom_fiscais', array('class'=>'btn_cinza floatRight')); ?>
+	<?php echo $html->link('Trocas', array('controller' => 'trocas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Inserir Troca', array('controller' => 'trocas', 'action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Lojas', array('controller' => 'lojas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Inserir Loja', array('controller' => 'lojas', 'action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
+</div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
+
 <div class="cupomFiscais form">
 <?php echo $form->create('CupomFiscal');?>
      <fieldset>
-        <legend><?php __('Add CupomFiscal');?></legend>
+        <legend>Dados Gerais</legend>
         <?php
         echo $form->input('codigo');
         //echo $form->input('data_compra');
@@ -36,19 +56,5 @@
         'empty' => true));
         ?>
     </fieldset>
-    <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-    <ul>
-        <li><?php echo $html->link(__('List CupomFiscais', true), array('action' => 'index'));?></li>
-        <li><?php echo $html->link(__('List Trocas', true), array('controller' => 'trocas', 'action' => 'index')); ?> </li>
-        <li><?php echo $html->link(__('New Troca', true), array('controller' => 'trocas', 'action' => 'add')); ?> </li>
-        <li><?php echo $html->link(__('List Lojas', true), array('controller' => 'lojas', 'action' => 'index')); ?> </li>
-        <li><?php echo $html->link(__('New Loja', true), array('controller' => 'lojas', 'action' => 'add')); ?> </li>
-    </ul>
-
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
+    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
 </div>

@@ -441,7 +441,7 @@ form input.submit{
 
 #content .index .pagina_atual_conteudo{
 	color:#0073a1;
-	padding:10px;
+	padding:8px 8px 7px 8px;
 	border-right:5px solid #FFFFFF;
 	background-color:#d5ecf1;
 	float:left;
@@ -449,55 +449,54 @@ form input.submit{
 
 
 /* CONTENT - PAGINAÇÃO */
-#content .index .pagina_atual{
+#content .index .paginacao{
 	width:950px;
 	height:32px;
 	background-color:#e2e2e2;
 	margin-bottom:10px;
+	margin-top:10px;
 }
 
-#content .index .pagina_atual .paging{
-	height:32px;
-	color:#0073a1;
-	background-color:#d5ecf1;
+
+#content .index .paginacao .pagin_proximo{
+	padding:7px 10px 8px 10px;
 	float:right;
-}
-
-#content .index .pagina_atual .paging .pagin_proximo{
-	padding:10px;
-	float:left;
 	border-left:1px solid #FFFFFF;
+	background-color:#d5ecf1;
 }
 
-#content .index .pagina_atual .paging .disabled{
+#content .index .paginacao .disabled{
 	color:#FFFFFF;
 }
 
-#content .index .pagina_atual .paging .pagin_anterior{
-	padding:10px;
-	float:left;
+#content .index .paginacao .pagin_anterior{
+	padding:7px 10px 8px 10px;
+	float:right;
 	border-left:1px solid #FFFFFF;
+	background-color:#d5ecf1;
 }
 
-#content .index .pagina_atual .paging .pagin_numeros{
+#content .index .paginacao .pagin_numeros{
+	height:32px;
 	color:#d5ecf1;
-	float:left;
+	float:right;
 }
 
-#content .index .pagina_atual .paging .pagin_numeros span{
-	border-left:1px solid #FFFFFF;
+#content .index .paginacao .pagin_numeros a{
+	display:block;
 	float:left;
+	padding:8px 13px 7px 13px;
+	border-left:1px solid #ffffff;
+	background-color:#d5ecf1;
 }
 
-#content .index .pagina_atual .paging .pagin_numeros span a:link, #content .index .pagina_atual .paging .pagin_numeros span a:visited{
-	padding-left:12px;
-	padding-right:12px;
+#content .index .paginacao .pagin_numeros a.current{
+	color:#ffffff;
+	background-color:#0073a1;
 }
 
-#content .index .pagina_atual .paging .pagin_numeros .current{
-	float:left;
-	color:#3a8ba0;
-	padding:10px;
+#content .index .paginacao .pagin_numeros a.current:hover{
+	text-decoration:none;
 }
 
 /* CONTENT - TABLE */

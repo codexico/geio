@@ -20,27 +20,9 @@
     </head>
     <body>
         <div id="container">
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
             <div id="header">
 				<div class="logotipo">
 					<a href="../index.php"><?php echo $html->image('logotipo_geio.jpg', array('alt' => 'GEIO - Início'))?></a>
-				</div>
-				<div class="painel_logado">
-					<h5>LOGIN</h5>
-					<ul>
-						<li>Olá <strong><?php echo $session->read('Auth.User.username') . " ! " ?></strong></li>
-						<li>|</li>
-						<li><a href="#"><strong>Meu Perfil</strong></a></li>
-						<li>|</li>
-						<li><a href="#"><strong>Trocar Senha</strong></a></li>
-						<li>|</li>
-						<li><a href="#"><strong>Ajuda</strong></a></li>
-						<li>|</li>
-						<li><a href="../sistema/logout/"><strong>Sair</strong></a></li>
-					</ul>
 				</div>
             </div>
 
