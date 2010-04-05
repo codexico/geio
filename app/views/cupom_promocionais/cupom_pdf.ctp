@@ -30,9 +30,7 @@ $tcpdf->SetAutoPageBreak(false);
 
 $html = '
 <table border="1" cellpadding="10">
-<tr><td>' . 
-"".$teste
-.'
+<tr><td>
     <span style="font-size:12px;text-align:center;font-weight:bold">Qual o Shopping que premia sua mãe?</span>
     <br />
     <br />
@@ -88,17 +86,15 @@ because he was used to sleeping on his right
 // set UTF-8 font
 $tcpdf->SetFont('dejavusans', '', 4);
 
-// add a page
-$tcpdf->AddPage();
-
-// output the HTML content
-$tcpdf->writeHTML($html, true, 0, true, true);
-
-// add a page
-$tcpdf->AddPage();
-
-// output the HTML content
-$tcpdf->writeHTML($html, true, 0, true, true);
+for ($i = 1; $i <= $troca['Troca']['qtd_cp']; $i++) {
+    
+    // add a page
+    $tcpdf->AddPage();
+    
+    // output the HTML content
+    $tcpdf->writeHTML($html, true, 0, true, true);
+    
+}
 
 //$tcpdf->Ln();
 
@@ -115,22 +111,22 @@ $tcpdf->IncludeJS($js);
 
 
 $preferences = array(
-	'HideToolbar' => true,
-	'HideMenubar' => true,
-	'HideWindowUI' => true,
-	'FitWindow' => true,
-	'CenterWindow' => true,
-	//'DisplayDocTitle' => true,
-	//'NonFullScreenPageMode' => 'UseNone', // UseNone, UseOutlines, UseThumbs, UseOC
-	'ViewArea' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
-	'ViewClip' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
-	'PrintArea' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
-	'PrintClip' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
-	'PrintScaling' => 'AppDefault', // None, AppDefault
-	'Duplex' => 'Simplex', // Simplex, DuplexFlipShortEdge, DuplexFlipLongEdge
-	//'PickTrayByPDFSize' => true,
-	//'PrintPageRange' => array(1,1,2,3),
-	'NumCopies' => 1
+        'HideToolbar' => true,
+        'HideMenubar' => true,
+        'HideWindowUI' => true,
+        'FitWindow' => true,
+        'CenterWindow' => true,
+        //'DisplayDocTitle' => true,
+        //'NonFullScreenPageMode' => 'UseNone', // UseNone, UseOutlines, UseThumbs, UseOC
+        'ViewArea' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
+        'ViewClip' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
+        'PrintArea' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
+        'PrintClip' => 'CropBox', // CropBox, BleedBox, TrimBox, ArtBox
+        'PrintScaling' => 'AppDefault', // None, AppDefault
+        'Duplex' => 'Simplex', // Simplex, DuplexFlipShortEdge, DuplexFlipLongEdge
+        //'PickTrayByPDFSize' => true,
+        //'PrintPageRange' => array(1,1,2,3),
+        'NumCopies' => 1
 );
 
 // set pdf viewer preferences

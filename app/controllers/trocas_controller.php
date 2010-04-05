@@ -149,26 +149,25 @@ class TrocasController extends AppController {
 
             //  $this->_imprimirCP();
             //$this->redirect(array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf'));
-            $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . 72));
+            //$this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . 72));
 
-            /*
+
             $this->Troca->create();
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));
 
                 if( !Configure::read('Regras.Brinde.true') ) {
-                    $this->_imprimirCP();
+                $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
+                    //$this->_imprimirCP();
                 }
                 if( Configure::read('Regras.Saldo.true') ) {
                     $this->_atualizaSaldo($valoresCP);
                 }
-
                 //$this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+                $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
             } else {
                 $this->Session->setFlash(__('The Troca could not be saved. Please, try again.', true));
             }
- * 
-            */
 
         }
         $lojas = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
@@ -184,12 +183,9 @@ class TrocasController extends AppController {
         $this->Troca->recursive = 1;
         $troca = $this->Troca->read(null, $id);//debug($troca);
 
-
         $consumidor['Consumidor'] = $troca['Consumidor'];//debug($consumidor);
 
-
         $this->set(compact('troca', 'consumidor'));
-            //$this->redirect(array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf'));
     }
 
     ////////////////
@@ -262,14 +258,13 @@ class TrocasController extends AppController {
                 'qtd_CP' => (int)$c);
     }
 
-
+    /*
     function _imprimirCP() {
         $CPimpresso = 0;
         $cps = $this->Troca->CupomPromocional->find('all',array(
                 'recursive' => -1,
                 'conditions' => array( 'troca_id' => $this->Troca->id )
         ));
-        debug($cps);
 
         foreach ($cps as $cp) {
 
@@ -278,15 +273,14 @@ class TrocasController extends AppController {
             //TODO: metodo q manda para impressora e detecta se imprimiu corretamente, ou só mostra os pdfs
             $CPimpresso++;
         }
-        debug("antess");
-        //$this->cupomPdf();
-        debug("depois");
         if($CPimpresso == $this->data['Troca']['qtd_cp']) {//debug("impressos = " . $CPimpresso);
             $this->Session->setFlash('Impressos '.$CPimpresso.' cupons.', 'default', null, 'Impressora');
         }else {
             $this->Session->setFlash(($totalCP - $CPimpresso) . ' cupons impressos errados.', 'default', null, 'Impressora');
         }
     }
+     *
+     */
 
 
     function _atualizaSaldo($valoresCP) {//debug($valoresCP);

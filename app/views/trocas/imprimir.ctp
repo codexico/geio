@@ -4,7 +4,7 @@
 /* @var $form FormHelper */
 /* @var $javascript JavascriptHelper */
 //debug($troca);
-echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf'));        
+echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']));
 ?>
 <div class="trocas view">
     <h2><?php  __('Troca');?></h2>
