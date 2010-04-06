@@ -177,13 +177,6 @@ $(document).ready(function() {
             message += "\n\nSobraram Créditos suficientes para um cupom extra se juntar os créditos de bandeira e comum.";
             message += "\n\nAtenção: Cadastrar outro cupom de no mínimo R$" + cupomMinimo+" em créditos da Bandeira";
             message += "\npode gerar mais "+ regrasBandeiraValor +" cupom(s)";
-            //            message += "\n\n\"OK\" para gerar agora "+ (c+1) +" cupom(s)";
-            //            message += "\n\"Cancelar\" para gerar agora  "+ (c) +" cupom(s) e guardar os créditos para uma troca futura";
-            //            if (confirm(regra+linha+resultado+message)){
-            //                c++;
-            //                restoBandeira = restoOutros+restoBandeira - regrasValor;
-            //                restoOutros = 0;
-            //            }
             alert(regra+linha+resultado+message);
         }else{
             message = "";
