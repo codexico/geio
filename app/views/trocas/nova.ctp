@@ -20,13 +20,6 @@ $javascript->link(array('trocas_nova'), false);
         <legend><?php __('Nova Troca do Consumidor');?></legend>
         <ul id="cupons">
             <?php
-            /*
-            $numcupons = isset ($this->data['CupomFiscal']) ? sizeof($this->data['CupomFiscal']) : 1;
-            for ($i = 0; $i < $numcupons; $i++) {
-                echo $this->element('form_cupom_fiscal', array('i' => $i));
-            }
-             * 
-            */
             if(isset ($this->data)) {
                 $i=0;
                 foreach ($this->data['CupomFiscal'] as $cf) {

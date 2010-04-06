@@ -38,20 +38,20 @@ $html = '
     <br />
     <br />
     <span style="font-size:10px;text-align:center;font-weight:bold">Nome Completo:</span>
-    <span style="text-decoration: underline">                                                                         </span>
+    <span style="text-decoration: underline"> '. $consumidor["Consumidor"]['nome'].' </span>
     <br />
     <span style="font-size:10px;text-align:center;font-weight:bold">Endereço Completo:</span>
-    <span style="text-decoration: underline">                                                                         </span>
+    <span style="text-decoration: underline"> '. $consumidor["Consumidor"]['endereco'].' </span>
     <br />
     <span style="font-size:10px;text-align:center;font-weight:bold">Telefone:</span>
-    <span style="text-decoration: underline">                               </span>
+    <span style="text-decoration: underline"> '. $consumidor["Consumidor"]['cel'].' </span>
     <span style="font-size:10px;text-align:center;font-weight:bold">Email:</span>
-    <span style="text-decoration: underline">                               </span>
+    <span style="text-decoration: underline"> '. $consumidor["Consumidor"]['email'].' </span>
     <br />
     <span style="font-size:10px;text-align:center;font-weight:bold">CPF:</span>
-    <span style="text-decoration: underline">                               </span>
+    <span style="text-decoration: underline"> '. $consumidor["Consumidor"]['cpf'].' </span>
     <span style="font-size:10px;text-align:center;font-weight:bold">RG:</span>
-    <span style="text-decoration: underline">                               </span>
+    <span style="text-decoration: underline"> '. $consumidor["Consumidor"]['rg'].' </span>
     <br />
     <br />
     <span style="font-size:8px;text-align:justify;">

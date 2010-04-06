@@ -1,3 +1,4 @@
+<div class="form">
 <?php
 $session->flash('auth');
 echo $form->create('User', array('action' => 'login'));
@@ -6,5 +7,6 @@ echo $form->inputs(array(
 	'username',
 	'password'
 ));
-echo $form->end('Login');
+echo $form->end(array('label'=>'ENVIAR','class'=>'submit mgt20'));
 ?>
+</div>

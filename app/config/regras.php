@@ -16,7 +16,7 @@ $config['Regras.Valor'] =  100;
 
 
 /**
- * True se acumula o saldo dos pontos, False se descarta o saldo
+ * True se acumula os saldos, False se descarta o saldo
  *
  * @global boolean $GLOBALS['config']
  * @name $config

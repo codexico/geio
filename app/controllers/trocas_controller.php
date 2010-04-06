@@ -156,15 +156,16 @@ class TrocasController extends AppController {
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));
 
-                if( !Configure::read('Regras.Brinde.true') ) {
-                $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
-                    //$this->_imprimirCP();
+                if( Configure::read('Regras.Brinde.true') ) {
+                    //TODO:redireciona para algo do brinde
+                }else{
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
                 }
-                if( Configure::read('Regras.Saldo.true') ) {
+
+                if( Configure::read('Regras.Saldo.true') ) {//debug($valoresCP);
                     $this->_atualizaSaldo($valoresCP);
                 }
-                //$this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
-                $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
+
             } else {
                 $this->Session->setFlash(__('The Troca could not be saved. Please, try again.', true));
             }
@@ -199,23 +200,26 @@ class TrocasController extends AppController {
     /**
      * Soma os cupons fiscais de acordo com o tipo de compra e calcula a quantidade de cupons
      * e o resto
+     * TODO: mudar essa funcao para o model CupomPromocional?
      *
      * @return array    array associativo(valorOutros, restoOutros, valorBandeira, restoBandeira, qtd_CP)
      */
     function _calculaCupomPromocional() {
-        $regras = Configure::read('Regras');//debug($regras);
         $c = $valorOutros = $valorBandeira = $restoOutros = $restoBandeira = 0;
+        $regras = Configure::read('Regras');//debug($regras);
 
         if($regras['Saldo']['true']) {
             $saldos = $this->Troca->Consumidor->read(array('saldo_bandeira', 'saldo_outros'));
-            $restoBandeira = $saldos['Consumidor']['saldo_bandeira'];
-            $restoOutros = $saldos['Consumidor']['saldo_outros'];
+            $restoBandeira = $saldos['Consumidor']['saldo_bandeira'];//debug('saldo_bandeira anterior = ' . $restoBandeira );
+            $restoOutros = $saldos['Consumidor']['saldo_outros'];//debug('saldo_outros anterior = ' . $restoOutros);
         }
         //soma os valores dos cupons fiscais enviados
         foreach ($this->data['CupomFiscal'] as $cf) {//debug($cf);
             if(isset ($cf['bandeira'])) {//debug($cf['bandeira'] . " " . $regras['Bandeira']['nome']);
                 if( up($cf['bandeira']) == up($regras['Bandeira']['nome']) ) {
                     $valorBandeira += $cf['valor'];//debug('bandeira = ' . $valorBandeira);
+                }else {//bandeiras fora da promocao
+                    $valorOutros += $cf['valor'];//debug("dinheiro = " . $valorOutros);
                 }
             }else {
                 $valorOutros += $cf['valor'];//debug("dinheiro = " . $valorOutros);
@@ -258,6 +262,32 @@ class TrocasController extends AppController {
                 'qtd_CP' => (int)$c);
     }
 
+    /**
+     * Atualiza o saldo do consumidor
+     * TODO: mudar essa funcao para o model Consumidor? afterSave talvez?
+     *
+     * @see function _calculaCupomPromocional()
+     *
+     * @param array $valoresCP (valorOutros, restoOutros, valorBandeira, restoBandeira, qtd_CP)
+     */
+    function _atualizaSaldo($valoresCP) {//debug($valoresCP);
+        $data_consumidor = array(
+                'Consumidor' => array(
+                        'updated' => false,
+                        'saldo_outros' => $valoresCP['restoOutros'],
+                        'saldo_bandeira' => $valoresCP['restoBandeira']
+        ));
+        $params_consumidor = array(
+                'validate' => false,
+                'fieldList' => array('saldo_bandeira', 'saldo_outros'),
+                'callbacks' => false
+        );
+        $this->Troca->Consumidor->save($data_consumidor, $params_consumidor);
+    }
+
+    ///////////////////
+    //funcoes nao mais utilizadas
+    ///////////////////
     /*
     function _imprimirCP() {
         $CPimpresso = 0;
@@ -280,27 +310,7 @@ class TrocasController extends AppController {
         }
     }
      *
-     */
-
-
-    function _atualizaSaldo($valoresCP) {//debug($valoresCP);
-        $data_consumidor = array(
-                'Consumidor' => array(
-                        'updated' => false,
-                        'saldo_outros' => $valoresCP['restoOutros'],
-                        'saldo_bandeira' => $valoresCP['restoBandeira']
-        ));
-        $params_consumidor = array(
-                'validate' => false,
-                'fieldList' => array('saldo_bandeira', 'saldo_outros'),
-                'callbacks' => false
-        );
-        $this->Troca->Consumidor->save($data_consumidor, $params_consumidor);
-    }
-
-    ///////////////////
-    //funcoes nao mais utilizadas
-    ///////////////////
+    */
     /*
     function _calculaCP($cfs) {
 
