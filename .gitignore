@@ -1,3 +1,2 @@
-app/tmp/**/*
-app/config/database.php
-app/tmp/cache/*
+/app/tmp/**/*
+/app/config/database.php
