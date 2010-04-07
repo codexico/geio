@@ -431,7 +431,7 @@ form input.submit{
 }
 
 
-/* CONTENT - PÁGINA ATUAL */
+/* CONTENT - Pï¿½GINA ATUAL */
 #content .index .pagina_atual{
 	width:950px;
 	height:32px;
@@ -448,7 +448,7 @@ form input.submit{
 }
 
 
-/* CONTENT - PAGINAÇÃO */
+/* CONTENT - PAGINAï¿½ï¿½O */
 #content .index .paginacao{
 	width:950px;
 	height:32px;
@@ -490,9 +490,19 @@ form input.submit{
 	background-color:#d5ecf1;
 }
 
-#content .index .paginacao .pagin_numeros a.current{
-	color:#ffffff;
+#content .index .paginacao .pagin_numeros li{
+        list-style: none;
+	float:left;
+}
+
+#content .index .paginacao .pagin_numeros li.current{
+	padding:8px 13px 7px 13px;
+        color:#ffffff;
 	background-color:#0073a1;
+
+}
+
+#content .index .paginacao .pagin_numeros a.current{
 }
 
 #content .index .paginacao .pagin_numeros a.current:hover{

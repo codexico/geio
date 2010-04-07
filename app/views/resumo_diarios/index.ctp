@@ -142,8 +142,11 @@ foreach ($resumoDiarios as $resumoDiario):
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
 </div>
+<?php /*
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('New ResumoDiario', true), array('action' => 'add')); ?></li>
 	</ul>
 </div>
+ *
+ */?>
