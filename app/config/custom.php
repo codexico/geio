@@ -5,8 +5,9 @@ setlocale(LC_ALL, 'pt_BR', 'pt');
 date_default_timezone_set('America/Sao_Paulo');
 $config['Config.language'] = 'pt_BR';
 
-
-//Configure::write('SITE_NAME', 'nome do site');
+/////////
+//SISTEMA
+/////////
 $config['SITE_NAME'] = 'GEIO';
 
 
@@ -18,6 +19,13 @@ $config['PASSWORD_CONTATO'] =  'xxxx';
 
 $config['WEBMASTER_EMAIL'] =  'asdf@gmail.com';
 
+
+
+/////////
+//CAMPANHA
+/////////
+$config['Regras.Valor'] =  100;
+$config['Campanha.Inicio'] =  date('Y-m-d', strtotime("1 April 2010"));
 
 
 ?>

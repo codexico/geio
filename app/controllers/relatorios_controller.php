@@ -1,0 +1,222 @@
+<?php
+/**
+ * @property Troca $Troca
+ * @property CupomPromocional $CupomPromocional
+ * @property ResumoDiario $ResumoDiario
+ * @property DiaTroca $DiaTroca
+ * @property Consumidor $Consumidor
+ * @property TrocasDia $TrocasDia
+ */
+class RelatoriosController extends AppController {
+
+    var $name = 'Relatorios';
+    var $helpers = array('Html', 'Form', 'Javascript', 'CakePtbr.Formatacao');
+
+    var $uses = array('Troca','CupomPromocional','CupomFiscal','ResumoDiario','DiaTroca','Consumidor','TrocasDia');
+
+
+    function beforeFilter() {
+        parent::beforeFilter();
+    }
+
+    function index() {
+        $this->Troca->recursive = 0;
+        $this->set('trocas', $this->paginate());
+    }
+
+    /**
+     * Mostra tabela com dados resumidos de cada dia da campanha
+     */
+    function resumoDiario() {
+//        $this->DiaTroca->useTable = true;
+//        $tabela = $this->ResumoDiario->tablePrefix ."dia_trocas";
+//        $this->DiaTroca->table = $tabela;
+        $maxDia = $this->DiaTroca->field('dia', array(), 'dia DESC');//debug($maxDia);
+        if(!$maxDia) {
+            $maxDia =  date('Y-m-d', strtotime(Configure::read('Campanha.Inicio') . " -21 days"));//inicio da campanha
+        }//debug($maxDia);
+        if ( $maxDia < date('Y-m-d') ) { //criar resumo de ontem, e dos dias anteriores se necessario
+            $this->_atualizarResumoDiario($maxDia);//vai rodar somente 1 vez por dia, na primeira visita
+        }
+
+
+        //buscar na tabela RESUMODIARIO //30min
+        //view //20min
+    }
+
+    /**
+     * Constroi os resumos ate o momento
+     * a partir do ultimo feito
+     */
+    function _atualizarResumoDiario($maxDia) {
+        $hoje = date('Y-m-d');
+        $ontem = date('Y-m-d', strtotime($hoje . " -1 days") );
+        $dia = $maxDia;
+//        debug($dia);
+//        debug($hoje);
+//        debug($ontem);
+        while ($dia < $ontem) {
+            $dia = date('Y-m-d', strtotime($dia . " +1 days") );
+            $this->_cronTrocasDia($dia);
+            $this->_cronResumoDiario($dia);
+        }
+    }
+
+    /**
+     * Cria uma tabela com as trocas de um determinado dia, e mais alguns dados extras
+     * Atencao: considera a data da troca e nao a data da compra
+     * TODO: criar um _cronComprasDia? pode ser interessante para os lojistas
+     *
+     * @param String $dia   data no formato Y-m-d
+     */
+    function _cronTrocasDia($dia = null) {
+        if(is_null($dia)) {
+            $dia = date('Y-m-d');
+        }
+
+        $tabela = $this->ResumoDiario->tablePrefix ."trocas_".$dia;
+        $sql = "CREATE TABLE IF NOT EXISTS `" . $tabela ."` (
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `troca_id` int(11) NOT NULL,  
+                      `dia` date NOT NULL,
+                      `promotor_id` int(11) NOT NULL,
+                      `consumidor_id` int(11) NOT NULL,
+                      `consumidor_nome` varchar(255) NOT NULL,
+                      `consumidor_created` date NOT NULL,
+                      `qtd_cf` int(3) DEFAULT NULL,
+                      `valor_total` double DEFAULT '0',
+                      `valor_bandeira` float DEFAULT '0',
+                      `valor_outros` float DEFAULT '0',
+                      `qtd_cp` int(5) DEFAULT '0',
+
+                      PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+        //debug($sql);
+        if($this->ResumoDiario->query($sql)) {
+        }
+        $this->DiaTroca->id = false;//para permitir multiples inserts
+        $this->DiaTroca->save(array('DiaTroca'=>array('dia'=>$dia)));//salva na tabela dia_trocas
+
+        $inicio = $dia;
+        $fim =  date('Y-m-d', strtotime($dia . " +1 days"));
+        $conditions_data_troca = array("Troca.created BETWEEN ? AND ?" => array($inicio,$fim));
+        //.total de trocas efetuadas
+        //$count_trocas = $this->Troca->find('count', array('conditions' => $conditions_data_troca));//debug($count_trocas);
+        $this->Troca->recursive = -1;
+        $trocas = $this->Troca->findAll( $conditions_data_troca);//debug($trocas);
+
+        $this->TrocasDia->useTable = true;
+        $this->TrocasDia->table = $this->ResumoDiario->tablePrefix . "trocas_".$dia; //troca para a tabela diaria
+        foreach ($trocas as $troca) {
+            $this->TrocasDia->id = false;//para permitir multiples inserts
+
+            $diatroca['TrocasDia'] = $troca['Troca'];
+            unset($diatroca['TrocasDia']['id']);//pegou o id da troca, unseta para usar o autoincrement
+            $diatroca['TrocasDia']['troca_id'] = $troca['Troca']['id'];
+
+            $consumidor = $this->Consumidor->find(array('id'=>$troca['Troca']['consumidor_id']), array('nome','created'));
+            $diatroca['TrocasDia']['consumidor_nome'] = $consumidor['Consumidor']['nome'];//debug($diatroca['TrocasDia']['consumidor_nome']);
+            $diatroca['TrocasDia']['consumidor_created'] = $consumidor['Consumidor']['created'];//debug($diatroca['TrocasDia']['consumidor_nome']);
+            $diatroca['TrocasDia']['dia'] = $dia;
+
+            $this->TrocasDia->save($diatroca);
+        }
+    }
+
+    /**
+     * insere o resumo das trocas de um determinado dia na tabela RESUMODIARIO
+     *
+     * @param <type> $dia
+     */
+    function _cronResumoDiario($dia = null) {
+        $inicio = date('Y-m-d', strtotime($dia . " -1 days"));
+        $fim =  $dia;
+
+        $this->TrocasDia->recursive = -1;
+        $this->TrocasDia->useTable = true;
+        $this->TrocasDia->table = $this->ResumoDiario->tablePrefix . "trocas_".$dia; //troca para a tabela diaria
+        //dia
+        $resumodiario['ResumoDiario']['dia'] = $dia;
+
+//	qtd_consumidores = select distinct
+        $resumodiario['ResumoDiario']['qtd_consumidores'] = $this->TrocasDia->find('count', "COUNT(DISTINCT TrocasDia.consumidor_id) AS 'count'");
+        if(is_null($resumodiario['ResumoDiario']['qtd_consumidores'])) $resumodiario['ResumoDiario']['qtd_consumidores'] = 0;
+
+//	qtd_consumidores novos = select distinct join copnsumidores
+        $conditions_num_consumidores_novos_bandeira = array(
+                'fields' => "COUNT(DISTINCT TrocasDia.consumidor_id) AS 'count'",
+                'conditions' => array('TrocasDia.consumidor_created BETWEEN ? AND ? ' => array($inicio,$fim)),
+                'recursive' => -1
+        );
+        $resumodiario['ResumoDiario']['qtd_consumidores_novos'] = $this->TrocasDia->find('count', $conditions_num_consumidores_novos_bandeira );
+
+//	qtd_cupons_fiscais
+        $qtd_cf = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.qtd_cf) AS 'total_qtd_cf'")));
+        if(is_null($qtd_cf[0]['total_qtd_cf'])) {
+            $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = 0;
+        }else {
+            $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = $qtd_cf[0]['total_qtd_cf'];
+        }
+
+//	qtd_cupons_promocionais
+        $qtd_cp = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.qtd_cp) AS 'total_qtd_cp'")));
+        $resumodiario['ResumoDiario']['qtd_cupons_promocionais'] = $qtd_cp[0]['total_qtd_cp'];
+
+//	valor_total 	float
+        $valor_total = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.valor_total) AS 'valor_total'")));
+        if(is_null($valor_total[0]['valor_total'])) $valor_total[0]['valor_total'] = 0;
+        if(is_null($valor_total[0]['valor_total'])) {
+            $resumodiario['ResumoDiario']['valor_total'] = 0;
+        }else {
+            $resumodiario['ResumoDiario']['valor_total'] = $valor_total[0]['valor_total'];
+        }
+
+//	valor_bandeira 	float
+        $valor_bandeira = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.valor_bandeira) AS 'valor_bandeira'")));
+        $resumodiario['ResumoDiario']['valor_bandeira'] = $valor_bandeira[0]['valor_bandeira'];
+        //debug('$valor_bandeira = '.$valor_bandeira[0]['valor_bandeira']);
+
+//	valor-outros 	float
+        $valor_outros = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.valor_outros) AS 'valor_outros'")));
+        $resumodiario['ResumoDiario']['valor_outros'] = $valor_outros[0]['valor_outros'];
+        //debug('$valor_outros = '.$valor_outros[0]['valor_outros']);
+
+//	ticket_medio_consumidor
+        if($resumodiario['ResumoDiario']['valor_total'] == 0 || $resumodiario['ResumoDiario']['qtd_consumidores'] == 0) {
+            $resumodiario['ResumoDiario']['ticket_medio_consumidor'] = 0;
+        }else {
+            $resumodiario['ResumoDiario']['ticket_medio_consumidor'] = $resumodiario['ResumoDiario']['valor_total']/$resumodiario['ResumoDiario']['qtd_consumidores'];
+            //debug('$ticket_medio_consumidor = '.$ticket_medio_consumidor);
+        }
+
+//	ticket_medio_cupom_fiscal
+        if($resumodiario['ResumoDiario']['valor_total'] == 0 || $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] == 0) {
+            $resumodiario['ResumoDiario']['ticket_medio_cupom_fiscal'] = 0;
+        }else {
+            $resumodiario['ResumoDiario']['ticket_medio_cupom_fiscal'] = $resumodiario['ResumoDiario']['valor_total']/$resumodiario['ResumoDiario']['qtd_cupons_fiscais'];
+            //debug('$ticket_medio_cupom_fiscal = '.$ticket_medio_cupom_fiscal);
+        }
+
+        //debug($resumodiario);
+        $this->ResumoDiario->id = false;//para permitir multiples inserts
+        $this->ResumoDiario->save($resumodiario);
+    }
+
+    /**
+     * Constroi os resumos ate o momento
+     * Atencao: vai destruir resumos ja calculados, usar somente se extremamente necessario!
+     */
+    function rebuildResumoDiario() {
+        //from (primeiro dia da campanha) até ontem //20min
+        $this->_cronResumoDiario($dia);
+    }
+
+
+
+
+
+
+
+
+}
+?>
