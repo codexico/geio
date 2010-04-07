@@ -58,7 +58,7 @@ class PagesController extends AppController {
         $this->render(join('/', $path));
     }
     function home() {
-        $this->layout = 'homelayout';
+        //$this->layout = 'homelayout';
     }
 
 }

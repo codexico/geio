@@ -1,0 +1,271 @@
+body {
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#646464;
+	background-image:url("../img/background.jpg");
+	background-repeat:repeat-x;
+	background-color:#ffffff;
+	line-height:17px;
+}
+
+a {
+	text-decoration:none;
+	color:#0073a1;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+h1{
+	font-size:18px;
+	color:#0073a1;
+	font-weight:bold;
+	text-transform:uppercase;
+	padding-bottom:7px;
+	border-bottom:1px solid #e0e0e0;
+}
+
+h5{
+	font-size:10px;
+	color:#333939;
+	font-weight:bold;
+	text-transform:uppercase;
+	padding-bottom:7px;
+	border-bottom:1px solid #e0e0e0;
+}
+
+form label{
+	display:block;
+	color:#555555;
+	margin-bottom:3px;
+}
+
+form input {
+	width:408px;
+	height:17px;
+	border:1px solid #e0e0e0;
+	color:#555555;
+}
+
+form input:focus, input.sffocus {
+	border:1px solid #0073a1;
+}
+
+form select {
+	width:410px;
+	width:412px \9;
+	*width:412px;
+	border:1px solid #e0e0e0;
+	color:#555555;
+}
+
+form textarea {
+	width:408px;
+	height:100px;
+	border:1px solid #e0e0e0;
+	color:#555555;
+}
+
+form textarea:focus {
+	border:1px solid #0073a1;
+}
+
+form input.submit{
+	width:auto;
+	height:auto;
+	font-weight:bold;
+	text-transform:uppercase;
+	color:#FFFFFF;
+	padding:6px 7px 6px 7px;
+	padding:7px 10px 7px 10px \9;
+	*padding:5px 0px 5px 0px;
+	background-color:#0073a1;
+	border:0;
+}
+
+/* UNIVERSAIS */
+.mgr5{margin-right:5px;}
+.mgr10{margin-right:10px;}
+.mgl10{margin-left:10px;}
+.mgt10{margin-top:10px;}
+.mgt20{margin-top:20px;}
+.mgt18{margin-top:18px;}
+.mgb20{margin-bottom:20px;}
+.pdt15{padding-top:15px;}
+.clear{clear:both;}
+.floatRight{float:right};
+.floatLeft{float:left};
+
+/* CONTAINER */
+#container {
+	width:100%;
+}
+
+/* HEADER */
+#header{
+	width:950px;
+	height:76px;
+	margin:0 auto 47px;
+}
+
+#header .logotipo{
+	margin-top:17px;
+	float:left;
+}
+
+
+/* CONTENT */
+#content{
+	width:100%;
+	background-color:#f3f4f4;
+	margin-top:155px;
+	margin-bottom:165px;
+}
+
+#content .login{
+	width:236px;
+	min-height:10px;
+	_height:10px;
+	margin:0 auto;
+	padding-left:50px;
+	padding-right:50px;
+	background-color:#FFFFFF;
+}
+
+
+
+/* CONTENT - TITULO */
+#content .titulo{
+	width:236px;
+}
+
+#content .titulo h1{
+	width:200px;
+	float:left;
+}
+
+#content .titulo img{
+	float:left;
+	display:inline;
+	margin-right:10px;
+}
+
+/* CONTENT - MENSAGENS SISTEMA */
+#content .message{
+	width:236px;
+	min-height:21px;
+	_height:21px;
+	font-size:12px;
+	font-weight:bold;
+	color:#0073a1;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-top:10px;
+	margin-bottom:10px;
+	background-color:#f4fbfd;
+}
+
+
+/* CONTENT - FORM */
+
+#content .form .input{
+	width:198px;
+	margin-left:36px;
+	*margin-left:36px;
+	_margin-left:18px;
+	margin-bottom:10px;
+	float:left;
+}
+
+#content .form .input input{
+	*margin-left:-36px;
+	_margin-left:-18px;
+}
+
+
+#content .form .input .error-message{
+	margin-top:3px;
+	color:#c90000;
+	font-weight:bold;
+}
+
+#content .form input.meio_input{
+	width:198px;
+}
+
+#content .form input.submit{
+	float:right;
+	margin-top:10px;
+}
+
+
+
+/* FOOTER */
+#footer{
+	width:100%;
+	height:61px;
+	clear:both;
+	margin-top:50px;
+	border-top:5px solid #0073a1; 
+	background-color:#878787;
+}
+
+#footer .footer_conteudo{
+	width:950px;
+	color:#FFFFFF;
+	margin:0 auto;
+	padding-top:10px;
+}
+
+#footer .footer_conteudo .copy{
+	width:265px;
+	height:51px;
+	color:#FFFFFF;
+	border-right:1px solid #FFFFFF;
+	margin-left:20px;
+	float:left;
+}
+
+#footer .footer_conteudo .links_rapidos{
+	height:51px;
+	margin-left:20px;
+	float:left;
+}
+
+#footer .footer_conteudo .links_rapidos ul li{
+	display:inline;
+	margin-right:15px;
+	font-weight:bold;
+}
+
+#footer .footer_conteudo .links_rapidos ul li a:link, #footer .footer_conteudo .links_rapidos ul li a:visited{
+	color:#FFFFFF;
+}
+
+#footer .fabricante{
+	float:right;
+}
+
+/* AUTENTICACAO */
+#autenticacao{
+	width:100%;
+	background-color:#f3f4f4;
+	margin-top:155px;
+	margin-bottom:165px;
+}
+
+#autenticacao .login{
+	width:236px;
+	min-height:10px;
+	_height:10px;
+	margin:0 auto;
+	padding-left:50px;
+	padding-right:50px;
+	background-color:#FFFFFF;
+}
+
+
+
+

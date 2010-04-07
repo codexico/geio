@@ -657,3 +657,81 @@ form input.submit{
 #footer .fabricante{
 	float:right;
 }
+
+/* AUTENTICACAO */
+#autenticacao{
+	width:100%;
+	background-color:#f3f4f4;
+	margin-top:155px;
+	margin-bottom:165px;
+}
+
+#autenticacao .login{
+	width:236px;
+	min-height:10px;
+	_height:10px;
+	margin:0 auto;
+	padding-left:50px;
+	padding-right:50px;
+	background-color:#FFFFFF;
+}
+
+/* AUTENTENTICACAO - TITULO */
+#autenticacao .titulo{
+	width:236px;
+}
+
+#autenticacao .titulo h1{
+	width:200px;
+	float:left;
+}
+
+#autenticacao .titulo img{
+	float:left;
+	display:inline;
+	margin-right:10px;
+}
+
+/* AUTENTICACAO - MENSAGENS SISTEMA */
+#autenticacao .message{
+	width:236px;
+	height:21px;
+	font-size:12px;
+	font-weight:bold;
+	color:#0073a1;
+	text-align:center;
+	padding-top:10px;
+	margin-top:10px;
+	margin-bottom:10px;
+	background-color:#f4fbfd;
+}
+
+
+/* AUTENTICACAO - FORM */
+
+#autenticacao .form .input{
+	width:198px;
+	margin-left:36px;
+	*margin-left:36px;
+	_margin-left:18px;
+	margin-bottom:10px;
+	float:left;
+}
+
+#autenticacao .form .input .error-message{
+	margin-top:3px;
+	color:#c90000;
+	font-weight:bold;
+}
+
+#autenticacao .form .meio_input input{
+	width:198px;
+}
+
+#autenticacao .form input.submit{
+	float:right;
+	margin-top:10px;
+}
+
+
+

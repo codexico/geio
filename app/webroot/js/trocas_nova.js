@@ -79,18 +79,27 @@ $(document).ready(function() {
 
     })
 
-    /**
-     * calcula o total de pontos somando os valores de acordo com as regras
-     */
-    $('#calcular-troca').click(function(){
-        var valorOutros = new Number(0);
-        var valorBandeira = new Number(0);
-        var count_CF = 0;
-        var regrasValor = 100;
-        var regrasBandeiraValor = 2;
-        var c = 0;
-        var restoOutros = 0;
-        var restoBandeira = 0;
+    var valorOutros = new Number(0);
+    var valorBandeira = new Number(0);
+    var count_CF = 0;
+    var regrasValor = 100;
+    var regrasBandeiraValor = 2;
+    var c = 0;
+    var restoOutros =  parseFloat($('#saldo_outros').val());//alert(restoOutros);
+    var restoBandeira =  parseFloat($('#saldo_bandeira').val());//alert(restoBandeira);
+
+    function _calculaCupomPromocional(){
+    
+        valorOutros = new Number(0);
+        valorBandeira = new Number(0);
+        restoOutros = new Number(0);
+        restoBandeira = new Number(0);
+        count_CF = 0;
+        regrasValor = 100;
+        regrasBandeiraValor = 2;
+        c = 0;
+        restoOutros +=  parseFloat($('#saldo_outros').val());//alert(restoOutros);
+        restoBandeira +=  parseFloat($('#saldo_bandeira').val());//alert(restoBandeira);
 
         $("li.cupom").each(function(){
             count_CF++;
@@ -101,51 +110,95 @@ $(document).ready(function() {
             bandeira = ($(this).find("[name*=bandeira]").val())
 
             if(bandeira.toUpperCase()=="VISA"){
-                valorBandeira += parseFloat(valor)
+                valorBandeira += parseFloat(valor);
             }else{
-                valorOutros += parseFloat(valor)
+                valorOutros += parseFloat(valor);
             }
         })
 
         restoBandeira += valorBandeira;
-        if (valorBandeira >= regrasValor) {
-            c += ( Math.floor(valorBandeira/regrasValor) )*regrasBandeiraValor ;
-            restoBandeira = valorBandeira%regrasValor
+        if (restoBandeira >= regrasValor) {
+            c += ( Math.floor(restoBandeira/regrasValor) )*regrasBandeiraValor ;
+            restoBandeira = restoBandeira%regrasValor
         }
         //alert('restoBandeira = '+restoBandeira + " c = " + c )
         restoOutros += valorOutros ;
-        if (valorOutros >= regrasValor) {
-            c += ( Math.floor(valorOutros/regrasValor) );
-            restoOutros = valorOutros%regrasValor
+        if (restoOutros >= regrasValor) {
+            c += ( Math.floor(restoOutros/regrasValor) );
+            restoOutros = restoOutros%regrasValor
         }
-        //alert('restoOutros = '+restoOutros + " c = " + c  )
 
-        if ( (restoOutros+restoBandeira) >= regrasValor) {
-            c++
-            restoBandeira = restoOutros+restoBandeira - regrasValor
-            restoOutros = 0
+        restoBandeira = restoBandeira.toFixed(2);//transforma em string
+        restoOutros = restoOutros.toFixed(2);//alert(restoOutros);;alert(typeof(restoOutros));
+    }
+
+    $('form.novatroca').submit(function() {
+        _calculaCupomPromocional();
+
+        message = "";
+        if ( (parseFloat(restoOutros)+parseFloat(restoBandeira)) >= regrasValor) {
+            message += "\n\n\"OK\" para gerar agora "+ (c+1) +" cupom(s)";
+            message += "\n\"Cancelar\" para gerar agora  "+ (c) +" cupom(s) e guardar os créditos para uma troca futura";
+            juntar = confirm(message);
+            if(!juntar){
+                $('#juntar_saldos').val('false');//avisar o php para guardar os saldos separados
+            }else{
+                $('#juntar_saldos').val('true');
+            }
         }
-        //alert('restoOutros = '+restoOutros + 'restoBandeira = '+restoBandeira + " c = " + c  )
+        return confirm("Confirma o envio dos dados?");
+    });
 
-        regra = "\n\n Regra:\n\
-                    A cada R$100,00 em cupons fiscais:\n\n\
-                    Com a bandeira da promoção = 2 cupons\n\
-                    Outras formas de pagamento = 1 cupom\n\n";
+    /**
+     * calcula o total de pontos somando os valores de acordo com as regras
+     */
+    $('#calcular-troca').click(function(){
+        _calculaCupomPromocional();
 
-        alert("\n Total de cupons fiscais= "+ count_CF +"\n Total de cupons promocionais = "+ c + regra)
+        linha = "\n=======================================================\n";
+
+        regra = "";
+        regra += "\n Regra da campanha:";
+        regra += "\n\tA cada R$"+regrasValor+",00 em cupons fiscais:"
+        regra += "\n\n\t\tCom a bandeira da promoção = "+regrasBandeiraValor+" cupons"
+        regra += "\n\t\tOutras formas de pagamento = 1 cupom";
+
+        resultado = "";
+        resultado += "\nTotal de cupons fiscais= "+ count_CF;
+        resultado += "\nNúmero de cupons promocionais = "+ c;
+
+        cupomMinimo = regrasValor-restoBandeira;
+        cupomMinimo = cupomMinimo.toFixed(2);
+        if ( (parseFloat(restoOutros)+parseFloat(restoBandeira)) >= regrasValor) {
+            message = "";
+            message = "\n\nCréditos:\n";
+            message += "\nR$ " + restoBandeira + " em créditos da Bandeira";
+            message += "\nR$ " + restoOutros + " em créditos normais";
+            message += "\n\nSobraram Créditos suficientes para um cupom extra se juntar os créditos de bandeira e comum.";
+            message += "\n\nAtenção: Cadastrar outro cupom de no mínimo R$" + cupomMinimo+" em créditos da Bandeira";
+            message += "\npode gerar mais "+ regrasBandeiraValor +" cupom(s)";
+            alert(regra+linha+resultado+message);
+        }else{
+            message = "";
+            message = "\n\nSobraram Créditos:\n";
+            message += "\n\t R$" + restoBandeira + " em créditos da Bandeira";
+            message += "\n\t R$" + restoOutros + " em créditos normais";
+            message += "\n\nAtenção: Cadastrar outro cupom de no mínimo R$" + cupomMinimo +" em créditos da Bandeira";
+            message += "\npode gerar mais "+ regrasBandeiraValor +" cupom(s)";
+            alert(regra+linha+resultado+message);
+        }
+    //alert('restoOutros = '+restoOutros + 'restoBandeira = '+restoBandeira + " c = " + c  )
+    //alert("\n Total de cupons fiscais= "+ count_CF +"\n Total de cupons promocionais = "+ c + regra)
     })
+    
 
-
-//    $('.remover-cupom-fiscal').click(function(){
-//        alert('remover')
-//    })
     $('.remover-cupom-fiscal').live('click', function(){
         $(this).closest('li.cupom').remove()
     })
 
 
 
-    /**
+/**
      * Adiciona consumidor por ajax sem sair da pagina
      */ /*
     $('#ConsumidorAddAjaxForm').submit(function(event){
@@ -172,7 +225,7 @@ $(document).ready(function() {
     })
     */
 
-    /**
+/**
      * calcula o total de pontos somando os valores de acordo com as regras
      * @deprecated  nao eh mais assim que se calcula a troca, talvez no futuro use em programas de fidelidade
      *//*

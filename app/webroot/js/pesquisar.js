@@ -29,11 +29,12 @@ $(document).ready(function() {
     //persquisar consumidor por rg
     $('#pesquisarrg').click(function(){
         var rg = $('#rg').val();
+        var datarg = "data[rg]="+rg;
 
         $.ajax({
             type: "POST",
             url: "pesquisarRgAjax",
-            data: "data[rg]="+rg,
+            data: datarg,
             success: function(xhr) {
                 if(xhr != "nao encontrou"){
                     mostrarConsumidor(xhr);

@@ -23,7 +23,11 @@
 
             <div id="header">
                 <div class="logotipo">
-                    <a href="../index.php"><?php echo $html->image('logotipo_geio.jpg', array('alt' => 'GEIO - Início'))?></a>
+			<?php echo $html->link(
+					$html->image('logotipo_geio.jpg', array('alt'=> __("GEIO - Início", true))),
+					'/', null, null, false
+				);
+			?>
                 </div>
                 <div class="painel_logado">
                     <h5><?php echo $html->link(__('LOGIN', true), '/login'); ?></h5>

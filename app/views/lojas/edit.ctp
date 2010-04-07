@@ -8,7 +8,7 @@
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/lojas', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('Loja.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Loja.id'))); ?>
+	<?php echo $html->link('Excluir Loja', array('action' => 'delete', $form->value('Loja.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Loja.id'))); ?>
 </div>
 
 <?php $session->flash('auth'); ?>

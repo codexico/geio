@@ -13,8 +13,14 @@ $javascript->link(array('trocas_nova'), false);
     echo $this->element('consumidor');
     ?>
     <?php
-    echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'],
-    'onsubmit'=>'return confirm("Confirma?")'));
+    echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'], 'class' => "novatroca",
+    //'onsubmit'=>'enviar();return false;'
+        ));
+    if( Configure::read('Regras.Saldo.true') ) {
+        echo $form->hidden('juntar_saldos', array('value'=>'true', 'name'=>'data[Troca][juntar_saldos]', 'id'=>'juntar_saldos' ) );
+        echo $form->hidden('saldo_bandeira', array('value'=>$consumidor['Consumidor']['saldo_bandeira'], 'name'=>'saldo_bandeira', 'id'=>'saldo_bandeira' ) );
+        echo $form->hidden('saldo_outros', array('value'=>$consumidor['Consumidor']['saldo_outros'], 'name'=>'saldo_outros', 'id'=>'saldo_outros' ) );
+    }
     ?>
     <fieldset>
         <legend><?php __('Nova Troca do Consumidor');?></legend>
@@ -39,6 +45,6 @@ $javascript->link(array('trocas_nova'), false);
         <input id="acrescentar-cupom" type="button" value="Acrescentar Cupom Fiscal" />
     </fieldset>
     <input id="calcular-troca" type="button" value="Calcular Cupons Promocionais" />
-    <?php echo $form->end('Salvar e gerar Cupons Promocionais');?>
+    <?php echo $form->end('Enviar');?>
 
 </div>

@@ -6,9 +6,10 @@
 class TrocasController extends AppController {
 
     var $name = 'Trocas';
-    var $helpers = array('Html', 'Form', 'Javascript');
+    var $helpers = array('Html', 'Form', 'Javascript', 'CakePtbr.Formatacao');
 
     var $uses = array('Troca','CupomPromocional', 'CupomFiscal');
+
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -146,24 +147,18 @@ class TrocasController extends AppController {
                 $valoresCP = $this->_calculaCupomPromocional();//debug($valoresCP);
             }
 
-
-            //  $this->_imprimirCP();
-            //$this->redirect(array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf'));
-            //$this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . 72));
-
-
             $this->Troca->create();
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));
 
-                if( Configure::read('Regras.Brinde.true') ) {
-                    //TODO:redireciona para algo do brinde
-                }else{
-                    $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
-                }
-
                 if( Configure::read('Regras.Saldo.true') ) {//debug($valoresCP);
                     $this->_atualizaSaldo($valoresCP);
+                }
+
+                if( Configure::read('Regras.Brinde.true') ) {
+                    //TODO:redireciona para algo do brinde
+                }else {
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
                 }
 
             } else {
@@ -236,11 +231,14 @@ class TrocasController extends AppController {
             $c += floor( ($restoBandeira) / $regras['Valor'] ) * $regras['Bandeira']['valor'];
             $restoBandeira = ($restoBandeira) % $regras['Valor']; //resto da divisao
         }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
-        if( ($restoOutros + $restoBandeira) >= $regras['Valor'] ) {//troca os restinhos
-            $c++;
-            $restoBandeira = ($restoOutros + $restoBandeira) - $regras['Valor']; //restinho final
-            $restoOutros = 0;
-        }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
+
+        if($this->data['Troca']['juntar_saldos'] == 'true') {
+            if( ($restoOutros + $restoBandeira) >= $regras['Valor'] ) {//troca os restinhos
+                $c++;
+                $restoBandeira = ($restoOutros + $restoBandeira) - $regras['Valor']; //restinho final
+                $restoOutros = 0;
+            }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
+        }
 
         //criar os cupons promocionais
         for ($i = 0; $i < $c; $i++) {

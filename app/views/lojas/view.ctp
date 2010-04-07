@@ -9,7 +9,6 @@
 <div class="botoes">
 
 	<?php echo $html->link('Voltar', '/lojas', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Lojas', array('action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Incluir Loja', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Editar Loja', array('action' => 'edit', $loja['Loja']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Excluir Loja', array('action' => 'delete', $loja['Loja']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $loja['Loja']['id'])); ?>

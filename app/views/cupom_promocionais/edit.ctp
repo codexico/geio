@@ -1,25 +1,29 @@
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Editar Cupom Promocional</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/cupom_promocionais', array('class'=>'btn_cinza floatRight')); ?>
+</div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
 <div class="cupomPromocionais form">
 <?php echo $form->create('CupomPromocional');?>
 	<fieldset>
- 		<legend><?php __('Edit CupomPromocional');?></legend>
-	<?php
-		echo $form->input('id');
-		echo $form->input('troca_id');
-		echo $form->input('promotor_id');
-		echo $form->input('consumidor_id');
-		echo $form->input('data_impressao');
-	?>
+ 		<legend>Dados Gerais</legend>
+		<?php
+			echo $form->input('id');
+			echo $form->input('troca_id');
+			echo $form->input('promotor_id');
+			echo $form->input('consumidor_id');
+			echo $form->input('data_impressao');
+		?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('CupomPromocional.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('CupomPromocional.id'))); ?></li>
-		<li><?php echo $html->link(__('List CupomPromocionais', true), array('action' => 'index'));?></li>
-	</ul>
-
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
+    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
 </div>
