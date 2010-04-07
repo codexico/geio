@@ -1,7 +1,24 @@
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Editar Promotor</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/promotores', array('class'=>'btn_cinza floatRight')); ?>
+	<?php echo $html->link('Excluir Promotor', array('action' => 'delete', $form->value('Promotor.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Promotor.id'))); ?>
+</div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
+
 <div class="promotores form">
 <?php echo $form->create('Promotor');?>
 	<fieldset>
- 		<legend><?php __('Edit Promotor');?></legend>
+ 		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
 		echo $form->input('nome');
@@ -18,16 +35,5 @@
         echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('Promotor.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Promotor.id'))); ?></li>
-		<li><?php echo $html->link(__('List Promotores', true), array('action' => 'index'));?></li>
-	</ul>
-
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
+    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
 </div>

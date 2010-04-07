@@ -9,7 +9,6 @@
 <div class="botoes">
 
 	<?php echo $html->link('Voltar', '/funcionarios', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Funcionarios', array('action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Incluir Funcionario', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Editar Funcionario', array('action' => 'edit', $funcionario['Funcionario']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Excluir Funcionario', array('action' => 'delete', $funcionario['Funcionario']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $funcionario['Funcionario']['id'])); ?>

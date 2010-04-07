@@ -1,7 +1,23 @@
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Inserir Usu&aacute;rio</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/users', array('class'=>'btn_cinza floatRight')); ?>
+</div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
+
 <div class="users form">
     <?php echo $form->create('User');?>
     <fieldset>
-        <legend><?php __('Add User');?></legend>
+        <legend>Dados Gerais</legend>
         <?php
         echo $form->input('username');
 
@@ -21,15 +37,5 @@
 
         ?>
     </fieldset>
-    <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-    <ul>
-        <li><?php echo $html->link(__('List Users', true), array('action' => 'index'));?></li>
-    </ul>
-
-    <?php
-    echo $this->element('admin_links');
-    ?>
-
+    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
 </div>

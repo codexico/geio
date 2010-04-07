@@ -9,7 +9,6 @@
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/cupom_fiscais', array('class'=>'btn_cinza floatRight')); ?>
 	<?php echo $html->link('Excluir Cupom', array('action' => 'delete', $form->value('CupomFiscal.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('CupomFiscal.id'))); ?>
-	<?php echo $html->link('Cupons Fiscais', array('action' => 'index'), array('class'=>'btn_azul floatRight mgr5'));?>
 	<?php echo $html->link('Trocas', array('controller' => 'trocas', 'action' => 'index'), array('class'=>'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Inserir Troca', array('controller' => 'trocas', 'action' => 'add'), array('class'=>'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Lojas', array('controller' => 'lojas', 'action' => 'index'), array('class'=>'btn_azul floatRight mgr5')); ?>
