@@ -57,16 +57,16 @@
                     <?php echo $detalhe['TrocasDia']['sum_cp']; ?>
             </td>
             <td>
-                    <?php echo $detalhe['TrocasDia']['avg_valor_total']; ?>
+                    <?php echo number_format($detalhe['TrocasDia']['avg_valor_total'],2); ?>
             </td>
             <td>
-                    <?php echo $detalhe['TrocasDia']['sum_valor_total']; ?>
+                    <?php echo number_format($detalhe['TrocasDia']['sum_valor_total'],2); ?>
             </td>
             <td>
-                    <?php echo $detalhe['TrocasDia']['sum_bandeira']; ?>
+                    <?php echo number_format($detalhe['TrocasDia']['sum_bandeira'],2); ?>
             </td>
             <td>
-                    <?php echo $detalhe['TrocasDia']['sum_outros']; ?>
+                    <?php echo number_format($detalhe['TrocasDia']['sum_outros'],2); ?>
             </td>
         </tr>
         <?php endforeach; ?>
