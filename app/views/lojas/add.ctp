@@ -19,7 +19,7 @@
     <fieldset>
         <legend>Dados Gerais</legend>
         <?php
-        echo $form->input('razao_social');
+        echo $form->input('razao_social', array('div' => 'input text mgt20', 'label' => 'Raz&atilde;o Social'));
         echo $form->input('nome_fantasia');
         echo $form->input('participante');
         echo $form->input('cnpj', array('label' => 'CNPJ (formato XX.XXX.XXX/XXXX-XX)'));

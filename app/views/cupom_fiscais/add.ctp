@@ -23,7 +23,7 @@
      <fieldset>
         <legend>Dados Gerais</legend>
         <?php
-        echo $form->input('codigo');
+        echo $form->input('codigo', array('div' => 'input text mgt20', 'label' => 'C&oacute;digo'));
         //echo $form->input('data_compra');
         echo $form->input('data_compra', array(
         'dateFormat'=>'DMY',
@@ -37,7 +37,7 @@
         echo $form->input('loja_id');
         echo $form->input('valor');
         //echo $form->input('forma_de_pagamento');
-        echo $form->input('forma_de_pagamento', array('options' => array(
+        echo $form->input('forma_de_pagamento', array('label' => 'Forma de Pagamento', 'options' => array(
                 'Dinheiro'=>'Dinheiro',
                 'Débito'=>'Débito',
                 'Crédito'=>'Crédito'

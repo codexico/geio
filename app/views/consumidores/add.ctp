@@ -19,14 +19,14 @@
         <legend>Dados Gerais</legend>
         <?php
 
-        echo $form->input('nome');
+        echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome'));
 
         echo $form->input('rg', array('label' => 'RG'));
         echo $form->input('cpf', array('label' => 'CPF (somente números)'));
         echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
 
         echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
-        echo $form->input('email');
+        echo $form->input('email', array('label' => 'E-mail'));
 
 
         //echo $form->input('sexo');
@@ -38,6 +38,7 @@
         ),
         'selected'=>'',
         'empty' => true));
+
 
         echo $form->input('nascimento',array(
         'dateFormat'=>'DMY',
@@ -60,8 +61,7 @@
         'selected'=>'',
         'empty' => true));
 
-        //echo $form->input('grau_de_instrucao');
-        echo $form->input('grau_de_instrucao', array('options' => array(
+        echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
                 'nenhum'=>'nenhum',
                 '1º Grau'=>'1º Grau',
                 '2º Grau'=>'2º Grau',
@@ -75,9 +75,9 @@
         'selected'=>'',
         'empty' => true));
 
-        echo $form->input('profissao');
+        echo $form->input('profissao', array('label' => 'Profiss&atilde;o'));
 
-        echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
+        echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observa&ccedil;&otilde;es'));
         ?>
     </fieldset>
     <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
