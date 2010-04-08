@@ -21,7 +21,7 @@
  		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('promotor_id');
+		echo $form->input('promotor_id', array('div' => 'input text mgt20', 'label' => 'ID do Promotor'));
 		echo $form->input('consumidor_id');
 	?>
 	</fieldset>

@@ -21,7 +21,7 @@
  		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('username');
+		echo $form->input('username', array('div' => 'input text mgt20', 'label' => 'Nome de Usu&aacute;rio'));
 		echo $form->input('password');
 		echo $form->input('group_id');
 	?>

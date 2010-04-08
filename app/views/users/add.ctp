@@ -19,7 +19,7 @@
     <fieldset>
         <legend>Dados Gerais</legend>
         <?php
-        echo $form->input('username');
+        echo $form->input('username', array('div' => 'input text mgt20', 'label' => 'Nome de Usu&aacute;rio'));
 
         //echo $form->input('password');
         //That effectively eliminates the annoying Auth habit of hashing your password.

@@ -20,8 +20,8 @@
  		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('nome');
-		echo $form->input('email');
+		echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome de Usu&aacute;rio'));
+		echo $form->input('email', array('div' => 'input text mgt20', 'label' => 'E-mail'));
 		echo $form->input('user_id');
 	?>
 	</fieldset>

@@ -21,18 +21,18 @@
  		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('nome');
-		echo $form->input('email');
-		echo $form->input('rg');
+		echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome de Usu&aacute;rios'));
+		echo $form->input('email', array('label' => 'E-mail'));
+		echo $form->input('rg', array('label' => 'RG'));
 		//echo $form->hidden('user_id');
 		//echo $form->hidden('User.id');
 		//echo $form->input('User.username', array('label' => 'Login'));
-        echo $form->input('cpf', array('label' => 'CPF (somente números)'));
+        echo $form->input('cpf', array('label' => 'CPF (somente n&uacute;meros)'));
 
         echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
         echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
 
-        echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observações'));
+        echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observa&ccedil;&otilde;es'));
 	?>
 	</fieldset>
     <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>

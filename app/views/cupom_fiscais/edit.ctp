@@ -25,11 +25,11 @@
  		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('codigo');
+		echo $form->input('codigo', array('div' => 'input text mgt20', 'label' => 'C&oacute;digo'));
 		echo $form->input('troca_id');
 		echo $form->input('loja_id');
 		echo $form->input('valor');
-		echo $form->input('forma_de_pagamento');
+		echo $form->input('forma_de_pagamento', array('label' => 'Forma de Pagamento'));
 		echo $form->input('bandeira');
 	?>
 	</fieldset>
