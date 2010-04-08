@@ -32,22 +32,18 @@ class LojasController extends AppController {
         $this->set(compact('loja', 'cupom_fiscais') );
     }
 
-    function asdfg($id = null) {
-        if (!$id) {
-            $this->Session->setFlash(__('Invalid Loja', true));
-            $this->redirect(array('action' => 'index'));
+    function add() {
+
+        if (!empty($this->data)) {
+            //debug($this->data);
+            $this->Loja->create();
+            if ($this->Loja->save($this->data)) {
+                $this->Session->setFlash(__('Loja criada', true));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Ocorreu algum erro, tente novamente por favor.', true));
+            }
         }
-        $this->Loja->recursive = -1;
-        $loja = $this->Loja->read(null, $id);debug($loja);
-
-        $this->paginate = array(
-                'conditions' => array('loja_id' => $id),
-                'limit' => 50,
-                'recursive' => -1
-        );
-        $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais);
-
-        $this->set(compact('loja', 'cupom_fiscais') );
     }
 
     function consumidores() {

@@ -13,12 +13,16 @@
 
 	<?php
 	echo $form->create('User', array('action' => 'login'));
-	echo $form->inputs(array(
-		'legend' => __('', true),
-		'username' => array('class' => 'meio_input'),
-		'password' => array('class' => 'meio_input')
-	));
-	echo $form->end(array('label'=>'ENVIAR','class'=>'submit '));
+
+        echo $form->input('username', array('label' => 'Usuário','class' => 'meio_input'));
+        echo $form->input('password', array('label' => 'Senha','class' => 'meio_input'));
+//
+//	echo $form->inputs(array(
+//		'legend' => __('', true),
+//		'username' => array('class' => 'meio_input'),
+//		'password' => array('class' => 'meio_input')
+//	));
+	echo $form->end(array('label'=>'ENTRAR','class'=>'submit '));
 	?>
 	<div class="clear"></div>
 </div>

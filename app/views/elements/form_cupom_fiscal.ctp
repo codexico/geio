@@ -3,7 +3,7 @@
     <fieldset><legend>Cupom Fiscal <?=$i+1;?>&nbsp;&nbsp;
     <input id="remover-cupom-fiscal-<?=$i;?>" class="remover-cupom-fiscal" type="button" value="Remover este Cupom" /></legend>
         <?php
-        echo $form->input('CupomFiscal.'.$i.'.codigo');
+        echo $form->input('CupomFiscal.'.$i.'.codigo', array('label'=>'Número do Cupom Fiscal'));
 
         $data_compra ='';
         if(!isset ($this->data['CupomFiscal'][$i]['data_compra'])) {
@@ -17,8 +17,11 @@
         'selected'=> $data_compra
         )
         );
-        echo $form->input('CupomFiscal.'.$i.'.loja_id', array('class'=> 'nomefantasia'));
-        echo $form->input('CupomFiscal.'.$i.'.loja_razao_social',array('options'=> $lojasRazaoSocial, 'class'=>'razaosocial'));
+        echo $form->input('CupomFiscal.'.$i.'.loja_id', array('class'=> 'nomefantasia','label'=>'Nome Fantasia'));
+        echo $form->input('CupomFiscal.'.$i.'.loja_razao_social',array(
+            'options'=> $lojasRazaoSocial,
+            'class'=>'razaosocial',
+            'label'=>'Razão Social'));
 
         echo $form->input('CupomFiscal.'.$i.'.valor');
 

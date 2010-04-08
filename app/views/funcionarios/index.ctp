@@ -30,7 +30,6 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w5"><?php echo $paginator->sort('id');?></th>
 			<th class="w20"><?php echo $paginator->sort('nome');?></th>
 			<th class="w20"><?php echo $paginator->sort('email');?></th>
 			<th class="w20"><?php echo $paginator->sort('created');?></th>
@@ -47,9 +46,6 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td>
-				<?php echo $funcionario['Funcionario']['id']; ?>
-			</td>
 			<td>
 				<?php echo $funcionario['Funcionario']['nome']; ?>
 			</td>

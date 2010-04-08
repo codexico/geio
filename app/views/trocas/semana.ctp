@@ -5,11 +5,6 @@
 </div>
 <div class="clear"></div>
 
-<!-- .botoes -->
-<div class="botoes">
-	<?php echo $html->link('Inserir Troca', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
-</div>
-
 <?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 
@@ -19,16 +14,16 @@
 
 	<div class="relatorio">
 		<p><?php echo "Total de trocas de hoje: " . $countTrocas; ?></p>
-		<p><?php echo "Número de Consumidores Atendidos: " . $numConsumidoresAtendidos; ?></p>
 		<p><?php echo "Número de Consumidores Novos: " . $numConsumidoresNovos; ?></p>
-		<p><?php echo "Valor total dos Cupons Fiscais trocados: R$ " . $valorCuponsFiscais[0]['total']; ?></p>
+		<p><?php echo "Número de Consumidores Atendidos: " . $numConsumidoresAtendidos; ?></p>
 		<p><?php echo "Número de Cupons Fiscais trocados: " . $numCuponsFiscais; ?></p>
+		<p><?php echo "Valor total dos Cupons Fiscais trocados: R$ " . $valorCuponsFiscais[0]['total']; ?></p>
 		<p><?php echo "Média de valor dos Cupons Fiscais: R$ " . $media; ?></p>
 		<p><?php echo "Média de valor das trocas: R$ " . $mediaValorTroca; ?></p>
 		<p><?php echo "Número de Cupons Promocionais impressos: " . $numCuponsPromocionais; ?></p>
 		<p><?php echo "Número de consumidores que compraram com VISA: " . $numConsumidoresBandeira; ?></p>
-		<p><?php echo "Número de consumidores novos que compraram com VISA: " . $numConsumidoresNovosBandeira; ?></p>
 		<p><?php echo "Número de consumidores que não compraram com VISA: " . $numConsumidoresNotBandeira; ?></p>
+		<p><?php echo "Número de consumidores novos que compraram com VISA: " . $numConsumidoresNovosBandeira; ?></p>
 		<p><?php echo "Número de consumidores novos que não compraram com VISA: " . $numConsumidoresNovosNotBandeira; ?></p>
 		<?php /* debug($mediaValorTroca); */ ?>
 	</div>

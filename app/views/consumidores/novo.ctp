@@ -109,13 +109,13 @@ $javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false 
         $opcoes=array('label'=>'Número',
                 'style'=>'width: 60px');
         echo $form->input('numero', $opcoes);
+        echo $form->input('complemento', array('style'=>'width: 200px'));
         echo $form->input('bairro', array('style'=>'width: 200px'));
         echo $form->input('cidade', array('style'=>'width: 200px'));
 
         echo $form->input('estado', array('options' => $estados,
         'empty'=>'Selecione'));
 
-        echo $form->input('complemento', array('style'=>'width: 200px'));
 
         echo $form->input('pais', array('options' => $paises,
         'empty'=>'Selecione'));

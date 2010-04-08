@@ -45,6 +45,6 @@ $javascript->link(array('trocas_nova'), false);
         <input id="acrescentar-cupom" type="button" value="Acrescentar Cupom Fiscal" />
     </fieldset>
     <input id="calcular-troca" type="button" value="Calcular Cupons Promocionais" />
-    <?php echo $form->end('Enviar');?>
+    <?php echo $form->end('GRAVAR DADOS');?>
 
 </div>

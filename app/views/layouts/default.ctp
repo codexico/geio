@@ -30,7 +30,7 @@
 			?>
                 </div>
                 <div class="painel_logado">
-                    <h5><?php echo $html->link(__('LOGIN', true), '/login'); ?></h5>
+                    <!--<h5><?php echo $html->link(__('LOGIN', true), '/login'); ?></h5>-->
                     <ul>
                         <li>Olá <strong><?php echo $session->read('Auth.User.username') . " ! " ?></strong></li>
                         <li>|</li>
@@ -52,6 +52,9 @@
             echo $this->element('menu_geio');
             ?>
 
+                <?php $session->flash('auth'); ?>
+
+                <?php $session->flash(); ?>
 
             <div id="content">
                 <?php echo $content_for_layout; ?>

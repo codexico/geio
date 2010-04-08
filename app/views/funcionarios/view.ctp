@@ -26,7 +26,6 @@
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $funcionario['Funcionario']['id']; ?>
 				&nbsp;
-				The body style sets the font to arial as first choice, verdana as second choice and the generic sans-serif as default (you should always set a default generic font as the final choice in the font-family list). The default font size is set in ems to allow the text size to be user selectable. This menu can be infinitely resized and it will always stay in shape.
 			</dd>
 		</div>
 

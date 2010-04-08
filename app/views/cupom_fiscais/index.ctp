@@ -6,6 +6,7 @@
 <div class="clear"></div>
 
 <!-- .botoes -->
+    <?php /*
 <div class="botoes">
 	<?php echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 	<?php echo $html->link('Trocas', array('controller' => 'trocas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
@@ -13,7 +14,7 @@
 	<?php echo $html->link('Lojas', array('controller' => 'lojas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Inserir Loja', array('controller' => 'lojas', 'action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
-
+     */?>
 <?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 
@@ -63,7 +64,7 @@
 				<?php echo $html->link($cupomFiscal['Troca']['id'], array('controller' => 'trocas', 'action' => 'view', $cupomFiscal['Troca']['id'])); ?>
 			</td>
 			<td>
-				<?php echo $html->link($cupomFiscal['Loja']['id'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
+				<?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
 			</td>
 			<td>
 				<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>

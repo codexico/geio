@@ -50,7 +50,7 @@
 				<?php echo $user['User']['id']; ?>
 			</td>
 			<td>
-				<?php echo $user['User']['password']; ?>
+				<?php echo $user['User']['username']; ?>
 			</td>
 			<td>
 				<?php echo $user['User']['group_id']; ?>
