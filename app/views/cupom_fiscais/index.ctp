@@ -7,7 +7,7 @@
 
 <!-- .botoes -->
 <div class="botoes">
-	<?php echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?></li>
+	<?php echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 	<?php echo $html->link('Trocas', array('controller' => 'trocas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Inserir Troca', array('controller' => 'trocas', 'action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Lojas', array('controller' => 'lojas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
