@@ -129,7 +129,7 @@
                     <?php echo $troca['Troca']['id']; ?>
             </td>
             <td>
-                    <?php echo $troca['Troca']['created']; ?>
+                    <?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
             </td>
             <td>
                     <?php echo number_format($troca['Troca']['valor_total'], 2); ?>

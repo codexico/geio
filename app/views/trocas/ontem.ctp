@@ -63,7 +63,7 @@
 		?>
 		<tr<?php echo $class;?>>
 			<td>
-				<?php echo $troca['Troca']['created']; ?>
+				<?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo $html->link($troca['Troca']['id'], array('action' => 'view/'.$troca['Troca']['id'])); ?>

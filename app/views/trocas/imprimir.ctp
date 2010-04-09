@@ -27,7 +27,7 @@ $class = ' class="altrow"';?>
         </dd>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
         <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $troca['Troca']['created']; ?>
+<?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
             &nbsp;
         </dd>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>

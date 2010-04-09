@@ -66,7 +66,7 @@
 			</td>
                 */ ?>
             <td class="txtCenter">
-                    <?php echo $html->link($resumoDiario['ResumoDiario']['dia'], array('controller' => 'relatorios', 'action' => 'detalhe_dia',$resumoDiario['ResumoDiario']['dia'])); ?>
+                    <?php echo $html->link(date('d/m/Y', strtotime($resumoDiario['ResumoDiario']['dia'])) , array('controller' => 'relatorios', 'action' => 'detalhe_dia',$resumoDiario['ResumoDiario']['dia'])); ?>
             </td>
             <td class="txtCenter">
                     <?php echo $resumoDiario['ResumoDiario']['qtd_consumidores']; ?>
