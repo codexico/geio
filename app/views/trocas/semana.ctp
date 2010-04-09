@@ -49,10 +49,10 @@
 		<tr>
 			<th class="w20"><?php echo $paginator->sort('Data', 'created');?></th>
 			<th class="w5"><?php echo $paginator->sort('id');?></th>
-			<th class="w30"><?php echo $paginator->sort('consumidor_id');?></th>
+			<th class="w30"><?php echo $paginator->sort('consumidor','Consumidor.nome');?></th>
 			<th class="w15"><?php echo $paginator->sort('Valor (R$)', 'valor_total');?></th>
 			<th class="w15"><?php echo $paginator->sort('Cupons Promocionais','qtd_cp');?></th>
-			<th class="w15"><?php echo $paginator->sort('promotor_id');?></th>
+			<th class="w15"><?php echo $paginator->sort('promotor','Promotor.nome');?></th>
 		</tr>
 		<?php
 		$i = 0;

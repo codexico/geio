@@ -140,13 +140,13 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $paginator->sort('id');?></th>
-            <th><?php echo $paginator->sort('codigo');?></th>
-            <th><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
-            <th><?php echo $paginator->sort('Valor R$','valor');?></th>
-            <th><?php echo $paginator->sort('forma_de_pagamento');?></th>
-            <th><?php echo $paginator->sort('bandeira');?></th>
-            <th><?php echo $paginator->sort('created');?></th>
+            <th><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th><?php echo $paginator->sort('codigo',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th><?php echo $paginator->sort('Consumidor','Consumidor.nome', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th><?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th><?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th><?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th><?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
         </tr>
         <?php
         $i = 0;
