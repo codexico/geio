@@ -83,6 +83,7 @@
             </ul>
             <ul class="relatorios">
                 <li><?php echo $html->link('Resumo Diário', array('controller'=>'resumo_diarios')); ?> </li>
+                <li><?php echo $html->link('Resumo Loja', array('controller'=>'lojas', 'action'=>'resumo_diario ')); ?> </li>
             </ul>
             <?php endif; ?>
 

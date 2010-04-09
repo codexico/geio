@@ -6,6 +6,27 @@ class LojasController extends AppController {
 
     var $uses = array('Loja', 'CupomFiscal', 'Consumidor');
 
+
+    function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allowedActions = array('resumo_diario');//TODO: remover e build_acl
+    }
+
+    function resumo_diario(){
+
+        $this->paginate = array(
+                'CupomFiscal' => array('fields' => array( 'CupomFiscal.data_compra','CupomFiscal.loja_id','COUNT(CupomFiscal.codigo) AS sum_cf',
+                    'AVG(CupomFiscal.valor) AS avg_valor','SUM(CupomFiscal.valor) AS sum_valor'
+                    ,'Loja.nome_fantasia'),
+                        'group' => array('data_compra','loja_id'),
+                'contain' => array('Loja'),
+                        'recursive' => 0 ));
+        $this->set('resumoDiarios', $this->paginate('CupomFiscal'));
+
+
+    }
+
+
     function index() {
         $this->Loja->recursive = 0;
         $this->set('lojas', $this->paginate());

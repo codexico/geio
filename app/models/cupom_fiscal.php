@@ -43,5 +43,35 @@ class CupomFiscal extends AppModel {
             )
     );
 
+
+    /**
+     * @link http://teknoid.wordpress.com/2008/09/29/dealing-with-calculated-fields-in-cakephps-find/
+     */
+    function afterFind($results, $primary=false) {
+        if($primary == true) {
+            //if(Set::check($results, '0.0')) {
+            //    $fieldName = key($results[0][0]);
+            //    foreach($results as $key=>$value) {
+            //        $results[$key][$this->alias][$fieldName] = $value[0][$fieldName];
+            //        unset($results[$key][0]);
+            //    }
+            //}
+            //http://teknoid.wordpress.com/2008/09/29/dealing-with-calculated-fields-in-cakephps-find/#comment-2272
+            //if (Set::check($results, '0.0')) {
+            //    foreach($results as &$entry) {
+            //        $entry[$this->alias] = array_merge($entry[$this->alias], $entry[0]);
+            //        unset($entry[0]);
+            //    }
+            //}
+            if (Set::check($results, '0.0')) {
+                foreach($results as &$entry) {
+                    $entry[$this->alias] = isset($entry[$this->alias]) ? array_merge($entry[$this->alias], $entry[0]) : $entry[0];
+                    unset($entry[0]);
+                }
+            }
+        }
+
+        return $results;
+    }
 }
 ?>

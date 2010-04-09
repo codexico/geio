@@ -217,13 +217,27 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="txtCenter"><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?></th>
-			<th class="txtCenter"><?php echo $paginator->sort('codigo',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?></th>
-			<th><?php echo $paginator->sort('Loja','Loja.nome_fantasia', array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?></th>
-			<th class="txtCenter"><?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?></th>
-			<th><?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?></th>
-			<th><?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?></th>
-			<th><?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?></th>
+			<th class="txtCenter">
+                                <?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+                        </th>
+			<th class="txtCenter">
+                                <?php echo $paginator->sort('codigo',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+                        </th>
+			<th>
+                                <?php echo $paginator->sort('Loja','Loja.nome_fantasia', array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+                        </th>
+			<th class="txtCenter">
+                                <?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+                        </th>
+			<th>
+                                <?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+                        </th>
+			<th>
+                                <?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+                        </th>
+			<th>
+                                <?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+                        </th>
 		</tr>
 		<?php
 		$i = 0;
