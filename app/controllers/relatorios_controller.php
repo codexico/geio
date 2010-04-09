@@ -37,7 +37,7 @@ class RelatoriosController extends AppController {
         $this->TrocasDia->table = $this->Consumidor->tablePrefix . "trocas_".$dia; //troca para a tabela diaria
         $this->set('detalhes', $this->paginate('TrocasDia'));
 
-        $this->set('dia', date('d/m/Y', strtotime($dia)));
+        $this->set('dia', $dia);
 
     }
 

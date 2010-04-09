@@ -10,7 +10,7 @@
 <!-- .titulo -->
 <div class="titulo">
     <?php echo $html->image('bullet_titulo.gif')?>
-    <h1>Detalhe Dia <?=$dia?></h1>
+    <h1>Detalhe Dia <?=date('d/m/Y', strtotime($dia));?></h1>
 </div>
 <div class="clear"></div>
 <div class="relatorios detalhe_dia index">
@@ -30,13 +30,13 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $paginator->sort('Consumidor','consumidor_nome');?></th>
-            <th><?php echo $paginator->sort('Cupons Fiscais Trocados','sum_cf');?></th>
-            <th><?php echo $paginator->sort('Cupons Promocionais Impressos','sum_cp');?></th>
-            <th><?php echo $paginator->sort('Média de Consumo','avg_valor_total');?></th>
-            <th><?php echo $paginator->sort('Consumo Total','sum_valor_total');?></th>
-            <th><?php echo $paginator->sort('Consumo Bandeira','sum_bandeira');?></th>
-            <th><?php echo $paginator->sort('Consumo Outros','sum_outros');?></th>
+            <th><?php echo $paginator->sort('Consumidor','consumidor_nome', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th><?php echo $paginator->sort('Cupons Fiscais Trocados','qtd_cf', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th><?php echo $paginator->sort('Cupons Promocionais Impressos','qtd_cp', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th><?php echo $paginator->sort('Média de Consumo','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th><?php echo $paginator->sort('Consumo Total','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th><?php echo $paginator->sort('Consumo Bandeira','valor_bandeira', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th><?php echo $paginator->sort('Consumo Outros','valor_outros', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
         </tr>
         <?php
         $i = 0;
@@ -48,7 +48,7 @@
             ?>
         <tr<?php echo $class;?>>
             <td>
-                    <?php echo $html->link($detalhe['TrocasDia']['consumidor_nome'], array('action' => 'view', 'controller' =>'consumidores', $detalhe['TrocasDia']['consumidor_id'])); ?>
+                    <?php echo $html->link($detalhe['TrocasDia']['consumidor_nome'], array('action' => 'view', 'controller' =>'consumidores', $dia)); ?>
             </td>
             <td>
                     <?php echo $detalhe['TrocasDia']['sum_cf']; ?>
