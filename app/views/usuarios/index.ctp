@@ -34,11 +34,11 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th class="w5"><?php echo $paginator->sort('id');?></th>
-            <th class="w30"><?php echo $paginator->sort('nome');?></th>
-            <th class="w20"><?php echo $paginator->sort('email');?></th>
-            <th class="w20"><?php echo $paginator->sort('Login','User.username');?></th>
-            <th class="w15 actions"><?php __('Actions');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+            <th class="w40"><?php echo $paginator->sort('nome');?></th>
+            <th class="w30"><?php echo $paginator->sort('email');?></th>
+            <th class="w15"><?php echo $paginator->sort('Login','User.username');?></th>
+            <th class="w10 actions"></th>
         </tr>
         <?php
         $i = 0;
@@ -49,7 +49,7 @@
             }
             ?>
         <tr<?php echo $class;?>>
-            <td>
+            <td class="txtCenter">
                     <?php echo $usuario['Usuario']['id']; ?>
             </td>
             <td>

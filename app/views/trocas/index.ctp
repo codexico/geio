@@ -30,9 +30,9 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w15"><?php echo $paginator->sort('id');?></th>
-			<th class="w15"><?php echo $paginator->sort('promotor_id');?></th>
-			<th class="w15"><?php echo $paginator->sort('consumidor_id');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('id');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('promotor_id');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('consumidor_id');?></th>
 			<th class="w20"><?php echo $paginator->sort('created');?></th>
 			<th class="w20"><?php echo $paginator->sort('modified');?></th>
 			<th class="w15 actions"></th>
@@ -46,13 +46,13 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td>
+			<td class="txtCenter">
 				<?php echo $troca['Troca']['id']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $troca['Troca']['promotor_id']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $troca['Troca']['consumidor_id']; ?>
 			</td>
 			<td>

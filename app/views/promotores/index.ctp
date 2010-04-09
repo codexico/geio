@@ -34,10 +34,10 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w50"><?php echo $paginator->sort('nome');?></th>
+			<th class="w55"><?php echo $paginator->sort('nome');?></th>
 			<th class="w20"><?php echo $paginator->sort('email');?></th>
 			<th class="w15"><?php echo $paginator->sort('Login','User.username');?></th>
-			<th class="w15 actions"><?php __('Actions');?></th>
+			<th class="w10 actions"></th>
 		</tr>
 		<?php
 		$i = 0;

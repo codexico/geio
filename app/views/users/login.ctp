@@ -14,7 +14,7 @@
 	<?php
 	echo $form->create('User', array('action' => 'login'));
 
-        echo $form->input('username', array('label' => 'Usuário','class' => 'meio_input'));
+        echo $form->input('username', array('div' => 'input text mgt20', 'label' => 'Usuário','class' => 'meio_input'));
         echo $form->input('password', array('label' => 'Senha','class' => 'meio_input'));
 //
 //	echo $form->inputs(array(

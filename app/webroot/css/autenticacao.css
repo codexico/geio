@@ -196,8 +196,11 @@ form input.submit{
 }
 
 #content .form input.submit{
-	float:right;
+	float:left;
 	margin-top:10px;
+	margin-left:36px;
+	*margin-left:36px;
+	_margin-left:18px;
 }
 
 

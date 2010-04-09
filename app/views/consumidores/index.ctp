@@ -34,12 +34,12 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w5"><?php echo $paginator->sort('id');?></th>
-			<th class="w25"><?php echo $paginator->sort('nome');?></th>
-			<th class="w15"><?php echo $paginator->sort('cpf');?></th>
-			<th class="w20"><?php echo $paginator->sort('email');?></th>
-			<th class="w20"><?php echo $paginator->sort('modified');?></th>
-			<th class="w15 actions"></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+			<th class="w30"><?php echo $paginator->sort('nome');?></th>
+			<th class="w10"><?php echo $paginator->sort('cpf');?></th>
+			<th class="w30"><?php echo $paginator->sort('email');?></th>
+			<th class="w15"><?php echo $paginator->sort('modified');?></th>
+			<th class="w10 actions"></th>
 		</tr>
 
 		<?php
@@ -51,7 +51,7 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td>
+			<td class="txtCenter">
 				<?php echo $consumidor['Consumidor']['id']; ?>
 			</td>
 			<td>

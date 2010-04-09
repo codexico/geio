@@ -30,11 +30,11 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w5"><?php echo $paginator->sort('id');?></th>
-			<th class="w30"><?php echo $paginator->sort('razao_social');?></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+			<th class="w35"><?php echo $paginator->sort('razao_social');?></th>
 			<th class="w30"><?php echo $paginator->sort('nome_fantasia');?></th>
-			<th class="w20"><?php echo $paginator->sort('created');?></th>
-			<th class="w15 actions"></th>
+			<th class="w20"><?php echo $paginator->sort('modified');?></th>
+			<th class="w10 actions"></th>
 		</tr>
 		<?php
 		$i = 0;
@@ -45,7 +45,7 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td>
+			<td class="txtCenter">
 				<?php echo $loja['Loja']['id']; ?>
 			</td>
 			<td>
@@ -55,7 +55,7 @@
 				<?php echo $loja['Loja']['nome_fantasia']; ?>
 			</td>
 			<td>
-				<?php echo $loja['Loja']['created']; ?>
+				<?php echo $loja['Loja']['modified']; ?>
 			</td>
 			<td class="actions">
 

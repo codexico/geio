@@ -30,11 +30,10 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w20"><?php echo $paginator->sort('nome');?></th>
-			<th class="w20"><?php echo $paginator->sort('email');?></th>
-			<th class="w20"><?php echo $paginator->sort('created');?></th>
-			<th class="w20"><?php echo $paginator->sort('modified');?></th>
-			<th class="w15 actions"></th>
+			<th class="w40"><?php echo $paginator->sort('nome');?></th>
+			<th class="w35"><?php echo $paginator->sort('email');?></th>
+			<th class="w15"><?php echo $paginator->sort('modified');?></th>
+			<th class="w10 actions"></th>
 		</tr>
 
 		<?php
@@ -51,9 +50,6 @@
 			</td>
 			<td>
 				<?php echo $funcionario['Funcionario']['email']; ?>
-			</td>
-			<td>
-				<?php echo $funcionario['Funcionario']['created']; ?>
 			</td>
 			<td>
 				<?php echo $funcionario['Funcionario']['modified']; ?>

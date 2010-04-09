@@ -140,10 +140,10 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
-            <th><?php echo $paginator->sort('codigo',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('codigo',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th><?php echo $paginator->sort('Consumidor','Consumidor.nome', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
-            <th><?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th><?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th><?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th><?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
@@ -157,16 +157,16 @@
             }
             ?>
         <tr<?php echo $class;?>>
-            <td>
+            <td class="txtCenter">
                     <?php echo $html->link($cupomFiscal['CupomFiscal']['id'], array('controller' => 'cupom_fiscais', 'action' => 'view', $cupomFiscal['CupomFiscal']['id'])); ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $cupomFiscal['CupomFiscal']['codigo']; ?>
             </td>
             <td>
                     <?php echo $cupomFiscal['Consumidor']['nome']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
             </td>
             <td>

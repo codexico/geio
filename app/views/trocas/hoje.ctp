@@ -47,11 +47,11 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w20"><?php echo $paginator->sort('Data', 'created');?></th>
-			<th class="w5"><?php echo $paginator->sort('id');?></th>
+			<th class="w15"><?php echo $paginator->sort('Data', 'created');?></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
 			<th class="w30"><?php echo $paginator->sort('consumidor','Consumidor.nome');?></th>
-			<th class="w15"><?php echo $paginator->sort('Valor (R$)', 'valor_total');?></th>
-			<th class="w15"><?php echo $paginator->sort('Cupons Promocionais','qtd_cp');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('Valor (R$)', 'valor_total');?></th>
+			<th class="w20 txtCenter"><?php echo $paginator->sort('Cupons Promocionais','qtd_cp');?></th>
 			<th class="w15"><?php echo $paginator->sort('promotor','Promotor.nome');?></th>
 		</tr>
 		<?php
@@ -66,17 +66,17 @@
 			<td>
 				<?php echo $troca['Troca']['created']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $html->link($troca['Troca']['id'], array('action' => 'view/'.$troca['Troca']['id'])); ?>
 			</td>
 			<td>
 				<?php echo $html->link($troca['Consumidor']['nome'], array('action' => 'view', 'controller' =>'consumidores', $troca['Consumidor']['id'])); ?>
 				<?php echo $html->link('Trocas', array('action' => 'consumidor', 'controller' =>'trocas', $troca['Consumidor']['id'])); ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo number_format($troca['Troca']['valor_total'], 2); ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $troca['Troca']['qtd_cp']; ?>
 			</td>
 			<td>
@@ -89,16 +89,16 @@
 			<th>
 				<?php echo "TOTAL"; ?>
 			</th>
-			<th>
+			<th class="txtCenter">
 				<?php echo $countTrocas; ?>
 			</th>
-			<th>
+			<th class="txtCenter">
 				<?php echo $numConsumidoresAtendidos; ?>
 			</th>
-			<th>
+			<th class="txtCenter">
 				<?php echo $valorCuponsFiscais[0]['total']; ?>
 			</th>
-			<th>
+			<th class="txtCenter">
 				<?php echo $numCuponsPromocionais; ?>
 			</th>
 			<th>

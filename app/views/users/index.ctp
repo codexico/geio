@@ -31,11 +31,11 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w5"><?php echo $paginator->sort('id');?></th>
-			<th class="w30"><?php echo $paginator->sort('username');?></th>
-			<th class="w20"><?php echo $paginator->sort('group_id');?></th>
-			<th class="w20"><?php echo $paginator->sort('modified');?></th>
-			<th class="w15 actions"></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+			<th class="w65"><?php echo $paginator->sort('username');?></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('group_id');?></th>
+			<th class="w15"><?php echo $paginator->sort('modified');?></th>
+			<th class="w10 actions"></th>
 		</tr>
 		<?php
 		$i = 0;
@@ -46,13 +46,13 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td>
+			<td class="txtCenter">
 				<?php echo $user['User']['id']; ?>
 			</td>
 			<td>
 				<?php echo $user['User']['username']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $user['User']['group_id']; ?>
 			</td>
 			<td>

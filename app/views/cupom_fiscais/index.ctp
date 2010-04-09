@@ -35,15 +35,15 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w5"><?php echo $paginator->sort('id');?></th>
-			<th class="w5"><?php echo $paginator->sort('codigo');?></th>
-			<th class="w5"><?php echo $paginator->sort('troca_id');?></th>
-			<th class="w5"><?php echo $paginator->sort('loja_id');?></th>
-			<th class="w5"><?php echo $paginator->sort('valor');?></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('N. Cupom Fiscal', 'codigo');?></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('troca_id');?></th>
+			<th class="w15"><?php echo $paginator->sort('loja_id');?></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('valor');?></th>
 			<th class="w20"><?php echo $paginator->sort('forma_de_pagamento');?></th>
-			<th class="w20"><?php echo $paginator->sort('bandeira');?></th>
-			<th class="w20"><?php echo $paginator->sort('modified');?></th>
-			<th class="w15 actions"></th>
+			<th class="w10"><?php echo $paginator->sort('bandeira');?></th>
+			<th class="w15"><?php echo $paginator->sort('modified');?></th>
+			<th class="w10 actions"></th>
 		</tr>
 		<?php
 		$i = 0;
@@ -54,19 +54,19 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td>
+			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['id']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['codigo']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $html->link($cupomFiscal['Troca']['id'], array('controller' => 'trocas', 'action' => 'view', $cupomFiscal['Troca']['id'])); ?>
 			</td>
 			<td>
 				<?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
 			</td>
 			<td>

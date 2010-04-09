@@ -96,6 +96,7 @@ form input.submit{
 .clear{clear:both;}
 .floatRight{float:right};
 .floatLeft{float:left};
+.txtCenter{text-align:center;}
 
 /* CONTAINER */
 #container {
@@ -448,7 +449,7 @@ form input.submit{
 }
 
 
-/* CONTENT - PAGINA��O */
+/* CONTENT - PAGINACAO */
 #content .index .paginacao{
 	width:950px;
 	height:32px;
@@ -515,7 +516,8 @@ form input.submit{
 }
 
 #content table th{
-	font-size:12px;
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:10px;
 	font-weight:bold;
 	color:#FFFFFF;
 	text-transform:uppercase;
@@ -530,22 +532,35 @@ form input.submit{
 	border:0;
 }
 
+#content table th.txtCenter{
+	text-align:center;
+}
+
 #content table th a:link, #content table th a:visited{
-	font-size:12px;
+	font-size:10px;
 	font-weight:bold;
 	color:#FFFFFF;
 	text-transform:uppercase;
 }
 
 #content table tr td{
-	font-size:13px;
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:10px;
 	color:#646464;
 	padding:5px 12px;
 	border-right:1px solid #e0e0e0;
 }
 
+#content table td.txtCenter{
+	text-align:center;
+}
+
 #content table tr.altrow{
 	background-color:#f7f7f7;
+}
+
+#content table tr:hover{
+	background-color: #fdf7e2;
 }
 
 #content table tr td.actions{
