@@ -601,6 +601,7 @@ form input.submit{
 #content .view dl{
 	width:950px;
 	font-size:13px;
+        float: left;
 }
 
 #content .view dl dt{
@@ -609,6 +610,7 @@ form input.submit{
 	border-top:1px solid #e0e0e0;
 	padding:7px 10px 7px 10px;
 	float:left;
+        clear: both;
 }
 
 #content .view dl dt.altrow{
