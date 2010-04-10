@@ -88,7 +88,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nascimento:'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $funcionario['Funcionario']['nascimento']; ?>
+                            <?php echo date('d/m/Y', strtotime($funcionario['Funcionario']['nascimento'])); ?>
 				&nbsp;
 			</dd>
 		</div>

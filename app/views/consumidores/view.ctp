@@ -83,7 +83,7 @@ $class = ' class="altrow"';?>
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nascimento'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $consumidor['Consumidor']['nascimento']; ?>
+<?php echo date('d/m/Y', strtotime($consumidor['Consumidor']['nascimento']) ); ?>
                 &nbsp;
             </dd>
         </div>

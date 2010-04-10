@@ -44,7 +44,7 @@
         </dd>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nascimento'); ?></dt>
         <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $consumidor['Consumidor']['nascimento']; ?>
+            <?php echo date('d/m/Y', strtotime($consumidor['Consumidor']['nascimento']) ); ?>
             &nbsp;
         </dd>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estado Civil'); ?></dt>
@@ -129,7 +129,7 @@
                     <?php echo $troca['Troca']['id']; ?>
             </td>
             <td>
-                    <?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
+                    <?php echo date('d/m/Y', strtotime($troca['Troca']['created']) ); ?>
             </td>
             <td>
                     <?php echo number_format($troca['Troca']['valor_total'], 2); ?>

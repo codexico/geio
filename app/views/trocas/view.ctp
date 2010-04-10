@@ -91,7 +91,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nascimento'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $troca['Consumidor']['nascimento']; ?>
+                            <?php echo date('d/m/Y', strtotime($troca['Consumidor']['nascimento']) ); ?>
 				&nbsp;
 			</dd>
 		</div>	
@@ -177,7 +177,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
+				<?php echo date('d/m/Y', strtotime($troca['Troca']['created']) ); ?>
 				&nbsp;
 			</dd>
 		</div>
