@@ -139,6 +139,20 @@ class ConsumidoresController extends AppController {
         if (empty($this->data)) {
             $this->data = $this->Consumidor->read(null, $id);
         }
+
+        /*
+        * Busca os estados e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
+        $this->set('estados', $estados);
+
+        /*
+        * Busca os paises e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
+        $this->set('paises', $paises);
     }
 
     function delete($id = null) {

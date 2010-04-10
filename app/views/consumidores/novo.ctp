@@ -29,22 +29,21 @@ $javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false 
         echo $form->input('sexo', array('options' => array(
                 'masculino'=>'masculino',
                 'feminino'=>'feminino',
-                'gls'=>'gls',
-                'outro'=>'outro'
+                'gls'=>'gls'
         ),
         'selected'=>$this->data['Consumidor']['sexo'],
         'empty' => true));
 
-        echo $form->input('nascimento',array(
-        'dateFormat'=>'DMY',
-        'timeFormat'=>'NONE',
-        'minYear'=> date('Y') - 100,
-        'maxYear' => date('Y'),
-        'selected'=>'',
-        //'selected'=>strtotime('01-01-2000'),
-        'empty' => true
-        )
-        );
+?>
+
+		<div class="input select">
+			<label for="ConsumidorNascimentoDay">Nascimento</label>
+			 <?php echo $form->day('nascimento', '', array('class'=>'select_dia'), true); ?>
+			 <?php echo $form->month('nascimento', '', array('class'=>'select_mes'), true); ?>
+			 <?php echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano')); ?>
+		</div>
+
+<?php
 
         //echo $form->input('estado_civil');
         $estado_civil ='';

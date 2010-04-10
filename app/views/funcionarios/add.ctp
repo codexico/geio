@@ -38,7 +38,7 @@
         ?>
 
 		<div class="input select">
-			<label for="FuncionarioSexo">Nascimento</label>
+			<label for="FuncionarioNascimentoDay">Nascimento</label>
 			 <?php echo $form->day('nascimento', '', array('class'=>'select_dia'), true); ?>
 			 <?php echo $form->month('nascimento', '', array('class'=>'select_mes'), true); ?>
 			 <?php echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano')); ?>
