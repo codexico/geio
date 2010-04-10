@@ -17,7 +17,6 @@ class RelatoriosController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allowedActions = array('detalhe_dia');//TODO: remover e build_acl
     }
 
     function index() {

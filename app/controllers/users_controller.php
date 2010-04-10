@@ -121,6 +121,7 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Trocas/imprimir');
         $this->Acl->allow($group, 'controllers/CupomPromocionais/cupomPdf');
         $this->Acl->allow($group, 'controllers/consumidores/novo');
+        $this->Acl->allow($group, 'controllers/consumidores/edit');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisar');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisarRgAjax');
         $this->Acl->allow($group, 'controllers/consumidores/pesquisarCpfAjax');

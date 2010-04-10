@@ -20,6 +20,7 @@ $javascript->link(array('pesquisar'), false);
     </fieldset>
 </div>
 <div id="consumidorencontrado">
+<?php /* view/elements/consumidorencontrado */?>
 </div>
 <?php /*
 <div class="actions">

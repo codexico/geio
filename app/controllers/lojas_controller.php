@@ -9,7 +9,6 @@ class LojasController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allowedActions = array('resumo_diario');//TODO: remover e build_acl
     }
 
     function resumo_diario(){
