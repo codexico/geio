@@ -109,7 +109,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Criado em:'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $funcionario['Funcionario']['created']; ?>
+				<?php echo date('d/m/Y - H:m',strtotime($funcionario['Funcionario']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>

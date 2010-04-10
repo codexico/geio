@@ -174,14 +174,7 @@ $class = ' class="altrow"';?>
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $consumidor['Consumidor']['created']; ?>
-                &nbsp;
-            </dd>
-        </div>
-        <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $consumidor['Consumidor']['modified']; ?>
+<?php echo date('d,m,Y',strtotime($consumidor['Consumidor']['created'])); ?>
                 &nbsp;
             </dd>
         </div>

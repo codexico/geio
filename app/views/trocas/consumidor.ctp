@@ -69,12 +69,7 @@
         </dd>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
         <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $consumidor['Consumidor']['created']; ?>
-            &nbsp;
-        </dd>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $consumidor['Consumidor']['modified']; ?>
+            <?php echo date('d/m/Y',strtotime($consumidor['Consumidor']['created'])); ?>
             &nbsp;
         </dd>
     </dl>
@@ -129,7 +124,7 @@
                     <?php echo $troca['Troca']['id']; ?>
             </td>
             <td>
-                    <?php echo date('d/m/Y', strtotime($troca['Troca']['created']) ); ?>
+                    <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
             <td>
                     <?php echo number_format($troca['Troca']['valor_total'], 2); ?>

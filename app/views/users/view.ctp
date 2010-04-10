@@ -53,7 +53,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $user['User']['created']; ?>
+				<?php echo date('d/m/Y - H:m',strtotime($user['User']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>	

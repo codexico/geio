@@ -34,7 +34,6 @@
 			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
 			<th class="w65"><?php echo $paginator->sort('username');?></th>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('group_id');?></th>
-			<th class="w15"><?php echo $paginator->sort('modified');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 		<?php
@@ -54,9 +53,6 @@
 			</td>
 			<td class="txtCenter">
 				<?php echo $user['User']['group_id']; ?>
-			</td>
-			<td>
-				<?php echo $user['User']['modified']; ?>
 			</td>
 			<td class="actions">
 

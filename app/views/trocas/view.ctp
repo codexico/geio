@@ -126,14 +126,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $troca['Consumidor']['created']; ?>
-				&nbsp;
-			</dd>
-		</div>	
-		<div <?php if ($i % 2 == 0) echo $class;?>>	
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $troca['Consumidor']['modified']; ?>
+				<?php echo date('d/m/Y',strtotime($troca['Consumidor']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>
@@ -177,14 +170,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y', strtotime($troca['Troca']['created']) ); ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $troca['Troca']['modified']; ?>
+				<?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
 				&nbsp;
 			</dd>
 		</div>
@@ -267,7 +253,7 @@
 				<?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
 			</td>
 			<td>
-				<?php echo $cupomFiscal['CupomFiscal']['created']; ?>
+				<?php echo date('d/m/Y - H:i',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>

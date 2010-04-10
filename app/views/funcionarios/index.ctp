@@ -32,7 +32,6 @@
 		<tr>
 			<th class="w40"><?php echo $paginator->sort('nome');?></th>
 			<th class="w35"><?php echo $paginator->sort('email');?></th>
-			<th class="w15"><?php echo $paginator->sort('modified');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 
@@ -50,9 +49,6 @@
 			</td>
 			<td>
 				<?php echo $funcionario['Funcionario']['email']; ?>
-			</td>
-			<td>
-				<?php echo $funcionario['Funcionario']['modified']; ?>
 			</td>
 			<td class="actions">
 	

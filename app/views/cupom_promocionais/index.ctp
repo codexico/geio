@@ -36,7 +36,6 @@
 			<th class="w20"><?php echo $paginator->sort('promotor_id');?></th>
 			<th class="w15"><?php echo $paginator->sort('consumidor_id');?></th>
 			<th class="w15"><?php echo $paginator->sort('data_impressao');?></th>
-			<th class="w10"><?php echo $paginator->sort('modified');?></th>
 			<th class="w15 actions"></th>
 		</tr>
 		<?php
@@ -65,9 +64,6 @@
 			</td>
 			<td>
 				<?php echo $cupomPromocional['CupomPromocional']['created']; ?>
-			</td>
-			<td>
-				<?php echo $cupomPromocional['CupomPromocional']['modified']; ?>
 			</td>
 			<td class="actions">
 				<?php echo $html->link(__('View', true), array('action' => 'view', $cupomPromocional['CupomPromocional']['id'])); ?>

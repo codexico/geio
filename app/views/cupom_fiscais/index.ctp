@@ -42,7 +42,6 @@
 			<th class="w5 txtCenter"><?php echo $paginator->sort('valor');?></th>
 			<th class="w20"><?php echo $paginator->sort('forma_de_pagamento');?></th>
 			<th class="w10"><?php echo $paginator->sort('bandeira');?></th>
-			<th class="w15"><?php echo $paginator->sort('modified');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 		<?php
@@ -74,9 +73,6 @@
 			</td>
 			<td>
 				<?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
-			</td>
-			<td>
-				<?php echo $cupomFiscal['CupomFiscal']['modified']; ?>
 			</td>
 			<td class="actions">
 				<?php echo $html->image("ico_view.gif", array(

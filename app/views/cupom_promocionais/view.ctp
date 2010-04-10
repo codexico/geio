@@ -65,13 +65,6 @@
 				&nbsp;
 			</dd>
 		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>	
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $cupomPromocional['CupomPromocional']['modified']; ?>
-				&nbsp;
-			</dd>
-		</div>
 	</dl>
 </div>
 <div class="clear"></div>

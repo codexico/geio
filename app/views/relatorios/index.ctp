@@ -12,7 +12,6 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('promotor_id');?></th>
 	<th><?php echo $paginator->sort('consumidor_id');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
-	<th><?php echo $paginator->sort('modified');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -35,9 +34,6 @@ foreach ($trocas as $troca):
 		</td>
 		<td>
 			<?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
-		</td>
-		<td>
-			<?php echo $troca['Troca']['modified']; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action' => 'view', $troca['Troca']['id'])); ?>

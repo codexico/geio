@@ -34,7 +34,6 @@
 			<th class="w15 txtCenter"><?php echo $paginator->sort('promotor_id');?></th>
 			<th class="w15 txtCenter"><?php echo $paginator->sort('consumidor_id');?></th>
 			<th class="w20"><?php echo $paginator->sort('created');?></th>
-			<th class="w20"><?php echo $paginator->sort('modified');?></th>
 			<th class="w15 actions"></th>
 		</tr>
 		<?php
@@ -56,10 +55,7 @@
 				<?php echo $troca['Troca']['consumidor_id']; ?>
 			</td>
 			<td>
-				<?php echo date('d/m/Y', strtotime($troca['Troca']['created']) ); ?>
-			</td>
-			<td>
-				<?php echo $troca['Troca']['modified']; ?>
+				<?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
 			</td>
 			<td class="actions">
 

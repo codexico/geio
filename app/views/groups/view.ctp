@@ -16,11 +16,6 @@
 			<?php echo $group['Group']['created']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $group['Group']['modified']; ?>
-			&nbsp;
-		</dd>
 	</dl>
 </div>
 <div class="actions">
@@ -43,7 +38,6 @@
 		<th><?php __('Password'); ?></th>
 		<th><?php __('Group Id'); ?></th>
 		<th><?php __('Created'); ?></th>
-		<th><?php __('Modified'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -60,7 +54,6 @@
 			<td><?php echo $user['password'];?></td>
 			<td><?php echo $user['group_id'];?></td>
 			<td><?php echo $user['created'];?></td>
-			<td><?php echo $user['modified'];?></td>
 			<td class="actions">
 				<?php echo $html->link(__('View', true), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
 				<?php echo $html->link(__('Edit', true), array('controller' => 'users', 'action' => 'edit', $user['id'])); ?>

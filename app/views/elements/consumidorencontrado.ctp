@@ -108,7 +108,7 @@
         </dd>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
         <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $consumidor['Consumidor']['created']; ?>
+            <?php echo date('d/m/Y - H:m',strtotime($consumidor['Consumidor']['created'])); ?>
             &nbsp;
         </dd>
     </dl>

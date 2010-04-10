@@ -76,14 +76,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $promotor['Promotor']['created']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $promotor['Promotor']['modified']; ?>
+				<?php echo date('d/m/Y - H:m',strtotime($promotor['Promotor']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>

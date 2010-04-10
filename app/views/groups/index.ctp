@@ -11,7 +11,6 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
-	<th><?php echo $paginator->sort('modified');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -31,9 +30,6 @@ foreach ($groups as $group):
 		</td>
 		<td>
 			<?php echo $group['Group']['created']; ?>
-		</td>
-		<td>
-			<?php echo $group['Group']['modified']; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action' => 'view', $group['Group']['id'])); ?>

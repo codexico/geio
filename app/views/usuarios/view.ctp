@@ -60,14 +60,14 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $usuario['Usuario']['created']; ?>
+				<?php echo date('d/m/Y - H:m',strtotime($usuario['Usuario']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>	
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $usuario['Usuario']['modified']; ?>
+				<?php echo date('d/m/Y - H:m',strtotime($usuario['Usuario']['modified'])); ?>
 				&nbsp;
 			</dd>
 		</div>
