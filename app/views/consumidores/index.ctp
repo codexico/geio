@@ -38,7 +38,7 @@
 			<th class="w30"><?php echo $paginator->sort('nome');?></th>
 			<th class="w10"><?php echo $paginator->sort('cpf');?></th>
 			<th class="w30"><?php echo $paginator->sort('email');?></th>
-			<th class="w15"><?php echo $paginator->sort('modified');?></th>
+			<th class="w15"><?php echo $paginator->sort('Cadastrado em','created');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 
@@ -64,7 +64,7 @@
 				<?php echo $consumidor['Consumidor']['email']; ?>
 			</td>
 			<td>
-				<?php echo $consumidor['Consumidor']['modified']; ?>
+				<?php echo date('d/m/Y',strtotime($consumidor['Consumidor']['created'])); ?>
 			</td>
 			<td class="actions">
 
