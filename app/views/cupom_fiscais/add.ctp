@@ -24,7 +24,8 @@
         <legend>Dados Gerais</legend>
         <?php
         echo $form->input('codigo', array('div' => 'input text mgt20', 'label' => 'C&oacute;digo'));
-        //echo $form->input('data_compra');
+
+
         echo $form->input('data_compra', array(
         'dateFormat'=>'DMY',
         'timeFormat'=>'24',
@@ -56,5 +57,5 @@
         'empty' => true));
         ?>
     </fieldset>
-    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>

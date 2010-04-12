@@ -19,10 +19,6 @@ $javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false 
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/consumidores', array('class'=>'btn_cinza floatRight')); ?>
-
-            <?php if ($session->read('Auth.User.group_id') == 1) : /*admin*/ ?>
-	<?php echo $html->link('Excluir Consumidor', array('action' => 'delete', $form->value('Consumidor.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Consumidor.id'))); ?>
-    <?php endif; ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -40,54 +36,67 @@ $javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false 
         echo $form->input('id');
         echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome'));
 
-        echo $form->input('rg', array('label' => 'RG'));
-        echo $form->input('cpf', array('label' => 'CPF (somente números)'));
-        echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
-        echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+        echo '<div class="duas_colunas">';
+			echo $form->input('rg', array('label' => 'RG', 'div' =>'input text meio_input'));
+	        echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' =>'input text meio_input'));
+        echo '</div>';
+
+        echo '<div class="duas_colunas">';
+			echo $form->input('tel', array('label' => 'Telefone', 'div' =>'input text meio_input'));
+			echo $form->input('cel', array('label' => 'Celular', 'div' =>'input text meio_input'));
+        echo '</div>';
 
         echo $form->input('email', array('label' => 'E-mail'));
         
-        //echo $form->input('sexo');
-        echo $form->input('sexo', array('options' => array(
-                'masculino'=>'masculino',
-                'feminino'=>'feminino',
-                'gls'=>'gls'
-        ),
-        'selected' => $this->data['Consumidor']['sexo'],
-        'empty' => true));
-?>
+        echo '<div class="duas_colunas">';
+			echo $form->input('sexo', array('options' => array(
+					'masculino'=>'masculino',
+					'feminino'=>'feminino',
+					'gls'=>'gls'
+			),
+			'selected' => $this->data['Consumidor']['sexo'],
+			'empty' => true,
+			'div' => 'input meio_input'));
 
-		<div class="input select">
-			<label for="ConsumidorNascimentoDay">Nascimento</label>
-			 <?php echo $form->day('nascimento', '', array('class'=>'select_dia'), true); ?>
-			 <?php echo $form->month('nascimento', '', array('class'=>'select_mes'), true); ?>
-			 <?php echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano')); ?>
-		</div>
+			echo '<div class="input select">';
+				echo '<label for="ConsumidorNascimentoDay">Nascimento</label>';
+				echo $form->day('nascimento', '', array('class'=>'select_dia'), true);
+				echo $form->month('nascimento', '', array('class'=>'select_mes'), true);
+				echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano'));
+			echo '</div>';
+        echo '</div>';
 
-<?php
+        echo '<div class="duas_colunas">';
+			echo $form->input('estado_civil', array('options' => array(
+					'solteiro'=>'Solteiro',
+					'casado'=>'Casado',
+					'viúvo'=>'Viúvo',
+					'separado'=>'Separado'
+			),
+			'selected' => $this->data['Consumidor']['estado_civil'],
+			'empty' => true,
+			'div' => 'input meio_input'));
 
-        echo $form->input('estado_civil', array('options' => array(
-                'solteiro'=>'solteiro',
-                'casado'=>'casado',
-                'viúvo'=>'viúvo',
-                'separado'=>'separado'
-        ),
-        'selected' => $this->data['Consumidor']['estado_civil'],
-        'empty' => true));
 
-        echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
-                'nenhum'=>'nenhum',
-                '1º Grau'=>'1º Grau',
-                '2º Grau'=>'2º Grau',
-                'Técnico'=>'Técnico',
-                'Universitário'=>'Univesitário',
-                'Mestrado'=>'Mestrado',
-                'Doutorado'=>'Doutorado',
-                'Pós'=>'Pós',
-                'MBA'=>'MBA'
-        ),
-        'selected' => $this->data['Consumidor']['grau_de_instrucao'],
-        'empty' => true));
+			echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
+					'nenhum'=>'nenhum',
+					'1º Grau'=>'1º Grau',
+					'2º Grau'=>'2º Grau',
+					'Técnico'=>'Técnico',
+					'Universitário'=>'Univesitário',
+					'Mestrado'=>'Mestrado',
+					'Doutorado'=>'Doutorado',
+					'Pós'=>'Pós',
+					'MBA'=>'MBA'
+			),
+			'selected' => $this->data['Consumidor']['grau_de_instrucao'],
+			'empty' => true,
+			'div' => 'input meio_input'));
+        echo '</div>';
+
+
+
+
 
         echo $form->input('profissao', array('label' => 'Profiss&atilde;o'));
         //echo $form->input('obs');
@@ -136,5 +145,5 @@ $javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false 
 
         ?>
     </fieldset>
-    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>

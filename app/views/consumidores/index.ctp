@@ -35,10 +35,9 @@
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
-			<th class="w30"><?php echo $paginator->sort('nome');?></th>
-			<th class="w10"><?php echo $paginator->sort('cpf');?></th>
-			<th class="w30"><?php echo $paginator->sort('email');?></th>
-			<th class="w15"><?php echo $paginator->sort('Cadastrado em','created');?></th>
+			<th class="w40"><?php echo $paginator->sort('nome');?></th>
+			<th class="w10 txtCenter"><?php echo $paginator->sort('cpf');?></th>
+			<th class="w35"><?php echo $paginator->sort('E-mail','email');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 
@@ -57,14 +56,11 @@
 			<td>
 				<?php echo $consumidor['Consumidor']['nome']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $consumidor['Consumidor']['cpf']; ?>
 			</td>
 			<td>
 				<?php echo $consumidor['Consumidor']['email']; ?>
-			</td>
-			<td>
-				<?php echo date('d/m/Y',strtotime($consumidor['Consumidor']['created'])); ?>
 			</td>
 			<td class="actions">
 
@@ -80,8 +76,10 @@
 				
 				<?php echo $html->image("ico_delete.gif", array(
 					"alt" => "Excluir",
-					'url' => array('action' => 'delete', $consumidor['Consumidor']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])
-				)); ?>
+					'url' => array('action' => 'delete', $consumidor['Consumidor']['id'])), 
+					null, 
+					sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])
+				); ?>
 
 			</td>
 		</tr>
