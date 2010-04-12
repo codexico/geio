@@ -8,7 +8,6 @@
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/lojas', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Excluir Loja', array('action' => 'delete', $form->value('Loja.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Loja.id'))); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -24,9 +23,11 @@
 		echo $form->input('razao_social', array('div' => 'input text mgt20', 'label' => 'Raz&atilde;o Social'));
 		echo $form->input('nome_fantasia');
 		echo $form->input('participante');
-		echo $form->input('cnpj');
-		echo $form->input('numero_da_loja');
-		//echo $form->input('ramo_de_atividade');
+
+        echo '<div class="duas_colunas">';
+	        echo $form->input('cnpj', array('div' => 'input text meio_input'));
+			echo $form->input('numero_da_loja', array('label' => 'N&uacute;mero da Loja', 'div' =>'input text meio_input'));
+        echo '</div>';
 
         echo $form->input('ramo_de_atividade', array('options' => array(
                 'Calçado'=>'Calçado',
@@ -41,11 +42,12 @@
                 'outro'=>'outro'
         ),
         'selected'=>$this->data['Loja']['ramo_de_atividade'],
-        'empty' => true));
+        'empty' => true, 
+		'label' => 'Ramo de Atividade'));
 		echo $form->input('contato');
-		echo $form->input('email_contato');
+		echo $form->input('email_contato', array('label' => 'E-mail do Contato'));
 		echo $form->input('telefone');
 	?>
 	</fieldset>
-    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>

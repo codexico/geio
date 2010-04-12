@@ -35,8 +35,8 @@
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th class="w55"><?php echo $paginator->sort('nome');?></th>
-			<th class="w20"><?php echo $paginator->sort('email');?></th>
-			<th class="w15"><?php echo $paginator->sort('Login','User.username');?></th>
+			<th class="w20"><?php echo $paginator->sort('E-mail', 'email');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('Login','User.username');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 		<?php
@@ -54,7 +54,7 @@
 			<td>
 				<?php echo $promotor['Promotor']['email']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $promotor['User']['username']; ?>
 			</td>
 			<td class="actions">

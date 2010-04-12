@@ -9,10 +9,9 @@
 <div class="botoes">
 
     <?php echo $html->link('Voltar', '/lojas', array('class'=>'btn_cinza floatRight')); ?>
-    <?php echo $html->link('Incluir Loja', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
-    <?php echo $html->link('Editar Loja', array('action' => 'edit', $loja['Loja']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
     <?php echo $html->link('Excluir Loja', array('action' => 'delete', $loja['Loja']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $loja['Loja']['id'])); ?>
-
+    <?php echo $html->link('Editar Loja', array('action' => 'edit', $loja['Loja']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
+    <?php echo $html->link('Incluir Loja', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -32,7 +31,7 @@
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Razao Social'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Raz&atilde;o Social'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
                 <?php echo $loja['Loja']['razao_social']; ?>
                 &nbsp;
@@ -57,21 +56,21 @@
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cnpj'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CNPJ'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
                 <?php echo $loja['Loja']['cnpj']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Numero Da Loja'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Numero da Loja'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
                 <?php echo $loja['Loja']['numero_da_loja']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Ramo De Atividade'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Ramo de Atividade'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
                 <?php echo $loja['Loja']['ramo_de_atividade']; ?>
                 &nbsp;
@@ -85,7 +84,7 @@
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Email Contato'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('E-mail do Contato'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
                 <?php echo $loja['Loja']['email_contato']; ?>
                 &nbsp;
@@ -134,12 +133,12 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th class="txtCenter"><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('codigo',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Nr. Cupom Fiscal','codigo', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th><?php echo $paginator->sort('Consumidor','Consumidor.nome', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th class="txtCenter"><?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
-            <th><?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
-            <th><?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
-            <th><?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
         </tr>
         <?php
         $i = 0;
@@ -162,13 +161,13 @@
             <td class="txtCenter">
                     <?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo date('d/m/Y - H:m',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
             </td>
         </tr>

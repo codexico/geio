@@ -21,10 +21,12 @@
         <?php
         echo $form->input('razao_social', array('div' => 'input text mgt20', 'label' => 'Raz&atilde;o Social'));
         echo $form->input('nome_fantasia');
-        echo $form->input('participante');
-        echo $form->input('cnpj', array('label' => 'CNPJ (formato XX.XXX.XXX/XXXX-XX)'));
-        echo $form->input('numero_da_loja');
-        //echo $form->input('ramo_de_atividade');
+        echo $form->input('participante', array('label' => 'Sou Participante'));
+
+        echo '<div class="duas_colunas">';
+	        echo $form->input('cnpj', array('div' => 'input text meio_input'));
+			echo $form->input('numero_da_loja', array('label' => 'N&uacute;mero da Loja', 'div' =>'input text meio_input'));
+        echo '</div>';
 
         echo $form->input('ramo_de_atividade', array('options' => array(
                 'Calçado'=>'Calçado',
@@ -39,11 +41,12 @@
                 'outro'=>'outro'
         ),
         'selected'=>'',
-        'empty' => true));
+        'empty' => true, 
+		'label' => 'Ramo de Atividade'));
         echo $form->input('contato');
-        echo $form->input('email_contato');
+        echo $form->input('email_contato', array('label' => 'E-mail do Contato'));
         echo $form->input('telefone');
         ?>
     </fieldset>
-    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>

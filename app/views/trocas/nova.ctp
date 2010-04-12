@@ -6,16 +6,17 @@
 $javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
 $javascript->link(array('trocas_nova'), false);
 ?>
-<div class="trocas form">
 
-    <?php $session->flash('Impressora'); ?>
-    <?php
-    echo $this->element('consumidor');
-    ?>
+<?php $session->flash('Impressora'); ?>
+<?php
+echo $this->element('consumidor');
+?>
+<div class="clear"></div>
+<div class="trocas form">
     <?php
     echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'], 'class' => "novatroca",
     //'onsubmit'=>'enviar();return false;'
-        ));
+    ));
     if( Configure::read('Regras.Saldo.true') ) {
         echo $form->hidden('juntar_saldos', array('value'=>'true', 'name'=>'data[Troca][juntar_saldos]', 'id'=>'juntar_saldos' ) );
         echo $form->hidden('saldo_bandeira', array('value'=>$consumidor['Consumidor']['saldo_bandeira'], 'name'=>'saldo_bandeira', 'id'=>'saldo_bandeira' ) );
@@ -29,7 +30,9 @@ $javascript->link(array('trocas_nova'), false);
             if(isset ($this->data)) {
                 $i=0;
                 foreach ($this->data['CupomFiscal'] as $cf) {
+
                     echo $this->element('form_cupom_fiscal', array('i' => $i++));
+                    
                     echo $javascript->codeBlock('
                             $(document).ready(function() {
                                 sincronizaSelectLoja('.$i.');
@@ -43,8 +46,8 @@ $javascript->link(array('trocas_nova'), false);
             ?>
         </ul>
         <input id="acrescentar-cupom" type="button" value="Acrescentar Cupom Fiscal" />
+        <input id="calcular-troca" type="button" value="Calcular Cupons Promocionais" />
     </fieldset>
-    <input id="calcular-troca" type="button" value="Calcular Cupons Promocionais" />
     <?php echo $form->end('GRAVAR DADOS');?>
 
 </div>
