@@ -1,4 +1,8 @@
 <?php
+/**
+ * @property Troca $Troca
+ * @property Consumidor $Consumidor
+ */
 class CupomFiscal extends AppModel {
 
     var $name = 'CupomFiscal';
@@ -45,6 +49,256 @@ class CupomFiscal extends AppModel {
 
 
     /**
+     * Retorna dados da campanha
+     *
+     * TODO: diminuir o numero de queries
+     *
+     * @param date $inicio
+     * @param date $fim
+     * @return array    $relatorio  array com dados relativos a campanha
+     */
+    function _buscaRelatorioTrocas($inicio = null, $fim = null) {
+        if(is_null($inicio)) $inicio = date('Y-m-d');
+        if(is_null($fim)) {
+            $conditions_data_troca = array("Troca.created > " => $inicio);
+            $conditions_data_consumidor = array("Consumidor.created > " => $inicio);
+            $conditions_data_cf = array("CupomFiscal.created > " => $inicio);
+            $conditions_data_cp = array("CupomPromocional.created > " => $inicio);
+        }else {
+            $conditions_data_troca = array("Troca.created BETWEEN ? AND ?" => array($inicio,$fim));
+            $conditions_data_consumidor = array("Consumidor.created BETWEEN ? AND ?" => array($inicio,$fim));
+            $conditions_data_cf = array("CupomFiscal.created BETWEEN ? AND ?" => array($inicio,$fim));
+            $conditions_data_cp = array("CupomPromocional.created BETWEEN ? AND ?" => array($inicio,$fim));
+        }
+        //.total de trocas efetuadas
+        $relatorio['count_trocas'] = $this->Troca->find('count', array('conditions' => $conditions_data_troca));
+        //.Numero consumidores atendidos
+        $conditions_num_consumidores_atendidos = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $conditions_data_troca
+        );
+        $relatorio['num_consumidores_atendidos'] = $this->Troca->find('count', $conditions_num_consumidores_atendidos );
+        //.Cupons Fiscais Diarios (R$)
+        $conditions_valor_cupons_fiscais = array(
+                'fields' => "SUM(CupomFiscal.valor) AS 'total'",
+                'conditions' => $conditions_data_troca
+        );
+        $valor_cupons_fiscais = $this->find('first', $conditions_valor_cupons_fiscais);
+        $relatorio['valor_cupons_fiscais'] = $valor_cupons_fiscais['CupomFiscal']['total'];//alias
+        //.Numero consumidores novos
+        $conditions_num_consumidores_novos = array(
+                'conditions' => $conditions_data_consumidor
+        );
+        $relatorio['num_consumidores_novos'] = $this->Consumidor->find('count', $conditions_num_consumidores_novos);
+        //.Numero de cupons fiscais trocados
+        $conditions_num_cupons_fiscais = array(
+                'conditions' => $conditions_data_cf
+        );
+        $relatorio['num_cupons_fiscais'] = $this->Troca->CupomFiscal->find('count', $conditions_num_cupons_fiscais);
+        //.Quantidade de cupons promocionais impressos
+        $conditions_num_cupons_promocionais = array(
+                'conditions' => $conditions_data_cp
+        );
+        $relatorio['num_cupons_promocionais'] = $this->Troca->CupomPromocional->find('count', $conditions_num_cupons_promocionais);
+        //medias
+        $relatorio['media'] = $relatorio['media_valor_troca'] = 0; //para evitar divisao por zero a seguir
+        if($relatorio['count_trocas'] != 0) {
+            //.Média ticket compra
+            $relatorio['media_valor_troca'] = number_format($relatorio['valor_cupons_fiscais']/$relatorio['count_trocas'], 2);
+            //.media de valor dos cupons fiscais
+            $relatorio['media'] = number_format($relatorio['valor_cupons_fiscais']/$relatorio['num_cupons_fiscais'], 2);
+        }
+
+        ////////////////
+        //dados relacionados a campanhas com bandeira promocional
+        ////////////////
+        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
+        $relatorio['num_consumidores_bandeira'] = $this->_num_consumidores_bandeira($inicio,$fim);
+        //.Quantidade de consumidores que compraram sem VISA/MASTER
+        $relatorio['num_consumidores_not_bandeira'] = $this->_num_consumidores_not_bandeira($inicio,$fim);
+        //.Quantidade de consumidores novos que compraram com VISA/MASTER
+        $relatorio['num_consumidores_novos_bandeira'] = $this->_num_consumidores_novos_bandeira($inicio,$fim);
+        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
+        $relatorio['num_consumidores_novos_not_bandeira'] = $this->_num_consumidores_novos_not_bandeira($inicio,$fim);
+
+        return $relatorio;
+    }
+
+
+
+
+
+
+    function _num_consumidores_bandeira($inicio, $fim = null ) {
+        if(is_null($fim)) $fim = date('Y-m-d', strtotime("+1 days"));
+        $conditionsSubQuery = array(
+                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
+                //'CF.forma_de_pagamento' => 'Credito',,//se interessar somente credito ou debito
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),//retirar essas condições null?
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this
+        );
+        $subQuery_num_consumidores_bandeira = ' Troca.id IN ( ' . $subQuery .' ) ';
+        //debug($subQuery_num_consumidores_bandeira);
+        $conditions_num_consumidores_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_bandeira );
+    }
+
+    function _num_consumidores_not_bandeira($inicio, $fim = null) {
+        if(is_null($fim)) {
+            $fim = date('Y-m-d', strtotime("+1 days"));
+        }
+        $conditionsSubQuery = array(
+                'NOT' => array(
+                        'AND' => array(
+                                'CF.bandeira' => Configure::read('Regras.Bandeira.nome')
+                        )),
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this
+        );
+        $subQuery_num_consumidores_not_bandeira = ' Troca.id IN ( ' . $subQuery .' ) ';
+        //debug($subQuery_num_consumidores_not_bandeira);
+        $conditions_num_consumidores_not_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_not_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_not_bandeira );
+    }
+
+    function _num_consumidores_novos_bandeira($inicio, $fim = null) {
+        if(is_null($fim)) {
+            $fim = date('Y-m-d', strtotime("+1 days"));
+        }
+        $conditionsSubQuery = array(
+                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this
+        );
+        $conditionsSubQuery2 = array(
+                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo2 = $this->Consumidor->getDataSource();
+        $subQuery2 = $dbo2->buildStatement(
+                array(
+                'fields' => array('Consumidor.id'),
+                'table' => $dbo2->fullTableName($this->Consumidor),
+                'alias' => 'Consumidor',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery2,
+                'order' => null,
+                'group' => null
+                ),
+                $this->Consumidor
+        );
+        $subQuery_num_consumidores_novos_bandeira = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
+        //debug($subQuery_num_consumidores_novos_bandeira);
+        $conditions_num_consumidores_novos_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_novos_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_novos_bandeira );
+    }
+
+
+    function _num_consumidores_novos_not_bandeira($inicio, $fim = null) {
+        if(is_null($fim)) {
+            $fim = date('Y-m-d', strtotime("+1 days"));
+        }
+        $conditionsSubQuery = array(
+                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
+                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo = $this->getDataSource();
+        $subQuery = $dbo->buildStatement(
+                array(
+                'fields' => array('CF.troca_id'),
+                'table' => $dbo->fullTableName($this),
+                'alias' => 'CF',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery,
+                'order' => null,
+                'group' => null
+                ),
+                $this
+        );
+        $conditionsSubQuery2 = array(
+                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
+        $dbo2 = $this->Consumidor->getDataSource();
+        $subQuery2 = $dbo2->buildStatement(
+                array(
+                'fields' => array('Consumidor.id'),
+                'table' => $dbo2->fullTableName($this->Consumidor),
+                'alias' => 'Consumidor',
+                'limit' => null,
+                'offset' => null,
+                'joins' => array(),
+                'conditions' => $conditionsSubQuery2,
+                'order' => null,
+                'group' => null
+                ),
+                $this->Consumidor
+        );
+        $subQuery_num_consumidores_novos_not_bandeira =
+                ' Troca.id IN ( ' . $subQuery .' )
+            AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
+        //debug($subQuery_num_consumidores_novos_not_bandeira);
+        $conditions_num_consumidores_novos_not_bandeira = array(
+                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
+                'conditions' => $subQuery_num_consumidores_novos_not_bandeira,
+                'recursive' => -1
+        );
+        return $this->Troca->find('count', $conditions_num_consumidores_novos_not_bandeira );
+    }
+
+
+    /**
+     * @link http://book.cakephp.org/view/681/afterFind
      * @link http://teknoid.wordpress.com/2008/09/29/dealing-with-calculated-fields-in-cakephps-find/
      */
     function afterFind($results, $primary=false) {

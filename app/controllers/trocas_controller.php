@@ -2,6 +2,7 @@
 /**
  * @property Troca $Troca
  * @property CupomPromocional $CupomPromocional
+ * @property CupomFiscal $CupomFiscal
  */
 class TrocasController extends AppController {
 
@@ -283,84 +284,6 @@ class TrocasController extends AppController {
         $this->Troca->Consumidor->save($data_consumidor, $params_consumidor);
     }
 
-    ///////////////////
-    //funcoes nao mais utilizadas
-    ///////////////////
-    /*
-    function _imprimirCP() {
-        $CPimpresso = 0;
-        $cps = $this->Troca->CupomPromocional->find('all',array(
-                'recursive' => -1,
-                'conditions' => array( 'troca_id' => $this->Troca->id )
-        ));
-
-        foreach ($cps as $cp) {
-
-        }
-        for ($i = 0; $i < $this->data['Troca']['qtd_cp']; $i++) {
-            //TODO: metodo q manda para impressora e detecta se imprimiu corretamente, ou só mostra os pdfs
-            $CPimpresso++;
-        }
-        if($CPimpresso == $this->data['Troca']['qtd_cp']) {//debug("impressos = " . $CPimpresso);
-            $this->Session->setFlash('Impressos '.$CPimpresso.' cupons.', 'default', null, 'Impressora');
-        }else {
-            $this->Session->setFlash(($totalCP - $CPimpresso) . ' cupons impressos errados.', 'default', null, 'Impressora');
-        }
-    }
-     *
-    */
-    /*
-    function _calculaCP($cfs) {
-
-        $pontos = $this->_calculaPontosTotal($cfs);
-
-        $totalCP = $pontos/Configure::read('Regras.Pontos');
-        //debug('calcula_calculaValorTotalTrocaCP = ' . $totalCP);
-        return $totalCP;
-
-    }
-
-    function _calculapontosTotal($cfs) {
-        $pontos = 0;
-
-        foreach ($cfs as $cf) {
-            $valor = 0;
-
-            $valor = $cf['valor']; //debug($valor);
-
-            $forma_de_pagamento = $cf['forma_de_pagamento'];
-            $bandeira = $cf['bandeira'];
-
-            $pontos += $this->_calculaPontosCF($valor, $forma_de_pagamento, $bandeira);
-            //debug("pontos = " . $pontos);
-        }
-        return $pontos;
-    }
-
-    function _calculaPontosCF($valor, $forma_de_pagamento, $bandeira) {
-        $pontos = 0;
-        if($forma_de_pagamento == "Credito" && $bandeira == "VISA") {
-            $pontos = $valor*Configure::read('Regras.Credito.Visa');
-        }else {
-            $pontos = $valor;
-        }
-        return $pontos;
-    }
-
-    function _calculaValorTotalTroca($cfs) {
-        $total = 0;
-        foreach ($cfs as $cf) {
-            $total += $cf['valor'];
-        }
-        return $total;
-    }
-
-    function _calculaSaldo($pontos) {
-        return $pontos%Configure::read('Regras.Pontos');
-    }
- * 
-    */
-
     ////////////////////////////////////////
     ////////////////////////
     ////
@@ -374,10 +297,6 @@ class TrocasController extends AppController {
         //buscar trocas de hoje
         $inicio = date('Y-m-d', strtotime("-0 days"));
         $conditions_data_troca = array("Troca.created > " => $inicio);
-        $conditions_data_consumidor = array("Consumidor.created > " => $inicio);
-        $conditions_data_cf = array("CupomFiscal.created > " => $inicio);
-        $conditions_data_cp = array("CupomPromocional.created > " => $inicio);
-
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
                 'limit' => 50,
@@ -386,82 +305,61 @@ class TrocasController extends AppController {
         $trocas = $this->paginate('Troca');
 
 
-        //.total de trocas efetuadas
-        $count_trocas = $this->Troca->find('count', array('conditions' => $conditions_data_troca));
+        $relatorio = $this->Troca->CupomFiscal->_buscaRelatorioTrocas($inicio);
 
-        //.Numero consumidores atendidos
-        $conditions_num_consumidores_atendidos = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $conditions_data_troca
-        );
-        $num_consumidores_atendidos = $this->Troca->find('count', $conditions_num_consumidores_atendidos );
-
-        //.Cupons Fiscais Diarios (R$)
-        $conditions_valor_cupons_fiscais = array(
-                'fields' => "SUM(CupomFiscal.valor) AS 'total'",
-                'conditions' => $conditions_data_troca
-        );
-        $valor_cupons_fiscais = $this->Troca->CupomFiscal->find('first', $conditions_valor_cupons_fiscais);
-
-        //.Numero consumidores novos
-        $conditions_num_consumidores_novos = array(
-                'conditions' => $conditions_data_consumidor
-        );
-        $num_consumidores_novos = $this->Troca->Consumidor->find('count', $conditions_num_consumidores_novos);
-
-        //.Numero de cupons fiscais trocados
-        $conditions_num_cupons_fiscais = array(
-                'conditions' => $conditions_data_cf
-        );
-        $num_cupons_fiscais = $this->Troca->CupomFiscal->find('count', $conditions_num_cupons_fiscais);
-
-        //.Quantidade de cupons promocionais impressos
-        $conditions_num_cupons_promocionais = array(
-                'conditions' => $conditions_data_cp
-        );
-        $num_cupons_promocionais = $this->Troca->CupomPromocional->find('count', $conditions_num_cupons_promocionais);
-
-        //.Média ticket compra (Media de cada troca e de cada cupom fiscal)
-        $media = $media_valor_troca = 0; //para evitar divisao por zero a seguir
-        if($count_trocas != 0) {
-            //.Média ticket compra
-            $media_valor_troca = number_format($valor_cupons_fiscais[0]['total']/$count_trocas, 2);
-
-            //.media de valor dos cupons fiscais
-            $media = number_format($valor_cupons_fiscais[0]['total']/$num_cupons_fiscais, 2);
-        }
-
-        ////////////////
-        //dados relacionados a campanhas com bandeira promocional
-        ////////////////
-
-        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
-        $num_consumidores_bandeira = $this->_num_consumidores_bandeira($inicio);
-        //debug($num_consumidores_VISA);
-
-        //.Quantidade de consumidores que compraram sem VISA/MASTER
-        $num_consumidores_not_bandeira = $this->_num_consumidores_not_bandeira($inicio);
-        //debug($num_consumidores_not_bandeira);
-
-        //.Quantidade de consumidores novos que compraram com VISA/MASTER
-        $num_consumidores_novos_bandeira = $this->_num_consumidores_novos_bandeira($inicio);
-        //debug($num_consumidores_novos_bandeira);
-
-        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
-        $num_consumidores_novos_not_bandeira = $this->_num_consumidores_novos_not_bandeira($inicio);
-        //debug($num_consumidores_novos_not_bandeira);
-
-
-        $this->set(compact('trocas',
-                'count_trocas', 'media_valor_troca', 'total_pontos',
-                'num_consumidores_atendidos', 'num_consumidores_novos',
-                'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
-                'num_cupons_promocionais',
-                'num_consumidores_bandeira', 'num_consumidores_not_bandeira',
-                'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
+        $this->set(compact('trocas','relatorio'));
     }
 
+    function semana() {
+        $inicio = date('Y-m-d', strtotime("-1 week"));
+        $conditions_data_troca = array("Troca.created > " => $inicio);
+        $this->paginate = array(
+                'conditions' => $conditions_data_troca,
+                'limit' => 50,
+                'recursive' => 0
+        );
+        $trocas = $this->paginate('Troca');
+
+
+        $relatorio = $this->Troca->CupomFiscal->_buscaRelatorioTrocas($inicio);
+
+        $this->set(compact('trocas','relatorio'));
+
+    }
+
+    function mes() {
+        $inicio = date('Y-m-d', strtotime("-1 month"));
+        $conditions_data_troca = array("Troca.created > " => $inicio);
+        $this->paginate = array(
+                'conditions' => $conditions_data_troca,
+                'limit' => 50,
+                'recursive' => 0
+        );
+        $trocas = $this->paginate('Troca');
+
+
+        $relatorio = $this->Troca->CupomFiscal->_buscaRelatorioTrocas($inicio);
+
+        $this->set(compact('trocas','relatorio'));
+    }
+
+
     function ontem() {
+        $inicio = date('Y-m-d', strtotime("-1 days"));
+        $fim =  date('Y-m-d', strtotime("-0 days"));
+        $conditions_data_troca = array("Troca.created > " => $inicio);
+        $this->paginate = array(
+                'conditions' => $conditions_data_troca,
+                'limit' => 50,
+                'recursive' => 0
+        );
+        $trocas = $this->paginate('Troca');
+
+
+        $relatorio = $this->Troca->CupomFiscal->_buscaRelatorioTrocas($inicio);
+
+        $this->set(compact('trocas','relatorio'));
+        /*
         //buscar trocas de ontem
         $inicio = date('Y-m-d', strtotime("-1 days"));
         $fim =  date('Y-m-d', strtotime("-0 days"));
@@ -546,337 +444,88 @@ class TrocasController extends AppController {
                 'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
                 'num_cupons_promocionais',
                 'num_consumidores_bandeira', 'num_consumidores_not_bandeira', 'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
+         *
+        */
 
     }
 
-    function semana() {
-        $inicio = date('Y-m-d', strtotime("-1 week"));
-        $conditions_data_troca = array("Troca.created > " => $inicio);
-        $conditions_data_consumidor = array("Consumidor.created > " => $inicio);
-        $conditions_data_cf = array("CupomFiscal.created > " => $inicio);
-        $conditions_data_cp = array("CupomPromocional.created > " => $inicio);
+    ///////////////////
+    //funcoes nao mais utilizadas
+    ///////////////////
+    /*
+    function _imprimirCP() {
+        $CPimpresso = 0;
+        $cps = $this->Troca->CupomPromocional->find('all',array(
+                'recursive' => -1,
+                'conditions' => array( 'troca_id' => $this->Troca->id )
+        ));
 
-        //.total de trocas efetuadas
-        $count_trocas = $this->Troca->find('count', array('conditions' => $conditions_data_troca));
+        foreach ($cps as $cp) {
 
-        //.Numero consumidores atendidos
-        $conditions_num_consumidores_atendidos = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $conditions_data_troca
-        );
-        $num_consumidores_atendidos = $this->Troca->find('count', $conditions_num_consumidores_atendidos );
-
-        //.Cupons Fiscais Diarios (R$)
-        $conditions_valor_cupons_fiscais = array(
-                'fields' => "SUM(CupomFiscal.valor) AS 'total'",
-                'conditions' => $conditions_data_troca
-        );
-        $valor_cupons_fiscais = $this->Troca->CupomFiscal->find('first', $conditions_valor_cupons_fiscais);
-
-        //.Numero consumidores novos
-        $conditions_num_consumidores_novos = array(
-                'conditions' => $conditions_data_consumidor
-        );
-        $num_consumidores_novos = $this->Troca->Consumidor->find('count', $conditions_num_consumidores_novos);
-
-        //.Numero de cupons fiscais trocados
-        $conditions_num_cupons_fiscais = array(
-                'conditions' => $conditions_data_cf
-        );
-        $num_cupons_fiscais = $this->Troca->CupomFiscal->find('count', $conditions_num_cupons_fiscais);
-
-        //.Quantidade de cupons promocionais impressos
-        $conditions_num_cupons_promocionais = array(
-                'conditions' => $conditions_data_cp
-        );
-        $num_cupons_promocionais = $this->Troca->CupomPromocional->find('count', $conditions_num_cupons_promocionais);
-
-        $media = $media_valor_troca = 0; //para evitar divisao por zero a seguir
-        if($count_trocas != 0) {
-            //.Média ticket compra
-            $media_valor_troca = number_format($valor_cupons_fiscais[0]['total']/$count_trocas, 2);
-
-            //.media de valor dos cupons fiscais
-            $media = number_format($valor_cupons_fiscais[0]['total']/$num_cupons_fiscais, 2);
         }
-
-
-        ////////////////
-        //dados relacionados a campanhas com bandeira promocional
-        ////////////////
-
-        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
-        $num_consumidores_bandeira = $this->_num_consumidores_bandeira($inicio);
-
-        //.Quantidade de consumidores que compraram sem VISA/MASTER
-        $num_consumidores_not_bandeira = $this->_num_consumidores_not_bandeira($inicio);
-
-        //.Quantidade de consumidores novos que compraram com VISA/MASTER
-        $num_consumidores_novos_bandeira = $this->_num_consumidores_novos_bandeira($inicio);
-
-        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
-        $num_consumidores_novos_not_bandeira = $this->_num_consumidores_novos_not_bandeira($inicio);
-
-
-        $this->paginate = array(
-                'conditions' => $conditions_data_troca,
-                'limit' => 50,
-                'recursive' => 0
-        );
-        $trocas = $this->paginate('Troca');
-
-        $this->set(compact('trocas',
-                'count_trocas', 'media_valor_troca', 'total_pontos',
-                'num_consumidores_atendidos', 'num_consumidores_novos',
-                'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
-                'num_cupons_promocionais',
-                'num_consumidores_bandeira', 'num_consumidores_not_bandeira', 'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
-
-    }
-
-    function mes() {
-        $inicio = date('Y-m-d', strtotime("-1 month"));
-        $conditions_data_troca = array("Troca.created > " => $inicio);
-        $conditions_data_consumidor = array("Consumidor.created > " => $inicio);
-        $conditions_data_cf = array("CupomFiscal.created > " => $inicio);
-        $conditions_data_cp = array("CupomPromocional.created > " => $inicio);
-
-        //.total de trocas efetuadas
-        $count_trocas = $this->Troca->find('count', array('conditions' => $conditions_data_troca));
-        //.Numero consumidores atendidos
-        $conditions_num_consumidores_atendidos = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $conditions_data_troca
-        );
-        $num_consumidores_atendidos = $this->Troca->find('count', $conditions_num_consumidores_atendidos );
-        //.Cupons Fiscais Diarios (R$)
-        $conditions_valor_cupons_fiscais = array(
-                'fields' => "SUM(CupomFiscal.valor) AS 'total'",
-                'conditions' => $conditions_data_troca
-        );
-        $valor_cupons_fiscais = $this->Troca->CupomFiscal->find('first', $conditions_valor_cupons_fiscais);
-        //.Numero consumidores novos
-        $conditions_num_consumidores_novos = array(
-                'conditions' => $conditions_data_consumidor
-        );
-        $num_consumidores_novos = $this->Troca->Consumidor->find('count', $conditions_num_consumidores_novos);
-        //.Numero de cupons fiscais trocados
-        $conditions_num_cupons_fiscais = array(
-                'conditions' => $conditions_data_cf
-        );
-        $num_cupons_fiscais = $this->Troca->CupomFiscal->find('count', $conditions_num_cupons_fiscais);
-        //.Quantidade de cupons promocionais impressos
-        $conditions_num_cupons_promocionais = array(
-                'conditions' => $conditions_data_cp
-        );
-        $num_cupons_promocionais = $this->Troca->CupomPromocional->find('count', $conditions_num_cupons_promocionais);
-
-        $media = $media_valor_troca = 0; //para evitar divisao por zero a seguir
-        if($count_trocas != 0) {
-            //.Média ticket compra
-            $media_valor_troca = number_format($valor_cupons_fiscais[0]['total']/$count_trocas, 2);
-            //.media de valor dos cupons fiscais
-            $media = number_format($valor_cupons_fiscais[0]['total']/$num_cupons_fiscais, 2);
+        for ($i = 0; $i < $this->data['Troca']['qtd_cp']; $i++) {
+            //TODO: metodo q manda para impressora e detecta se imprimiu corretamente, ou só mostra os pdfs
+            $CPimpresso++;
         }
-
-        ////////////////
-        //dados relacionados a campanhas com bandeira promocional
-        ////////////////
-        //.Quantidade de consumidores que compraram com Bandeira da promoção (VISA/MASTER)
-        $num_consumidores_bandeira = $this->_num_consumidores_bandeira($inicio);
-        //.Quantidade de consumidores que compraram sem VISA/MASTER
-        $num_consumidores_not_bandeira = $this->_num_consumidores_not_bandeira($inicio);
-        //.Quantidade de consumidores novos que compraram com VISA/MASTER
-        $num_consumidores_novos_bandeira = $this->_num_consumidores_novos_bandeira($inicio);
-        //.Quantidade de consumidores novos que compraram sem VISA/MASTER
-        $num_consumidores_novos_not_bandeira = $this->_num_consumidores_novos_not_bandeira($inicio);
-
-        $this->paginate = array(
-                'conditions' => $conditions_data_troca,
-                'limit' => 50,
-                'recursive' => 0
-        );
-        $trocas = $this->paginate('Troca');
-
-        $this->set(compact('trocas',
-                'count_trocas', 'media_valor_troca', 'total_pontos',
-                'num_consumidores_atendidos', 'num_consumidores_novos',
-                'valor_cupons_fiscais', 'num_cupons_fiscais', 'media',
-                'num_cupons_promocionais',
-                'num_consumidores_bandeira', 'num_consumidores_not_bandeira', 'num_consumidores_novos_bandeira', 'num_consumidores_novos_not_bandeira'));
-    }
-
-
-
-    function _num_consumidores_bandeira($inicio, $fim = null ) {
-        if(is_null($fim)) {
-            $fim = date('Y-m-d', strtotime("+1 days"));
+        if($CPimpresso == $this->data['Troca']['qtd_cp']) {//debug("impressos = " . $CPimpresso);
+            $this->Session->setFlash('Impressos '.$CPimpresso.' cupons.', 'default', null, 'Impressora');
+        }else {
+            $this->Session->setFlash(($totalCP - $CPimpresso) . ' cupons impressos errados.', 'default', null, 'Impressora');
         }
-        $conditionsSubQuery = array(
-                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
-                //'CF.forma_de_pagamento' => 'Credito',,//se interessar somente credito ou debito
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),//retirar essas condições null?
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-        $subQuery_num_consumidores_bandeira = ' Troca.id IN ( ' . $subQuery .' ) ';
-        //debug($subQuery_num_consumidores_bandeira);
-        $conditions_num_consumidores_bandeira = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_bandeira,
-                'recursive' => -1
-        );
-        return $this->Troca->find('count', $conditions_num_consumidores_bandeira );
+    }
+     *
+    */
+    /*
+    function _calculaCP($cfs) {
+
+        $pontos = $this->_calculaPontosTotal($cfs);
+
+        $totalCP = $pontos/Configure::read('Regras.Pontos');
+        //debug('calcula_calculaValorTotalTrocaCP = ' . $totalCP);
+        return $totalCP;
+
     }
 
-    function _num_consumidores_not_bandeira($inicio, $fim = null) {
-        if(is_null($fim)) {
-            $fim = date('Y-m-d', strtotime("+1 days"));
+    function _calculapontosTotal($cfs) {
+        $pontos = 0;
+
+        foreach ($cfs as $cf) {
+            $valor = 0;
+
+            $valor = $cf['valor']; //debug($valor);
+
+            $forma_de_pagamento = $cf['forma_de_pagamento'];
+            $bandeira = $cf['bandeira'];
+
+            $pontos += $this->_calculaPontosCF($valor, $forma_de_pagamento, $bandeira);
+            //debug("pontos = " . $pontos);
         }
-        $conditionsSubQuery = array(
-                'NOT' => array(
-                        'AND' => array(
-                                'CF.bandeira' => Configure::read('Regras.Bandeira.nome')
-                        )),
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-        $subQuery_num_consumidores_not_bandeira = ' Troca.id IN ( ' . $subQuery .' ) ';
-        //debug($subQuery_num_consumidores_not_bandeira);
-        $conditions_num_consumidores_not_bandeira = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_not_bandeira,
-                'recursive' => -1
-        );
-        return $this->Troca->find('count', $conditions_num_consumidores_not_bandeira );
+        return $pontos;
     }
 
-    function _num_consumidores_novos_bandeira($inicio, $fim = null) {
-        if(is_null($fim)) {
-            $fim = date('Y-m-d', strtotime("+1 days"));
+    function _calculaPontosCF($valor, $forma_de_pagamento, $bandeira) {
+        $pontos = 0;
+        if($forma_de_pagamento == "Credito" && $bandeira == "VISA") {
+            $pontos = $valor*Configure::read('Regras.Credito.Visa');
+        }else {
+            $pontos = $valor;
         }
-        $conditionsSubQuery = array(
-                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-        $conditionsSubQuery2 = array(
-                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-        $subQuery_num_consumidores_novos_bandeira = ' Troca.id IN ( ' . $subQuery .' ) AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_bandeira);
-        $conditions_num_consumidores_novos_bandeira = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_bandeira,
-                'recursive' => -1
-        );
-        return $this->Troca->find('count', $conditions_num_consumidores_novos_bandeira );
+        return $pontos;
     }
 
-
-    function _num_consumidores_novos_not_bandeira($inicio, $fim = null) {
-        if(is_null($fim)) {
-            $fim = date('Y-m-d', strtotime("+1 days"));
+    function _calculaValorTotalTroca($cfs) {
+        $total = 0;
+        foreach ($cfs as $cf) {
+            $total += $cf['valor'];
         }
-        $conditionsSubQuery = array(
-                'CF.bandeira' => Configure::read('Regras.Bandeira.nome'),
-                'CF.created BETWEEN ? AND ? ' => array($inicio,$fim));
-        $dbo = $this->CupomFiscal->getDataSource();
-        $subQuery = $dbo->buildStatement(
-                array(
-                'fields' => array('CF.troca_id'),
-                'table' => $dbo->fullTableName($this->CupomFiscal),
-                'alias' => 'CF',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery,
-                'order' => null,
-                'group' => null
-                ),
-                $this->CupomFiscal
-        );
-        $conditionsSubQuery2 = array(
-                'Consumidor.created BETWEEN ? AND ? ' => array($inicio,$fim));
-        $dbo2 = $this->Troca->Consumidor->getDataSource();
-        $subQuery2 = $dbo2->buildStatement(
-                array(
-                'fields' => array('Consumidor.id'),
-                'table' => $dbo2->fullTableName($this->Troca->Consumidor),
-                'alias' => 'Consumidor',
-                'limit' => null,
-                'offset' => null,
-                'joins' => array(),
-                'conditions' => $conditionsSubQuery2,
-                'order' => null,
-                'group' => null
-                ),
-                $this->Troca->Consumidor
-        );
-        $subQuery_num_consumidores_novos_not_bandeira =
-                ' Troca.id IN ( ' . $subQuery .' )
-            AND Troca.consumidor_id IN ( '. $subQuery2 .' )';
-        //debug($subQuery_num_consumidores_novos_not_bandeira);
-        $conditions_num_consumidores_novos_not_bandeira = array(
-                'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $subQuery_num_consumidores_novos_not_bandeira,
-                'recursive' => -1
-        );
-        return $this->Troca->find('count', $conditions_num_consumidores_novos_not_bandeira );
+        return $total;
     }
 
+    function _calculaSaldo($pontos) {
+        return $pontos%Configure::read('Regras.Pontos');
+    }
+    *
+    */
 
 }
 ?>

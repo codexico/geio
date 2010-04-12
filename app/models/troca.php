@@ -1,4 +1,7 @@
 <?php
+/**
+ * @property CupomFiscal $CupomFiscal
+ */
 class Troca extends AppModel {
 
 	var $name = 'Troca';
