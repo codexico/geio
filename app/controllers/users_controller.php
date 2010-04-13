@@ -46,7 +46,7 @@ class UsersController extends AppController {
         }
         $this->set('user', $this->User->read(null, $id));
     }
-
+/*
     function add() {
         if (!empty($this->data)) {
             $this->User->create();
@@ -61,7 +61,7 @@ class UsersController extends AppController {
         $this->set(compact('groups'));
 
     }
-
+*/
     function edit($id = null) {
         if (!$id && empty($this->data)) {
             $this->Session->setFlash(__('Invalid User', true));

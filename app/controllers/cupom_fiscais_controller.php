@@ -16,7 +16,7 @@ class CupomFiscaisController extends AppController {
         }
         $this->set('cupomFiscal', $this->CupomFiscal->read(null, $id));
     }
-
+/*
     function add() {
         if (!empty($this->data)) {
             $this->CupomFiscal->create();
@@ -67,7 +67,7 @@ class CupomFiscaisController extends AppController {
         $this->Session->setFlash(__('The CupomFiscal could not be deleted. Please, try again.', true));
         $this->redirect(array('action' => 'index'));
     }
-
+*/
     function _gerarCP(){
         debug($this->CupomFiscal);
     }

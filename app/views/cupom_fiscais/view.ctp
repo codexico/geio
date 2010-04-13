@@ -8,9 +8,9 @@
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/cupom_fiscais', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Excluir Cupom Fiscal', array('action' => 'delete', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $cupomFiscal['CupomFiscal']['id'])); ?>
+	<?php /*echo $html->link('Excluir Cupom Fiscal', array('action' => 'delete', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $cupomFiscal['CupomFiscal']['id'])); */?>
 	<?php echo $html->link('Editar Cupom Fiscal', array('action' => 'edit', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?></li>
+	<?php /*echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); */?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -42,7 +42,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Loja'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $html->link($cupomFiscal['Loja']['id'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
+				<?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
 				&nbsp;
 			</dd>
 		</div>

@@ -106,6 +106,13 @@ $class = ' class="altrow"';?>
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observação'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $consumidor['Consumidor']['obs']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CEP'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['cep']; ?>
@@ -158,13 +165,6 @@ $class = ' class="altrow"';?>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('País'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['pais']; ?>
-                &nbsp;
-            </dd>
-        </div>
-        <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observação'); ?></dt>
-            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $consumidor['Consumidor']['obs']; ?>
                 &nbsp;
             </dd>
         </div>
