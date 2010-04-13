@@ -104,6 +104,13 @@
                 &nbsp;
             </dd>
         </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo date('d/m/Y - H:m',strtotime($loja['Loja']['modified'])); ?>
+                &nbsp;
+            </dd>
+        </div>
     </dl>
 </div>
 <div class="clear"></div>
@@ -132,7 +139,7 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th class="txtCenter"><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <!-- <th class="txtCenter"><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th> -->
             <th class="txtCenter"><?php echo $paginator->sort('Nr. Cupom Fiscal','codigo', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th><?php echo $paginator->sort('Consumidor','Consumidor.nome', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th class="txtCenter"><?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
@@ -150,16 +157,13 @@
             ?>
         <tr<?php echo $class;?>>
             <td class="txtCenter">
-                    <?php echo $html->link($cupomFiscal['CupomFiscal']['id'], array('controller' => 'cupom_fiscais', 'action' => 'view', $cupomFiscal['CupomFiscal']['id'])); ?>
-            </td>
-            <td class="txtCenter">
-                    <?php echo $cupomFiscal['CupomFiscal']['codigo']; ?>
+                    <?php echo $html->link($cupomFiscal['CupomFiscal']['codigo'], array('controller' => 'cupom_fiscais', 'action' => 'view', $cupomFiscal['CupomFiscal']['id'])); ?>
             </td>
             <td>
                     <?php echo $cupomFiscal['Consumidor']['nome']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
+                    <?php echo number_format($cupomFiscal['CupomFiscal']['valor'],2); ?>
             </td>
             <td class="txtCenter">
                     <?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>

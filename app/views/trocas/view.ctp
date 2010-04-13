@@ -17,7 +17,7 @@
 	<?php echo $html->link('Voltar', '/trocas', array('class'=>'btn_cinza floatRight')); ?>
 	<?php echo $html->link('Excluir Troca', array('action' => 'delete', $troca['Troca']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $troca['Troca']['id'])); ?>
 	<?php echo $html->link('Editar Troca', array('action' => 'edit', $troca['Troca']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php/* echo $html->link('Incluir Troca', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); */?>
+	<?php /* echo $html->link('Incluir Troca', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); */ ?>
 </div>
 
 <?php $session->flash('auth'); ?>
