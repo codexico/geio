@@ -417,6 +417,14 @@ form input.submit, .form input.submit{
 	width:45px;
 }
 
+#content .form .input .select_hora{
+	width:45px;
+}
+
+#content .form .input .select_minuto{
+	width:45px;
+}
+
 #content .form .input .select_mes{
 	width:92px;
 	*width:90px;

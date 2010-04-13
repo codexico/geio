@@ -31,14 +31,12 @@ $javascript->link(array('trocas_nova'), false);
 
         <div class="input select">
             <label for="CupomFiscal<?=$i?>DataCompraDay">Data do Cupom Fiscal</label>
-            <?php echo $form->day('CupomFiscal.'.$i.'.data_compra', '', array('class'=>'select_dia'), true); ?>
-            <?php echo $form->month('CupomFiscal.'.$i.'.data_compra', '', array('class'=>'select_mes'), true); ?>
-            <?php echo $form->year('CupomFiscal.'.$i.'.data_compra', 1900, 2010, true, array('class'=>'select_ano')); ?>
-        </div>
-        <div class="input select">
-            <? echo date('H',strtotime("now -5 hours")); ?>
-            <?php echo $form->hour('CupomFiscal.'.$i.'.data_compra', true, $data_compra['hour'], array('class'=>'select_hora')); ?>
-            <?php echo $form->minute('CupomFiscal.'.$i.'.data_compra', $data_compra['minute'], array('class'=>'select_minuto')); ?>
+            <?php echo $form->day('CupomFiscal.'.$i.'.data_compra', $data_compra['day'], array('class'=>'select_dia'), true); ?>
+            <?php echo $form->month('CupomFiscal.'.$i.'.data_compra', $data_compra['month'], array('class'=>'select_mes'), true); ?>
+            <?php echo $form->year('CupomFiscal.'.$i.'.data_compra', 1900, 2010, $data_compra['year'], array('class'=>'select_ano')); ?>
+            &nbsp;-&nbsp;
+            <?php echo $form->hour('CupomFiscal.'.$i.'.data_compra', true, $data_compra['hour'], array('class'=>'select_hora')); ?>&nbsp;h&nbsp;&nbsp;
+            <?php echo $form->minute('CupomFiscal.'.$i.'.data_compra', $data_compra['minute'], array('class'=>'select_minuto')); ?>&nbsp;min
         </div>
 
 

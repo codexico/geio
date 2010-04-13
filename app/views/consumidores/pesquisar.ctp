@@ -1,3 +1,11 @@
+<?php
+//javascripts para a busca de cep
+$javascript->link(array("prototype.js", "funcoes.js"), false);
+
+//
+$javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
+	$javascript->link(array('consumidor_pesquisar'), false);
+?>
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>
@@ -5,16 +13,11 @@
 </div>
 <div class="clear"></div>
 
-<!-- .botoes -->
+<!-- .botoes
 <div class="botoes">
 	<?php echo $html->link('Inserir Promotor', array('action' => 'novo'), array('class' => 'btn_azul floatRight')); ?>
 </div>
-
-<?php
-	$javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
-	$javascript->link(array('pesquisar'), false);
-?>
-
+-->
 <?php $session->flash('Impressora'); ?>
 <?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>

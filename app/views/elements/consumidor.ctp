@@ -69,6 +69,46 @@
             <?php echo $consumidor['Consumidor']['obs']; ?>
             &nbsp;
         </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CEP'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['cep']; ?>
+            &nbsp;
+        </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Endereço'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['endereco']; ?>
+            &nbsp;
+        </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Número'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['numero']; ?>
+            &nbsp;
+        </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Bairro'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['bairro']; ?>
+            &nbsp;
+        </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cidade'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['cidade']; ?>
+            &nbsp;
+        </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estado'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['estado']; ?>
+            &nbsp;
+        </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Complemento'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['complemento']; ?>
+            &nbsp;
+        </dd>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('País'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php echo $consumidor['Consumidor']['pais']; ?>
+            &nbsp;
+        </dd>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
         <dd<?php if ($i++ % 2 == 0) echo $class;?>>
             <?php echo date('d/m/Y - H:m',strtotime($consumidor['Consumidor']['created'])); ?>
