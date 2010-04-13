@@ -8,11 +8,6 @@
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/cupom_fiscais', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Excluir Cupom', array('action' => 'delete', $form->value('CupomFiscal.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('CupomFiscal.id'))); ?>
-	<?php echo $html->link('Trocas', array('controller' => 'trocas', 'action' => 'index'), array('class'=>'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Inserir Troca', array('controller' => 'trocas', 'action' => 'add'), array('class'=>'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Lojas', array('controller' => 'lojas', 'action' => 'index'), array('class'=>'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Inserir Loja', array('controller' => 'lojas', 'action' => 'add'), array('class'=>'btn_azul floatRight mgr5')); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -29,9 +24,12 @@
 		echo $form->input('troca_id');
 		echo $form->input('loja_id');
 		echo $form->input('valor');
-		echo $form->input('forma_de_pagamento', array('label' => 'Forma de Pagamento'));
-		echo $form->input('bandeira');
+
+        echo '<div class="duas_colunas">';
+			echo $form->input('forma_de_pagamento', array('label' => 'Forma de Pagamento', 'div' =>'input text meio_input'));
+			echo $form->input('bandeira', array('div' =>'input text meio_input'));
+        echo '</div>';
 	?>
 	</fieldset>
-    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>

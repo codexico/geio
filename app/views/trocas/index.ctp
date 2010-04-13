@@ -30,11 +30,11 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w15 txtCenter"><?php echo $paginator->sort('id');?></th>
-			<th class="w15 txtCenter"><?php echo $paginator->sort('promotor_id');?></th>
-			<th class="w15 txtCenter"><?php echo $paginator->sort('consumidor_id');?></th>
-			<th class="w20"><?php echo $paginator->sort('created');?></th>
-			<th class="w15 actions"></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+			<th class="w25"><?php echo $paginator->sort('promotor_id');?></th>
+			<th class="w25"><?php echo $paginator->sort('consumidor_id');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
+			<th class="w10 actions"></th>
 		</tr>
 		<?php
 		$i = 0;
@@ -48,13 +48,13 @@
 			<td class="txtCenter">
 				<?php echo $troca['Troca']['id']; ?>
 			</td>
-			<td class="txtCenter">
+			<td>
 				<?php echo $troca['Troca']['promotor_id']; ?>
 			</td>
-			<td class="txtCenter">
+			<td>
 				<?php echo $troca['Troca']['consumidor_id']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
 			</td>
 			<td class="actions">

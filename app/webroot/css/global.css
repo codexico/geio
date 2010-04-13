@@ -35,24 +35,24 @@ h5{
 	border-bottom:1px solid #e0e0e0;
 }
 
-form label{
+form label, .form label{
 	display:block;
 	color:#555555;
 	margin-bottom:3px;
 }
 
-form input {
+form input, .form input {
 	width:408px;
 	height:17px;
 	border:1px solid #e0e0e0;
 	color:#555555;
 }
 
-form input:focus, input.sffocus {
+form input:focus, input.sffocus, .form input:focus{
 	border:1px solid #0073a1;
 }
 
-form select {
+form select, .form select {
 	width:410px;
 	width:412px \9;
 	*width:412px;
@@ -60,18 +60,18 @@ form select {
 	color:#555555;
 }
 
-form textarea {
+form textarea, .form textarea {
 	width:408px;
 	height:100px;
 	border:1px solid #e0e0e0;
 	color:#555555;
 }
 
-form textarea:focus {
+form textarea:focus, .form textarea:focus {
 	border:1px solid #0073a1;
 }
 
-form input.submit{
+form input.submit, .form input.submit{
 	width:auto;
 	height:auto;
 	font-weight:bold;
@@ -220,7 +220,7 @@ form input.submit{
 #menu .menu-content .menu-navegacao ul li{
 	background-image:url("../img/bullet_menu_mais.gif");
 	background-repeat:no-repeat;
-	background-position:0 3px;
+	background-position:0 6px;
 	padding-left:12px;
 	margin-bottom:6px;
 }
@@ -372,11 +372,10 @@ form input.submit{
 }
 
 #content .form .input{
-	width:930px;
+	width:940px;
 	_width:925px;
-	margin-left:10px;
-	*margin-left:17px;
-	_margin-left:8px;
+	padding-left:10px;
+	*padding-left:17px;
 	margin-bottom:10px;
 	float:left;
 }
@@ -388,27 +387,30 @@ form input.submit{
 }
 
 #content .form .duas_colunas{
-	width:930px;
+	width:920px;
 	_width:925px;
-	margin-left:10px;
-	*margin-left:17px;
-	_margin-left:8px;
 	margin-bottom:10px;
 	float:left;
 }
 
 #content .form .duas_colunas .input{
 	width:200px;
-	_width:195px;
-	margin-right:10px;
+	*width:198px;
 	margin-left:0;
 	margin-bottom:0;
 }
 
 #content .form .meio_input input{
 	width:198px;
+	*width:194px;
+	_width:194px;
+}
+
+#content .form .meio_input select{
+	width:200px;
 	*width:198px;
 	_width:197px;
+
 }
 
 #content .form .input .select_dia{
@@ -417,6 +419,10 @@ form input.submit{
 
 #content .form .input .select_mes{
 	width:92px;
+	*width:90px;
+	_width:90px;
+	margin-left:4px;
+	margin-right:4px;
 }
 
 #content .form .input .select_ano{
@@ -431,6 +437,14 @@ form input.submit{
 	_margin-top:9px;
 }
 
+#content .form .checkbox input{
+	width:auto;
+	margin-right:5px;
+}
+
+#content .form .checkbox label{
+	display:inline;
+}
 
 /* CONTENT - P�GINA ATUAL */
 #content .index .pagina_atual{
@@ -517,7 +531,7 @@ form input.submit{
 
 #content table th{
 	font-family:Tahoma, Arial, Helvetica, sans-serif;
-	font-size:10px;
+	font-size:11px;
 	font-weight:bold;
 	color:#FFFFFF;
 	text-transform:uppercase;
@@ -537,7 +551,7 @@ form input.submit{
 }
 
 #content table th a:link, #content table th a:visited{
-	font-size:10px;
+	font-size:11px;
 	font-weight:bold;
 	color:#FFFFFF;
 	text-transform:uppercase;
@@ -545,7 +559,7 @@ form input.submit{
 
 #content table tr td{
 	font-family:Tahoma, Arial, Helvetica, sans-serif;
-	font-size:10px;
+	font-size:11px;
 	color:#646464;
 	padding:5px 12px;
 	border-right:1px solid #e0e0e0;
@@ -601,16 +615,16 @@ form input.submit{
 #content .view dl{
 	width:950px;
 	font-size:13px;
-        float: left;
+	float: left;
 }
 
 #content .view dl dt{
-	width:110px;
+	width:150px;
 	font-weight:bold;
 	border-top:1px solid #e0e0e0;
 	padding:7px 10px 7px 10px;
 	float:left;
-        clear: both;
+	clear: both;
 }
 
 #content .view dl dt.altrow{
@@ -618,7 +632,7 @@ form input.submit{
 }
 
 #content .view dl dd{
-	width:800px;
+	width:760px;
 	border-top:1px solid #e0e0e0;
 	padding:7px 10px 7px 10px;
 	vertical-align:top;

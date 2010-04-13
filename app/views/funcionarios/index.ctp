@@ -31,7 +31,7 @@
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th class="w40"><?php echo $paginator->sort('nome');?></th>
-			<th class="w35"><?php echo $paginator->sort('email');?></th>
+			<th class="w35"><?php echo $paginator->sort('E-mail', 'email');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 

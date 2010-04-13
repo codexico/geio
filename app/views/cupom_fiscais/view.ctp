@@ -8,13 +8,9 @@
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/cupom_fiscais', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?></li>
-	<?php echo $html->link('Editar Cupom Fiscal', array('action' => 'edit', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Excluir Cupom Fiscal', array('action' => 'delete', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $cupomFiscal['CupomFiscal']['id'])); ?>
-	<?php echo $html->link('Trocas', array('controller' => 'trocas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Inserir Troca', array('controller' => 'trocas', 'action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Lojas', array('controller' => 'lojas', 'action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Inserir Loja', array('controller' => 'lojas', 'action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Editar Cupom Fiscal', array('action' => 'edit', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?></li>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -58,7 +54,7 @@
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Forma De Pagamento'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Forma de Pagamento'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
 				&nbsp;

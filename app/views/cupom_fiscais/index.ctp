@@ -40,8 +40,8 @@
 			<th class="w5 txtCenter"><?php echo $paginator->sort('troca_id');?></th>
 			<th class="w15"><?php echo $paginator->sort('loja_id');?></th>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('valor');?></th>
-			<th class="w20"><?php echo $paginator->sort('forma_de_pagamento');?></th>
-			<th class="w10"><?php echo $paginator->sort('bandeira');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('forma_de_pagamento');?></th>
+			<th class="w15 txtCenter"><?php echo $paginator->sort('bandeira');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 		<?php
@@ -68,10 +68,10 @@
 			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
 			</td>
-			<td>
+			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
 			</td>
 			<td class="actions">

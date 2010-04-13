@@ -21,64 +21,71 @@
 
         echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome'));
 
-        echo $form->input('rg', array('label' => 'RG'));
-        echo $form->input('cpf', array('label' => 'CPF (somente números)'));
-        echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+        echo '<div class="duas_colunas">';
+			echo $form->input('rg', array('label' => 'RG', 'div' =>'input text meio_input'));
+			echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' =>'input text meio_input'));
+        echo '</div>';
 
-        echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+        echo '<div class="duas_colunas">';
+			echo $form->input('tel', array('label' => 'Telefone', 'div' =>'input text meio_input'));
+			echo $form->input('cel', array('label' => 'Celular', 'div' =>'input text meio_input'));
+        echo '</div>';
+
         echo $form->input('email', array('label' => 'E-mail'));
 
 
-        //echo $form->input('sexo');
-        echo $form->input('sexo', array('options' => array(
-                'masculino'=>'masculino',
-                'feminino'=>'feminino',
-                'gls'=>'gls',
-                'outro'=>'outro'
-        ),
-        'selected'=>'',
-        'empty' => true));
+        echo '<div class="duas_colunas">';
+			echo $form->input('sexo', array('options' => array(
+					'masculino'=>'masculino',
+					'feminino'=>'feminino',
+					'gls'=>'gls',
+					'outro'=>'outro'
+			),
+			'selected'=>'',
+			'empty' => true,
+			'div' => 'input meio_input'));
+
+			echo '<div class="input select">';
+				echo '<label for="ConsumidorNascimentoDay">Nascimento</label>';
+				echo $form->day('nascimento', '', array('class'=>'select_dia'), true) ;
+				echo $form->month('nascimento', '', array('class'=>'select_mes'), true) ;
+				echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano')) ;
+			echo '</div>';
+        echo '</div>';
+
+        echo '<div class="duas_colunas">';
+			echo $form->input('estado_civil', array('options' => array(
+					'solteiro'=>'Solteiro',
+					'casado'=>'Casado',
+					'viúvo'=>'Viúvo',
+					'separado'=>'Separado'
+			),
+			'selected'=>'',
+			'empty' => true,
+			'div' => 'input meio_input'));
+
+			echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
+					'nenhum'=>'nenhum',
+					'1º Grau'=>'1º Grau',
+					'2º Grau'=>'2º Grau',
+					'Técnico'=>'Técnico',
+					'Universitário'=>'Univesitário',
+					'Mestrado'=>'Mestrado',
+					'Doutorado'=>'Doutorado',
+					'Pós'=>'Pós',
+					'MBA'=>'MBA'
+			),
+			'selected'=>'',
+			'empty' => true,
+			'div' => 'input meio_input'));
+        echo '</div>';
 
 
-        echo $form->input('nascimento',array(
-        'dateFormat'=>'DMY',
-        'timeFormat'=>'NONE',
-        'minYear'=> date('Y') - 100,
-        'maxYear' => date('Y'),
-        'selected'=>'',
-        //'selected'=>strtotime('01-01-2000'),
-        'empty' => true
-        )
-        );
-
-        //echo $form->input('estado_civil');
-        echo $form->input('estado_civil', array('options' => array(
-                'solteiro'=>'solteiro',
-                'casado'=>'casado',
-                'viúvo'=>'viúvo',
-                'separado'=>'separado'
-        ),
-        'selected'=>'',
-        'empty' => true));
-
-        echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
-                'nenhum'=>'nenhum',
-                '1º Grau'=>'1º Grau',
-                '2º Grau'=>'2º Grau',
-                'Técnico'=>'Técnico',
-                'Universitário'=>'Univesitário',
-                'Mestrado'=>'Mestrado',
-                'Doutorado'=>'Doutorado',
-                'Pós'=>'Pós',
-                'MBA'=>'MBA'
-        ),
-        'selected'=>'',
-        'empty' => true));
 
         echo $form->input('profissao', array('label' => 'Profiss&atilde;o'));
 
         echo $form->input('obs', array('type' => 'textarea', 'label' => 'Observa&ccedil;&otilde;es'));
         ?>
     </fieldset>
-    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>

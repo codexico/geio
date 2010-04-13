@@ -7,13 +7,10 @@
 
 <!-- .botoes -->
 <div class="botoes">
-
-    <?php echo $html->link('Voltar', '/funcionarios', array('class'=>'btn_cinza floatRight')); ?>
-    <?php echo $html->link('Consumidores', array('action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
-    <?php echo $html->link('Incluir Consumidor', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
+    <?php echo $html->link('Voltar', '/consumidores', array('class'=>'btn_cinza floatRight')); ?>
+	<?php echo $html->link('Excluir Consumidor', array('action' => 'delete', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])); ?>
     <?php echo $html->link('Editar Consumidor', array('action' => 'edit', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
-    <?php echo $html->link('Excluir Consumidor', array('action' => 'delete', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])); ?>
-
+    <?php echo $html->link('Incluir Consumidor', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -39,35 +36,35 @@ $class = ' class="altrow"';?>
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Rg'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('RG'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['rg']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cpf'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CPF'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['cpf']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Email'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('E-mail'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['email']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cel'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Celular'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['cel']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Tel'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Telefone'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['tel']; ?>
                 &nbsp;
@@ -95,14 +92,14 @@ $class = ' class="altrow"';?>
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Grau De Instrucao'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Grau de Instrução'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['grau_de_instrucao']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Profissao'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Profissão'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['profissao']; ?>
                 &nbsp;
@@ -165,7 +162,7 @@ $class = ' class="altrow"';?>
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Obs'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observação'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
 <?php echo $consumidor['Consumidor']['obs']; ?>
                 &nbsp;
@@ -174,7 +171,7 @@ $class = ' class="altrow"';?>
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo date('d,m,Y',strtotime($consumidor['Consumidor']['created'])); ?>
+<?php echo date('d/m/Y', strtotime($consumidor['Consumidor']['created'])); ?>
                 &nbsp;
             </dd>
         </div>

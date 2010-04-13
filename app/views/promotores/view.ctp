@@ -7,13 +7,10 @@
 
 <!-- .botoes -->
 <div class="botoes">
-
 	<?php echo $html->link('Voltar', '/promotores', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Promotores', array('action' => 'index'), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Incluir Promotor', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
-	<?php echo $html->link('Editar Promotor', array('action' => 'edit', $promotor['Promotor']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
 	<?php echo $html->link('Excluir Promotor', array('action' => 'delete', $promotor['Promotor']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $promotor['Promotor']['id'])); ?>
-
+	<?php echo $html->link('Editar Promotor', array('action' => 'edit', $promotor['Promotor']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php echo $html->link('Incluir Promotor', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -39,28 +36,28 @@
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Email'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('E-mail'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['email']; ?>
 				&nbsp;
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Rg'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('RG'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['rg']; ?>
 				&nbsp;
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cpf'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CPF'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['cpf']; ?>
 				&nbsp;
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User Id'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id de Usu&aacute;rio'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['user_id']; ?>
 				&nbsp;
@@ -74,21 +71,14 @@
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y - H:m',strtotime($promotor['Promotor']['created'])); ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Tel'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Telefone'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['tel']; ?>
 				&nbsp;
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cel'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Celular'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['cel']; ?>
 				&nbsp;
@@ -98,6 +88,13 @@
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Obs'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['obs']; ?>
+				&nbsp;
+			</dd>
+		</div>
+		<div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo date('d/m/Y - H:m',strtotime($promotor['Promotor']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>
