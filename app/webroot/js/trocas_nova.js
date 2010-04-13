@@ -103,14 +103,14 @@ $(document).ready(function() {
 
         $("li.cupom").each(function(){
             count_CF++;
-            valor = ($(this).find("input[name*=valor]").val())
+            valor = ($(this).find("input[name*=valor]").val()).replace(/(,)/g,".");
             if( isNaN( parseFloat(valor) ) ){
                 valor = 0
             }
             bandeira = ($(this).find("[name*=bandeira]").val())
 
             if(bandeira.toUpperCase()=="VISA"){
-                valorBandeira += parseFloat(valor);
+                valorBandeira += parseFloat(valor);//alert(valorBandeira);
             }else{
                 valorOutros += parseFloat(valor);
             }

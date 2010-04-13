@@ -13,7 +13,7 @@ $javascript->link(array('trocas_nova'), false);
         <?php
         echo $form->input('CupomFiscal.'.$i.'.codigo', array('label'=>'Número do Cupom Fiscal'));
 
-        $data_compra['hour'] =$data_compra['minute'] ='';
+        $data_compra['day'] = $data_compra['month'] = $data_compra['year'] = $data_compra['hour'] =$data_compra['minute'] ='';
         if(!isset ($this->data['CupomFiscal'][$i]['data_compra'])) {
             $data_compra = date_parse(date('Y-m-d H:i:s',strtotime("now -3 hours")));//quanto tempo a pessoa demora para ir trocar o cupom fiscal, 3 horas?
         }
@@ -47,7 +47,7 @@ $javascript->link(array('trocas_nova'), false);
         'class'=>'razaosocial',
         'label'=>'Razão Social'));
 
-        echo $form->input('CupomFiscal.'.$i.'.valor');
+        echo $form->input('CupomFiscal.'.$i.'.valor', array('class'=> 'nomefantasia','label'=>'Valor R$ (formato: xxxx,xx ou xxxxx.xx)'));
 
         echo $form->input('CupomFiscal.'.$i.'.forma_de_pagamento', array('options' => array(
                 'Dinheiro'=>'Dinheiro',
