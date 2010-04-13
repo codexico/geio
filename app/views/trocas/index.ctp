@@ -1,3 +1,6 @@
+<?php
+//debug($trocas[0]);
+?>
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>
@@ -5,11 +8,11 @@
 </div>
 <div class="clear"></div>
 
-<!-- .botoes -->
+<!-- .botoes
 <div class="botoes">
 	<?php echo $html->link('Inserir Troca', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 </div>
-
+ -->
 <?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 
@@ -31,8 +34,8 @@
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
-			<th class="w25"><?php echo $paginator->sort('promotor_id');?></th>
-			<th class="w25"><?php echo $paginator->sort('consumidor_id');?></th>
+			<th class="w25"><?php echo $paginator->sort('Promotor','Promotor.nome');?></th>
+			<th class="w25"><?php echo $paginator->sort('Consumidor.nome');?></th>
 			<th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
 			<th class="w10 actions"></th>
 		</tr>
@@ -49,10 +52,10 @@
 				<?php echo $troca['Troca']['id']; ?>
 			</td>
 			<td>
-				<?php echo $troca['Troca']['promotor_id']; ?>
+				<?php echo $troca['Promotor']['nome']; ?>
 			</td>
 			<td>
-				<?php echo $troca['Troca']['consumidor_id']; ?>
+				<?php echo $troca['Consumidor']['nome']; ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
