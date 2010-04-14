@@ -1,4 +1,8 @@
 <?php
+/**
+ * @property Loja $Loja
+ * @property CupomFiscal $CupomFiscal
+ */
 class LojasController extends AppController {
 
     var $name = 'Lojas';
@@ -39,17 +43,19 @@ class LojasController extends AppController {
         $this->Loja->recursive = 1;
         $loja = $this->Loja->read(null, $id);//debug($loja);
 
-        $this->CupomFiscal->Behaviors->attach('Containable');
+        //$this->CupomFiscal->Behaviors->attach('Containable');
         $this->paginate = array(
                 'conditions' => array('loja_id' => $id),
-                'contain' => array('Consumidor'),
+                //'contain' => array('Consumidor'),
                 'limit' => 50,
            //'group' => array('consumidor_id')
-                //'recursive' => -1
+                //'recursive' => 1
         );
-        $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais);
+        $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais[0]);
 
-        $this->set(compact('loja', 'cupom_fiscais') );
+        $relatorio = $this->CupomFiscal->_buscaRelatorioLoja($id);//debug($relatorio);
+
+        $this->set(compact('loja', 'cupom_fiscais','relatorio') );
     }
 
     function add() {

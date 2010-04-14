@@ -138,7 +138,7 @@ class ResumoDiario extends AppModel {
         if(is_null($qtd_cf['TrocasDia']['total_qtd_cf'])) {
             $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = 0;
         }else {
-            $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = $qtd_cf[0]['total_qtd_cf'];
+            $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = $qtd_cf['TrocasDia']['total_qtd_cf'];
         }
 
         //qtd_cupons_promocionais
@@ -151,7 +151,7 @@ class ResumoDiario extends AppModel {
         if(is_null($valor_total['TrocasDia']['valor_total'])) {
             $resumodiario['ResumoDiario']['valor_total'] = 0;
         }else {
-            $resumodiario['ResumoDiario']['valor_total'] = $valor_total[0]['valor_total'];
+            $resumodiario['ResumoDiario']['valor_total'] = $valor_total['TrocasDia']['valor_total'];
         }
 
         //valor_bandeira 	float

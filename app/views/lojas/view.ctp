@@ -115,6 +115,22 @@
 </div>
 <div class="clear"></div>
 
+<div class="titulo">
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Relatório de Compras na Loja</h1>
+</div>
+<div class="relatorio">
+    <p><?php echo "Total de Consumo: R$ " . number_format($relatorio['total'],2); ?></p>
+    <p><?php echo "Número Total de Consumidores: " . $relatorio['total_consumidores']; ?></p>
+    <br />
+    <p><?php echo "Total de Consumo na Bandeira: R$ " . number_format($relatorio['total_bandeira'],2); ?></p>
+    <p><?php echo "Número de Consumidores que usaram a Bandeira: " . $relatorio['total_consumidores_bandeira']; ?></p>
+    <br />
+    <p><?php echo "Total de Consumo em outras formas: R$ " . number_format($relatorio['total_outros'],2); ?></p>
+    <p><?php echo "Número de Consumidores que Não usaram a Bandeira: " . $relatorio['total_consumidores_outros']; ?></p>
+</div>
+<div class="clear"></div>
+
 <!-- .titulo -->
 <div class="titulo">
     <?php echo $html->image('bullet_titulo.gif')?>

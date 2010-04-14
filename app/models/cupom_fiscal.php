@@ -297,6 +297,37 @@ class CupomFiscal extends AppModel {
     }
 
 
+
+    function _buscaRelatorioLoja($id) {
+
+        $conditions_valor_cupons_fiscais = array(
+                'fields' => array("SUM(CupomFiscal.valor) AS 'total'","COUNT(DISTINCT (CupomFiscal.consumidor_id) ) AS 'total_consumidores'"),
+                'conditions' => array('loja_id'=>$id)
+        );
+        $relatorio_total = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_total);
+
+        $relatorio_bandeira = $relatorio_outros = array();
+        if(!Configure::read('Regras.Brinde.true')) {
+
+            $conditions_valor_cupons_fiscais = array(
+                    'fields' => array("SUM(CupomFiscal.valor) AS 'total_bandeira'","COUNT(DISTINCT (CupomFiscal.consumidor_id) ) AS 'total_consumidores_bandeira'"),
+                    'conditions' => array('loja_id'=>$id, 'bandeira'=>Configure::read('Regras.Bandeira.nome'))
+            );
+            $relatorio_bandeira = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_bandeira);
+
+            $conditions_valor_cupons_fiscais = array(
+                    'fields' => array("SUM(CupomFiscal.valor) AS 'total_outros'","COUNT(DISTINCT (CupomFiscal.consumidor_id) ) AS 'total_consumidores_outros'"),
+                    'conditions' => array('loja_id'=>$id, 'NOT'=>array('bandeira'=>Configure::read('Regras.Bandeira.nome')))
+            );
+            $relatorio_outros = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_outros);
+        }
+
+        $relatorio = array_merge($relatorio_total['CupomFiscal'], $relatorio_bandeira['CupomFiscal'], $relatorio_outros['CupomFiscal']);
+        //debug($relatorio);
+        return $relatorio;
+    }
+
+
     /**
      * @link http://book.cakephp.org/view/681/afterFind
      * @link http://teknoid.wordpress.com/2008/09/29/dealing-with-calculated-fields-in-cakephps-find/

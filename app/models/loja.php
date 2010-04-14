@@ -1,4 +1,8 @@
 <?php
+/**
+ * @property Loja $Loja
+ * @property CupomFiscal $CupomFiscal
+ */
 class Loja extends AppModel {
 
     var $name = 'Loja';
@@ -52,5 +56,6 @@ class Loja extends AppModel {
             )
     );
 
+    
 }
 ?>
