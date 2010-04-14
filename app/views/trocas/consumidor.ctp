@@ -176,13 +176,21 @@
 	</tr>
         */ ?>
     </table>
+
+    <!-- .paginacao -->
+    <div class="paginacao">
+        <div class="pagin_proximo"><?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?></div>
+        <div class="pagin_numeros"><?php echo $paginator->numbers(array('before'=>'','after'=>'','tag'=>'li','separator'=>' '));?></div>
+        <div class="pagin_anterior"><?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?></div>
+    </div>
+
 </div>
+<?php /*
 <div class="paging">
     <?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
     | 	<?php echo $paginator->numbers();?>
     <?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
 </div>
-<?php /*
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('New Troca', true), array('action' => 'add')); ?></li>

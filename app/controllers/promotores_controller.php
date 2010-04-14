@@ -8,7 +8,7 @@ class PromotoresController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        //$this->Auth->allowedActions = array('index', 'view');
+        $this->Auth->allowedActions = array('trocas');
     }
 
 
@@ -90,6 +90,22 @@ class PromotoresController extends AppController {
         }
         $this->Session->setFlash(__('O Promotor não pode ser deletado. Tente novamente.', true));
         $this->redirect(array('action' => 'index'));
+    }
+
+    function trocas($id){
+        $this->set('promotor', $this->Promotor->read(null, $id));
+
+
+        $this->Promotor->Troca->Behaviors->attach('Containable');
+        $this->paginate = array(
+                'conditions' => array('promotor_id' => $id),
+                'contain' => array('Consumidor'),
+                'limit' => 50,
+                'recursive' => 0
+        );
+        $trocas = $this->paginate('Troca');//debug($trocas);
+
+        $this->set( compact('trocas'));
     }
 
 }
