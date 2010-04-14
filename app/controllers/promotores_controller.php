@@ -93,6 +93,10 @@ class PromotoresController extends AppController {
     }
 
     function trocas($id){
+        if (!$id) {
+            $this->Session->setFlash(__('Id de Promotor Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
         $this->set('promotor', $this->Promotor->read(null, $id));
 
 
