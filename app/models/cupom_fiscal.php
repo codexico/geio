@@ -317,7 +317,10 @@ class CupomFiscal extends AppModel {
 
             $conditions_valor_cupons_fiscais = array(
                     'fields' => array("SUM(CupomFiscal.valor) AS 'total_outros'","COUNT(DISTINCT (CupomFiscal.consumidor_id) ) AS 'total_consumidores_outros'"),
-                    'conditions' => array('loja_id'=>$id, 'NOT'=>array('bandeira'=>Configure::read('Regras.Bandeira.nome')))
+                    'conditions' => array('loja_id'=>$id,
+                            'OR' =>array(
+                                    'NOT'=>array('bandeira'=>Configure::read('Regras.Bandeira.nome') ),
+                                    'AND'=>array('bandeira'=>null) ) )
             );
             $relatorio_outros = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_outros);
         }
