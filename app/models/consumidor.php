@@ -51,7 +51,17 @@ class Consumidor extends AppModel {
             'obs' => array('rule' => array('maxLength', '510'),
                             'message' => 'Máximo 500 caracteres',
                             'allowEmpty' => true,
-                            'required' => false)
+                            'required' => false),
+            'endereco' => array(
+                            'endereco-1' => array(
+                                            'rule' => array('maxLength', '900'),
+                                            'message' => 'Máximo 900 caracteres'),
+                            'endereco-2' => array(
+                                            'rule' => 'notEmpty',
+                                            'message' => 'Preencher Endereço'
+                            )
+            ),
+            'numero' => array('rule' => 'notEmpty')
     );
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed

@@ -137,7 +137,7 @@ class ConsumidoresController extends AppController {
                 }
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The Consumidor could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('O Consumidor não foi salvo. Tente novamente.', true));
             }
         }
         if (empty($this->data)) {
