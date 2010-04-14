@@ -296,6 +296,32 @@ class CupomFiscal extends AppModel {
         return $this->Troca->find('count', $conditions_num_consumidores_novos_not_bandeira );
     }
 
+    /**
+     * @link http://abcoder.com/php/cakephp/cakephp-advanced-pagination-sort-by-derived-field/
+     * @link http://book.cakephp.org/view/164/Pagination
+     *
+     * @package       cake
+     * @subpackage    cake.cake.libs.controller
+     * @see function paginate
+     *
+     * Handles automatic pagination of model records.
+     *
+     * @param mixed $object Model to paginate (e.g: model instance, or 'Model', or 'Model.InnerModel')
+     * @param mixed $scope Conditions to use while paginating
+     * @param array $whitelist List of allowed options for paging
+     * @return array Model query results
+     * @access public
+     * @link http://book.cakephp.org/view/165/Controller-Setup
+     */
+    function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+        if(empty($order)) {
+            // great fix!
+            $order = array($extra['passit']['sort'] => $extra['passit']['direction']);
+        }
+        $group = $extra['group'];
+        return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
+    }
+
 
 
     function _buscaRelatorioLoja($id) {
@@ -329,6 +355,8 @@ class CupomFiscal extends AppModel {
         //debug($relatorio);
         return $relatorio;
     }
+
+
 
 
     /**

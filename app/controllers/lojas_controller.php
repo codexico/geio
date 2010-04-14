@@ -15,18 +15,20 @@ class LojasController extends AppController {
         parent::beforeFilter();
     }
 
-    function resumo_diario(){
+    function resumo_diario() {
 
         $this->paginate = array(
-                'CupomFiscal' => array('fields' => array( 'CupomFiscal.data_compra','CupomFiscal.loja_id','COUNT(CupomFiscal.codigo) AS sum_cf',
-                    'AVG(CupomFiscal.valor) AS avg_valor','SUM(CupomFiscal.valor) AS sum_valor'
-                    ,'Loja.nome_fantasia'),
-                        'group' => array('data_compra','loja_id'),
-                'contain' => array('Loja'),
-                        'recursive' => 0 ));
-        $this->set('resumoDiarios', $this->paginate('CupomFiscal'));
+                'CupomFiscal' => array(
+                        'fields' => array(
+                                'date_FORMAT(`CupomFiscal`.`data_compra`, "%Y-%m-%d") AS dmy',
+                                'COUNT(CupomFiscal.codigo) AS sum_cf','AVG(CupomFiscal.valor) AS avg_valor','SUM(CupomFiscal.valor) AS sum_valor',
+                                'CupomFiscal.loja_id','Loja.nome_fantasia'),
+                        'group' => array('Loja.nome_fantasia','date_FORMAT(`CupomFiscal`.`data_compra`, "%Y-%m-%d")'),
+                        'order' => array('dmy' => 'asc'),
+                        'passit' => $this->passedArgs, // pass via $extra
+                        'recursive' => 0));
 
-
+        $this->set('resumoDiarios', $this->paginate('CupomFiscal') );
     }
 
 
@@ -48,7 +50,7 @@ class LojasController extends AppController {
                 'conditions' => array('loja_id' => $id),
                 //'contain' => array('Consumidor'),
                 'limit' => 50,
-           //'group' => array('consumidor_id')
+                //'group' => array('consumidor_id')
                 //'recursive' => 1
         );
         $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais[0]);
