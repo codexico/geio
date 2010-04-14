@@ -21,7 +21,7 @@
         <?php
 
         //echo $form->input('user_id');
-        echo $form->input('User.username', array('div' => 'input text mgt20', 'label' => 'Nome de Usu&aacute;rio'));
+        echo $form->input('User.username', array('div' => 'input text mgt20', 'label' => 'Login (nome que será usado para acessar o sistema)'));
 
         //That effectively eliminates the annoying Auth habit of hashing your password.
         echo $form->input('User.passwd', array('label' => 'Senha'));

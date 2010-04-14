@@ -3,7 +3,24 @@ class User extends AppModel {
 
     var $name = 'User';
     var $validate = array(
-            'username' => array('notempty'),
+        'username' => array(
+                            'username-1' => array(
+                                'rule'=>'notEmpty',
+                                            'required' => true,
+                                            'allowEmpty' => false
+                            ),
+                            'username-2' => array(
+                                            'rule' => 'isUnique',
+                                            'message' => 'Login já cadastrado, escolha outro por favor.'
+                            ),
+            ),
+//            'username' => array(
+//                                    'rule' => array('isUnique'),
+//                                            'required' => true,
+//                                            'allowEmpty' => false,
+//                                            'message' => 'Login já cadastrado, escolha outro por favor.'
+//            ),
+
             //'password' => array('notempty'),
             'passwd' => array('Campo Requerido' => 'notempty',
                             //tamanho

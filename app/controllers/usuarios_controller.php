@@ -19,7 +19,7 @@ class UsuariosController extends AppController {
 
     function view($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid Usuario', true));
+            $this->Session->setFlash(__('Id de Usuário Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
         $this->set('usuario', $this->Usuario->read(null, $id));
@@ -27,17 +27,17 @@ class UsuariosController extends AppController {
 
     function add() {
         if (!empty($this->data)) {
-            debug($this->data);
+            //debug($this->data);
 
             //grupo dos promotores
             $this->data['User']['group_id'] = 2; //TODO: fazer dinamico, ou usar ACL, ou usar uma CONSTANTE, ...
 
             if($this->User->Usuario->saveall($this->data)) {// lembrar que so funciona se o mysql for InnoDB
-                $this->Session->setFlash(__('The Usuario has been saved', true));
+                $this->Session->setFlash(__('Usuário salvo com sucesso.', true));
                 $this->redirect(array('action' => 'index'));
             }else {
                 $this->data['User']['password'] = '';//zerar o password
-                $this->Session->setFlash(__('The Usuario could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('O Usuário não foi salvo. Tente novamente.', true));
             }
 
             /*
@@ -55,15 +55,19 @@ class UsuariosController extends AppController {
 
     function edit($id = null) {
         if (!$id && empty($this->data)) {
-            $this->Session->setFlash(__('Invalid Usuario', true));
+            $this->Session->setFlash(__('Id de Usuário Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
         if (!empty($this->data)) {
-            if ($this->Usuario->save($this->data)) {
-                $this->Session->setFlash(__('The Usuario has been saved', true));
+
+            if($this->User->Usuario->saveall($this->data)) {// lembrar que so funciona se o mysql for InnoDB
+                $this->Session->setFlash(__('Usuário salvo com sucesso.', true));
                 $this->redirect(array('action' => 'index'));
+//            if ($this->Usuario->save($this->data)) {
+//                $this->Session->setFlash(__('Promotor salvo com sucesso.', true));
+//                $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The Usuario could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('O Usuário não foi salvo. Tente novamente.', true));
             }
         }
         if (empty($this->data)) {
@@ -73,7 +77,7 @@ class UsuariosController extends AppController {
 
     function delete($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid id for Usuario', true));
+            $this->Session->setFlash(__('Id de Usuário Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
 
@@ -83,10 +87,10 @@ class UsuariosController extends AppController {
         //if ($this->Usuario->del($id)) {
         if ($this->Usuario->del($id) && $this->User->del($usuario['User']['id'])) {
 
-            $this->Session->setFlash(__('Usuario deleted', true));
+            $this->Session->setFlash(__('Usuario deletado', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('The Usuario could not be deleted. Please, try again.', true));
+        $this->Session->setFlash(__('O Usuário não pode ser deletado. Tente novamente.', true));
         $this->redirect(array('action' => 'index'));
     }
 

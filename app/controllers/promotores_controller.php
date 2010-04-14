@@ -19,7 +19,7 @@ class PromotoresController extends AppController {
 
     function view($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid Promotor', true));
+            $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
         $this->set('promotor', $this->Promotor->read(null, $id));
@@ -33,11 +33,11 @@ class PromotoresController extends AppController {
             $this->data['User']['group_id'] = 3; //TODO: fazer dinamico, ou usar ACL, ou usar uma CONSTANTE, ...
 
             if($this->User->Promotor->saveall($this->data)) {// lembrar que so funciona se o mysql for InnoDB
-                $this->Session->setFlash(__('The Promotor has been saved', true));
+                $this->Session->setFlash(__('Promotor salvo com sucesso.', true));
                 $this->redirect(array('action' => 'index'));
             }else {
                 $this->data['User']['password'] = '';//zerar o password
-                $this->Session->setFlash(__('The Promotor could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('O Promotor não foi salvo. Tente novamente.', true));
             }
 
             /*
@@ -55,17 +55,17 @@ class PromotoresController extends AppController {
 
     function edit($id = null) {
         if (!$id && empty($this->data)) {
-            $this->Session->setFlash(__('Invalid Promotor', true));
+            $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
         if (!empty($this->data)) {
             //debug($this->data);
             //if($this->User->Promotor->saveall($this->data)) {//TODO: editar tambem o User na mesma tela
             if ($this->Promotor->save($this->data)) {
-                $this->Session->setFlash(__('The Promotor has been saved', true));
+                $this->Session->setFlash(__('Promotor salvo com sucesso.', true));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The Promotor could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('O Promotor não foi salvo. Tente novamente.', true));
             }
         }
         if (empty($this->data)) {
@@ -75,7 +75,7 @@ class PromotoresController extends AppController {
 
     function delete($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid id for Promotor', true));
+            $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
 
@@ -85,10 +85,10 @@ class PromotoresController extends AppController {
         //if ($this->Promotor->del($id)) {
         if ($this->Promotor->del($id) && $this->User->del($promotor['User']['id'])) {
         
-            $this->Session->setFlash(__('Promotor deleted', true));
+            $this->Session->setFlash(__('Promotor deletado', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('The Promotor could not be deleted. Please, try again.', true));
+        $this->Session->setFlash(__('O Promotor não pode ser deletado. Tente novamente.', true));
         $this->redirect(array('action' => 'index'));
     }
 

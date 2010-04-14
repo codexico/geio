@@ -98,6 +98,13 @@
 				&nbsp;
 			</dd>
 		</div>
+		<div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo date('d/m/Y - H:m',strtotime($promotor['Promotor']['modified'])); ?>
+				&nbsp;
+			</dd>
+		</div>
 	</dl>
 </div>
 <div class="clear"></div>
