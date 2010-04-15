@@ -314,8 +314,6 @@ class CupomFiscal extends AppModel {
      * @link http://book.cakephp.org/view/165/Controller-Setup
      */
     function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
-//debug($extra);
-//debug($conditions);
         if(empty($order)) {
             // great fix!
             if(isset ($extra['passit'])) {

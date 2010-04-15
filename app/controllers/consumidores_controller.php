@@ -115,11 +115,11 @@ class ConsumidoresController extends AppController {
             //debug($this->data);
             $this->Consumidor->create();
             if ($this->Consumidor->save($this->data)) {
-                $this->Session->setFlash(__('The Consumidor has been saved', true));
+                $this->Session->setFlash(__('Consumidor salvo com sucesso', true));
                 //$this->redirect(array('action' => 'index'));
                 $this->redirect(array('controller' => 'trocas', 'action' => 'nova/'.$this->Consumidor->id));
             } else {
-                $this->Session->setFlash(__('The Consumidor could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('O Consumidor não foi salvo. Tente novamente.', true));
             }
         }
     }
@@ -276,7 +276,31 @@ class ConsumidoresController extends AppController {
                 $resposta =  $this->render('/elements/consumidorencontrado');
                 return $resposta;
             }else {
-                return "nao encontrou";
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
+                $this->set('estados', $estados);
+
+                /*
+                * Busca os paises e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
+                $this->set('paises', $paises);
+
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+                $this->set('profissoes', $profissoes);
+
+                $this->set(compact('consumidor'));
+                $resposta =  $this->render('/elements/consumidorencontrado');
+                return $resposta;
+                //return "nao encontrou";
             }
         }
         exit ();
