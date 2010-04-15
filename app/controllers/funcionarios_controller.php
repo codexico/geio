@@ -3,6 +3,7 @@ class FuncionariosController extends AppController {
 
     var $name = 'Funcionarios';
     var $helpers = array('Html', 'Form');
+    var $uses = array("Funcionario",'Profissao');
 
     function index() {
         $this->Funcionario->recursive = 0;
@@ -30,6 +31,14 @@ class FuncionariosController extends AppController {
         $lojas = $this->Funcionario->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
         $lojas = array_merge(array('empty'=>''), $lojas );
         $this->set(compact('lojas'));
+
+        /*
+        * Busca as profissoes e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+        $this->set('profissoes', $profissoes);
+
     }
 
     function edit($id = null) {
@@ -50,6 +59,13 @@ class FuncionariosController extends AppController {
         }
         $lojas = $this->Funcionario->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
         $this->set(compact('lojas'));
+
+        /*
+        * Busca as profissoes e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+        $this->set('profissoes', $profissoes);
     }
 
     function delete($id = null) {

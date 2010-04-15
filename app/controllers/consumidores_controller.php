@@ -158,12 +158,12 @@ class ConsumidoresController extends AppController {
         $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
         $this->set('paises', $paises);
 
-                /*
-                * Busca os estados e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
-                $this->set('profissoes', $profissoes);
+        /*
+        * Busca as profissoes e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+        $this->set('profissoes', $profissoes);
     }
 
     function delete($id = null) {
@@ -225,12 +225,12 @@ class ConsumidoresController extends AppController {
         $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
         $this->set('paises', $paises);
 
-                /*
-                * Busca os estados e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
-                $this->set('profissoes', $profissoes);
+        /*
+        * Busca as profissoes e prepara um array para preencher o
+        * select na primeira vez que o formulário for carregado.
+        */
+        $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+        $this->set('profissoes', $profissoes);
     }
 
     function pesquisar() {
@@ -291,7 +291,7 @@ class ConsumidoresController extends AppController {
                 $this->set('paises', $paises);
 
                 /*
-                * Busca os estados e prepara um array para preencher o
+                * Busca as profissoes e prepara um array para preencher o
                 * select na primeira vez que o formulário for carregado.
                 */
                 $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
