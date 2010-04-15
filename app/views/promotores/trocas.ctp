@@ -63,7 +63,7 @@
                     <?php echo $html->link('Trocas', array('action' => 'consumidor', 'controller' =>'trocas', $troca['Consumidor']['id'])); ?>
             </td>
             <td class="txtCenter">
-                    <?php echo number_format($troca['Troca']['valor_total'], 2); ?>
+                    <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td class="txtCenter">
                     <?php echo $troca['Troca']['qtd_cp']; ?>

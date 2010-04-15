@@ -57,7 +57,7 @@
             <th class="txtCenter">
                 <?php
                 //echo $paginator->sort('R$','sum_valor');
-            echo $html->link(__('R$', true), array(
+            echo $html->link(__('VENDAS DIA (R$)', true), array(
                 'sort' => 'sum_valor',
                 'page' => isset($this->passedArgs['page'])?$this->passedArgs['page']:1,
                 'direction' => isset($this->passedArgs['direction'])? ($this->passedArgs['direction'] == 'asc')?'desc' : 'asc' : 'asc'
@@ -66,7 +66,7 @@
             <th class="txtCenter">
             <?php
             //echo $paginator->sort('Venda Média','avg_valor');
-            echo $html->link(__('Venda Média', true), array(
+            echo $html->link(__('Venda Média (R$)', true), array(
                 'page' => isset($this->passedArgs['page'])?$this->passedArgs['page']:1,
                 'sort' => 'avg_valor',
                 'direction' => isset($this->passedArgs['direction'])? ($this->passedArgs['direction'] == 'asc')?'desc' : 'asc' : 'asc'
@@ -99,10 +99,10 @@
                     <?php echo $resumoDiario['CupomFiscal']['sum_cf']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo number_format($resumoDiario['CupomFiscal']['sum_valor'],2); ?>
+                    <?php echo $number->currency($resumoDiario['CupomFiscal']['sum_valor'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td class="txtCenter">
-                    <?php echo number_format($resumoDiario['CupomFiscal']['avg_valor'],2); ?>
+                    <?php echo $number->currency($resumoDiario['CupomFiscal']['avg_valor'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
                 <?php /*
 			<td class="actions">
@@ -144,10 +144,10 @@
         <?php echo $valor_outros_sum; ?>
                     </th>
                     <th class="txtCenter">
-        <?php echo number_format($ticket_medio_consumidor_sum/$i,2); ?>
+        <?php echo $number->currency($ticket_medio_consumidor_sum/$i,'EUR',array('before'=>'R$ ','after'=>'')); ?>
                     </th>
                     <th class="txtCenter">
-        <?php echo number_format($ticket_medio_cupom_fiscal_sum/$i,2); ?>
+        <?php echo $number->currency($ticket_medio_cupom_fiscal_sum/$i,'EUR',array('before'=>'R$ ','after'=>'')); ?>
                     </th>
                 </tr>
         -->

@@ -85,23 +85,23 @@
                     <?php $qtd_cupons_promocionais_sum += $resumoDiario['ResumoDiario']['qtd_cupons_promocionais']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $resumoDiario['ResumoDiario']['valor_total']; ?>
+                    <?php echo  $number->currency($resumoDiario['ResumoDiario']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $valor_total_sum += $resumoDiario['ResumoDiario']['valor_total']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $resumoDiario['ResumoDiario']['valor_bandeira']; ?>
+                    <?php echo  $number->currency($resumoDiario['ResumoDiario']['valor_bandeira'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $valor_bandeira_sum += $resumoDiario['ResumoDiario']['valor_bandeira']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $resumoDiario['ResumoDiario']['valor_outros']; ?>
+                    <?php echo  $number->currency($resumoDiario['ResumoDiario']['valor_outros'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $valor_outros_sum += $resumoDiario['ResumoDiario']['valor_outros']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo number_format($resumoDiario['ResumoDiario']['ticket_medio_consumidor'],2); ?>
+                    <?php echo $number->currency($resumoDiario['ResumoDiario']['ticket_medio_consumidor'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $ticket_medio_consumidor_sum += $resumoDiario['ResumoDiario']['ticket_medio_consumidor']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo number_format($resumoDiario['ResumoDiario']['ticket_medio_cupom_fiscal'],2); ?>
+                    <?php echo $number->currency($resumoDiario['ResumoDiario']['ticket_medio_cupom_fiscal'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $ticket_medio_cupom_fiscal_sum += $resumoDiario['ResumoDiario']['ticket_medio_cupom_fiscal']; ?>
             </td>
                 <?php /*
@@ -144,10 +144,10 @@
                 <?php echo $valor_outros_sum; ?>
             </th>
             <th class="txtCenter">
-                <?php echo number_format($ticket_medio_consumidor_sum/$i,2); ?>
+                <?php echo $number->currency($ticket_medio_consumidor_sum/$i,'EUR',array('before'=>'','after'=>'')); ?>
             </th>
             <th class="txtCenter">
-                <?php echo number_format($ticket_medio_cupom_fiscal_sum/$i,2); ?>
+                <?php echo $number->currency($ticket_medio_cupom_fiscal_sum/$i,'EUR',array('before'=>'','after'=>'')); ?>
             </th>
         </tr>
     </table>

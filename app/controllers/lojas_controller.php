@@ -6,7 +6,7 @@
 class LojasController extends AppController {
 
     var $name = 'Lojas';
-    var $helpers = array('Html', 'Form');
+    var $helpers = array('Html', 'Form', 'Number');
 
     var $uses = array('Loja', 'CupomFiscal', 'Consumidor');
 

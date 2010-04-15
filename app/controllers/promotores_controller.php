@@ -2,7 +2,7 @@
 class PromotoresController extends AppController {
 
     var $name = 'Promotores';
-    var $helpers = array('Html', 'Form');
+    var $helpers = array('Html', 'Form', 'Number');
 
     var $uses = array('Promotor','User');
 

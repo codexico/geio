@@ -57,16 +57,16 @@
                     <?php echo $detalhe['TrocasDia']['sum_cp']; ?>
             </td>
             <td>
-                    <?php echo number_format($detalhe['TrocasDia']['avg_valor_total'],2); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['avg_valor_total'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
             <td>
-                    <?php echo number_format($detalhe['TrocasDia']['sum_valor_total'],2); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['sum_valor_total'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
             <td>
-                    <?php echo number_format($detalhe['TrocasDia']['sum_bandeira'],2); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['sum_bandeira'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
             <td>
-                    <?php echo number_format($detalhe['TrocasDia']['sum_outros'],2); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['sum_outros'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
         </tr>
         <?php endforeach; ?>

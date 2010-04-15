@@ -1,3 +1,12 @@
+<?php
+/* @var $this View */
+/* @var $html HtmlHelper */
+/* @var $form FormHelper */
+/* @var $javascript JavascriptHelper */
+/* @var $cakePtbr CakePtbr.FormatacaoHelper */
+/* @var $paginator PaginatorHelper */
+/* @var $number NumberHelper */
+?>
 <!-- .titulo -->
 <div class="titulo">
     <?php echo $html->image('bullet_titulo.gif')?>
@@ -120,13 +129,13 @@
     <h1>Relatório de Compras na Loja</h1>
 </div>
 <div class="relatorio">
-    <p><?php echo "Total de Consumo: R$ " . number_format($relatorio['total'],2); ?></p>
+    <p><?php echo "Total de Consumo: " . $number->currency($relatorio['total'],'EUR',array('before'=>'R$ ','after'=>'')); ?></p>
     <p><?php echo "Número Total de Consumidores: " . $relatorio['total_consumidores']; ?></p>
     <br />
-    <p><?php echo "Total de Consumo na Bandeira: R$ " . number_format($relatorio['total_bandeira'],2); ?></p>
+    <p><?php echo "Total de Consumo na Bandeira: " . $number->currency($relatorio['total_bandeira'],'EUR',array('before'=>'R$ ','after'=>'')); ?></p>
     <p><?php echo "Número de Consumidores que usaram a Bandeira: " . $relatorio['total_consumidores_bandeira']; ?></p>
     <br />
-    <p><?php echo "Total de Consumo em outras formas: R$ " . number_format($relatorio['total_outros'],2); ?></p>
+    <p><?php echo "Total de Consumo em outras formas: " . $number->currency($relatorio['total_outros'],'EUR',array('before'=>'R$ ','after'=>'')); ?></p>
     <p><?php echo "Número de Consumidores que Não usaram a Bandeira: " . $relatorio['total_consumidores_outros']; ?></p>
 </div>
 <div class="clear"></div>
@@ -158,7 +167,7 @@
             <!-- <th class="txtCenter"><?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th> -->
             <th class="txtCenter"><?php echo $paginator->sort('Nr. Cupom Fiscal','codigo', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th><?php echo $paginator->sort('Consumidor','Consumidor.nome', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Valor (R$)','valor', array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th class="txtCenter"><?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th class="txtCenter"><?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
             <th class="txtCenter"><?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$loja['Loja']['id']) ) );?></th>
@@ -179,7 +188,7 @@
                     <?php echo $cupomFiscal['Consumidor']['nome']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo number_format($cupomFiscal['CupomFiscal']['valor'],2); ?>
+                    <?php echo $number->currency($cupomFiscal['CupomFiscal']['valor'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td class="txtCenter">
                     <?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>

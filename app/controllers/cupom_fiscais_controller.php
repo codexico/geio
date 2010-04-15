@@ -2,7 +2,7 @@
 class CupomFiscaisController extends AppController {
 
     var $name = 'CupomFiscais';
-    var $helpers = array('Html', 'Form');
+    var $helpers = array('Html', 'Form', 'Number');
 
     function index() {
         $this->CupomFiscal->recursive = 0;

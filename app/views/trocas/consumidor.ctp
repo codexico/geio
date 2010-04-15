@@ -127,7 +127,7 @@
                     <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
             <td>
-                    <?php echo number_format($troca['Troca']['valor_total'], 2); ?>
+                    <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td>
                     <?php echo $troca['Troca']['qtd_cp']; ?>

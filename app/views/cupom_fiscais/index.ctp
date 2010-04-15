@@ -66,7 +66,7 @@
 				<?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
 			</td>
 			<td class="txtCenter">
-				<?php echo number_format($cupomFiscal['CupomFiscal']['valor'],2); ?>
+				<?php echo $number->currency($cupomFiscal['CupomFiscal']['valor'],'EUR',array('before'=>'','after'=>'')); ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
