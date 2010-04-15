@@ -316,9 +316,18 @@ class CupomFiscal extends AppModel {
     function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
         if(empty($order)) {
             // great fix!
-            $order = array($extra['passit']['sort'] => $extra['passit']['direction']);
+            if(isset ($extra['passit'])){
+                $order = array($extra['passit']['sort'] => $extra['passit']['direction']);
+            }else{
+                $order = array();
+            }
         }
-        $group = $extra['group'];
+        if(isset ($extra['group'])){
+            $group = $extra['group'];
+        }else{
+            $group = '';
+        }
+        
         return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
     }
 

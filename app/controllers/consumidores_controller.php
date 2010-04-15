@@ -20,7 +20,7 @@ class ConsumidoresController extends AppController {
     */
     var $name = 'Consumidores';
     var $helpers = array('Html', 'Form', 'CakePtbr.Formatacao', 'Ajax', 'Javascript');
-    var $uses = array("Consumidor", "Bairro", "Endereco", "Cidade", "Estado", "Paise");
+    var $uses = array("Consumidor", "Bairro", "Endereco", "Cidade", "Estado", "Paise",'Profissao');
     var $components = array('RequestHandler');
 
 
@@ -132,7 +132,7 @@ class ConsumidoresController extends AppController {
         if (!empty($this->data)) {
             if ($this->Consumidor->save($this->data)) {
                 $this->Session->setFlash(__('Consumidor editado com sucesso.', true));
-                if ($this->Session->read('Auth.User.group_id') == 3){//promotor
+                if ($this->Session->read('Auth.User.group_id') == 3) {//promotor
                     $this->redirect(array('controller'=>'trocas','action' => 'nova', $id));
                 }
                 $this->redirect(array('action' => 'index'));
@@ -157,6 +157,13 @@ class ConsumidoresController extends AppController {
         */
         $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
         $this->set('paises', $paises);
+
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+                $this->set('profissoes', $profissoes);
     }
 
     function delete($id = null) {
@@ -217,6 +224,13 @@ class ConsumidoresController extends AppController {
         */
         $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
         $this->set('paises', $paises);
+
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+                $this->set('profissoes', $profissoes);
     }
 
     function pesquisar() {
@@ -235,21 +249,29 @@ class ConsumidoresController extends AppController {
             //                            'cpf' => $this->data['cpf']
             //            )));
             if($consumidor) {
-$this->data = $consumidor;
+                $this->data = $consumidor;
 
-        /*
-        * Busca os estados e prepara um array para preencher o
-        * select na primeira vez que o formulário for carregado.
-        */
-        $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
-        $this->set('estados', $estados);
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
+                $this->set('estados', $estados);
 
-        /*
-        * Busca os paises e prepara um array para preencher o
-        * select na primeira vez que o formulário for carregado.
-        */
-        $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
-        $this->set('paises', $paises);
+                /*
+                * Busca os paises e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
+                $this->set('paises', $paises);
+
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+                $this->set('profissoes', $profissoes);
+
                 $this->set(compact('consumidor'));
                 $resposta =  $this->render('/elements/consumidorencontrado');
                 return $resposta;

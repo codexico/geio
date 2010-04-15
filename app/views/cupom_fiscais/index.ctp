@@ -39,7 +39,7 @@
 			<th class="w15 txtCenter"><?php echo $paginator->sort('N. Cupom Fiscal', 'codigo');?></th>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('troca_id');?></th>
 			<th class="w15"><?php echo $paginator->sort('loja_id');?></th>
-			<th class="w5 txtCenter"><?php echo $paginator->sort('valor');?></th>
+			<th class="w10 txtCenter"><?php echo $paginator->sort('Valor R$','valor');?></th>
 			<th class="w15 txtCenter"><?php echo $paginator->sort('forma_de_pagamento');?></th>
 			<th class="w15 txtCenter"><?php echo $paginator->sort('bandeira');?></th>
 			<th class="w10 actions"></th>
@@ -66,7 +66,7 @@
 				<?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
 			</td>
 			<td class="txtCenter">
-				<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
+				<?php echo number_format($cupomFiscal['CupomFiscal']['valor'],2); ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
