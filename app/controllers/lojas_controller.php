@@ -25,6 +25,7 @@ class LojasController extends AppController {
                                 'CupomFiscal.loja_id','Loja.nome_fantasia'),
                         'group' => array('Loja.nome_fantasia','date_FORMAT(`CupomFiscal`.`data_compra`, "%Y-%m-%d")'),
                         'order' => array('dmy' => 'asc'),
+                        'limit'=>20,
                         'passit' => $this->passedArgs, // pass via $extra
                         'recursive' => 0));
 

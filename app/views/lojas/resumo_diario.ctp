@@ -48,7 +48,7 @@
                 //'action' => 'view',
                 'page' => isset($this->passedArgs['page'])?$this->passedArgs['page']:1,
                 'sort' => 'sum_cf',
-                //'limit' => isset($this->passedArgs['limit'])?$this->passedArgs['limit']:'',
+                'limit' => isset($this->passedArgs['limit'])?$this->passedArgs['limit']:'',
                 'direction' => isset($this->passedArgs['direction'])? ($this->passedArgs['direction'] == 'asc')?'desc' : 'asc' : 'asc'
                 ));
                 //debug($this->passedArgs);
@@ -155,7 +155,7 @@
 
     <!-- .paginacao -->
     <div class="paginacao">
-        <div class="pagin_proximo"><?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?></div>
+        <div class="pagin_proximo"><?php echo $paginator->next(__('next', true).' >>', array('model'=>'CupomFiscal'), null, array('class' => 'disabled'));?></div>
         <div class="pagin_numeros"><?php echo $paginator->numbers(array('before'=>'','after'=>'','tag'=>'li','separator'=>' '));?></div>
         <div class="pagin_anterior"><?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?></div>
     </div>

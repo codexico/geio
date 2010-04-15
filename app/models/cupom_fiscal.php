@@ -314,23 +314,45 @@ class CupomFiscal extends AppModel {
      * @link http://book.cakephp.org/view/165/Controller-Setup
      */
     function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+//debug($extra);
+//debug($conditions);
         if(empty($order)) {
             // great fix!
-            if(isset ($extra['passit'])){
+            if(isset ($extra['passit'])) {
                 $order = array($extra['passit']['sort'] => $extra['passit']['direction']);
-            }else{
+            }else {
                 $order = array();
             }
         }
-        if(isset ($extra['group'])){
+        if(isset ($extra['group'])) {
             $group = $extra['group'];
-        }else{
+        }else {
             $group = '';
         }
-        
+
         return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
     }
 
+    /**
+     * Unsets contain key for faster pagination counts
+     *
+     * @link http://teknoid.wordpress.com/2010/01/30/lets-help-out-cakephps-pagination/
+     *
+     * @param array $conditions
+     * @param integer $recursive
+     * @param array $extra
+     * @return integer
+     * @author Jose Diaz-Gonzalez
+     */
+    public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
+        $conditions = compact('conditions');
+        if ($recursive != $this->recursive) {
+            $conditions['recursive'] = $recursive;
+        }
+        $extra['contain'] = false;
+        //return $this->find('count', array_merge($conditions, $extra));//não retorna a soma
+        return count($this->find('all', array_merge($conditions, $extra)));
+    }
 
 
     function _buscaRelatorioLoja($id) {
