@@ -10,11 +10,12 @@ class TrocasController extends AppController {
     var $name = 'Trocas';
     var $helpers = array('Html', 'Form', 'Javascript', 'CakePtbr.Formatacao');
 
-    var $uses = array('Troca','CupomPromocional', 'CupomFiscal');
+    var $uses = array('Troca','CupomPromocional', 'CupomFiscal','Brinde');
 
 
     function beforeFilter() {
         parent::beforeFilter();
+        $this->Auth->allow('escolher_brinde','concluida');
     }
 
     function index() {
@@ -160,7 +161,7 @@ class TrocasController extends AppController {
 
                 if( Configure::read('Regras.Brinde.true') ) {
                     //TODO:redireciona para algo do brinde
-                    $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'escolher_brinde/' . $this->Troca->id),null,true);
                 }else {
                     $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
                 }
@@ -168,13 +169,57 @@ class TrocasController extends AppController {
             } else {
                 $this->Session->setFlash(__('A Troca não foi efetuda. Verifique os erros por favor.', true));
             }
-
         }
         $lojas = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
         $lojas_razao_social = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.razao_social')));
         $this->set(compact('lojas', 'lojas_razao_social'));
     }
+    function escolher_brinde($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(__('Troca inválida', true));
+            $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+        }
 
+
+        $this->Troca->recursive = 1;
+        $troca = $this->Troca->read(null, $id);//debug($troca);
+        $this->Troca->Premio->recursive = -1;
+        $premios = $this->Troca->Premio->find('all',array('conditions'=>array('troca_id'=>$id),'fields'=>'id' ));//debug($premios);
+
+        if (!empty($this->data)) {//debug($this->data);
+            //debug($this->data);
+            //debug($premios);
+            $i=0;
+            foreach ($this->data['Premio']['foreign_key'] as $key => $value) {
+
+                for($k=0;$k<$value;$k++) {
+                    $premios[$i]["Premio"]['foreign_key'] = $key;
+                    $premios[$i]["Premio"]['model'] = 'Brinde';
+                    $i++;
+                }
+            }
+            //debug($premios);
+            if ($this->Troca->Premio->saveAll($premios)) {
+                $this->Session->setFlash(__('Troca concluída com sucesso.', true));
+                $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
+            } else {
+                $this->Session->setFlash(__('Ocorreu algum erro, tente novamente por favor.', true));
+            }
+
+        }
+
+
+
+        $consumidor['Consumidor'] = $troca['Consumidor'];//debug($consumidor);
+
+        $this->set(compact('troca', 'consumidor'));
+
+        $this->set(compact('premios'));
+
+        $brindes = $this->Brinde->find('list');//debug($brindes);
+        $this->set(compact('brindes'));
+
+    }
     function concluida($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Troca inválida', true));
@@ -201,7 +246,7 @@ class TrocasController extends AppController {
         $this->set(compact('troca', 'consumidor'));
     }
      *
-     */
+    */
 
     ////////////////
     ////////////
@@ -321,7 +366,7 @@ class TrocasController extends AppController {
         $this->data['Troca']['valor_total'] = $valorBandeira +  $valorOutros;
         $this->data['Troca']['valor_bandeira'] = $valorBandeira;
         $this->data['Troca']['valor_outros'] = $valorOutros;
-        $this->data['Troca']['qtd_cp'] = (int)$c;
+        $this->data['Troca']['qtd_premios'] = (int)$c;
 
         return array(
                 'valorOutros' => $valorOutros,
@@ -330,7 +375,6 @@ class TrocasController extends AppController {
                 'restoBandeira' => $restoBandeira,
                 'qtd_premios' => (int)$c);
     }
-
     /**
      * Atualiza o saldo do consumidor
      * TODO: mudar essa funcao para o model Consumidor? afterSave talvez?

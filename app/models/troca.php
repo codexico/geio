@@ -5,6 +5,7 @@
  * @property CupomFiscal $CupomFiscal
  * @property Consumidor $Consumidor
  * @property Promotor $Promotor
+ * @property Premio $Premio
  */
 class Troca extends AppModel {
 
