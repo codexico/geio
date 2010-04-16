@@ -20,6 +20,8 @@
 
                 <?php if ($session->read('Auth.User.group_id') == 1) : ?>
 
+                <li><?php echo $html->link('Brindes', array('action' => 'index', 'controller'=>'brindes'));?></li>
+
                 <li><?php echo $html->link('Consumidores', array('action' => 'index', 'controller'=>'consumidores'));?></li>
                 <!-- <li><?php echo $html->link('Inserir Consumidor', array('action' => 'add', 'controller'=>'consumidores')); ?></li> -->
 
