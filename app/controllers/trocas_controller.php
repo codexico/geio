@@ -15,7 +15,7 @@ class TrocasController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('escolher_brinde','concluida');
+        //$this->Auth->allow('escolher_brinde','concluida');
     }
 
     function index() {

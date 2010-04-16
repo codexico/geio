@@ -118,6 +118,7 @@ class UsersController extends AppController {
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/logout');
         $this->Acl->allow($group, 'controllers/Trocas/nova');
+        $this->Acl->allow($group, 'controllers/Trocas/escolher_brinde');
         $this->Acl->allow($group, 'controllers/Trocas/concluida');
         $this->Acl->allow($group, 'controllers/CupomPromocionais/cupomPdf');
         $this->Acl->allow($group, 'controllers/consumidores/novo');
