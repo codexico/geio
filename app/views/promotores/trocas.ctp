@@ -4,7 +4,7 @@
 <!-- .titulo -->
 <div class="titulo">
     <?php echo $html->image('bullet_titulo.gif')?>
-    <h1>Trocas dos &uacute;ltimos 30 dias</h1>
+    <h1>Trocas do Promotor</h1>
 </div>
 <div class="clear"></div>
 
