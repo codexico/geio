@@ -11,6 +11,7 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
 	<th><?php echo $paginator->sort('valor');?></th>
+	<th><?php echo $paginator->sort('consumidor_max');?></th>
 	<th><?php echo $paginator->sort('estoque_inicial');?></th>
 	<th><?php echo $paginator->sort('estoque_atual');?></th>
 	<th><?php echo $paginator->sort('obs');?></th>
@@ -35,6 +36,9 @@ foreach ($brindes as $brinde):
 		</td>
 		<td>
 			<?php echo $brinde['Brinde']['valor']; ?>
+		</td>
+		<td>
+			<?php echo $brinde['Brinde']['consumidor_max']; ?>
 		</td>
 		<td>
 			<?php echo $brinde['Brinde']['estoque_inicial']; ?>

@@ -16,6 +16,11 @@
 			<?php echo $brinde['Brinde']['valor']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Consumidor Max'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $brinde['Brinde']['consumidor_max']; ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estoque Inicial'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $brinde['Brinde']['estoque_inicial']; ?>

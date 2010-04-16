@@ -53,7 +53,7 @@ $config['Regras.Bandeira.valor'] =  2;
  * @global boolean $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.true'] = FALSE;
+$config['Regras.Brinde.true'] = TRUE;
 /**
  * Máximo de brindes que um consumidor pode retirar
  *

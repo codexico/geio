@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* Brinde Test cases generated on: 2010-04-15 19:12:06 : 1271369526*/
+/* Brinde Test cases generated on: 2010-04-16 03:22:18 : 1271398938*/
 App::import('Model', 'Brinde');
 
 class BrindeTestCase extends CakeTestCase {
@@ -24,11 +24,12 @@ class BrindeTestCase extends CakeTestCase {
 			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'valor' => 1,
+			'consumidor_max' => 1,
 			'estoque_inicial' => 1,
 			'estoque_atual' => 1,
 			'obs' => 'Lorem ipsum dolor sit amet',
-			'created' => '2010-04-15 19:12:05',
-			'modified' => '2010-04-15 19:12:05'
+			'created' => '2010-04-16 03:22:17',
+			'modified' => '2010-04-16 03:22:17'
 		));
 		$this->assertEqual($results, $expected);
 	}

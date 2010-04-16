@@ -1,6 +1,10 @@
 <?php
 /**
+ * @property Troca $Troca
+ * @property CupomPromocional $CupomPromocional
  * @property CupomFiscal $CupomFiscal
+ * @property Consumidor $Consumidor
+ * @property Promotor $Promotor
  */
 class Troca extends AppModel {
 
@@ -40,6 +44,19 @@ class Troca extends AppModel {
 		),
 		'CupomPromocional' => array(
 			'className' => 'CupomPromocional',
+			'foreignKey' => 'troca_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Premio' => array(
+			'className' => 'Premio',
 			'foreignKey' => 'troca_id',
 			'dependent' => false,
 			'conditions' => '',

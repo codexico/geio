@@ -418,5 +418,27 @@ class CupomFiscal extends AppModel {
 
         return $results;
     }
+
+
+    /**
+     * soma os valores dos cupons fiscais enviados
+     *
+     * @return array array('valorBandeira'=>$valorBandeira,'valorOutros'=>$valorOutros);
+     */
+    function _somaValorCFs($cfs) {
+        $valorBandeira = $valorOutros = 0;
+        foreach ($cfs as $cf) {//debug($cf);
+            if(isset ($cf['bandeira'])) {//debug($cf['bandeira'] . " " . $regras['Bandeira']['nome']);
+                if( up($cf['bandeira']) == up(Configure::read('Regras.Bandeira.nome') ) ){
+                    $valorBandeira += $cf['valor'];//debug('bandeira = ' . $valorBandeira);
+                }else {//bandeiras fora da promocao
+                    $valorOutros += $cf['valor'];//debug("dinheiro = " . $valorOutros);
+                }
+            }else {
+                $valorOutros += $cf['valor'];//debug("dinheiro = " . $valorOutros);
+            }
+        }
+        return array('valorBandeira'=>$valorBandeira,'valorOutros'=>$valorOutros);
+    }
 }
 ?>

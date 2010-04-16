@@ -7,7 +7,6 @@ $javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
 $javascript->link(array('trocas_nova'), false);
 ?>
 
-<?php $session->flash('Impressora'); ?>
 <?php
 echo $this->element('consumidor');
 ?>

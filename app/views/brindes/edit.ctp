@@ -6,6 +6,7 @@
 		echo $form->input('id');
 		echo $form->input('name');
 		echo $form->input('valor');
+		echo $form->input('consumidor_max');
 		echo $form->input('estoque_inicial');
 		echo $form->input('estoque_atual');
 		echo $form->input('obs');

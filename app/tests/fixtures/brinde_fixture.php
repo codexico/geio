@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* Brinde Fixture generated on: 2010-04-15 19:12:05 : 1271369525*/
+/* Brinde Fixture generated on: 2010-04-16 03:22:17 : 1271398937*/
 
 class BrindeFixture extends CakeTestFixture {
 	var $name = 'Brinde';
@@ -9,6 +9,7 @@ class BrindeFixture extends CakeTestFixture {
 		'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 		'name' => array('type'=>'string', 'null' => false, 'default' => NULL),
 		'valor' => array('type'=>'integer', 'null' => true, 'default' => NULL),
+		'consumidor_max' => array('type'=>'integer', 'null' => true, 'default' => '0', 'length' => 2),
 		'estoque_inicial' => array('type'=>'integer', 'null' => false, 'default' => '0', 'length' => 5),
 		'estoque_atual' => array('type'=>'integer', 'null' => false, 'default' => '0', 'length' => 5),
 		'obs' => array('type'=>'string', 'null' => true, 'default' => NULL, 'length' => 500),
@@ -20,11 +21,12 @@ class BrindeFixture extends CakeTestFixture {
 		'id' => 1,
 		'name' => 'Lorem ipsum dolor sit amet',
 		'valor' => 1,
+		'consumidor_max' => 1,
 		'estoque_inicial' => 1,
 		'estoque_atual' => 1,
 		'obs' => 'Lorem ipsum dolor sit amet',
-		'created' => '2010-04-15 19:12:05',
-		'modified' => '2010-04-15 19:12:05'
+		'created' => '2010-04-16 03:22:17',
+		'modified' => '2010-04-16 03:22:17'
 	));
 }
 ?>

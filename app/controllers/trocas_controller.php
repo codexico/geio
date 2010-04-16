@@ -3,6 +3,7 @@
  * @property Troca $Troca
  * @property CupomPromocional $CupomPromocional
  * @property CupomFiscal $CupomFiscal
+ * @property Consumidor $Consumidor
  */
 class TrocasController extends AppController {
 
@@ -142,28 +143,30 @@ class TrocasController extends AppController {
                 $this->data['CupomFiscal'][$i]['consumidor_id'] = $consumidor['Consumidor']['id'];
             }
 
-            if( Configure::read('Regras.Brinde.true') ) {
+            if( Configure::read('Regras.Brinde.true') ) {//por enquanto continua usando, mas depois vai virar tudo premio
+                $valores = $this->_calculaPremio();
                 //$this->_calculaBrinde();//TODO
-            }else {
-                $valoresCP = $this->_calculaCupomPromocional();//debug($valoresCP);
+            }else {//por enquanto continua usando, mas depois vai virar tudo premio
+                $valores = $this->_calculaCupomPromocional();//debug($valoresCP);
             }
-
+            debug($this->data);
             $this->Troca->create();
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));
 
                 if( Configure::read('Regras.Saldo.true') ) {//debug($valoresCP);
-                    $this->_atualizaSaldo($valoresCP);
+                    $this->_atualizaSaldo($valores);
                 }
 
                 if( Configure::read('Regras.Brinde.true') ) {
                     //TODO:redireciona para algo do brinde
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
                 }else {
-                    $this->redirect(array('controller'=>'trocas', 'action' => 'imprimir/' . $this->Troca->id));
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
                 }
 
             } else {
-                $this->Session->setFlash(__('The Troca could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('A Troca não foi efetuda. Verifique os erros por favor.', true));
             }
 
         }
@@ -172,6 +175,19 @@ class TrocasController extends AppController {
         $this->set(compact('lojas', 'lojas_razao_social'));
     }
 
+    function concluida($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(__('Troca inválida', true));
+            $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+        }
+        $this->Troca->recursive = 1;
+        $troca = $this->Troca->read(null, $id);//debug($troca);
+
+        $consumidor['Consumidor'] = $troca['Consumidor'];//debug($consumidor);
+
+        $this->set(compact('troca', 'consumidor'));
+    }
+    /*
     function imprimir($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid id for Troca', true));
@@ -184,6 +200,8 @@ class TrocasController extends AppController {
 
         $this->set(compact('troca', 'consumidor'));
     }
+     *
+     */
 
     ////////////////
     ////////////
@@ -205,22 +223,15 @@ class TrocasController extends AppController {
         $regras = Configure::read('Regras');//debug($regras);
 
         if($regras['Saldo']['true']) {
-            $saldos = $this->Troca->Consumidor->read(array('saldo_bandeira', 'saldo_outros'));
-            $restoBandeira = $saldos['Consumidor']['saldo_bandeira'];//debug('saldo_bandeira anterior = ' . $restoBandeira );
-            $restoOutros = $saldos['Consumidor']['saldo_outros'];//debug('saldo_outros anterior = ' . $restoOutros);
+            $restoBandeira = $this->Troca->Consumidor->data['Consumidor']['saldo_bandeira'];//debug('saldo_bandeira anterior = ' . $restoBandeira );
+            $restoOutros = $this->Troca->Consumidor->data['Consumidor']['saldo_outros'];//debug('saldo_outros anterior = ' . $restoOutros);
         }
+
         //soma os valores dos cupons fiscais enviados
-        foreach ($this->data['CupomFiscal'] as $cf) {//debug($cf);
-            if(isset ($cf['bandeira'])) {//debug($cf['bandeira'] . " " . $regras['Bandeira']['nome']);
-                if( up($cf['bandeira']) == up($regras['Bandeira']['nome']) ) {
-                    $valorBandeira += $cf['valor'];//debug('bandeira = ' . $valorBandeira);
-                }else {//bandeiras fora da promocao
-                    $valorOutros += $cf['valor'];//debug("dinheiro = " . $valorOutros);
-                }
-            }else {
-                $valorOutros += $cf['valor'];//debug("dinheiro = " . $valorOutros);
-            }
-        }
+        $valores = $this->CupomFiscal->_somaValorCFs($this->data['CupomFiscal']);
+        $valorBandeira = $valores['valorBandeira'];
+        $valorOutros = $valores['valorOutros'];
+
         //calcula as trocas
         $restoOutros += $valorOutros ;
         if( $restoOutros >= $regras['Valor'] ) {//trocar dinheiro
@@ -259,6 +270,65 @@ class TrocasController extends AppController {
                 'valorBandeira' => $valorBandeira,
                 'restoBandeira' => $restoBandeira,
                 'qtd_CP' => (int)$c);
+    }
+
+    function _calculaPremio() {
+        $c = $valorOutros = $valorBandeira = $restoOutros = $restoBandeira = 0;
+        $regras = Configure::read('Regras');//debug($regras);
+
+        if($regras['Saldo']['true']) {
+            $restoBandeira = $this->Troca->Consumidor->data['Consumidor']['saldo_bandeira'];//debug('saldo_bandeira anterior = ' . $restoBandeira );
+            $restoOutros = $this->Troca->Consumidor->data['Consumidor']['saldo_outros'];//debug('saldo_outros anterior = ' . $restoOutros);
+        }
+
+        //soma os valores dos cupons fiscais enviados
+        $valores = $this->CupomFiscal->_somaValorCFs($this->data['CupomFiscal']);
+        $valorBandeira = $valores['valorBandeira'];
+        $valorOutros = $valores['valorOutros'];
+
+        //calcula as trocas
+        $restoOutros += $valorOutros ;
+        if( $restoOutros >= $regras['Valor'] ) {//trocar dinheiro
+            $c += floor( ($restoOutros) / $regras['Valor'] );
+            $restoOutros = ($restoOutros) % $regras['Valor']; //resto da divisao
+        }
+        $restoBandeira += $valorBandeira;
+        if( $restoBandeira >= $regras['Valor'] ) {// trocar bandeira
+            $c += floor( ($restoBandeira) / $regras['Valor'] ) * $regras['Bandeira']['valor'];
+            $restoBandeira = ($restoBandeira) % $regras['Valor']; //resto da divisao
+        }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
+
+        if($this->data['Troca']['juntar_saldos'] == 'true') {
+            if( ($restoOutros + $restoBandeira) >= $regras['Valor'] ) {//troca os restinhos
+                $c++;
+                $restoBandeira = ($restoOutros + $restoBandeira) - $regras['Valor']; //restinho final
+                $restoOutros = 0;
+            }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
+        }
+
+        //criar os Premios
+        for ($i = 0; $i < $c; $i++) {
+            $this->data['Premio'][$i]['promotor_id'] = $this->data['Troca']['promotor_id'];
+            $this->data['Premio'][$i]['consumidor_id'] = $this->data['Troca']['consumidor_id'];
+
+//            if( Configure::read('Regras.Brinde.true') ) {
+//                $this->data['Premio'][$i]['model']='';
+//                $this->data['Premio'][$i]['foreign_key']='';
+//            }
+        }
+        //dados extras para colocar na troca e economizar processamento nos SELECTs
+        $this->data['Troca']['qtd_cf'] = count($this->data['CupomFiscal']);
+        $this->data['Troca']['valor_total'] = $valorBandeira +  $valorOutros;
+        $this->data['Troca']['valor_bandeira'] = $valorBandeira;
+        $this->data['Troca']['valor_outros'] = $valorOutros;
+        $this->data['Troca']['qtd_cp'] = (int)$c;
+
+        return array(
+                'valorOutros' => $valorOutros,
+                'restoOutros' => $restoOutros,
+                'valorBandeira' => $valorBandeira,
+                'restoBandeira' => $restoBandeira,
+                'qtd_premios' => (int)$c);
     }
 
     /**
