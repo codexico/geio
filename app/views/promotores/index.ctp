@@ -49,7 +49,9 @@
             ?>
         <tr<?php echo $class;?>>
             <td>
-                    <?php echo $promotor['Promotor']['nome']; ?>
+                    <?php echo $html->link($promotor['Promotor']['nome'],
+                    array('action' => 'trocas', 'controller' =>'promotores', $promotor['Promotor']['id'])); ?>
+
             </td>
             <td>
                     <?php echo $promotor['Promotor']['email']; ?>
@@ -73,14 +75,6 @@
                     "alt" => "Excluir",
                     'url' => array('action' => 'delete', $promotor['Promotor']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $promotor['Promotor']['id'])
                     )); ?>
-
-                    <?php echo $html->image("seta1_direita.gif", array(
-                    "alt" => "Trocas",
-                    'url' => array('action' => 'trocas', $promotor['Promotor']['id']),
-                    "width" => '8'
-                    ));
-                    //TODO: trocar a imagem do link "Trocas"
-                    ?>
 
             </td>
         </tr>
