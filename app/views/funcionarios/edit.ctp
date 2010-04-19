@@ -50,5 +50,5 @@
         ?>
 
 	</fieldset>
-    <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>

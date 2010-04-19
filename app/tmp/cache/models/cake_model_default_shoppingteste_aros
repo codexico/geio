@@ -1,2 +1,6 @@
+<<<<<<< HEAD:app/tmp/cache/models/cake_model_default_shoppingteste_aros
 1271558778
+=======
+1271617714
+>>>>>>> 2b6f8d26c99c1c02a8d5b229167c29a7486f69fb:app/tmp/cache/models/cake_model_default_shoppingteste_aros
 a:7:{s:2:"id";a:5:{s:4:"type";s:7:"integer";s:4:"null";b:0;s:7:"default";N;s:6:"length";i:10;s:3:"key";s:7:"primary";}s:9:"parent_id";a:4:{s:4:"type";s:7:"integer";s:4:"null";b:1;s:7:"default";N;s:6:"length";i:10;}s:5:"model";a:4:{s:4:"type";s:6:"string";s:4:"null";b:1;s:7:"default";N;s:6:"length";i:255;}s:11:"foreign_key";a:4:{s:4:"type";s:7:"integer";s:4:"null";b:1;s:7:"default";N;s:6:"length";i:10;}s:5:"alias";a:4:{s:4:"type";s:6:"string";s:4:"null";b:1;s:7:"default";N;s:6:"length";i:255;}s:3:"lft";a:4:{s:4:"type";s:7:"integer";s:4:"null";b:1;s:7:"default";N;s:6:"length";i:10;}s:4:"rght";a:4:{s:4:"type";s:7:"integer";s:4:"null";b:1;s:7:"default";N;s:6:"length";i:10;}}

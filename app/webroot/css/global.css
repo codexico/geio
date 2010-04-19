@@ -65,6 +65,8 @@ form textarea, .form textarea {
 	height:100px;
 	border:1px solid #e0e0e0;
 	color:#555555;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:100%;
 }
 
 form textarea:focus, .form textarea:focus {

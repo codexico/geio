@@ -7,9 +7,31 @@ $javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
 $javascript->link(array('trocas_nova'), false);
 ?>
 
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Troca do Consumidor</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/consumidores/pesquisar', array('class'=>'btn_cinza floatRight')); ?>
+</div>
+
+<?php $session->flash('auth'); ?>
+<?php $session->flash(); ?>
+
 <?php
 echo $this->element('consumidor');
 ?>
+<div class="clear"></div>
+
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Troca do Consumidor</h1>
+</div>
 <div class="clear"></div>
 <div class="trocas form">
     <?php
@@ -44,9 +66,8 @@ echo $this->element('consumidor');
             }
             ?>
         </ul>
-        <input id="acrescentar-cupom" type="button" value="Acrescentar Cupom Fiscal" />
-        <input id="calcular-troca" type="button" value="Calcular Cupons Promocionais" />
     </fieldset>
-    <?php echo $form->end('GRAVAR DADOS');?>
-
+	<input id="acrescentar-cupom" class="submit" type="button" value="Acrescentar Cupom Fiscal" />
+	<input id="calcular-troca" class="submit" type="button" value="Calcular Cupons Promocionais" />
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
 </div>
