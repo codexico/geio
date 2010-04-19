@@ -9,7 +9,7 @@
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/cupom_fiscais', array('class'=>'btn_cinza floatRight')); ?>
 	<?php /*echo $html->link('Excluir Cupom Fiscal', array('action' => 'delete', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $cupomFiscal['CupomFiscal']['id'])); */?>
-	<?php echo $html->link('Editar Cupom Fiscal', array('action' => 'edit', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php /*echo $html->link('Editar Cupom Fiscal', array('action' => 'edit', $cupomFiscal['CupomFiscal']['id']), array('class' => 'btn_azul floatRight mgr5')); */ ?>
 	<?php /*echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); */?>
 </div>
 
