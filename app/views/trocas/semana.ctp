@@ -59,7 +59,7 @@
             </td>
             <td>
                     <?php echo $html->link($troca['Consumidor']['nome'], array('action' => 'view', 'controller' =>'consumidores', $troca['Consumidor']['id'])); ?>
-                    <?php echo $html->link('Trocas', array('action' => 'consumidor', 'controller' =>'trocas', $troca['Consumidor']['id'])); ?>
+                    <?php /* echo $html->link('Trocas', array('action' => 'consumidor', 'controller' =>'trocas', $troca['Consumidor']['id'])); */ ?>
             </td>
             <td class="txtCenter">
                     <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
@@ -85,7 +85,7 @@
                 <?php echo $relatorio['num_consumidores_atendidos']; ?>
             </th>
             <th class="txtCenter">
-                <?php echo $relatorio['valor_cupons_fiscais']; ?>
+                <?php echo $number->currency($relatorio['valor_cupons_fiscais'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
             <th class="txtCenter">
                 <?php echo $relatorio['num_cupons_promocionais']; ?>

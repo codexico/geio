@@ -86,7 +86,7 @@
                 <?php echo $relatorio['num_consumidores_atendidos']; ?>
             </th>
             <th class="txtCenter">
-                <?php echo $relatorio['valor_cupons_fiscais']; ?>
+                <?php echo $number->currency($relatorio['valor_cupons_fiscais'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
             <th class="txtCenter">
                 <?php echo $relatorio['num_cupons_promocionais']; ?>
