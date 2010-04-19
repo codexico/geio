@@ -33,8 +33,9 @@
                 'gls'=>'GLS',
                 'outro'=>'Outro'
         ),
-        'selected'=>'',
-        'empty' => true));
+        'selected'=> $this->data['Funcionario']['sexo'],
+        'empty' => true
+            ));
         ?>
 
 		<div class="input select">
