@@ -32,8 +32,8 @@
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
-			<th class="w65"><?php echo $paginator->sort('username');?></th>
-			<th class="w5 txtCenter"><?php echo $paginator->sort('group_id');?></th>
+			<th class="w65"><?php echo $paginator->sort('Nome de Usuário','username');?></th>
+			<th class="w5 txtCenter"><?php echo $paginator->sort('Grupo','group_id');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 		<?php
@@ -52,7 +52,7 @@
 				<?php echo $user['User']['username']; ?>
 			</td>
 			<td class="txtCenter">
-				<?php echo $user['User']['group_id']; ?>
+				<?php echo $user['Group']['name']; ?>
 			</td>
 			<td class="actions">
 
