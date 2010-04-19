@@ -352,7 +352,6 @@ class CupomFiscal extends AppModel {
         return count($this->find('all', array_merge($conditions, $extra)));
     }
 
-
     function _buscaRelatorioLoja($id) {
 
         $conditions_valor_cupons_fiscais = array(
@@ -361,14 +360,15 @@ class CupomFiscal extends AppModel {
         );
         $relatorio_total = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_total);
 
-        $relatorio_bandeira = $relatorio_outros = array();
-        if(!Configure::read('Regras.Brinde.true')) {
+        $relatorio_bandeira['CupomFiscal'] = $relatorio_outros['CupomFiscal'] = array();
+        if(Configure::read('Regras.Bandeira.true')) {
 
             $conditions_valor_cupons_fiscais = array(
                     'fields' => array("SUM(CupomFiscal.valor) AS 'total_bandeira'","COUNT(DISTINCT (CupomFiscal.consumidor_id) ) AS 'total_consumidores_bandeira'"),
                     'conditions' => array('loja_id'=>$id, 'bandeira'=>Configure::read('Regras.Bandeira.nome'))
             );
-            $relatorio_bandeira = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_bandeira);
+            $relatorio_bandeira = $this->find('first', $conditions_valor_cupons_fiscais);
+            //debug("ba = ".$relatorio_bandeira);
 
             $conditions_valor_cupons_fiscais = array(
                     'fields' => array("SUM(CupomFiscal.valor) AS 'total_outros'","COUNT(DISTINCT (CupomFiscal.consumidor_id) ) AS 'total_consumidores_outros'"),

@@ -15,8 +15,8 @@
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/trocas', array('class'=>'btn_cinza floatRight')); ?>
-	<?php echo $html->link('Excluir Troca', array('action' => 'delete', $troca['Troca']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $troca['Troca']['id'])); ?>
-	<?php echo $html->link('Editar Troca', array('action' => 'edit', $troca['Troca']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
+	<?php /* echo $html->link('Excluir Troca', array('action' => 'delete', $troca['Troca']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $troca['Troca']['id'])); */ ?>
+	<?php /* echo $html->link('Editar Troca', array('action' => 'edit', $troca['Troca']['id']), array('class' => 'btn_azul floatRight mgr5')); */ ?>
 	<?php /* echo $html->link('Incluir Troca', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); */ ?>
 </div>
 
@@ -121,6 +121,62 @@
 				&nbsp;
 			</dd>
 		</div>	
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CEP'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['cep']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Endereço'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['endereco']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Número'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['numero']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Complemento'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['complemento']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Bairro'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['bairro']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cidade'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['cidade']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estado'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['estado']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('País'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+<?php echo $troca['Consumidor']['pais']; ?>
+                &nbsp;
+            </dd>
+        </div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>

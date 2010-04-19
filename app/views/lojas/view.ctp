@@ -132,11 +132,14 @@
     <p><?php echo "Total de Consumo: " . $number->currency($relatorio['total'],'EUR',array('before'=>'R$ ','after'=>'')); ?></p>
     <p><?php echo "Número Total de Consumidores: " . $relatorio['total_consumidores']; ?></p>
     <br />
+
+    <?php if(Configure::read('Regras.Bandeira.true')) : ?>
     <p><?php echo "Total de Consumo na Bandeira: " . $number->currency($relatorio['total_bandeira'],'EUR',array('before'=>'R$ ','after'=>'')); ?></p>
     <p><?php echo "Número de Consumidores que usaram a Bandeira: " . $relatorio['total_consumidores_bandeira']; ?></p>
     <br />
     <p><?php echo "Total de Consumo em outras formas: " . $number->currency($relatorio['total_outros'],'EUR',array('before'=>'R$ ','after'=>'')); ?></p>
     <p><?php echo "Número de Consumidores que Não usaram a Bandeira: " . $relatorio['total_consumidores_outros']; ?></p>
+    <?php endif; ?>
 </div>
 <div class="clear"></div>
 
@@ -205,9 +208,10 @@
 
     <!-- .paginacao -->
     <div class="paginacao">
-        <div class="pagin_proximo"><?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?></div>
-        <div class="pagin_numeros"><?php echo $paginator->numbers(array('before'=>'','after'=>'','tag'=>'a','separator'=>' '));?></div>
-        <div class="pagin_anterior"><?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?></div>
-    </div>
 
+        <div class="pagin_proximo"><?php echo $paginacao->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?></div>
+        <div class="pagin_numeros"><?php echo $paginacao->numbers(array('before'=>'','after'=>'','tag'=>'li','separator'=>' '));?></div>
+        <div class="pagin_anterior"><?php echo $paginacao->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?></div>
+    </div>
+<?php /* debug($this->passedArgs[0]); */ ?>
 </div>
