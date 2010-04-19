@@ -8,6 +8,11 @@
 </div>
 <div class="clear"></div>
 
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/promotores', array('class'=>'btn_cinza floatRight')); ?>
+</div>
+
 <?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 

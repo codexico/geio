@@ -57,7 +57,7 @@
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id de Usu&aacute;rio'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id do Usu&aacute;rio'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['user_id']; ?>
 				&nbsp;
@@ -85,7 +85,7 @@
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Obs'); ?></dt>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observa&ccedil;&otilde;es'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $promotor['Promotor']['obs']; ?>
 				&nbsp;

@@ -9,7 +9,7 @@ $javascript->link(array('trocas_nova'), false);
 
 <li class="cupom" id="cupom-fiscal-<?=$i;?>">
     <fieldset><legend>Cupom Fiscal <?=$i+1;?>&nbsp;&nbsp;
-            <input id="remover-cupom-fiscal-<?=$i;?>" class="remover-cupom-fiscal" type="button" value="Remover este Cupom" /></legend>
+            <input id="remover-cupom-fiscal-<?=$i;?>" class="remover-cupom-fiscal submit" type="button" value="Remover este Cupom" /></legend>
         <?php
         echo $form->input('CupomFiscal.'.$i.'.codigo', array('label'=>'Número do Cupom Fiscal'));
 
@@ -49,27 +49,35 @@ $javascript->link(array('trocas_nova'), false);
 
         echo $form->input('CupomFiscal.'.$i.'.valor', array('class'=> 'nomefantasia','label'=>'Valor R$ (formato: xxxx,xx ou xxxxx.xx)'));
 
-        echo $form->input('CupomFiscal.'.$i.'.forma_de_pagamento', array('options' => array(
-                'Dinheiro'=>'Dinheiro',
-                'Debito'=>'Débito',
-                'Credito'=>'Crédito'
-        )));
+        echo '<div class="duas_colunas">';
 
-        $bandeira ='';
-        if(isset ($this->data['CupomFiscal'][$i]['bandeira'])) {
-            $bandeira = $this->data['CupomFiscal'][$i]['bandeira'];
-        }
-        echo $form->input('CupomFiscal.'.$i.'.bandeira', array('options' => array(
-                'VISA'=>'VISA',
-                'MasterCard'=>'MasterCard',
-                'HiperCard'=>'HiperCard',
-                'Diners'=>'Diners',
-                'Aura'=>'Aura',
-                'American Express'=>'American Express',
-                'outro'=>'outro'
-        ),
-        'selected'=>$bandeira,
-        'empty' => true));
+			echo $form->input('CupomFiscal.'.$i.'.forma_de_pagamento', array('options' => array(
+					'Dinheiro'=>'Dinheiro',
+					'Debito'=>'Débito',
+					'Credito'=>'Crédito'
+			),
+			'label' => 'Forma de Pagamento',
+			'div' => 'input meio_input'));
+	
+			$bandeira ='';
+			if(isset ($this->data['CupomFiscal'][$i]['bandeira'])) {
+				$bandeira = $this->data['CupomFiscal'][$i]['bandeira'];
+			}
+
+			echo $form->input('CupomFiscal.'.$i.'.bandeira', array('options' => array(
+					'VISA'=>'VISA',
+					'MasterCard'=>'MasterCard',
+					'HiperCard'=>'HiperCard',
+					'Diners'=>'Diners',
+					'Aura'=>'Aura',
+					'American Express'=>'American Express',
+					'outro'=>'Outro'
+			),
+			'selected'=>$bandeira,
+			'empty' => true, 
+			'div' => 'input meio_input'));
+
+        echo '</div>';
         ?>
     </fieldset>
 </li>
