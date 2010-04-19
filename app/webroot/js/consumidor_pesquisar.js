@@ -59,4 +59,13 @@ jQuery(document).ready(function($) {
         $('#consumidorencontrado').html("<h2>Consumidor Não Encontrado</h2>");
     }
 
+    $('#ConsumidorEstado').live('change', function() {
+        if($(this).val()!=''){
+            $('#ConsumidorPais').val('Brasil')
+        }else{
+            $('#ConsumidorPais').val('')
+        }
+    });
+
+
 })
