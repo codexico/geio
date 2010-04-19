@@ -12,7 +12,7 @@ class UsersController extends AppController {
 
     function login() {
         if ($this->Session->read('Auth.User')) {
-            $this->Session->setFlash('Olá, '.$this->Auth->user('username').'!');
+            //$this->Session->setFlash('Olá, '.$this->Auth->user('username').'!');//ja esta no topo #
 
             if ($this->Session->read('Auth.User.group_id') == 3) {
                 $this->Auth->loginRedirect =array('action' => 'pesquisar', 'controller'=>'consumidores');
