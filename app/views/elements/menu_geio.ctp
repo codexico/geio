@@ -1,67 +1,70 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
 <script>
-$(function(){
-	// abas
-	// oculta todas as abas
-	$("div.menu-navegacao").hide();
+    $(function(){
+        // abas
+        // oculta todas as abas
+        $("div.menu-navegacao").hide();
 
-	// mostra somente  a primeira aba
-	$("div.menu-navegacao:first").show();
+        // mostra somente  a primeira aba
+        $("div.menu-navegacao:first").show();
 
-	// seta a primeira aba como selecionada (na lista de abas)
-	$("#abas li:first").addClass("aba_ativa");
+        // seta a primeira aba como selecionada (na lista de abas)
+        $("#abas li:first").addClass("aba_ativa");
 
-	// quando clicar no link de uma aba
-	$("#abas li").click(function(){
-		// oculta todas as abas
-		$("div.menu-navegacao").hide();
-	
-		// tira a seleção da aba atual
-		$("#abas li").removeClass("aba_ativa");
-	
-		// adiciona a classe selected na selecionada atualmente
-		$(this).addClass("aba_ativa");
-	
-		// mostra a aba clicada
-		$($("a", this).attr("href")).show();
-	
-		// pra nao ir para o link
-		return false;
-	});
-});
+        // quando clicar no link de uma aba
+        $("#abas li").click(function(){
+            // oculta todas as abas
+            $("div.menu-navegacao").hide();
+
+            // tira a seleção da aba atual
+            $("#abas li").removeClass("aba_ativa");
+
+            // adiciona a classe selected na selecionada atualmente
+            $(this).addClass("aba_ativa");
+
+            // mostra a aba clicada
+            $($("a", this).attr("href")).show();
+
+            // pra nao ir para o link
+            return false;
+        });
+    });
 
 </script>
 
 <div id="menu">
     <div class="menu-content">
         <div class="menu-abas">
-			<ul id="abas">
-				<li><a href="#aba_inicio">IN&Iacute;CIO</a></li>
+            <ul id="abas">
+                <li><a href="#aba_inicio">IN&Iacute;CIO</a></li>
 
-                <?php if ($session->read('Auth.User.group_id') == 1) : ?>
-				<li><a href="#aba_administracao_grupo1">ADMINISTRA&Ccedil;&Atilde;O</a></li>
+                <?php if  ($session->read('Auth.User.group_id') == 1) : ?>
+                <li><a href="#aba_administracao_grupo1">ADMINISTRA&Ccedil;&Atilde;O</a></li>
                 <?php endif; ?>
 
                 <?php if ($session->read('Auth.User.group_id') == 2) : ?>
-				<li><a href="#aba_administracao_grupo2">ADMINISTRA&Ccedil;&Atilde;O</a></li>
+                <li><a href="#aba_administracao_grupo2">ADMINISTRA&Ccedil;&Atilde;O</a></li>
                 <?php endif; ?>
 
                 <?php if ($session->read('Auth.User.group_id') == 3) : ?>
-				<li><a href="#aba_pesquisa_grupo3">PESQUISAS</a></li>
+                <li><a href="#aba_pesquisa_grupo3">PESQUISAS</a></li>
                 <?php endif; ?>
 
-				<li><a href="#aba_mailing">MAILING</a></li>
-				<li><a href="#aba_relatorios">RELAT&Oacute;RIOS</a></li>
-			</ul>
+                <?php if ($session->read('Auth.User.group_id') != 3) : ?>
+                <li><a href="#aba_mailing">MAILING</a></li>
+                <li><a href="#aba_relatorios">RELAT&Oacute;RIOS</a></li>
+                <?php endif; ?>
+
+            </ul>
         </div>
 
-		<!-- INICIO -->
+        <!-- INICIO -->
         <div class="menu-navegacao" id="aba_inicio">
-			<p>Colocaremos a principio alguns tópicos de ajuda e alerta como: Como utilizar este sistema, atenção durante o cadatro de consumidores, como reportar problemas, contatos úteis (telefones e emails)...</p>
+            <p>Colocaremos a principio alguns tópicos de ajuda e alerta como: Como utilizar este sistema, atenção durante o cadatro de consumidores, como reportar problemas, contatos úteis (telefones e emails)...</p>
         </div>
 
-		<?php if ($session->read('Auth.User.group_id') == 1) : ?>
-		<!-- ADMINISTRAÇÃO GRUPO: ADMIN -->
+        <?php if ($session->read('Auth.User.group_id') == 1) : ?>
+        <!-- ADMINISTRAÇÃO GRUPO: ADMIN -->
         <div class="menu-navegacao" id="aba_administracao_grupo1">
             <ul class="first">
                 <li><?php echo $html->link('Consumidores', array('action' => 'index', 'controller'=>'consumidores'));?></li>
@@ -79,33 +82,33 @@ $(function(){
                 <li><?php echo $html->link('Listar todos', array('action' => 'index', 'controller'=>'users')); ?> </li>
             </ul>
         </div>
-		<?php endif; ?>
+        <?php endif; ?>
 
-		<?php if ($session->read('Auth.User.group_id') == 2) : ?>
-		<!-- ADMINISTRAÇÃO GRUPO: USUARIOS -->
+        <?php if ($session->read('Auth.User.group_id') == 2) : ?>
+        <!-- ADMINISTRAÇÃO GRUPO: USUARIOS -->
         <div class="menu-navegacao" id="aba_administracao_grupo2">
             <ul class="first">
-				<li><?php echo $html->link('Consumidores', array('action' => 'index', 'controller'=>'consumidores'));?></li>
-				<li><?php echo $html->link('Trocas', array('action' => 'index', 'controller'=>'trocas')); ?> </li>
+                <li><?php echo $html->link('Consumidores', array('action' => 'index', 'controller'=>'consumidores'));?></li>
+                <li><?php echo $html->link('Trocas', array('action' => 'index', 'controller'=>'trocas')); ?> </li>
             </ul>
         </div>
-		<?php endif; ?>
+        <?php endif; ?>
 
-		<?php if ($session->read('Auth.User.group_id') == 3) : ?>
-		<!-- PESQUISA GRUPO: PROMOTORES -->
+        <?php if ($session->read('Auth.User.group_id') == 3) : ?>
+        <!-- PESQUISA GRUPO: PROMOTORES -->
         <div class="menu-navegacao" id="aba_pesquisa_grupo3">
             <ul class="first">
-				<li><?php echo $html->link('Pesquisar Consumidores', array('action' => 'pesquisar', 'controller'=>'consumidores')); ?></li>
+                <li><?php echo $html->link('Pesquisar Consumidores', array('action' => 'pesquisar', 'controller'=>'consumidores')); ?></li>
             </ul>
         </div>
-		<?php endif; ?>
+        <?php endif; ?>
 
-		<!-- MAILING -->
+        <!-- MAILING -->
         <div class="menu-navegacao" id="aba_mailing">
-			<p>Já tenho conteúdo definido, mas esta parte Chico irá desenvolver durante a campanha</p>
+            <p>Já tenho conteúdo definido, mas esta parte Chico irá desenvolver durante a campanha</p>
         </div>
 
-		<!-- RELATORIOS -->
+        <!-- RELATORIOS -->
         <div class="menu-navegacao" id="aba_relatorios">
             <ul class="first">
                 <li><?php echo $html->link('Trocas de Hoje', array('action' => 'hoje', 'controller'=>'trocas')); ?> </li>

@@ -7,13 +7,7 @@
 <div class="consumidores form">
     <br />
     <div class="consumidorencontrado">
-        <?php if($consumidor['Consumidor']['id']):
-            ?>
-         <div class="botoes">
-            <?php echo $html->link('Aceitar e ir para o cadastro de Cupons',
-                    array('controller'=>'trocas','action' => 'nova', $consumidor['Consumidor']['id']), array('class'=>'btn_azul')); ?>
-            </div>
-        <?php else: ?>
+        <?php if(!$consumidor['Consumidor']['id']) : ?>
         <h2>Cadastrar novo Consumidor</h2>
         <?php endif; ?>
     </div>
@@ -141,12 +135,16 @@
         ?>
     </fieldset>
 
-        <?php
-        if($consumidor['Consumidor']['id']):
-            echo $form->end(array('label'=>'EDITAR E IR PARA CUPONS','class'=>'submit'));
-        else:
-            echo $form->end(array('label'=>'SALVAR E IR PARA CUPONS','class'=>'submit'));
-        endif;
-        ?>
-    
+    <?php
+    if($consumidor['Consumidor']['id']):
+        echo $form->end(array('label'=>'EDITAR E IR PARA CUPONS','class'=>'submit'));
+        echo '<br /><br />';
+        echo $html->link('Aceitar e ir para o cadastro de Cupons',
+        array('controller'=>'trocas','action' => 'nova', $consumidor['Consumidor']['id']), array('class'=>'btn_azul'));
+
+    else:
+        echo $form->end(array('label'=>'SALVAR E IR PARA CUPONS','class'=>'submit'));
+    endif;
+    ?>
+
 </div>
