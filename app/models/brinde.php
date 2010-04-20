@@ -1,4 +1,8 @@
 <?php
+/**
+ * @property Entrada $Entrada
+ * @property Brinde $Brinde
+ */
 class Brinde extends AppModel {
 
 	var $name = 'Brinde';
@@ -10,5 +14,12 @@ class Brinde extends AppModel {
 		'estoque_atual' => array('numeric')
 	);
 
+
+        function _atualizarEstoque($data){
+
+		$brinde = $this->read(null,$data['brinde_id']);
+                $brinde['Brinde']['estoque_atual'] += (int)$data['qtd'];
+                $this->save($brinde);
+        }
 }
 ?>

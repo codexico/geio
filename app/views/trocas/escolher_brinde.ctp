@@ -9,7 +9,9 @@ $javascript->link(array('trocas_escolher_brinde'), false);
 ?>
 <?php
 if( Configure::read('Regras.Brinde.true') ) {
-    echo "Escolher ".$troca['Troca']['qtd_premios']." brindes para o Consumidor.";
+    echo "Consumidor trocou valor suficiente para ".$troca['Troca']['qtd_premios']." brindes.";
+    echo "<br /><br />";
+    echo "O Consumidor ainda pode receber  ".$brindesDisponiveis." brindes.";
     echo "<br /><br />";
 }else{
     echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']));
@@ -17,13 +19,14 @@ if( Configure::read('Regras.Brinde.true') ) {
 
     echo $form->create('Troca', array('action'=> 'escolher_brinde/'.$this->params['pass'][0]));
 
-    echo $form->hidden('qtd_brindes', array('value'=>$troca['Troca']['qtd_premios']));
+    echo $form->hidden('qtd_brindes', array('value'=>$brindesDisponiveis));
 
 //debug($brindes);
 $i=0;
 foreach ($brindes as $id => $brinde) {
     echo "<br />";
     echo $brinde;
+    echo  " - Estoque atual: ". $estoques[$id];
     echo $form->input( 'Premio.foreign_key.'.$id, array('label'=>'Quantidade','class'=>'qtd_brinde') );
 }
 echo $form->end(array('value'=>'Enviar','class'=>'enviar_qtd_brindes') );

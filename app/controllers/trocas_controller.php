@@ -4,6 +4,7 @@
  * @property CupomPromocional $CupomPromocional
  * @property CupomFiscal $CupomFiscal
  * @property Consumidor $Consumidor
+ * @property Brinde $Brinde
  */
 class TrocasController extends AppController {
 
@@ -180,45 +181,62 @@ class TrocasController extends AppController {
             $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
         }
 
-
         $this->Troca->recursive = 1;
         $troca = $this->Troca->read(null, $id);//debug($troca);
+        $consumidor['Consumidor'] = $troca['Consumidor'];//para usar $this->element('consumidor') na view
+
         $this->Troca->Premio->recursive = -1;
         $premios = $this->Troca->Premio->find('all',array('conditions'=>array('troca_id'=>$id),'fields'=>'id' ));//debug($premios);
 
-        if (!empty($this->data)) {//debug($this->data);
-            //debug($this->data);
-            //debug($premios);
-            $i=0;
+        $this->Brinde->recursive = -1;
+        $estoques = $this->Brinde->find('list',array('fields'=>array('id','estoque_atual') ));//debug($estoques);
+
+        $brindes_disponiveis = $troca['Troca']['qtd_premios'];
+        if(Configure::read('Regras.Brinde.max')  < ( $troca['Troca']['qtd_premios'] + $consumidor['Consumidor']['brinde_count']) ) {
+            $brindes_disponiveis = Configure::read('Regras.Brinde.max') - $consumidor['Consumidor']['brinde_count'];
+        }
+
+        if (!empty($this->data)) { //debug($this->data);
+            $estoqueSuficiente = true;
+            $i=$j=0;
             foreach ($this->data['Premio']['foreign_key'] as $key => $value) {
+
+                if( ($value > $estoques[$key]) && $estoqueSuficiente ) {
+                    $estoqueSuficiente = false;
+                }
 
                 for($k=0;$k<$value;$k++) {
                     $premios[$i]["Premio"]['foreign_key'] = $key;
                     $premios[$i]["Premio"]['model'] = 'Brinde';
                     $i++;
                 }
-            }
-            //debug($premios);
-            if ($this->Troca->Premio->saveAll($premios)) {
-                $this->Session->setFlash(__('Troca concluída com sucesso.', true));
-                $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
-            } else {
-                $this->Session->setFlash(__('Ocorreu algum erro, tente novamente por favor.', true));
-            }
+                if($value >= 1) {//monta os brindes para atualizar o estoque
+                    $brindes[$j]['brinde_id'] = $key;
+                    $brindes[$j]['qtd'] = ((int)$value )*(-1);//subtrair do estoque
+                    $j++;
+                }
+            } //debug($premios);debug($brindes);
 
+            if( $estoqueSuficiente ) {
+                if ($this->Troca->Premio->saveAll($premios)) {
+                    $this->Troca->Consumidor->_atualizarBrindeCount($consumidor['Consumidor']['id'],$brindes_disponiveis);
+
+                    foreach($brindes as $brinde) {
+                        $this->Brinde->_atualizarEstoque($brinde);
+                    }
+
+                    $this->Session->setFlash(__('Troca concluída com sucesso.', true));
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
+                } else {
+                    $this->Session->setFlash(__('Ocorreu algum erro, tente novamente por favor.', true));
+                }
+            }else {
+                $this->Session->setFlash(__('Quantidade escolhida maior que estoque atual. Escolha outro Brinde.', true));
+            }
         }
 
-
-
-        $consumidor['Consumidor'] = $troca['Consumidor'];//debug($consumidor);
-
-        $this->set(compact('troca', 'consumidor'));
-
-        $this->set(compact('premios'));
-
         $brindes = $this->Brinde->find('list');//debug($brindes);
-        $this->set(compact('brindes'));
-
+        $this->set(compact('brindes','estoques','premios','troca', 'consumidor','brindes_disponiveis'));
     }
     function concluida($id = null) {
         if (!$id) {

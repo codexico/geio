@@ -1,3 +1,4 @@
+
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>

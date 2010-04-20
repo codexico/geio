@@ -1,4 +1,8 @@
 <?php
+/**
+ * @property Entrada $Entrada
+ * @property Brinde $Brinde
+ */
 class BrindesController extends AppController {
 
 	var $name = 'Brindes';
@@ -14,6 +18,7 @@ class BrindesController extends AppController {
 			$this->Session->setFlash(__('Invalid Brinde', true));
 			$this->redirect(array('action' => 'index'));
 		}
+
 		$this->set('brinde', $this->Brinde->read(null, $id));
 	}
 

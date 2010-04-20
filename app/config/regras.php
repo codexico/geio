@@ -60,7 +60,7 @@ $config['Regras.Brinde.true'] = TRUE;
  * @global int $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.max'] = 5;
+$config['Regras.Brinde.max'] = 4;
 
 
 ?>

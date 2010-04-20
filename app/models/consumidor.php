@@ -81,7 +81,15 @@ class Consumidor extends AppModel {
             )
     );
 
-    
+
+    function _atualizarBrindeCount($id, $count = 0) {
+
+        $this->recursive = -1;
+        $consumidor = $this->read(null,$id);
+        $consumidor['Consumidor']['brinde_count'] += $count;
+        //debug($consumidor);
+        $this->save($consumidor);
+    }
 
 }
 ?>
