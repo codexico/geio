@@ -10,9 +10,6 @@ jQuery(document).ready(function($) {
             url: "pesquisarCpfAjax",
             data: "data[cpf]="+cpf,
             success: function(xhr) {
-                //display message back to user here
-                //alert("success")
-                //alert(xhr)
                 if(xhr != "nao encontrou"){
                     mostrarConsumidor(xhr);
                 }else{
@@ -29,13 +26,12 @@ jQuery(document).ready(function($) {
 
     //persquisar consumidor por rg
     $('#pesquisarrg').click(function(){
-        var rg = $('#rg').val();
-        var datarg = "data[rg]="+rg;
+        var rg = $('#rg').val();;
 
         $.ajax({
             type: "POST",
             url: "pesquisarRgAjax",
-            data: datarg,
+            data: "data[rg]="+rg,
             success: function(xhr) {
                 if(xhr != "nao encontrou"){
                     mostrarConsumidor(xhr);

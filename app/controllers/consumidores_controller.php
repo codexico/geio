@@ -242,29 +242,20 @@ class ConsumidoresController extends AppController {
 
         if ($this->RequestHandler->isAjax()) {
             $consumidor = $this->Consumidor->findByCpf($this->data['cpf']);
-            //sem recursao para melhor performance
-            //$consumidor = $this->Consumidor->find('first', array(
-            //                    'recursive' => -1,
-            //                    'conditions' => array(
-            //                            'cpf' => $this->data['cpf']
-            //            )));
             if($consumidor) {
                 $this->data = $consumidor;
-
                 /*
                 * Busca os estados e prepara um array para preencher o
                 * select na primeira vez que o formulário for carregado.
                 */
                 $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
                 $this->set('estados', $estados);
-
                 /*
                 * Busca os paises e prepara um array para preencher o
                 * select na primeira vez que o formulário for carregado.
                 */
                 $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
                 $this->set('paises', $paises);
-
                 /*
                 * Busca os estados e prepara um array para preencher o
                 * select na primeira vez que o formulário for carregado.
@@ -300,7 +291,6 @@ class ConsumidoresController extends AppController {
                 $this->set(compact('consumidor'));
                 $resposta =  $this->render('/elements/consumidorencontrado');
                 return $resposta;
-                //return "nao encontrou";
             }
         }
         exit ();
@@ -311,19 +301,55 @@ class ConsumidoresController extends AppController {
 
         if ($this->RequestHandler->isAjax()) {
             $consumidor = $this->Consumidor->findByRg($this->data['rg']);
-            //sem recursao para melhor performance
-            //$consumidor = $this->Consumidor->find('first', array(
-            //                    'recursive' => -1,
-            //                    'conditions' => array(
-            //                            'rg' => $this->data['rg']
-            //            )));
             if($consumidor) {
+                $this->data = $consumidor;
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
+                $this->set('estados', $estados);
+                /*
+                * Busca os paises e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
+                $this->set('paises', $paises);
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+                $this->set('profissoes', $profissoes);
 
                 $this->set(compact('consumidor'));
                 $resposta =  $this->render('/elements/consumidorencontrado');
                 return $resposta;
             }else {
-                return "nao encontrou";
+                /*
+                * Busca os estados e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
+                $this->set('estados', $estados);
+
+                /*
+                * Busca os paises e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
+                $this->set('paises', $paises);
+
+                /*
+                * Busca as profissoes e prepara um array para preencher o
+                * select na primeira vez que o formulário for carregado.
+                */
+                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+                $this->set('profissoes', $profissoes);
+
+                $this->set(compact('consumidor'));
+                $resposta =  $this->render('/elements/consumidorencontrado');
+                return $resposta;
             }
         }
         exit ();
