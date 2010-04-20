@@ -76,6 +76,7 @@
             <ul>
                 <li><?php echo $html->link('Lojas', array('action' => 'index', 'controller'=>'lojas')); ?> </li>
                 <li><?php echo $html->link('Brindes', array('action' => 'index', 'controller'=>'brindes'));?></li>
+                <li><?php echo $html->link('Estoque', array('action' => 'index', 'controller'=>'entradas'));?></li>
                 <li><?php echo $html->link('Trocas', array('action' => 'index', 'controller'=>'trocas')); ?> </li>
             </ul>
             <ul>
