@@ -33,9 +33,10 @@
 	<tr>
 		<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
 		<th class="w25"><?php echo $paginator->sort('Nome', 'name');?></th>
+                <!-- Será usado qd tiver controle de premiacao para cada tipo de brinde
 		<th class="w10 txtCenter"><?php echo $paginator->sort('valor');?></th>
 		<th class="w20 txtCenter"><?php echo $paginator->sort('Max. Consumidores', 'consumidor_max');?></th>
-		<th class="w15 txtCenter"><?php echo $paginator->sort('estoque_inicial');?></th>
+                -->
 		<th class="w15 txtCenter"><?php echo $paginator->sort('estoque_atual');?></th>
 		<th class="w10 actions"></th>
 	</tr>
@@ -54,15 +55,14 @@
 			<td>
 				<?php echo $brinde['Brinde']['name']; ?>
 			</td>
+                <!-- Será usado qd tiver controle de premiacao para cada tipo de brinde
 			<td class="txtCenter">
 				<?php echo $brinde['Brinde']['valor']; ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo $brinde['Brinde']['consumidor_max']; ?>
 			</td>
-			<td class="txtCenter">
-				<?php echo $brinde['Brinde']['estoque_inicial']; ?>
-			</td>
+                -->
 			<td class="txtCenter">
 				<?php echo $brinde['Brinde']['estoque_atual']; ?>
 			</td>

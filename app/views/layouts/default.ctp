@@ -9,7 +9,7 @@
             echo Configure::read('SITE_NAME');
             ?>
         </title>
-        <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+        <script src="<?php echo $this->webroot.JS_URL; ?>jquery-1.4.2.min.js" type="text/javascript"></script>
         <?php
         echo $html->meta('icon');
 
@@ -22,7 +22,6 @@
     </head>
     <body>
         <div id="container">
-
             <div id="header">
                 <div class="logotipo">
 			<?php echo $html->link(

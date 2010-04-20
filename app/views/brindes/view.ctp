@@ -33,6 +33,7 @@
 				&nbsp;
 			</dd>
 		</div>
+                <!-- Será usado qd tiver controle de premiacao para cada tipo de brinde
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Valor'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -47,13 +48,7 @@
 				&nbsp;
 			</dd>
 		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estoque Inicial'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $brinde['Brinde']['estoque_inicial']; ?>
-				&nbsp;
-			</dd>
-		</div>
+                -->
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estoque Atual'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
