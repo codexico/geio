@@ -1,4 +1,4 @@
-$.noConflict();
+
 jQuery(document).ready(function($) {
 
     //persquisar consumidor por cpf

@@ -3,7 +3,7 @@
 /* @var $html HtmlHelper */
 /* @var $form FormHelper */
 /* @var $javascript JavascriptHelper */
-$javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
+//$javascript->link(array('jquery-1.4.2.min'), false);// foi para o layout
 $javascript->link(array('trocas_nova'), false);
 ?>
 

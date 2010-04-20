@@ -1,6 +1,5 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
-<script>
-    $(function(){
+<script type="text/javascript">
+    jQuery(document).ready(function($) {//usar assim para não dar conflito com outras bibliotecas
         // abas
         // oculta todas as abas
         $("div.menu-navegacao").hide();
@@ -60,7 +59,10 @@
 
         <!-- INICIO -->
         <div class="menu-navegacao" id="aba_inicio">
-            <p>Colocaremos a principio alguns tópicos de ajuda e alerta como: Como utilizar este sistema, atenção durante o cadatro de consumidores, como reportar problemas, contatos úteis (telefones e emails)...</p>
+            <p>
+                Colocaremos a principio alguns tópicos de ajuda e alerta como: Como utilizar este sistema,
+                atenção durante o cadatro de consumidores, como reportar problemas, contatos úteis (telefones e emails)...
+            </p>
         </div>
 
         <?php if ($session->read('Auth.User.group_id') == 1) : ?>

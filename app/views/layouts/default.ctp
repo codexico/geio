@@ -9,11 +9,13 @@
             echo Configure::read('SITE_NAME');
             ?>
         </title>
+        <script src="../js/jquery-1.4.2.min.js" type="text/javascript"></script>
         <?php
         echo $html->meta('icon');
 
         echo $html->css('reset');
         echo $html->css('global');
+
 
         echo $scripts_for_layout;
         ?>
