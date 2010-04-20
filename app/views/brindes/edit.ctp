@@ -21,14 +21,24 @@
 	<?php
 		echo $form->input('id');
 		echo $form->input('name', array('div' => 'input text mgt20', 'label' => 'Nome'));
-        echo '<div class="duas_colunas">';
+        ?>
+        <!-- Será usado qd tiver controle de premiacao para cada tipo de brinde
+<div class="duas_colunas">
+        <?php
 			echo $form->input('valor', array('label' => 'Valor', 'div' =>'input text meio_input'));
 			echo $form->input('consumidor_max', array('label' => 'M&aacute;ximo de Consumidores', 'div' =>'input text meio_input'));
-        echo '</div>';
-        echo '<div class="duas_colunas">';
+        ?>
+</div>
+        -->
+        <!-- Será usado qd tiver controle de premiacao para cada tipo de brinde
+<div class="duas_colunas">
+        <?php
 			echo $form->input('estoque_inicial', array('label' => 'Estoque Inicial', 'div' =>'input text meio_input'));
 			echo $form->input('estoque_atual', array('label' => 'Estoque Final', 'div' =>'input text meio_input'));
-        echo '</div>';
+        ?>
+</div>
+        -->
+        <?php
 		echo $form->input('obs', array('label' => 'Observa&ccedil;&otilde;es'));
 	?>
 	</fieldset>
