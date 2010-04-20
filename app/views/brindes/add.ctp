@@ -10,9 +10,7 @@
     <?php echo $html->link('Voltar', '/brindes', array('class'=>'btn_cinza floatRight')); ?>
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="brindes form">
     <?php echo $form->create('Brinde');?>

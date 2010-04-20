@@ -1,5 +1,19 @@
+
+<!-- .titulo -->
+<div class="titulo">
+	<?php echo $html->image('bullet_titulo.gif')?>
+	<h1>Visualizar Entrada</h1>
+</div>
+<div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', '/entradas', array('class'=>'btn_cinza floatRight')); ?>
+	<?php echo $html->link('Inserir Entrada', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
+</div>
+
+<?php $session->flash(); ?>
 <div class="entradas view">
-<h2><?php  __('Entrada');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -16,23 +30,15 @@
 			<?php echo $entrada['Entrada']['modified']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Brinde Id'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Brinde'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $entrada['Entrada']['brinde_id']; ?>
+			<?php echo $entrada['Brinde']['name']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Qtd'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Quantidade'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $entrada['Entrada']['qtd']; ?>
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Edit Entrada', true), array('action' => 'edit', $entrada['Entrada']['id'])); ?> </li>
-		<li><?php echo $html->link(__('Delete Entrada', true), array('action' => 'delete', $entrada['Entrada']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $entrada['Entrada']['id'])); ?> </li>
-		<li><?php echo $html->link(__('List Entradas', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New Entrada', true), array('action' => 'add')); ?> </li>
-	</ul>
 </div>

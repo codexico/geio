@@ -36,7 +36,7 @@ class EntradasController extends AppController {
         $brindes = $this->Entrada->Brinde->find('list');
         $this->set(compact('brindes'));
 	}
-
+/*
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Entrada', true));
@@ -67,6 +67,8 @@ class EntradasController extends AppController {
 		$this->Session->setFlash(__('The Entrada could not be deleted. Please, try again.', true));
 		$this->redirect(array('action' => 'index'));
 	}
+ * 
+ */
 
 }
 ?>

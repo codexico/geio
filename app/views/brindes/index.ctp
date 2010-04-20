@@ -10,9 +10,7 @@
 	<?php echo $html->link('Inserir Brinde', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="brindes index">
 
