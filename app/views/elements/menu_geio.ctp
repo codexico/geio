@@ -46,7 +46,7 @@
                 <?php endif; ?>
 
                 <?php if ($session->read('Auth.User.group_id') == 3) : ?>
-                <li><a href="#aba_pesquisa_grupo3">PESQUISAS</a></li>
+                <li><a href="#aba_pesquisa_grupo3">PESQUISAR</a></li>
                 <?php endif; ?>
 
                 <?php if ($session->read('Auth.User.group_id') != 3) : ?>
@@ -77,11 +77,13 @@
                 <li><?php echo $html->link('Lojas', array('action' => 'index', 'controller'=>'lojas')); ?> </li>
                 <li><?php echo $html->link('Brindes', array('action' => 'index', 'controller'=>'brindes'));?></li>
                 <li><?php echo $html->link('Estoque', array('action' => 'index', 'controller'=>'entradas'));?></li>
-                <li><?php echo $html->link('Trocas', array('action' => 'index', 'controller'=>'trocas')); ?> </li>
             </ul>
             <ul>
+                <li><?php echo $html->link('Trocas', array('action' => 'index', 'controller'=>'trocas')); ?> </li>
                 <li><?php echo $html->link('Promotores', array('action' => 'index', 'controller'=>'promotores')); ?> </li>
                 <li><?php echo $html->link('Usuários', array('action' => 'index', 'controller'=>'usuarios')); ?> </li>
+            </ul>
+            <ul>
                 <li><?php echo $html->link('Listar todos', array('action' => 'index', 'controller'=>'users')); ?> </li>
             </ul>
         </div>
