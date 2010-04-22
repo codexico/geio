@@ -30,10 +30,9 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
-            <th class="w50"><?php echo $paginator->sort('brinde_id');?></th>
+            <th class="w50"><?php echo $paginator->sort('Brinde','Brinde.name');?></th>
             <th class="w10 txtCenter"><?php echo $paginator->sort('Quantidade', 'qtd');?></th>
             <th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
-            <th class="w15 txtCenter"><?php echo $paginator->sort('modified');?></th>
             <th class="w5 actions">&nbsp;</th>
         </tr>
         <?php
@@ -49,16 +48,13 @@
                     <?php echo $entrada['Entrada']['id']; ?>
             </td>
             <td>
-                    <?php echo $entrada['Entrada']['brinde_id']; ?>
+                    <?php echo $entrada['Brinde']['name']; ?>
             </td>
             <td class="txtCenter">
                     <?php echo $entrada['Entrada']['qtd']; ?>
             </td>
             <td class="txtCenter">
 					<?php echo date('d/m/Y H:i:s', strtotime($entrada['Entrada']['created']) ); ?>
-            </td>
-            <td class="txtCenter">
-					<?php echo date('d/m/Y H:i:s', strtotime($entrada['Entrada']['modified']) ); ?>
             </td>
             <td class="actions">
                     <?php echo $html->image("ico_view.gif", array(

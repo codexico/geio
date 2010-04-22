@@ -49,7 +49,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Valor'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
+				<?php echo $number->currency($cupomFiscal['CupomFiscal']['valor'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
 				&nbsp;
 			</dd>
 		</div>

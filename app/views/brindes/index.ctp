@@ -7,7 +7,8 @@
 
 <!-- .botoes -->
 <div class="botoes">
-	<?php echo $html->link('Inserir Brinde', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
+	<?php echo $html->link('Inserir Brinde', array('action' => 'add'), array('class' => 'btn_azul floatRight mg5')); ?>
+    <?php echo $html->link('Inserir Entrada', array('controller'=>'entradas','action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
 
 <?php $session->flash(); ?>

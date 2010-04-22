@@ -15,7 +15,7 @@ class BrindesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Brinde', true));
+			$this->Session->setFlash(__('Brinde inválido', true));
 			$this->redirect(array('action' => 'index'));
 		}
 
@@ -26,10 +26,10 @@ class BrindesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Brinde->create();
 			if ($this->Brinde->save($this->data)) {
-				$this->Session->setFlash(__('The Brinde has been saved', true));
+				$this->Session->setFlash(__('Brinde salvo com sucesso!', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The Brinde could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('O Brinde não pode ser salvo. Tente novamente por favor.', true));
 			}
 		}
 	}
@@ -41,10 +41,10 @@ class BrindesController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Brinde->save($this->data)) {
-				$this->Session->setFlash(__('The Brinde has been saved', true));
+				$this->Session->setFlash(__('Brinde salvo com sucesso!', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The Brinde could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('O Brinde não pode ser salvo. Tente novamente por favor.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -54,14 +54,14 @@ class BrindesController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Brinde', true));
+			$this->Session->setFlash(__('Brinde inválido', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->Brinde->del($id)) {
-			$this->Session->setFlash(__('Brinde deleted', true));
+			$this->Session->setFlash(__('Brinde deletedo', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('The Brinde could not be deleted. Please, try again.', true));
+		$this->Session->setFlash(__('O Brinde não pode ser deletado. Tente novamente por favor.', true));
 		$this->redirect(array('action' => 'index'));
 	}
 

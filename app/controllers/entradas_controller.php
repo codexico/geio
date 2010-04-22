@@ -15,7 +15,7 @@ class EntradasController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Entrada', true));
+			$this->Session->setFlash(__('Entrada ou id inválido', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('entrada', $this->Entrada->read(null, $id));
@@ -27,10 +27,10 @@ class EntradasController extends AppController {
                         //debug($this->data['Entrada']);
 			if ($this->Entrada->save($this->data)) {
                                 $this->Entrada->Brinde->_atualizarEstoque($this->data['Entrada']);
-				$this->Session->setFlash(__('The Entrada has been saved', true));
+				$this->Session->setFlash(__('Estoque atualizado', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The Entrada could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('A Entrada não foi salva. Tente novamente por favor.', true));
 			}
 		}
         $brindes = $this->Entrada->Brinde->find('list');
