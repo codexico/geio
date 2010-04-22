@@ -18,7 +18,7 @@
         <legend>DADOS GERAIS</legend>
 	<?php
 		echo $form->input('brinde_id', array('div' => 'input text mgt20'));
-		echo $form->input('qtd', array('div' => 'input text mgt20', 'label' => 'Quantidade'));
+		echo $form->input('qtd', array('div' => 'input text', 'label' => 'Quantidade'));
 	?>
 	</fieldset>
     <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>

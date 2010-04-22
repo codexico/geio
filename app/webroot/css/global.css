@@ -77,6 +77,8 @@ form input.submit, .form input.submit{
 	width:auto;
 	height:auto;
 	font-weight:bold;
+	font-size:12px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 	text-transform:uppercase;
 	color:#FFFFFF;
 	padding:6px 7px 6px 7px;
@@ -447,6 +449,34 @@ form input.submit, .form input.submit{
 	_margin-top:9px;
 }
 
+
+#content .form .linha-botoes{
+	width:950px;
+	min-height:10px;
+	_height:10px;
+	margin-top:10px;
+	margin-left:20px;
+	*margin-left:26px;
+}
+
+#content .form .submit_botoes{
+	min-width:10px;
+	float:left;
+	margin-right:10px;
+}
+
+#content .form .submit_botoes a{
+	height:18px;
+	*height:19px;
+	padding:7px;
+	display:block;
+	_display:auto;
+}
+
+#content .form .submit_botoes input.submit{
+	margin:0;
+}
+
 #content .form .checkbox input{
 	width:auto;
 	margin-right:5px;
@@ -553,7 +583,7 @@ form input.submit, .form input.submit{
 
 #content table th.actions{
 	text-align:center;
-	border:0;
+	border-right:0;
 }
 
 #content table th.txtCenter{
@@ -677,7 +707,6 @@ form input.submit, .form input.submit{
 	width:950px;
 	color:#FFFFFF;
 	margin:0 auto;
-	padding-top:10px;
 }
 
 #footer .footer_conteudo .copy{
@@ -686,12 +715,14 @@ form input.submit, .form input.submit{
 	color:#FFFFFF;
 	border-right:1px solid #FFFFFF;
 	margin-left:20px;
+	margin-top:10px;
 	float:left;
 }
 
 #footer .footer_conteudo .links_rapidos{
 	height:51px;
 	margin-left:20px;
+	margin-top:10px;
 	float:left;
 }
 
@@ -706,6 +737,7 @@ form input.submit, .form input.submit{
 }
 
 #footer .fabricante{
+	margin-top:6px;
 	float:right;
 }
 

@@ -73,7 +73,7 @@
                         </ul>
                     </div>
                     <div class="fabricante">
-                        <?php echo $html->image('logo_geio_footer.gif', array('alt' => 'GEIO'))?>
+                        <?php echo $html->image('logo_lume_footer.gif', array('alt' => 'LUME - Tecnologia em Sistemas'))?>
                     </div>
                 </div>
             </div>

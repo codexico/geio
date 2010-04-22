@@ -4,14 +4,15 @@
 /* @var $form FormHelper */
 /* @var $javascript JavascriptHelper */
 ?>
-<div class="consumidores form">
-    <br />
-    <div class="consumidorencontrado">
-        <?php if(!$consumidor['Consumidor']['id']) : ?>
-        <h2>Cadastrar novo Consumidor</h2>
-        <?php endif; ?>
-    </div>
-    <br />
+
+<div class="consumidores form mgt20">
+
+        <?php if(!$consumidor['Consumidor']['id']) :
+			$legend = "Cadastrar Consumidor";
+		else:
+			$legend = "Consumidor Encontrado";
+		endif;
+		?>
     <?php
     if($consumidor['Consumidor']['id']):
         echo $form->create('Consumidor');
@@ -20,7 +21,7 @@
     endif;
     ?>
     <fieldset>
-        <legend>Dados Gerais</legend>
+        <legend><?php echo $legend ?></legend>
         <?php
         echo $form->input('id');
         echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome'));
@@ -56,31 +57,31 @@
         echo '</div>';
 
         echo '<div class="duas_colunas">';
-        echo $form->input('estado_civil', array('options' => array(
-                'solteiro'=>'Solteiro',
-                'casado'=>'Casado',
-                'viúvo'=>'Viúvo',
-                'separado'=>'Separado'
-        ),
-        'selected' => $this->data['Consumidor']['estado_civil'],
-        'empty' => true,
-        'div' => 'input meio_input'));
-
-
-        echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
-                'nenhum'=>'nenhum',
-                '1º Grau'=>'1º Grau',
-                '2º Grau'=>'2º Grau',
-                'Técnico'=>'Técnico',
-                'Universitário'=>'Univesitário',
-                'Mestrado'=>'Mestrado',
-                'Doutorado'=>'Doutorado',
-                'Pós'=>'Pós',
-                'MBA'=>'MBA'
-        ),
-        'selected' => $this->data['Consumidor']['grau_de_instrucao'],
-        'empty' => true,
-        'div' => 'input meio_input'));
+			echo $form->input('estado_civil', array('options' => array(
+					'solteiro'=>'Solteiro',
+					'casado'=>'Casado',
+					'viúvo'=>'Viúvo',
+					'separado'=>'Separado'
+			),
+			'selected' => $this->data['Consumidor']['estado_civil'],
+			'empty' => true,
+			'div' => 'input meio_input'));
+	
+	
+			echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
+					'nenhum'=>'nenhum',
+					'1º Grau'=>'1º Grau',
+					'2º Grau'=>'2º Grau',
+					'Técnico'=>'Técnico',
+					'Universitário'=>'Univesitário',
+					'Mestrado'=>'Mestrado',
+					'Doutorado'=>'Doutorado',
+					'Pós'=>'Pós',
+					'MBA'=>'MBA'
+			),
+			'selected' => $this->data['Consumidor']['grau_de_instrucao'],
+			'empty' => true,
+			'div' => 'input meio_input'));
         echo '</div>';
 
 
@@ -94,15 +95,12 @@
 
 
         echo $form->input('cep', array('id'=>'cep', 'maxlength' => 8, 'label' => 'CEP (exatamente 8 números)',
-        'style'=>'width: 108px',
         'onkeyup'=>'javascript:saiCep(this.value.length);')); //Quando sair do campo cep chama a função javascript saiCep()
 
         echo $html->image('loading.gif', array('id'=>'loading',
         'style'=>'display:none')); //Imagem de loading no código, mas não exibida na página
 
-        $opcoes=array('label'=>'Rua/Avenida',
-                'style'=>'width: 500px');
-        echo $form->input('endereco', $opcoes);
+        echo $form->input('endereco', array('label'=>'Rua/Avenida'));
 
         /*
 		* Observa o campo cujo id é 'cep', quando seu conteúdo for modificado "executa" a action 'endereco_cep'
@@ -117,31 +115,37 @@
         )
         );
 
-        $opcoes=array('label'=>'Número',
-                'style'=>'width: 60px');
-        echo $form->input('numero', $opcoes);
-        echo $form->input('complemento', array('style'=>'width: 200px'));
-        echo $form->input('bairro', array('style'=>'width: 200px'));
-        echo $form->input('cidade', array('style'=>'width: 200px'));
+        echo '<div class="duas_colunas">';
+			echo $form->input('numero', array('label'=>'Número', 'div'=>'input meio_input'));
+			echo $form->input('complemento', array('div'=>'input meio_input'));
+        echo '</div>';
 
-        echo $form->input('estado', array('options' => $estados,
-        'empty'=>'Selecione'));
-
+        echo $form->input('bairro');
 
         echo $form->input('pais', array('options' => $paises,
         'empty'=>'Selecione'));
 
+        echo '<div class="duas_colunas">';
+			echo $form->input('estado', array('options' => $estados,
+			'empty'=>'Selecione',
+			'div' => 'input meio_input'));
+			echo $form->input('cidade', array('div'=>'input meio_input'));
+        echo '</div>';
 
         ?>
     </fieldset>
 
     <?php
     if($consumidor['Consumidor']['id']):
-        echo $form->end(array('label'=>'EDITAR E IR PARA CUPONS','class'=>'submit'));
-        echo '<br /><br />';
-        echo $html->link('Aceitar e ir para o cadastro de Cupons',
-        array('controller'=>'trocas','action' => 'nova', $consumidor['Consumidor']['id']), array('class'=>'btn_azul'));
+		echo '<div class="linha-botoes">';
+			echo '<div class="submit_botoes">';
+			echo $html->link('Aceitar e ir para o cadastro de Cupons',
+			array('controller'=>'trocas','action' => 'nova', $consumidor['Consumidor']['id']), array('class'=>'btn_azul'));
+			echo '</div>';			
 
+			echo $form->end(array('label'=>'EDITAR E IR PARA CUPONS','class'=>'submit', 'div'=>'submit submit_botoes'));
+		echo '</div>';
+		echo '<div class="clear"></div>';
     else:
         echo $form->end(array('label'=>'SALVAR E IR PARA CUPONS','class'=>'submit'));
     endif;

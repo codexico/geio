@@ -29,12 +29,12 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $paginator->sort('id');?></th>
-            <th><?php echo $paginator->sort('created');?></th>
-            <th><?php echo $paginator->sort('modified');?></th>
-            <th><?php echo $paginator->sort('brinde_id');?></th>
-            <th><?php echo $paginator->sort('qtd');?></th>
-            <th class="actions"><?php __('Actions');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+            <th class="w50"><?php echo $paginator->sort('brinde_id');?></th>
+            <th class="w10 txtCenter"><?php echo $paginator->sort('Quantidade', 'qtd');?></th>
+            <th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
+            <th class="w15 txtCenter"><?php echo $paginator->sort('modified');?></th>
+            <th class="w5 actions">&nbsp;</th>
         </tr>
         <?php
         $i = 0;
@@ -45,20 +45,20 @@
             }
             ?>
         <tr<?php echo $class;?>>
-            <td>
+            <td class="txtCenter">
                     <?php echo $entrada['Entrada']['id']; ?>
-            </td>
-            <td>
-                    <?php echo $entrada['Entrada']['created']; ?>
-            </td>
-            <td>
-                    <?php echo $entrada['Entrada']['modified']; ?>
             </td>
             <td>
                     <?php echo $entrada['Entrada']['brinde_id']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $entrada['Entrada']['qtd']; ?>
+            </td>
+            <td class="txtCenter">
+					<?php echo date('d/m/Y H:i:s', strtotime($entrada['Entrada']['created']) ); ?>
+            </td>
+            <td class="txtCenter">
+					<?php echo date('d/m/Y H:i:s', strtotime($entrada['Entrada']['modified']) ); ?>
             </td>
             <td class="actions">
                     <?php echo $html->image("ico_view.gif", array(

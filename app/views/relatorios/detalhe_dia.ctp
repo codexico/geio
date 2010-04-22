@@ -13,6 +13,12 @@
     <h1>Detalhe Dia <?=date('d/m/Y', strtotime($dia));?></h1>
 </div>
 <div class="clear"></div>
+
+<!-- .botoes -->
+<div class="botoes">
+	<?php echo $html->link('Voltar', 'javascript:history.back(-1)', array('class' => 'btn_cinza floatRight')); ?>
+</div>
+
 <div class="relatorios detalhe_dia index">
 
     <!-- .pagina_atual -->
@@ -31,12 +37,12 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $paginator->sort('Consumidor','consumidor_nome', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th><?php echo $paginator->sort('Cupons Fiscais Trocados','qtd_cf', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th><?php echo $paginator->sort('Cupons Promocionais Impressos','qtd_cp', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th><?php echo $paginator->sort('Média de Consumo','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th><?php echo $paginator->sort('Consumo Total','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th><?php echo $paginator->sort('Consumo Bandeira','valor_bandeira', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th><?php echo $paginator->sort('Consumo Outros','valor_outros', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Cupons Fiscais Trocados','qtd_cf', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Cupons Promocionais Impressos','qtd_cp', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Média de Consumo','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Consumo Total','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Consumo Bandeira','valor_bandeira', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Consumo Outros','valor_outros', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
         </tr>
         <?php
         $i = 0;
@@ -50,22 +56,22 @@
             <td>
                     <?php echo $html->link($detalhe['TrocasDia']['consumidor_nome'], array('action' => 'view', 'controller' =>'consumidores', $dia)); ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $detalhe['TrocasDia']['sum_cf']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $detalhe['TrocasDia']['sum_cp']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $number->currency($detalhe['TrocasDia']['avg_valor_total'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $number->currency($detalhe['TrocasDia']['sum_valor_total'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
             <td>
                     <?php echo $number->currency($detalhe['TrocasDia']['sum_bandeira'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $number->currency($detalhe['TrocasDia']['sum_outros'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
             </td>
         </tr>
