@@ -298,13 +298,13 @@
 				<?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
 			</td>
 			<td class="txtCenter">
-				<?php echo $cupomFiscal['CupomFiscal']['valor']; ?>
+				<?php echo $number->currency($cupomFiscal['CupomFiscal']['valor'],'EUR',array('before'=>'','after'=>'')); ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
 			</td>
 			<td class="txtCenter">
-				<?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
+				<?php echo ($cupomFiscal['CupomFiscal']['bandeira']=='') ? 'Cash' : $cupomFiscal['CupomFiscal']['bandeira'] ; ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo date('d/m/Y - H:i',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
