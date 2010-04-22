@@ -32,6 +32,10 @@ class TrocasController extends AppController {
         //$this->set('troca', $this->Troca->read(null, $id));
         $this->Troca->recursive = 0;
         $troca = $this->Troca->read(null, $id);//debug($troca);
+        if(!$troca){
+            $this->Session->setFlash(__('Id da Troca Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
 
         $this->paginate = array(
                 'conditions' => array('troca_id' => $id),

@@ -85,8 +85,13 @@ class PromotoresController extends AppController {
         }
 
         //nao existe um deleteAll() para deletar User e Promotor ao mesmo tempo?
-        $promotor = $this->Promotor->findById($id);
-
+        //$promotor = $this->Promotor->findById($id);
+        $promotor = $this->Promotor->read(null, $id);
+        if(!$promotor){
+            $this->Session->setFlash(__('Id de Promotor Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        
         //if ($this->Promotor->del($id)) {
         if ($this->Promotor->del($id) && $this->User->del($promotor['User']['id'])) {
         
@@ -102,7 +107,14 @@ class PromotoresController extends AppController {
             $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('promotor', $this->Promotor->read(null, $id));
+
+        //$this->set('promotor', $this->Promotor->read(null, $id));
+        $promotor = $this->Promotor->read(null, $id);
+        if(!$promotor){
+            $this->Session->setFlash(__('Id de Promotor Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('promotor', $promotor);
 
 
         $this->Promotor->Troca->Behaviors->attach('Containable');

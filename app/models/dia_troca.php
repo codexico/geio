@@ -15,5 +15,9 @@ class DiaTroca extends AppModel {
         }//debug($maxDia);
         return $maxDia;
     }
+
+    function _diaexiste($dia){
+        return $this->find('first',array('conditions'=>array('dia'=>$dia)));
+    }
 }
 ?>

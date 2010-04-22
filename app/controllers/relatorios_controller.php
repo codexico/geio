@@ -24,7 +24,18 @@ class RelatoriosController extends AppController {
         $this->set('trocas', $this->paginate());
     }
 
-    function detalhe_dia($dia) {//debug($dia);
+    function detalhe_dia($dia=null) {//debug($dia);
+
+        if(!$dia){
+            $this->Session->setFlash(__('Dia Inválido', true));            
+            $this->redirect(array('controller' => 'resumo_diarios'));
+        }
+
+
+        if(!$this->DiaTroca->_diaexiste($dia)){
+            $this->Session->setFlash(__('Dia Inválido', true));
+            $this->redirect(array('controller' => 'resumo_diarios'));
+        }
 
         $this->paginate = array(
                 'TrocasDia' => array('fields' => array( 'consumidor_id','consumidor_nome', 'SUM(qtd_cf) AS "sum_cf"', 'SUM(qtd_cp) AS sum_cp', 'AVG(valor_total) AS avg_valor_total',

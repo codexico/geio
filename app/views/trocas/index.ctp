@@ -13,7 +13,6 @@
 	<?php echo $html->link('Inserir Troca', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 </div>
  -->
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 
 
@@ -35,7 +34,7 @@
 		<tr>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
 			<th class="w25"><?php echo $paginator->sort('Promotor','Promotor.nome');?></th>
-			<th class="w25"><?php echo $paginator->sort('Consumidor.nome');?></th>
+			<th class="w25"><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
 			<th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
 			<th class="w10 actions"></th>
 		</tr>
@@ -67,15 +66,15 @@
 					'url' => array('action' => 'view', $troca['Troca']['id'])
 				)); ?>
 				
-				<?php echo $html->image("ico_edit.gif", array(
+				<?php /* echo $html->image("ico_edit.gif", array(
 					"alt" => "Editar",
 					'url' => array('action' => 'edit', $troca['Troca']['id'])
-				)); ?>
+				)); */ ?>
 				
-				<?php echo $html->image("ico_delete.gif", array(
+				<?php /* echo $html->image("ico_delete.gif", array(
 					"alt" => "Excluir",
 					'url' => array('action' => 'delete', $troca['Troca']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $troca['Troca']['id'])
-				)); ?>
+				)); */ ?>
 
 			</td>
 		</tr>
