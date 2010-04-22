@@ -239,7 +239,7 @@
 	<h1>Cupons Fiscais</h1>
 </div>
 <div class="clear"></div>
-
+<?php $paginator->options(array('url' => $this->passedArgs)); ?>
 <div class="cupomFiscais index">
 
 	<!-- .pagina_atual -->
@@ -258,25 +258,25 @@
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th class="txtCenter">
-				<?php echo $paginator->sort('id',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+				<?php echo $paginator->sort('id');?>
 			</th>
 			<th class="txtCenter">
-				<?php echo $paginator->sort('Nr. Cupom Fiscal', 'codigo', array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+				<?php echo $paginator->sort('Nr. Cupom Fiscal', 'codigo');?>
 			</th>
 			<th>
-				<?php echo $paginator->sort('Loja','Loja.nome_fantasia', array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+				<?php echo $paginator->sort('Loja','Loja.nome_fantasia');?>
 			</th>
 			<th class="txtCenter">
-				<?php echo $paginator->sort('Valor R$','valor', array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+				<?php echo $paginator->sort('Valor R$','valor');?>
 			</th>
 			<th class="txtCenter">
-				<?php echo $paginator->sort('forma_de_pagamento',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+				<?php echo $paginator->sort('forma_de_pagamento');?>
 			</th>
 			<th class="txtCenter">
-				<?php echo $paginator->sort('bandeira',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+				<?php echo $paginator->sort('bandeira');?>
 			</th>
 			<th class="txtCenter">
-				<?php echo $paginator->sort('created',null, array('url' =>  array( 'action'=>'view/'.$troca['Troca']['id']) ) );?>
+				<?php echo $paginator->sort('created');?>
 			</th>
 		</tr>
 		<?php
