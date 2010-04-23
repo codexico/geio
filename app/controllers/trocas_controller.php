@@ -155,7 +155,7 @@ class TrocasController extends AppController {
             }else {//por enquanto continua usando, mas depois vai virar tudo premio
                 $valores = $this->_calculaCupomPromocional();//debug($valoresCP);
             }
-            debug($this->data);
+            //debug($this->data);
             $this->Troca->create();
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));

@@ -1,3 +1,10 @@
+
+<!-- .titulo -->
+<div class="titulo">
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Consumidor</h1>
+</div>
+<div class="clear"></div>
 <div class="consumidores view">
     <dl><?php $i = 0;
         $class = ' class="altrow"';?>

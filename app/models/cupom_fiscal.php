@@ -7,11 +7,12 @@ class CupomFiscal extends AppModel {
 
     var $name = 'CupomFiscal';
     var $validate = array(
-            'codigo' => array(
-                            'rule' => 'isUnique',
-                            'message' => 'Este cupom já foi cadastrado'
-            ),
+//            'codigo' => array(
+//                            'rule' => 'isUnique',
+//                            'message' => 'Este cupom já foi cadastrado'
+//            ),
 
+            'codigo' => array('notempty'),
             //'troca_id' => array('numeric'),
             'loja_id' => array('numeric'),
             'forma_de_pagamento' => array('notempty'),
