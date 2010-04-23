@@ -39,7 +39,7 @@
 </div>
         -->
         <?php
-		echo $form->input('obs', array('label' => 'Observa&ccedil;&otilde;es'));
+        echo $form->input('obs', array('label' => 'Observa&ccedil;&otilde;es','type'=>'textarea'));
 	?>
 	</fieldset>
     <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>

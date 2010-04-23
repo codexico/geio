@@ -61,7 +61,7 @@
                     <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $html->link($troca['Troca']['id'], array('action' => 'view/'.$troca['Troca']['id'])); ?>
+                    <?php echo $html->link($troca['Troca']['id'], array('controller'=>'trocas','action' => 'view/'.$troca['Troca']['id'])); ?>
             </td>
             <td>
                     <?php echo $html->link($troca['Consumidor']['nome'], array('action' => 'view', 'controller' =>'consumidores', $troca['Consumidor']['id'])); ?>
