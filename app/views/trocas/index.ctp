@@ -51,10 +51,10 @@
 				<?php echo $troca['Troca']['id']; ?>
 			</td>
 			<td>
-				<?php echo $troca['Promotor']['nome']; ?>
+                            <?php echo $html->link($troca['Promotor']['nome'], array('action' => 'view', 'controller' =>'promotores', $troca['Promotor']['id'])); ?>
 			</td>
 			<td>
-				<?php echo $troca['Consumidor']['nome']; ?>
+                            <?php echo $html->link($troca['Consumidor']['nome'], array('action' => 'view', 'controller' =>'consumidores', $troca['Consumidor']['id'])); ?>
 			</td>
 			<td class="txtCenter">
 				<?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>

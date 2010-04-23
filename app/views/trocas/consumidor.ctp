@@ -2,108 +2,115 @@
     <dl><?php $i = 0;
         $class = ' class="altrow"';?>
 
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['id']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nome'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['nome']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Rg'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['rg']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cpf'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['cpf']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Email'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['email']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cel'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['cel']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Tel'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['tel']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sexo'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['sexo']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nascimento'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y', strtotime($consumidor['Consumidor']['nascimento']) ); ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estado Civil'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['estado_civil']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Grau De Instrucao'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['grau_de_instrucao']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Profissao'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['profissao']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Obs'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $consumidor['Consumidor']['obs']; ?>
-				&nbsp;
-			</dd>
-		</div>
-		<div <?php if ($i % 2 == 0) echo $class;?>>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y',strtotime($consumidor['Consumidor']['created'])); ?>
-				&nbsp;
-			</dd>
-		</div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['id']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nome'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['nome']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Rg'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['rg']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cpf'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['cpf']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Email'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['email']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cel'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['cel']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Tel'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['tel']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sexo'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['sexo']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nascimento'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo date('d/m/Y', strtotime($consumidor['Consumidor']['nascimento']) ); ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estado Civil'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['estado_civil']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Grau De Instrucao'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['grau_de_instrucao']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Profissao'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['profissao']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Obs'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $consumidor['Consumidor']['obs']; ?>
+                &nbsp;
+            </dd>
+        </div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo date('d/m/Y',strtotime($consumidor['Consumidor']['created'])); ?>
+                &nbsp;
+            </dd>
+        </div>
     </dl>
 </div>
+
+<div class="clear"></div>
+<!-- .titulo -->
+<div class="titulo">
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Trocas do Consumidor</h1>
+</div>
+<div class="clear"></div>
 <div class="trocas index">
-    <h2><?php __('Trocas Do Consumidor');?></h2>
     <div class="relatorio">
         <?php /*
     <p><?php echo "Total de trocas de hoje: " . $countTrocas; ?></p>
@@ -122,12 +129,19 @@
     <br />
     <hr />
     <br />
-    <p>
-        <?php
-        echo $paginator->counter(array(
-        'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-        ));
-        ?></p>
+
+    <!-- .pagina_atual -->
+    <div class="pagina_atual">
+        <div class="pagina_atual_conteudo">
+            <p>
+                <?php
+                echo $paginator->counter(array(
+                'format' => __('P&aacute;gina %page% de %pages%', true)
+                ));
+                ?>
+            </p>
+        </div>
+    </div>
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $paginator->sort('id');?></th>
@@ -162,7 +176,6 @@
             </td>
             <td>
                     <?php echo $html->link($troca['Promotor']['nome'], array('action' => 'view', 'controller' =>'promotores', $troca['Promotor']['id'])); ?>
-
             </td>
                 <?php /*
 		<td class="actions">
@@ -173,36 +186,6 @@
                 */ ?>
         </tr>
         <?php endforeach; ?>
-
-        <tr>
-            <th><?php echo $paginator->sort('id');?></th>
-            <th><?php echo $paginator->sort('Data', 'created');?></th>
-            <th><?php echo $paginator->sort('Valor (R$)', 'valor_total');?></th>
-            <th><?php echo $paginator->sort('Cupons Promocionais','qtd_cp');?></th>
-            <th><?php echo $paginator->sort('promotor_id');?></th>
-        </tr>
-        <?php /*
-        <tr>
-		<th>
-			<?php echo "TOTAL"; ?>
-		</th>
-		<th>
-			<?php echo $countTrocas; ?>
-		</th>
-		<th>
-			<?php echo $numConsumidoresAtendidos; ?>
-		</th>
-		<th>
-			<?php echo $valorCuponsFiscais[0]['total']; ?>
-		</th>
-		<th>
-			<?php echo $numCuponsPromocionais; ?>
-		</th>
-		<th>
-			<?php echo " "; ?>
-		</th>
-	</tr>
-        */ ?>
     </table>
 
     <!-- .paginacao -->
