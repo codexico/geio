@@ -72,7 +72,7 @@
 				<?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
 			</td>
 			<td class="txtCenter">
-				<?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
+                            <?php echo ($cupomFiscal['CupomFiscal']['bandeira']=='') ? 'Cash' : $cupomFiscal['CupomFiscal']['bandeira'] ; ?>
 			</td>
 			<td class="actions">
 				<?php echo $html->image("ico_view.gif", array(

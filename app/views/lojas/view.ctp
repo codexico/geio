@@ -197,7 +197,7 @@
                     <?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $cupomFiscal['CupomFiscal']['bandeira']; ?>
+                <?php echo ($cupomFiscal['CupomFiscal']['bandeira']=='') ? 'Cash' : $cupomFiscal['CupomFiscal']['bandeira'] ; ?>
             </td>
             <td class="txtCenter">
                     <?php echo date('d/m/Y - H:m',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
