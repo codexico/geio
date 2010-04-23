@@ -15,7 +15,12 @@ class FuncionariosController extends AppController {
             $this->Session->setFlash(__('Id de Funcionário Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('funcionario', $this->Funcionario->read(null, $id));
+        $funcionario = $this->Funcionario->read(null, $id);
+        if(!$funcionario){
+            $this->Session->setFlash(__('Id de Funcionario Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('funcionario', $funcionario);
     }
 
     function add() {
@@ -55,7 +60,13 @@ class FuncionariosController extends AppController {
             }
         }
         if (empty($this->data)) {
-            $this->data = $this->Funcionario->read(null, $id);
+            $this->Funcionario->recursive = 0;
+            $funcionario = $this->Funcionario->read(null, $id);//debug($troca);
+            if(!$funcionario) {
+                $this->Session->setFlash(__('Id do Funcionario Inválido', true));
+                $this->redirect(array('action' => 'index'));
+            }
+            $this->data = $funcionario;
         }
         $lojas = $this->Funcionario->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
         $this->set(compact('lojas'));

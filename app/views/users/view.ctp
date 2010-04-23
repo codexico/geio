@@ -15,9 +15,7 @@
 
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="users view">
 	<dl>
@@ -35,21 +33,14 @@
 				<?php echo $user['User']['username']; ?>
 				&nbsp;
 			</dd>
-		</div>	
-		<div <?php if ($i % 2 == 0) echo $class;?>>	
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Password'); ?></dt>
+		</div>
+		<div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Grupo'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $user['User']['password']; ?>
+				<?php echo $user['Group']['name']; ?>
 				&nbsp;
 			</dd>
-		</div>	
-		<div <?php if ($i % 2 == 0) echo $class;?>>	
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Group Id'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $user['User']['group_id']; ?>
-				&nbsp;
-			</dd>
-		</div>	
+		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -60,7 +51,7 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $user['User']['modified']; ?>
+				<?php echo date('d/m/Y - H:m',strtotime($user['User']['modified'])); ?>
 				&nbsp;
 			</dd>
 		</div>

@@ -13,7 +13,6 @@
 	<?php /*echo $html->link('Inserir Cupom Fiscal', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); */?>
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 
 <div class="cupomFiscais view">
@@ -36,6 +35,13 @@
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Troca'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 				<?php echo $html->link($cupomFiscal['Troca']['id'], array('controller' => 'trocas', 'action' => 'view', $cupomFiscal['Troca']['id'])); ?>
+				&nbsp;
+			</dd>
+		</div>
+		<div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Consumidor'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $html->link($cupomFiscal['Consumidor']['nome'], array('controller' => 'consumidores', 'action' => 'view', $cupomFiscal['Consumidor']['id'])); ?>
 				&nbsp;
 			</dd>
 		</div>

@@ -74,7 +74,13 @@ class PromotoresController extends AppController {
             }
         }
         if (empty($this->data)) {
-            $this->data = $this->Promotor->read(null, $id);
+            $this->Promotor->recursive = 0;
+            $promotor = $this->Promotor->read(null, $id);//debug($troca);
+            if(!$promotor) {
+                $this->Session->setFlash(__('Id do Promotor Inválido', true));
+                $this->redirect(array('action' => 'index'));
+            }
+            $this->data = $promotor;
         }
     }
 

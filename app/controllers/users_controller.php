@@ -19,7 +19,7 @@ class UsersController extends AppController {
             }elseif ($this->Session->read('Auth.User.group_id') == 1) {
                 //$this->Auth->loginRedirect =array('action' => 'hoje', 'controller'=>'trocas');
                 $this->Auth->loginRedirect = '/'; // #29 1)
-            }else{
+            }else {
                 $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
             }
 
@@ -45,9 +45,15 @@ class UsersController extends AppController {
             $this->Session->setFlash(__('Invalid User', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('user', $this->User->read(null, $id));
+        $this->User->recursive = 0;
+        $user = $this->User->read(null, $id);//debug($troca);
+        if(!$user) {
+            $this->Session->setFlash(__('Id do User Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('user', $user);
     }
-/*
+    /*
     function add() {
         if (!empty($this->data)) {
             $this->User->create();
@@ -62,7 +68,7 @@ class UsersController extends AppController {
         $this->set(compact('groups'));
 
     }
-*/
+    */
     function edit($id = null) {
         if (!$id && empty($this->data)) {
             $this->Session->setFlash(__('Invalid User', true));
@@ -77,7 +83,13 @@ class UsersController extends AppController {
             }
         }
         if (empty($this->data)) {
-            $this->data = $this->User->read(null, $id);
+            $this->User->recursive = 0;
+            $user = $this->User->read(null, $id);//debug($troca);
+            if(!$user) {
+                $this->Session->setFlash(__('Id do User Inválido', true));
+                $this->redirect(array('action' => 'index'));
+            }
+            $this->data = $user;
         }
     }
 

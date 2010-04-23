@@ -22,7 +22,13 @@ class UsuariosController extends AppController {
             $this->Session->setFlash(__('Id de Usuário Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('usuario', $this->Usuario->read(null, $id));
+        $this->Usuario->recursive = 0;
+        $usuario = $this->Usuario->read(null, $id);//debug($troca);
+        if(!$usuario) {
+            $this->Session->setFlash(__('Id do Usuário Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('usuario', $usuario);
     }
 
     function add() {
@@ -63,15 +69,18 @@ class UsuariosController extends AppController {
             if($this->User->Usuario->saveall($this->data)) {// lembrar que so funciona se o mysql for InnoDB
                 $this->Session->setFlash(__('Usuário salvo com sucesso.', true));
                 $this->redirect(array('action' => 'index'));
-//            if ($this->Usuario->save($this->data)) {
-//                $this->Session->setFlash(__('Promotor salvo com sucesso.', true));
-//                $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('O Usuário não foi salvo. Tente novamente.', true));
             }
         }
         if (empty($this->data)) {
-            $this->data = $this->Usuario->read(null, $id);
+            $this->Usuario->recursive = 0;
+            $usuario = $this->Usuario->read(null, $id);//debug($troca);
+            if(!$usuario) {
+                $this->Session->setFlash(__('Id do Usuário Inválido', true));
+                $this->redirect(array('action' => 'index'));
+            }
+            $this->data = $usuario;
         }
     }
 

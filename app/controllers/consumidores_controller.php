@@ -107,7 +107,13 @@ class ConsumidoresController extends AppController {
             $this->Session->setFlash(__('Invalid Consumidor', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('consumidor', $this->Consumidor->read(null, $id));
+        $this->Consumidor->recursive = 0;
+        $consumidor = $this->Consumidor->read(null, $id);
+        if(!$consumidor) {
+            $this->Session->setFlash(__('Id do Consumidor Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('consumidor', $consumidor);
     }
 
     function add() {
@@ -141,7 +147,13 @@ class ConsumidoresController extends AppController {
             }
         }
         if (empty($this->data)) {
-            $this->data = $this->Consumidor->read(null, $id);
+            $this->Consumidor->recursive = 0;
+            $consumidor = $this->Consumidor->read(null, $id);//debug($troca);
+            if(!$consumidor) {
+                $this->Session->setFlash(__('Id do Consumidor Inválido', true));
+                $this->redirect(array('action' => 'index'));
+            }
+            $this->data = $consumidor;
         }
 
         /*

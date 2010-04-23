@@ -80,15 +80,15 @@
 					'url' => array('action' => 'view', $cupomFiscal['CupomFiscal']['id'])
 				)); ?>
 				
-				<?php echo $html->image("ico_edit.gif", array(
+				<?php /* echo $html->image("ico_edit.gif", array(
 					"alt" => "Editar",
 					'url' => array('action' => 'edit', $cupomFiscal['CupomFiscal']['id'])
-				)); ?>
+				)); */ ?>
 				
-				<?php echo $html->image("ico_delete.gif", array(
+				<?php /* echo $html->image("ico_delete.gif", array(
 					"alt" => "Excluir",
 					'url' => array('action' => 'delete', $cupomFiscal['CupomFiscal']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $cupomFiscal['CupomFiscal']['id'])
-				)); ?>
+				)); */ ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>

@@ -22,7 +22,7 @@
         echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome'));
         echo '<div class="duas_colunas">';
 			echo $form->input('rg', array('label' => 'RG', 'div' =>'input text meio_input'));
-			echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' =>'input text meio_input'));
+			echo $form->input('cpf', array('label' => 'CPF (somente nÃºmeros)', 'div' =>'input text meio_input'));
         echo '</div>';
         echo $form->input('loja_id', array('label' => 'Loja'));
         echo '<div class="duas_colunas">';
