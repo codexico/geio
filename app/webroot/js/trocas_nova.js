@@ -20,7 +20,6 @@ function sincronizaSelectLoja(i){
 }
 
 function sincronizaSelectBandeira(i){
-    //alert($('#CupomFiscal'+i+'FormaDePagamento').val()!='Dinheiro');
     if($('#CupomFiscal'+i+'FormaDePagamento').val()=='Dinheiro'){
         $('#CupomFiscal'+i+'Bandeira').attr('disabled', 'disabled');
     }
@@ -187,8 +186,6 @@ $(document).ready(function() {
             message += "\npode gerar mais "+ regrasBandeiraValor +" cupom(s)";
             alert(regra+linha+resultado+message);
         }
-    //alert('restoOutros = '+restoOutros + 'restoBandeira = '+restoBandeira + " c = " + c  )
-    //alert("\n Total de cupons fiscais= "+ count_CF +"\n Total de cupons promocionais = "+ c + regra)
     })
     
 
@@ -196,71 +193,5 @@ $(document).ready(function() {
         $(this).closest('li.cupom').remove()
     })
 
-
-
-/**
-     * Adiciona consumidor por ajax sem sair da pagina
-     */ /*
-    $('#ConsumidorAddAjaxForm').submit(function(event){
-        event.preventDefault();
-
-        var dataString = $('#ConsumidorAddAjaxForm').serialize();
-        alert(dataString);
-
-        $.ajax({
-            type: "POST",
-            url: "consumidores/addAjax",
-            data: dataString,
-            success: function(xhr) {
-                //display message back to user here
-                alert("foi?")
-                return false;
-            },
-            error: function(){
-                alert("foi erro?")
-                return false;
-            }
-        });
-        return false;
-    })
-    */
-
-/**
-     * calcula o total de pontos somando os valores de acordo com as regras
-     * @deprecated  nao eh mais assim que se calcula a troca, talvez no futuro use em programas de fidelidade
-     *//*
-    $('#calcular-pontos').click(function(){
-        var pontos = new Number(0);
-        var count_CF = 0;
-        $("li.cupom").each(function(){
-            count_CF++;
-            valor = ($(this).find("input[name*=valor]").val())
-            if( isNaN( parseFloat(valor) ) ){
-                valor = 0
-            }
-            forma_de_pagamento = ($(this).find("[name*=forma_de_pagamento]").val())
-            bandeira = ($(this).find("[name*=bandeira]").val())
-
-            if(forma_de_pagamento=="Credito" && bandeira=="VISA"){
-                pontos += parseFloat(valor)*2
-            }else{
-                pontos += parseFloat(valor)*1
-            }
-
-        })
-
-        regra = "\n\n\
-                    Regra:\n\n\
-                    A cada R$1,00:\n\n\
-                    Crédito VISA = 2 pontos\n\
-                    Outras formas de pagamento = 1 ponto\n\
-                    \n\
-                    Cada 100 pontos = 1 Cupom Promocional\n\n";
-
-        totalCP = Math.floor(pontos/100);
-
-        alert("\n Total de cupons fiscais= "+ count_CF +"\n Pontos = " + Math.floor(pontos) + "\n Total de cupons promocionais= "+ totalCP + regra)
-    })
-    */
 
 })
