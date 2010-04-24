@@ -99,7 +99,8 @@ class ConsumidoresController extends AppController {
 
     function index() {
         $this->Consumidor->recursive = 0;
-        $this->set('consumidores', $this->paginate());
+        //$this->set('consumidores', $this->paginate());
+        $this->set('consumidores', $this->paginate(array('Consumidor.deleted' => 0)));
     }
 
     function view($id = null) {
@@ -183,11 +184,24 @@ class ConsumidoresController extends AppController {
             $this->Session->setFlash(__('Invalid id for Consumidor', true));
             $this->redirect(array('action' => 'index'));
         }
-        if ($this->Consumidor->del($id)) {
-            $this->Session->setFlash(__('Consumidor deleted', true));
+//        if ($this->Consumidor->del($id)) {
+//            $this->Session->setFlash(__('Consumidor deleted', true));
+//            $this->redirect(array('action' => 'index'));
+//        }
+        //SoftDeletable Behavior
+        $this->Consumidor->del($id);
+
+        $this->Consumidor->recursive = -1;
+        $this->Consumidor->enableSoftDeletable('find', false);
+        //$x = $this->Consumidor->find('first',array('conditions' =>array('id'=>$id), 'fields'=>array('Consumidor.deleted')) );
+        //debug($x['Consumidor']['deleted']);
+        $softDeleted = $this->Consumidor->field('deleted', array('id'=>$id) );
+        if($softDeleted){
+            $this->Session->setFlash(__('Consumidor deletado', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('The Consumidor could not be deleted. Please, try again.', true));
+
+        $this->Session->setFlash(__('O Consumidor não foi deletado. Tente novamente por favor.', true));
         $this->redirect(array('action' => 'index'));
     }
 

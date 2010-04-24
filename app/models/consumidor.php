@@ -3,7 +3,8 @@ class Consumidor extends AppModel {
 
     var $name = 'Consumidor';
 
-    var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData');
+    var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData', 'SoftDeletable' => array('find'=>false) );
+    //var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData', 'SoftDeletable');
 
     var $validate = array(
             'nome' => array('notempty'),

@@ -1,5 +1,8 @@
 <?php
-//debug($funcionarios);
+/* @var $this View */
+/* @var $html HtmlHelper */
+/* @var $form FormHelper */
+/* @var $javascript JavascriptHelper */
 ?>
 <!-- .titulo -->
 <div class="titulo">
@@ -74,11 +77,11 @@
 					'url' => array('action' => 'edit', $consumidor['Consumidor']['id'])
 				)); ?>
 				
-				<?php echo $html->image("ico_delete.gif", array(
-					"alt" => "Excluir",
-					'url' => array('action' => 'delete', $consumidor['Consumidor']['id'])), 
+				<?php echo $html->link(
+                                $html->image("ico_delete.gif", array("alt" => "Excluir")),
+					array('action' => 'delete', $consumidor['Consumidor']['id']),
 					null, 
-					sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])
+					sprintf(__('Are you sure you want to delete #%s - %s?', true), $consumidor['Consumidor']['id'], $consumidor['Consumidor']['nome']),null
 				); ?>
 
 			</td>
