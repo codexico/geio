@@ -33,8 +33,6 @@ class UsuariosController extends AppController {
 
     function add() {
         if (!empty($this->data)) {
-            //debug($this->data);
-
             //grupo dos promotores
             $this->data['User']['group_id'] = 2; //TODO: fazer dinamico, ou usar ACL, ou usar uma CONSTANTE, ...
 
@@ -45,17 +43,6 @@ class UsuariosController extends AppController {
                 $this->data['User']['password'] = '';//zerar o password
                 $this->Session->setFlash(__('O Usuário não foi salvo. Tente novamente.', true));
             }
-
-            /*
-            $this->Usuario->create();
-            if ($this->Usuario->save($this->data)) {
-                $this->Session->setFlash(__('The Usuario has been saved', true));
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The Usuario could not be saved. Please, try again.', true));
-            }
-             *
-             */
         }
     }
 

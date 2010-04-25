@@ -14,7 +14,7 @@ class PromotoresController extends AppController {
 
     function index() {
         $this->Promotor->recursive = 0;
-        $this->set('promotores', $this->paginate());
+        $this->set('promotores', $this->paginate(array('Promotor.deleted' => 0)));
     }
 
     function view($id = null) {
@@ -32,8 +32,6 @@ class PromotoresController extends AppController {
 
     function add() {
         if (!empty($this->data)) {
-            //debug($this->data);
-
             //grupo dos promotores
             $this->data['User']['group_id'] = 3; //TODO: fazer dinamico, ou usar ACL, ou usar uma CONSTANTE, ...
 
@@ -44,17 +42,6 @@ class PromotoresController extends AppController {
                 $this->data['User']['password'] = '';//zerar o password
                 $this->Session->setFlash(__('O Promotor não foi salvo. Tente novamente.', true));
             }
-
-            /*
-            $this->Promotor->create();
-            if ($this->Promotor->save($this->data)) {
-                $this->Session->setFlash(__('The Promotor has been saved', true));
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The Promotor could not be saved. Please, try again.', true));
-            }
-             * 
-             */
         }
     }
 
@@ -99,11 +86,30 @@ class PromotoresController extends AppController {
         }
         
         //if ($this->Promotor->del($id)) {
-        if ($this->Promotor->del($id) && $this->User->del($promotor['User']['id'])) {
-        
+//        if ($this->Promotor->del($id) && $this->User->del($promotor['User']['id'])) {
+//
+//            $this->Session->setFlash(__('Promotor deletado', true));
+//            $this->redirect(array('action' => 'index'));
+//        }
+
+        //SoftDeletable Behavior
+        $this->User->del($promotor['User']['id']);
+        $this->Promotor->del($id);
+
+        $this->User->recursive = -1;
+        $this->User->enableSoftDeletable('find', false);
+        $softDeleted2 = $this->User->field('deleted', array('id'=>($promotor['User']['id'])) );
+
+        $this->Promotor->recursive = -1;
+        $this->Promotor->enableSoftDeletable('find', false);
+        $softDeleted1 = $this->Promotor->field('deleted', array('id'=>$id) );
+
+
+        if($softDeleted1 && $softDeleted2) {
             $this->Session->setFlash(__('Promotor deletado', true));
             $this->redirect(array('action' => 'index'));
         }
+
         $this->Session->setFlash(__('O Promotor não pode ser deletado. Tente novamente.', true));
         $this->redirect(array('action' => 'index'));
     }

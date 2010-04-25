@@ -13,9 +13,7 @@
     <?php echo $html->link('Inserir Promotor', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="promotores index">
 
@@ -70,11 +68,13 @@
                     "alt" => "Editar",
                     'url' => array('action' => 'edit', $promotor['Promotor']['id'])
                     )); ?>
-
-                    <?php echo $html->image("ico_delete.gif", array(
-                    "alt" => "Excluir",
-                    'url' => array('action' => 'delete', $promotor['Promotor']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $promotor['Promotor']['id'])
-                    )); ?>
+    
+                    <?php echo $html->link(
+                    $html->image("ico_delete.gif", array("alt" => "Excluir")),
+                    array('action' => 'delete', $promotor['Promotor']['id']), null,
+                    sprintf(__('Tem certeza que quer deletar #%s - %s?', true),
+                    $promotor['Promotor']['id'], $promotor['Promotor']['nome']),null
+                    ); ?>
 
             </td>
         </tr>

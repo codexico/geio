@@ -3,7 +3,7 @@ class Promotor extends AppModel {
 
     var $name = 'Promotor';
 
-    var $actsAs = array('CakePtbr.Validacao');
+    var $actsAs = array('CakePtbr.Validacao', 'SoftDeletable' => array('find'=>false) );
     
     var $validate = array(
 
