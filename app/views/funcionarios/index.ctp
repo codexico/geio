@@ -30,8 +30,9 @@
 
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th class="w40"><?php echo $paginator->sort('nome');?></th>
-			<th class="w35"><?php echo $paginator->sort('E-mail', 'email');?></th>
+			<th class="w30"><?php echo $paginator->sort('nome');?></th>
+			<th class="w30"><?php echo $paginator->sort('Loja','nome_fantasia');?></th>
+			<th class="w30"><?php echo $paginator->sort('E-mail', 'email');?></th>
 			<th class="w10 actions"></th>
 		</tr>
 
@@ -46,6 +47,9 @@
 		<tr<?php echo $class;?>>
 			<td>
 				<?php echo $funcionario['Funcionario']['nome']; ?>
+			</td>
+			<td>
+				<?php echo $funcionario['Loja']['nome_fantasia']; ?>
 			</td>
 			<td>
 				<?php echo $funcionario['Funcionario']['email']; ?>

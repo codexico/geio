@@ -35,7 +35,7 @@ class LojasController extends AppController {
 
     function index() {
         $this->Loja->recursive = 0;
-        $this->set('lojas', $this->paginate());
+        $this->set('lojas', $this->paginate(array('Loja.deleted' => 0)));
     }
 
     function view($id = null) {
@@ -111,11 +111,22 @@ class LojasController extends AppController {
             $this->Session->setFlash(__('Invalid id for Loja', true));
             $this->redirect(array('action' => 'index'));
         }
-        if ($this->Loja->del($id)) {
-            $this->Session->setFlash(__('Loja deleted', true));
+//        if ($this->Loja->del($id)) {
+//            $this->Session->setFlash(__('Loja deleted', true));
+//            $this->redirect(array('action' => 'index'));
+//        }
+        //SoftDeletable Behavior
+        $this->Loja->del($id);
+
+        $this->Loja->recursive = -1;
+        $this->Loja->enableSoftDeletable('find', false);
+        $softDeleted = $this->Loja->field('deleted', array('id'=>$id) );
+        if($softDeleted) {
+            $this->Session->setFlash(__('Loja deletada', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('The Loja could not be deleted. Please, try again.', true));
+
+        $this->Session->setFlash(__('O Loja não foi deletata. Tente novamente por favor.', true));
         $this->redirect(array('action' => 'index'));
     }
 

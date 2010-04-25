@@ -65,10 +65,14 @@
 					'url' => array('action' => 'edit', $loja['Loja']['id'])
 				)); ?>
 				
-				<?php echo $html->image("ico_delete.gif", array(
-					"alt" => "Excluir",
-					'url' => array('action' => 'delete', $loja['Loja']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $loja['Loja']['id'])
-				)); ?>
+				<?php echo $html->link(
+                                $html->image("ico_delete.gif", array("alt" => "Excluir")),
+					array('action' => 'delete', $loja['Loja']['id']),
+					null,
+					sprintf(__('Tem certeza que quer deletar #%s - %s?', true),
+                                                $loja['Loja']['id'], $loja['Loja']['nome_fantasia']),null
+				); ?>
+	
 
 			</td>
 		</tr>

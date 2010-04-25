@@ -120,6 +120,15 @@
                 &nbsp;
             </dd>
         </div>
+        <?php if($loja['Loja']['deleted']) : ?>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Deletado em:'); ?></dt>
+            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                    <?php echo date('d/m/Y - H:i', strtotime($loja['Loja']['deleted_date'])); ?>
+                &nbsp;
+            </dd>
+        </div>
+        <?php endif; ?>
     </dl>
 </div>
 <div class="clear"></div>
