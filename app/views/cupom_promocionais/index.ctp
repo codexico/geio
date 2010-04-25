@@ -1,3 +1,10 @@
+<?php
+/* @var $this View */
+/* @var $html HtmlHelper */
+/* @var $form FormHelper */
+/* @var $javascript JavascriptHelper */
+//debug($cupomPromocionais[0]);
+?>
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>
@@ -5,14 +12,7 @@
 </div>
 <div class="clear"></div>
 
-<!-- .botoes -->
-<div class="botoes">
-	<?php echo $html->link('Inserir Cupom', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
-</div>
-
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="cupomPromocionais index">
 
@@ -36,7 +36,8 @@
 			<th class="w20"><?php echo $paginator->sort('promotor_id');?></th>
 			<th class="w15"><?php echo $paginator->sort('consumidor_id');?></th>
 			<th class="w15"><?php echo $paginator->sort('data_impressao');?></th>
-			<th class="w15 actions"></th>
+			<th class="w15 actions"><?php echo $paginator->sort('created');?></th>
+                        <th class="w10 actions"></th>
 		</tr>
 		<?php
 		$i = 0;
@@ -66,9 +67,14 @@
 				<?php echo $cupomPromocional['CupomPromocional']['created']; ?>
 			</td>
 			<td class="actions">
-				<?php echo $html->link(__('View', true), array('action' => 'view', $cupomPromocional['CupomPromocional']['id'])); ?>
-				<?php echo $html->link(__('Edit', true), array('action' => 'edit', $cupomPromocional['CupomPromocional']['id'])); ?>
-				<?php echo $html->link(__('Delete', true), array('action' => 'delete', $cupomPromocional['CupomPromocional']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $cupomPromocional['CupomPromocional']['id'])); ?>
+
+				<?php echo $html->image("ico_view.gif", array(
+					"alt" => "Visualizar",
+					'url' => array('action' => 'view', $cupomPromocional['CupomPromocional']['id'])
+				)); ?>
+				<?php /* echo $html->link(__('Edit', true), array('action' => 'edit', $cupomPromocional['CupomPromocional']['id'])); */ ?>
+				<?php /* echo $html->link(__('Delete', true), array('action' => 'delete', $cupomPromocional['CupomPromocional']['id']), null,
+                                 * sprintf(__('Are you sure you want to delete # %s?', true), $cupomPromocional['CupomPromocional']['id'])); */ ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>

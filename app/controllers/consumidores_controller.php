@@ -29,74 +29,6 @@ class ConsumidoresController extends AppController {
         $this->Auth->allowedActions = array('edit');
     }
 
-    function endereco_cep() {
-        $cep_num = $this->data['Consumidor']['cep']; //Recupera o cep informado no formulário
-
-        //Busca o logradouro e bairro_id na tabela enderecos
-        $logradouro = $this->Endereco->find('first',
-                array(
-                'conditions' => array('Endereco.cep' => $cep_num),
-                'fields' => array('Endereco.logradouro', 'Endereco.bairro_id')
-                )
-        );
-
-        $cep['Cep']['numero'] = $cep_num; //Armazena o numero do cep no array cep
-        $endereco = $logradouro['Endereco']['logradouro']; //Guarda o logradouro recuperado da tabela enderecos
-        $bairro	  = $logradouro['Endereco']['bairro_id'];  //Guarda o bairro_id recuperado da tabela enderecos
-
-        //Busca o nome do bairro e cidade_id na tabela bairros
-        $bairro = $this->Bairro->find('first',
-                array(
-                'conditions' => array('Bairro.id' => $bairro),
-                'recursive' => -1, //Para não retornar os relacionamentos de bairros
-                'fields' => array('Bairro.descricao', 'Bairro.cidade_id')
-                )
-        );
-
-        $cidade = $bairro['Bairro']['cidade_id']; //Guarda o cidade_id recuperado da tabela bairros
-
-        //Busca o nome da cidade e estado_id na tabela cidades
-        $cidade = $this->Cidade->find('first',
-                array(
-                'conditions'=>array('Cidade.id'=>$cidade),
-                'recursive'=>-1, //Para não retornar os relacionamentos de cidades
-                'fields'=>array('Cidade.cidade', 'Cidade.estado_id')
-                )
-        );
-
-        $estado = $cidade['Cidade']['estado_id']; //Guarda estado_id recuperado da tabela cidades
-
-        /*
-    	 * Busca o nome do estado e pais_id na tabela estados
-    	 * Nota: Só existem os estados brasileiros no sql que disponibilizei
-        */
-        $estado = $this->Estado->find('first',
-                array(
-                'conditions'=>array('Estado.id'=>$estado),
-                'recursive'=>-1, //Para não retornar os relacionamentos de estados
-                'fields'=>array('Estado.estado', 'Estado.paise_id')
-                )
-        );
-
-        $pais = $estado['Estado']['paise_id']; //Guarda o pais_id recuperado da tabela estados
-
-        //Busca o nome do país na tabela paises
-        $pais = $this->Paise->find('first',
-                array(
-                'conditions'=>array('Paise.id'=>$pais),
-                'recursive'=>-1, //Para não retornar os relacionamentos de paises
-                'fields'=>array('Paise.nome')
-                )
-        );
-
-        /*
-    	 * Monta um array de endereço com os dados recolhidos anteriormente das tabelas
-    	 * e seta o array para ser utilizado na view
-        */
-        $endereco = Set::merge($cep, $logradouro, $bairro, $cidade, $estado, $pais);
-        $this->set('endereco', $endereco);
-    }
-
     function index() {
         $this->Consumidor->recursive = 0;
         //$this->set('consumidores', $this->paginate());
@@ -117,20 +49,6 @@ class ConsumidoresController extends AppController {
         $this->set('consumidor', $consumidor);
     }
 
-    function add() {
-        if (!empty($this->data)) {
-            //debug($this->data);
-            $this->Consumidor->create();
-            if ($this->Consumidor->save($this->data)) {
-                $this->Session->setFlash(__('Consumidor salvo com sucesso', true));
-                //$this->redirect(array('action' => 'index'));
-                $this->redirect(array('controller' => 'trocas', 'action' => 'nova/'.$this->Consumidor->id));
-            } else {
-                $this->Session->setFlash(__('O Consumidor não foi salvo. Tente novamente.', true));
-            }
-        }
-    }
-
     function edit($id = null) {
         if (!$id && empty($this->data)) {
             $this->Session->setFlash(__('Invalid Consumidor', true));
@@ -139,9 +57,11 @@ class ConsumidoresController extends AppController {
         if (!empty($this->data)) {
             if ($this->Consumidor->save($this->data)) {
                 $this->Session->setFlash(__('Consumidor editado com sucesso.', true));
+
                 if ($this->Session->read('Auth.User.group_id') == 3) {//promotor
                     $this->redirect(array('controller'=>'trocas','action' => 'nova', $id));
                 }
+
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('O Consumidor não foi salvo. Tente novamente.', true));
@@ -196,7 +116,7 @@ class ConsumidoresController extends AppController {
         //$x = $this->Consumidor->find('first',array('conditions' =>array('id'=>$id), 'fields'=>array('Consumidor.deleted')) );
         //debug($x['Consumidor']['deleted']);
         $softDeleted = $this->Consumidor->field('deleted', array('id'=>$id) );
-        if($softDeleted){
+        if($softDeleted) {
             $this->Session->setFlash(__('Consumidor deletado', true));
             $this->redirect(array('action' => 'index'));
         }
@@ -262,6 +182,7 @@ class ConsumidoresController extends AppController {
     function pesquisar() {
 
     }
+
     function pesquisarCpfAjax() {
         Configure::write('debug', 0);
         $this->autoRender = false;
@@ -380,5 +301,74 @@ class ConsumidoresController extends AppController {
         }
         exit ();
     }
+
+    function endereco_cep() {
+        $cep_num = $this->data['Consumidor']['cep']; //Recupera o cep informado no formulário
+
+        //Busca o logradouro e bairro_id na tabela enderecos
+        $logradouro = $this->Endereco->find('first',
+                array(
+                'conditions' => array('Endereco.cep' => $cep_num),
+                'fields' => array('Endereco.logradouro', 'Endereco.bairro_id')
+                )
+        );
+
+        $cep['Cep']['numero'] = $cep_num; //Armazena o numero do cep no array cep
+        $endereco = $logradouro['Endereco']['logradouro']; //Guarda o logradouro recuperado da tabela enderecos
+        $bairro	  = $logradouro['Endereco']['bairro_id'];  //Guarda o bairro_id recuperado da tabela enderecos
+
+        //Busca o nome do bairro e cidade_id na tabela bairros
+        $bairro = $this->Bairro->find('first',
+                array(
+                'conditions' => array('Bairro.id' => $bairro),
+                'recursive' => -1, //Para não retornar os relacionamentos de bairros
+                'fields' => array('Bairro.descricao', 'Bairro.cidade_id')
+                )
+        );
+
+        $cidade = $bairro['Bairro']['cidade_id']; //Guarda o cidade_id recuperado da tabela bairros
+
+        //Busca o nome da cidade e estado_id na tabela cidades
+        $cidade = $this->Cidade->find('first',
+                array(
+                'conditions'=>array('Cidade.id'=>$cidade),
+                'recursive'=>-1, //Para não retornar os relacionamentos de cidades
+                'fields'=>array('Cidade.cidade', 'Cidade.estado_id')
+                )
+        );
+
+        $estado = $cidade['Cidade']['estado_id']; //Guarda estado_id recuperado da tabela cidades
+
+        /*
+    	 * Busca o nome do estado e pais_id na tabela estados
+    	 * Nota: Só existem os estados brasileiros no sql que disponibilizei
+        */
+        $estado = $this->Estado->find('first',
+                array(
+                'conditions'=>array('Estado.id'=>$estado),
+                'recursive'=>-1, //Para não retornar os relacionamentos de estados
+                'fields'=>array('Estado.estado', 'Estado.paise_id')
+                )
+        );
+
+        $pais = $estado['Estado']['paise_id']; //Guarda o pais_id recuperado da tabela estados
+
+        //Busca o nome do país na tabela paises
+        $pais = $this->Paise->find('first',
+                array(
+                'conditions'=>array('Paise.id'=>$pais),
+                'recursive'=>-1, //Para não retornar os relacionamentos de paises
+                'fields'=>array('Paise.nome')
+                )
+        );
+
+        /*
+    	 * Monta um array de endereço com os dados recolhidos anteriormente das tabelas
+    	 * e seta o array para ser utilizado na view
+        */
+        $endereco = Set::merge($cep, $logradouro, $bairro, $cidade, $estado, $pais);
+        $this->set('endereco', $endereco);
+    }
+
 }
 ?>

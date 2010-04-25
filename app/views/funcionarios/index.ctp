@@ -62,10 +62,13 @@
 					'url' => array('action' => 'edit', $funcionario['Funcionario']['id'])
 				)); ?>
 				
-				<?php echo $html->image("ico_delete.gif", array(
-					"alt" => "Excluir",
-					'url' => array('action' => 'delete', $funcionario['Funcionario']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $funcionario['Funcionario']['id'])
-				)); ?>
+				<?php echo $html->link(
+                                $html->image("ico_delete.gif", array("alt" => "Excluir")),
+					array('action' => 'delete', $funcionario['Funcionario']['id']),
+					null,
+					sprintf(__('Tem certeza que quer deletar #%s - %s?', true),
+                                                $funcionario['Funcionario']['id'], $funcionario['Funcionario']['nome']),null
+				); ?>
 	
 			</td>
 		</tr>

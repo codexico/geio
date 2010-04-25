@@ -8,9 +8,10 @@
 <!-- .botoes -->
 <div class="botoes">
     <?php echo $html->link('Voltar', '/consumidores', array('class'=>'btn_cinza floatRight')); ?>
-    <?php echo $html->link('Excluir Consumidor', array('action' => 'delete', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])); ?>
     <?php echo $html->link('Editar Consumidor', array('action' => 'edit', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
     <?php echo $html->link('Incluir Consumidor', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
+    <?php echo $html->link('Excluir Consumidor', array('action' => 'delete', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5'),
+            sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -177,7 +178,7 @@
         </div>
         <?php if($consumidor['Consumidor']['deleted']) : ?>
         <div <?php if ($i % 2 == 0) echo $class;?>>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Deletado'); ?></dt>
+            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Deletado em:'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
                     <?php echo date('d/m/Y - H:i', strtotime($consumidor['Consumidor']['deleted_date'])); ?>
                 &nbsp;

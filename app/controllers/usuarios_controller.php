@@ -14,7 +14,7 @@ class UsuariosController extends AppController {
 
     function index() {
         $this->Usuario->recursive = 0;
-        $this->set('usuarios', $this->paginate());
+        $this->set('usuarios', $this->paginate(array('Usuario.deleted' => 0)));
     }
 
     function view($id = null) {
@@ -94,11 +94,31 @@ class UsuariosController extends AppController {
         $usuario = $this->Usuario->findById($id);
 
         //if ($this->Usuario->del($id)) {
-        if ($this->Usuario->del($id) && $this->User->del($usuario['User']['id'])) {
+//        if ($this->Usuario->del($id) && $this->User->del($usuario['User']['id'])) {
+//
+//            $this->Session->setFlash(__('Usuario deletado', true));
+//            $this->redirect(array('action' => 'index'));
+//        }
+        
+        
+        //SoftDeletable Behavior
+        $this->User->del($usuario['User']['id']);
+        $this->Usuario->del($id);
 
-            $this->Session->setFlash(__('Usuario deletado', true));
+        $this->User->recursive = -1;
+        $this->User->enableSoftDeletable('find', false);
+        $softDeleted2 = $this->User->field('deleted', array('id'=>($usuario['User']['id'])) );
+
+        $this->Usuario->recursive = -1;
+        $this->Usuario->enableSoftDeletable('find', false);
+        $softDeleted1 = $this->Usuario->field('deleted', array('id'=>$id) );
+
+        
+        if($softDeleted1 && $softDeleted2) {
+            $this->Session->setFlash(__('Usuário deletado', true));
             $this->redirect(array('action' => 'index'));
         }
+
         $this->Session->setFlash(__('O Usuário não pode ser deletado. Tente novamente.', true));
         $this->redirect(array('action' => 'index'));
     }
