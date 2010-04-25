@@ -1,3 +1,10 @@
+<!-- .titulo -->
+<div class="titulo">
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Escolha dos Brindes</h1>
+</div>
+<div class="clear"></div>
+
 <?php
 /* @var $this View */
 /* @var $html HtmlHelper */
@@ -7,73 +14,106 @@
 $javascript->link(array('jquery-1.4.2.min'), false);// false para ir em <head>
 $javascript->link(array('trocas_escolher_brinde'), false);
 ?>
+
 <?php
 if( Configure::read('Regras.Brinde.true') ) {
-    echo "Consumidor trocou valor suficiente para ".$troca['Troca']['qtd_premios']." brindes.";
-    echo "<br /><br />";
-    echo "O Consumidor ainda pode receber  ".$brindesDisponiveis." brindes.";
-    echo "<br /><br />";
+    echo "<p>Consumidor trocou valor suficiente para ".$troca['Troca']['qtd_premios']." brindes.</p>";
+    echo "<p>O Consumidor ainda pode receber  ".$brindesDisponiveis." brindes.</p>";
+    echo "<br />";
 }else{
     echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']));
 }
-
+echo "<div class='form'>";
     echo $form->create('Troca', array('action'=> 'escolher_brinde/'.$this->params['pass'][0]));
 
     echo $form->hidden('qtd_brindes', array('value'=>$brindesDisponiveis));
 
-//debug($brindes);
-$i=0;
-foreach ($brindes as $id => $brinde) {
-    echo "<br />";
-    echo $brinde;
-    echo  " - Estoque atual: ". $estoques[$id];
-    echo $form->input( 'Premio.foreign_key.'.$id, array('label'=>'Quantidade','class'=>'qtd_brinde') );
-}
-echo $form->end(array('value'=>'Enviar','class'=>'enviar_qtd_brindes') );
+	//debug($brindes);
+	echo "<fieldset>";
+		echo "<legend>Lista de Brindes</legend>";
+		$i=0;
+		foreach ($brindes as $id => $brinde) {
+			echo "<br /><span class='mgl10'><strong>";
+			echo $brinde;
+			echo  " - Estoque atual: ". $estoques[$id]."</strong></span>";
+			echo $form->input( 'Premio.foreign_key.'.$id, array('label'=>'Quantidade','class'=>'qtd_brinde') );
+		}
+	echo "</fieldset>";
+	echo $form->end(array('value'=>'Enviar','class'=>'submit enviar_qtd_brindes') );
+echo "</div>";
 ?>
-<br />
-<br />
+
+<!-- .titulo -->
+<div class="titulo">
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Dados da Troca</h1>
+</div>
+<div class="clear"></div>
+
 <div class="trocas view">
-    <h2><?php  __('Troca');?></h2>
-    <dl><?php $i = 0;
+    <dl>
+		<?php $i = 0;
         $class = ' class="altrow"';?>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $troca['Troca']['id']; ?>
-            &nbsp;
-        </dd>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Promotor Id'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $troca['Troca']['promotor_id']; ?>
-            &nbsp;
-        </dd>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Consumidor Id'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $troca['Troca']['consumidor_id']; ?>
-            &nbsp;
-        </dd>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
-            &nbsp;
-        </dd>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Valor Total'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo "R$ " . $troca['Troca']['valor_total']; ?>
-            &nbsp;
-        </dd>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('N° Cupons Fiscais'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $troca['Troca']['qtd_cf']; ?>
-            &nbsp;
-        </dd>
-        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('N° Cupons Promocionais'); ?></dt>
-        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $troca['Troca']['qtd_cp']; ?>
-            &nbsp;
-        </dd>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $troca['Troca']['id']; ?>
+				&nbsp;
+			</dd>
+		</div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Promotor Id'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $troca['Troca']['promotor_id']; ?>
+				&nbsp;
+			</dd>
+		</div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Consumidor Id'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $troca['Troca']['consumidor_id']; ?>
+				&nbsp;
+			</dd>
+		</div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
+				&nbsp;
+			</dd>
+		</div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Valor Total'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo "R$ " . $troca['Troca']['valor_total']; ?>
+				&nbsp;
+			</dd>
+		</div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('N° Cupons Fiscais'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $troca['Troca']['qtd_cf']; ?>
+				&nbsp;
+			</dd>
+		</div>
+        <div <?php if ($i % 2 == 0) echo $class;?>>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('N° Cupons Promocionais'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $troca['Troca']['qtd_cp']; ?>
+				&nbsp;
+			</dd>
+		</div>
     </dl>
 </div>
+<div class="clear"></div>
+
+<!-- .titulo -->
+<div class="titulo">
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Dados do Consumidor</h1>
+</div>
+<div class="clear"></div>
 <?php
 echo $this->element('consumidor');
 ?>
+<div class="clear"></div>

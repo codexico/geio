@@ -34,9 +34,9 @@
 		<tr>
 			<th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
 			<th class="w25"><?php echo $paginator->sort('Promotor','Promotor.nome');?></th>
-			<th class="w25"><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
+			<th class="w30"><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
 			<th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
-			<th class="w10 actions"></th>
+			<th class="w5 actions"></th>
 		</tr>
 		<?php
 		$i = 0;

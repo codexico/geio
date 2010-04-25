@@ -81,7 +81,8 @@
                                 $html->image("ico_delete.gif", array("alt" => "Excluir")),
 					array('action' => 'delete', $consumidor['Consumidor']['id']),
 					null, 
-					sprintf(__('Are you sure you want to delete #%s - %s?', true), $consumidor['Consumidor']['id'], $consumidor['Consumidor']['nome']),null
+					sprintf(__('Tem certeza que quer deletar #%s - %s?', true),
+                                                $consumidor['Consumidor']['id'], $consumidor['Consumidor']['nome']),null
 				); ?>
 
 			</td>

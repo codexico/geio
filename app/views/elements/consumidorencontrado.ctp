@@ -122,9 +122,6 @@
 
         echo $form->input('bairro');
 
-        echo $form->input('pais', array('options' => $paises,
-        'empty'=>'Selecione'));
-
         echo '<div class="duas_colunas">';
 			echo $form->input('estado', array('options' => $estados,
 			'empty'=>'Selecione',
@@ -132,6 +129,8 @@
 			echo $form->input('cidade', array('div'=>'input meio_input'));
         echo '</div>';
 
+        echo $form->input('pais', array('options' => $paises,
+        'empty'=>'Selecione'));
         ?>
     </fieldset>
 

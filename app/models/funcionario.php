@@ -3,7 +3,7 @@ class Funcionario extends AppModel {
 
     var $name = 'Funcionario';
 
-    var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData');
+    var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData', 'SoftDeletable' => array('find'=>false) );
 
 
     var $validate = array(

@@ -92,6 +92,7 @@ form input.submit, .form input.submit{
 .mgr5{margin-right:5px;}
 .mgr10{margin-right:10px;}
 .mgl10{margin-left:10px;}
+.mgl20{margin-left:20px;}
 .mgt10{margin-top:10px;}
 .mgt20{margin-top:20px;}
 .mgt18{margin-top:18px;}
@@ -362,6 +363,7 @@ form input.submit, .form input.submit{
 	background-image:url("../img/background_fieldset.gif");
 	background-position:top;
 	background-position:0 4px \9;
+	*background-position:0 9px;
 	background-repeat:repeat-x;
 	padding-left:10px;
 }
@@ -817,4 +819,49 @@ form input.submit, .form input.submit{
 }
 
 
+/* NOVO CUPOM - FORM */
+#content #cupons .cupom{
+	width:918px;
+	border:1px solid #e0e0e0;
+	padding:10px;
+	margin-bottom:10px;
+}
+
+#content #cupons .cupom .cupom-titulo{
+	width:400px;
+	color:#0073A1;
+	font-size:14px;
+	font-weight:bold;
+	text-transform:uppercase;
+	float:left;
+}
+
+#content #cupons .cupom .cupom-botoes{
+	width:500px;
+	float:right;
+}
+
+#content #cupons input.submit{
+	margin:0;
+	float:right;
+	margin-left:10px;
+}
+
+#content #cupons .form{
+	display:inline;
+}
+
+#content #cupons .form div.input, #content #cupons .form div.duas_colunas{
+	width:48%;
+	height:50px;
+	padding:0;
+	float:left;
+}
+
+#content #cupons .cupom fieldset legend{
+	color:#023854;
+	font-size:14px;
+	font-weight:bold;
+	text-transform:uppercase;
+}
 

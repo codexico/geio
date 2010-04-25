@@ -118,24 +118,22 @@
 </div>
 <div class="clear"></div>
 <div class="trocas index">
-    <div class="relatorio">
-        <?php /*
-    <p><?php echo "Total de trocas de hoje: " . $countTrocas; ?></p>
-    <p><?php echo "Valor total dos Cupons Fiscais trocados: R$ " . $valorCuponsFiscais[0]['total']; ?></p>
-    <p><?php echo "Número de Cupons Fiscais trocados: " . $numCuponsFiscais; ?></p>
-    <p><?php echo "Média de valor dos Cupons Fiscais: R$ " . $media; ?></p>
-    <p><?php echo "Média de valor das trocas: R$ " . $mediaValorTroca; ?></p>
-    <p><?php echo "Número de Cupons Promocionais impressos: " . $numCuponsPromocionais; ?></p>
-    <p><?php echo "Número de consumidores que compraram com VISA: " . $numConsumidoresBandeira; ?></p>
-    <p><?php echo "Número de consumidores novos que compraram com VISA: " . $numConsumidoresNovosBandeira; ?></p>
-    <p><?php echo "Número de consumidores que não compraram com VISA: " . $numConsumidoresNotBandeira; ?></p>
-    <p><?php echo "Número de consumidores novos que não compraram com VISA: " . $numConsumidoresNovosNotBandeira; ?></p>
-        */ ?>
-        <?php /* debug($mediaValorTroca); */ ?>
-    </div>
-    <br />
-    <hr />
-    <br />
+    <?php /*
+		<div class="relatorio">
+	
+		<p><?php echo "Total de trocas de hoje: " . $countTrocas; ?></p>
+		<p><?php echo "Valor total dos Cupons Fiscais trocados: R$ " . $valorCuponsFiscais[0]['total']; ?></p>
+		<p><?php echo "Número de Cupons Fiscais trocados: " . $numCuponsFiscais; ?></p>
+		<p><?php echo "Média de valor dos Cupons Fiscais: R$ " . $media; ?></p>
+		<p><?php echo "Média de valor das trocas: R$ " . $mediaValorTroca; ?></p>
+		<p><?php echo "Número de Cupons Promocionais impressos: " . $numCuponsPromocionais; ?></p>
+		<p><?php echo "Número de consumidores que compraram com VISA: " . $numConsumidoresBandeira; ?></p>
+		<p><?php echo "Número de consumidores novos que compraram com VISA: " . $numConsumidoresNovosBandeira; ?></p>
+		<p><?php echo "Número de consumidores que não compraram com VISA: " . $numConsumidoresNotBandeira; ?></p>
+		<p><?php echo "Número de consumidores novos que não compraram com VISA: " . $numConsumidoresNovosNotBandeira; ?></p>
+			<?php /* debug($mediaValorTroca); */ ?>
+		</div>
+    */ ?>
 
     <!-- .pagina_atual -->
     <div class="pagina_atual">
@@ -151,11 +149,11 @@
     </div>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $paginator->sort('id');?></th>
-            <th><?php echo $paginator->sort('Data', 'created');?></th>
-            <th><?php echo $paginator->sort('Valor (R$)', 'valor_total');?></th>
-            <th><?php echo $paginator->sort('Cupons Promocionais','qtd_cp');?></th>
-            <th><?php echo $paginator->sort('promotor_id');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
+            <th class="w15 txtCenter"><?php echo $paginator->sort('Data', 'created');?></th>
+            <th class="w10 txtCenter"><?php echo $paginator->sort('Valor (R$)', 'valor_total');?></th>
+            <th class="w20 txtCenter"><?php echo $paginator->sort('Cupons Promocionais','qtd_cp');?></th>
+            <th class="w50"><?php echo $paginator->sort('promotor_id');?></th>
             <?php /*
 	<th class="actions"><?php __('Actions');?></th>
             */ ?>
@@ -169,16 +167,16 @@
             }
             ?>
         <tr<?php echo $class;?>>
-            <td>
+            <td class="txtCenter">
                     <?php echo $troca['Troca']['id']; ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
-            <td>
+            <td class="txtCenter">
                     <?php echo $troca['Troca']['qtd_cp']; ?>
             </td>
             <td>

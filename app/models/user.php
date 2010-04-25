@@ -2,6 +2,9 @@
 class User extends AppModel {
 
     var $name = 'User';
+
+    var $actsAs = array('Acl' => 'requester', 'SoftDeletable' => array('find'=>false));
+
     var $validate = array(
         'username' => array(
                             'username-1' => array(
@@ -86,8 +89,6 @@ class User extends AppModel {
                             'counterQuery' => ''
             )
     );
-
-    var $actsAs = array('Acl' => 'requester');
 
     function parentNode() {
         if (!$this->id && empty($this->data)) {

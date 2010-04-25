@@ -45,7 +45,7 @@ echo $this->element('consumidor');
     ?>
     <fieldset>
         <legend><?php __('Nova Troca do Consumidor');?></legend>
-        <ul id="cupons">
+        <ul id="cupons" class="mgt20 mgb20">
             <?php
             if(isset ($this->data)) {
                 $i=0;
@@ -66,13 +66,17 @@ echo $this->element('consumidor');
             ?>
         </ul>
     </fieldset>
-	<input id="acrescentar-cupom" class="submit" type="button" value="Acrescentar Cupom Fiscal" />
 
-<?php if( Configure::read('Regras.Brinde.true') ) : ?>
-	<input id="calcular-troca" class="submit" type="button" value="Calcular Brindes" />
-<?php else : ?>
-	<input id="calcular-troca" class="submit" type="button" value="Calcular Cupons Promocionais" />
-<?php endif; ?>
-        
-    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit'));?>
+	<div class="submit_botoes mgl10">
+		<input id="acrescentar-cupom" class="submit" type="button" value="Acrescentar Cupom Fiscal" />
+	</div>
+	<div class="submit_botoes">
+		<?php if( Configure::read('Regras.Brinde.true') ) : ?>
+			<input id="calcular-troca" class="submit mgl20" type="button" value="Calcular Brindes" />
+		<?php else : ?>
+			<input id="calcular-troca" class="submit" type="button" value="Calcular Cupons Promocionais" />
+		<?php endif; ?>
+	</div>
+    <?php echo $form->end(array('label'=>'SALVAR','class'=>'submit', 'div'=>'submit submit_botoes'));?>
+	<div class="clear"></div>
 </div>

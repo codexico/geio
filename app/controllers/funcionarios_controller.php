@@ -7,7 +7,7 @@ class FuncionariosController extends AppController {
 
     function index() {
         $this->Funcionario->recursive = 0;
-        $this->set('funcionarios', $this->paginate());
+        $this->set('funcionarios', $this->paginate(array('Funcionario.deleted' => 0)));
     }
 
     function view($id = null) {
@@ -16,7 +16,7 @@ class FuncionariosController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
         $funcionario = $this->Funcionario->read(null, $id);
-        if(!$funcionario){
+        if(!$funcionario) {
             $this->Session->setFlash(__('Id de Funcionario Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
@@ -84,11 +84,22 @@ class FuncionariosController extends AppController {
             $this->Session->setFlash(__('Id de Funcionário Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
-        if ($this->Funcionario->del($id)) {
-            $this->Session->setFlash(__('Funcionario deletado', true));
+//        if ($this->Funcionario->del($id)) {
+//            $this->Session->setFlash(__('Funcionario deletado', true));
+//            $this->redirect(array('action' => 'index'));
+//        }
+        //SoftDeletable Behavior
+        $this->Funcionario->del($id);
+        
+        $this->Funcionario->recursive = -1;
+        $this->Funcionario->enableSoftDeletable('find', false);
+        $softDeleted = $this->Funcionario->field('deleted', array('id'=>$id) );
+        if($softDeleted) {
+            $this->Session->setFlash(__('Funcionário deletado', true));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('O Funcionario não foi salvo. Tente novamente.', true));
+
+        $this->Session->setFlash(__('O Funcionário não foi deletado. Tente novamente por favor.', true));
         $this->redirect(array('action' => 'index'));
     }
 

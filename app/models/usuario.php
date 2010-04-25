@@ -3,7 +3,7 @@ class Usuario extends AppModel {
 
     var $name = 'Usuario';
 
-    var $actsAs = array('CakePtbr.Validacao');
+    var $actsAs = array('CakePtbr.Validacao', 'SoftDeletable' => array('find'=>false) );
     
     var $validate = array(
 
