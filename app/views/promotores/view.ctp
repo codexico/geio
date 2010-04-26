@@ -13,9 +13,7 @@
     <?php echo $html->link('Incluir Promotor', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="promotores view">
 

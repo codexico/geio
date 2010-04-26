@@ -16,7 +16,6 @@
 
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 
 <div class="funcionarios view">

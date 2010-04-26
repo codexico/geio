@@ -386,6 +386,60 @@ class CupomFiscal extends AppModel {
         return $relatorio;
     }
 
+    function _buscaRelatorioConsumidor($id) {
+        $relatorio = array();
+
+        $conditions_valor_cupons_fiscais = array(
+                'fields' => array("SUM(CupomFiscal.valor) AS 'total'", "COUNT(DISTINCT (CupomFiscal.loja_id) ) AS 'total_lojas'",
+                        "COUNT(DISTINCT (CupomFiscal.id) ) AS 'total_cf'", "COUNT(DISTINCT (CupomFiscal.troca_id) ) AS 'total_trocas'",
+                        "AVG(CupomFiscal.valor) AS 'media_cf'",
+                ),
+                'conditions' => array('CupomFiscal.consumidor_id'=>$id)
+        );
+        $relatorio_total = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_total);
+
+        //bandeira, outros
+        $relatorio_bandeira['CupomFiscal'] = $relatorio_outros['CupomFiscal'] = array();
+        if(Configure::read('Regras.Bandeira.true')) {
+            $conditions_valor_cupons_fiscais = array(
+                    'fields' => array("SUM(CupomFiscal.valor) AS 'total_bandeira'"),
+                    'conditions' => array('CupomFiscal.consumidor_id'=>$id, 'bandeira'=>Configure::read('Regras.Bandeira.nome'))
+            );
+            $relatorio_bandeira = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_bandeira);
+
+            $conditions_valor_cupons_fiscais = array(
+                    'fields' => array("SUM(CupomFiscal.valor) AS 'total_outros'"),
+                    'conditions' => array('CupomFiscal.consumidor_id'=>$id,
+                            'OR' =>array(
+                                    'NOT'=>array('bandeira'=>Configure::read('Regras.Bandeira.nome') ),
+                                    'AND'=>array('bandeira'=>null) ) )
+            );
+            $relatorio_outros = $this->find('first', $conditions_valor_cupons_fiscais);//debug($relatorio_outros);
+        }
+
+        //brindes, cp
+        $conditions_qtd_premios = array(
+                'fields' => array("SUM(Troca.qtd_premios) AS 'total_brindes'", "SUM(Troca.qtd_cp) AS 'total_cp'"),
+                'conditions' => array('Troca.consumidor_id'=>$id)
+        );
+        $this->Troca->recursive = -1;
+        $relatorio_qtd_premios = $this->Troca->find('first', $conditions_qtd_premios);//debug($relatorio_qtd_premios);
+
+
+        $conditions_troca = array(
+                'fields' => array("AVG(Troca.valor_total) AS 'troca_media'", "AVG(Troca.qtd_cf) AS 'troca_media_qtd_cf'"),
+                'conditions' => array('Troca.consumidor_id'=>$id)
+        );
+        $this->Troca->recursive = -1;
+        $relatorio_troca = $this->Troca->find('first', $conditions_troca);//debug($relatorio_troca);
+
+
+        $relatorio = array_merge($relatorio, $relatorio_qtd_premios[0], $relatorio_troca[0],
+                $relatorio_total['CupomFiscal'], $relatorio_bandeira['CupomFiscal'], $relatorio_outros['CupomFiscal']);
+        //debug($relatorio);
+        return $relatorio;
+    }
+
 
 
 
@@ -430,7 +484,7 @@ class CupomFiscal extends AppModel {
         $valorBandeira = $valorOutros = 0;
         foreach ($cfs as $cf) {//debug($cf);
             if(isset ($cf['bandeira'])) {//debug($cf['bandeira'] . " " . $regras['Bandeira']['nome']);
-                if( up($cf['bandeira']) == up(Configure::read('Regras.Bandeira.nome') ) ){
+                if( up($cf['bandeira']) == up(Configure::read('Regras.Bandeira.nome') ) ) {
                     $valorBandeira += $cf['valor'];//debug('bandeira = ' . $valorBandeira);
                 }else {//bandeiras fora da promocao
                     $valorOutros += $cf['valor'];//debug("dinheiro = " . $valorOutros);

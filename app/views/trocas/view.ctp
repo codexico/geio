@@ -20,9 +20,7 @@
     <?php /* echo $html->link('Incluir Troca', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); */ ?>
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="consumidores view">
 
@@ -199,33 +197,33 @@
 
     <dl>
         <?php $i = 0;
-$class = ' class="altrow"';?>
+        $class = ' class="altrow"';?>
 
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $troca['Troca']['id']; ?>
+                <?php echo $troca['Troca']['id']; ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Promotor'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $html->link($troca['Promotor']['nome'], array('controller'=>'promotores','action' => 'view', $troca['Promotor']['id'])); ?>
+                <?php echo $html->link($troca['Promotor']['nome'], array('controller'=>'promotores','action' => 'view', $troca['Promotor']['id'])); ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Consumidor'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo $html->link($troca['Consumidor']['nome'], array('controller'=>'consumidores','action' => 'view', $troca['Consumidor']['id'])); ?>
+                <?php echo $html->link($troca['Consumidor']['nome'], array('controller'=>'consumidores','action' => 'view', $troca['Consumidor']['id'])); ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-<?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
+                <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
                 &nbsp;
             </dd>
         </div>
@@ -236,7 +234,7 @@ $class = ' class="altrow"';?>
 
 <!-- .titulo -->
 <div class="titulo">
-<?php echo $html->image('bullet_titulo.gif')?>
+    <?php echo $html->image('bullet_titulo.gif')?>
     <h1>Cupons Fiscais</h1>
 </div>
 <div class="clear"></div>
@@ -251,7 +249,7 @@ $class = ' class="altrow"';?>
                 echo $paginator->counter(array(
                 'format' => __('P&aacute;gina %page% de %pages%', true)
                 ));
-?>
+                ?>
             </p>
         </div>
     </div>
@@ -259,25 +257,25 @@ $class = ' class="altrow"';?>
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th class="txtCenter">
-<?php echo $paginator->sort('id');?>
+                <?php echo $paginator->sort('id');?>
             </th>
             <th class="txtCenter">
-<?php echo $paginator->sort('Nr. Cupom Fiscal', 'codigo');?>
+                <?php echo $paginator->sort('Nr. Cupom Fiscal', 'codigo');?>
             </th>
             <th>
-<?php echo $paginator->sort('Loja','Loja.nome_fantasia');?>
+                <?php echo $paginator->sort('Loja','Loja.nome_fantasia');?>
             </th>
             <th class="txtCenter">
-<?php echo $paginator->sort('Valor R$','valor');?>
+                <?php echo $paginator->sort('Valor R$','valor');?>
             </th>
             <th class="txtCenter">
-<?php echo $paginator->sort('forma_de_pagamento');?>
+                <?php echo $paginator->sort('forma_de_pagamento');?>
             </th>
             <th class="txtCenter">
-<?php echo $paginator->sort('bandeira');?>
+                <?php echo $paginator->sort('bandeira');?>
             </th>
             <th class="txtCenter">
-<?php echo $paginator->sort('created');?>
+                <?php echo $paginator->sort('created');?>
             </th>
         </tr>
         <?php
@@ -287,31 +285,31 @@ $class = ' class="altrow"';?>
             if ($i++ % 2 == 0) {
                 $class = ' class="altrow"';
             }
-    ?>
+            ?>
         <tr<?php echo $class;?>>
             <td class="txtCenter">
-    <?php echo $html->link($cupomFiscal['CupomFiscal']['id'], array('controller' => 'cupom_fiscais', 'action' => 'view', $cupomFiscal['CupomFiscal']['id'])); ?>
+                    <?php echo $html->link($cupomFiscal['CupomFiscal']['id'], array('controller' => 'cupom_fiscais', 'action' => 'view', $cupomFiscal['CupomFiscal']['id'])); ?>
             </td>
             <td class="txtCenter">
-    <?php echo $cupomFiscal['CupomFiscal']['codigo']; ?>
+                    <?php echo $cupomFiscal['CupomFiscal']['codigo']; ?>
             </td>
             <td>
-    <?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
+                    <?php echo $html->link($cupomFiscal['Loja']['nome_fantasia'], array('controller' => 'lojas', 'action' => 'view', $cupomFiscal['Loja']['id'])); ?>
             </td>
             <td class="txtCenter">
-    <?php echo $number->currency($cupomFiscal['CupomFiscal']['valor'],'EUR',array('before'=>'','after'=>'')); ?>
+                    <?php echo $number->currency($cupomFiscal['CupomFiscal']['valor'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td class="txtCenter">
-    <?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
+                    <?php echo $cupomFiscal['CupomFiscal']['forma_de_pagamento']; ?>
             </td>
             <td class="txtCenter">
-    <?php echo ($cupomFiscal['CupomFiscal']['bandeira']=='') ? 'Cash' : $cupomFiscal['CupomFiscal']['bandeira'] ; ?>
+                    <?php echo ($cupomFiscal['CupomFiscal']['bandeira']=='') ? 'Cash' : $cupomFiscal['CupomFiscal']['bandeira'] ; ?>
             </td>
             <td class="txtCenter">
-    <?php echo date('d/m/Y - H:i',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
+                    <?php echo date('d/m/Y - H:i',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
             </td>
         </tr>
-<?php endforeach; ?>
+        <?php endforeach; ?>
     </table>
 
     <!-- .paginacao -->

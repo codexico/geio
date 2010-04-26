@@ -19,8 +19,8 @@ class ConsumidoresController extends AppController {
         *
     */
     var $name = 'Consumidores';
-    var $helpers = array('Html', 'Form', 'CakePtbr.Formatacao', 'Ajax', 'Javascript');
-    var $uses = array("Consumidor", "Bairro", "Endereco", "Cidade", "Estado", "Paise",'Profissao');
+    var $helpers = array('Html', 'Form', 'CakePtbr.Formatacao', 'Ajax', 'Javascript','Paginacao');
+    var $uses = array("Consumidor", "Bairro", "Endereco", "Cidade", "Estado", "Paise",'Profissao', 'CupomFiscal');
     var $components = array('RequestHandler');
 
 
@@ -47,6 +47,16 @@ class ConsumidoresController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
         $this->set('consumidor', $consumidor);
+
+        //extras
+        $relatorio = $this->CupomFiscal->_buscaRelatorioConsumidor($id);//debug($relatorio);
+        $this->paginate = array(
+                'conditions' => array('CupomFiscal.consumidor_id' => $id),
+                'limit' => 5,
+                'extra'=>$id,
+        );
+        $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais[0]);
+        $this->set(compact('cupom_fiscais','relatorio') );
     }
 
     function edit($id = null) {

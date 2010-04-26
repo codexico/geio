@@ -15,9 +15,8 @@
 	<?php echo $html->link('Inserir Loja', array('controller' => 'lojas', 'action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
      */?>
-<?php $session->flash('auth'); ?>
-<?php $session->flash(); ?>
 
+<?php $session->flash(); ?>
 
 <div class="cupomFiscais index">
 	<!-- .pagina_atual -->
