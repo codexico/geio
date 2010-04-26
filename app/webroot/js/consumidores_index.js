@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
 
         $.ajax({
             type: "POST",
-            url: "pesquisarCpfAjax",
+            url: "consumidores/consumidorCpfAjax",
             data: "data[cpf]="+cpf,
             success: function(xhr) {
                 if(xhr != "nao encontrou"){
@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
     }
 
     function consumidorNaoEncontrado(){
-        $('#consumidorencontrado').html('<br /><div class="message">Consumidor Não Encontrado</div>');
+        $('#consumidorencontrado').html('<div class="message">Consumidor Não Encontrado</div>');
     }
 
     $('#ConsumidorEstado').live('change', function() {

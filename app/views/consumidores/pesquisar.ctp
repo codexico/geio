@@ -24,14 +24,13 @@ $javascript->link(array('consumidor_pesquisar'), false);//usa jquery
         <legend><?php __('Pesquisar por RG');?></legend>
         <?php
         echo $form->input('rg', array('label' => 'RG', 'div' => 'input text mgt20'));
-
         ?>
     </fieldset>
-    <?php
-    echo '<div class="submit">';
-    echo $form->button('PESQUISAR', array('id' => 'pesquisarrg','class'=>'submit'));
-    echo '</div>';
-    ?>
+    <div class="submit">
+        <?php
+        echo $form->button('PESQUISAR', array('id' => 'pesquisarrg','class'=>'submit'));
+        ?>
+    </div>
 </div>
 
 <div class="consumidores form mgt20">
@@ -41,11 +40,11 @@ $javascript->link(array('consumidor_pesquisar'), false);//usa jquery
         echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' => 'input text mgt20'));
         ?>
     </fieldset>
-    <?php
-    echo '<div class="submit">';
-    echo $form->button('PESQUISAR', array('id' => 'pesquisarcpf','class'=>'submit'));
-    echo '</div>';
-    ?>
+    <div class="submit">
+        <?php
+        echo $form->button('PESQUISAR', array('id' => 'pesquisarcpf','class'=>'submit'));
+        ?>
+    </div>
 </div>
 
 <div id="consumidorencontrado">

@@ -8,7 +8,7 @@ $javascript->link(array('trocas_nova'), false);
 ?>
 <li class="cupom" id="cupom-fiscal-<?=$i;?>">
 	<div class="cupom-header">
-		<div class="cupom-titulo">Cupom Fiscal #<?=$i+1;?></div>
+		<div class="cupom-titulo">Cupom Fiscal #1</div>
 		<div class="cupom-botoes">
 			<input id="remover-cupom-fiscal-<?=$i;?>" class="remover-cupom-fiscal submit" type="button" value="Remover este Cupom" />
 		</div>

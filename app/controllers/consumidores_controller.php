@@ -26,7 +26,7 @@ class ConsumidoresController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allowedActions = array('edit');
+        //$this->Auth->allowedActions = array('edit');
     }
 
     function index() {
@@ -191,54 +191,31 @@ class ConsumidoresController extends AppController {
             $consumidor = $this->Consumidor->findByCpf($this->data['cpf']);
             if($consumidor) {
                 $this->data = $consumidor;
-                /*
-                * Busca os estados e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
-                $this->set('estados', $estados);
-                /*
-                * Busca os paises e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
-                $this->set('paises', $paises);
-                /*
-                * Busca os estados e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
-                $this->set('profissoes', $profissoes);
-
-                $this->set(compact('consumidor'));
-                $resposta =  $this->render('/elements/consumidorencontrado');
-                return $resposta;
-            }else {
-                /*
-                * Busca os estados e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
-                $this->set('estados', $estados);
-
-                /*
-                * Busca os paises e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
-                $this->set('paises', $paises);
-
-                /*
-                * Busca as profissoes e prepara um array para preencher o
-                * select na primeira vez que o formulário for carregado.
-                */
-                $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
-                $this->set('profissoes', $profissoes);
-
-                $this->set(compact('consumidor'));
-                $resposta =  $this->render('/elements/consumidorencontrado');
-                return $resposta;
             }
+            /*
+            * Busca os estados e prepara um array para preencher o
+            * select na primeira vez que o formulário for carregado.
+            */
+            $estados = $this->Estado->find('list',array('fields' => array('Estado.estado', 'Estado.estado'),));
+            $this->set('estados', $estados);
+            /*
+            * Busca os paises e prepara um array para preencher o
+            * select na primeira vez que o formulário for carregado.
+            */
+            $paises = $this->Paise->find('list',array('fields' => array('Paise.nome', 'Paise.nome'),));
+            $this->set('paises', $paises);
+            /*
+            * Busca os estados e prepara um array para preencher o
+            * select na primeira vez que o formulário for carregado.
+            */
+            $profissoes = $this->Profissao->find('list',array('fields' => array('Profissao.name', 'Profissao.name')));
+            $this->set('profissoes', $profissoes);
+
+            $this->set(compact('consumidor'));
+
+            $resposta =  $this->render('/elements/consumidorencontrado');
+
+            return $resposta;
         }
         exit ();
     }
@@ -301,7 +278,39 @@ class ConsumidoresController extends AppController {
         }
         exit ();
     }
+    function consumidorCpfAjax() {
+        Configure::write('debug', 0);
+        $this->autoRender = false;
 
+        if ($this->RequestHandler->isAjax()) {
+            $consumidor = $this->Consumidor->findByCpf($this->data['cpf']);
+            if($consumidor['Consumidor']['id']) {
+                $this->data = $consumidor;
+                $this->set(compact('consumidor'));
+                $resposta =  $this->render('/elements/consumidores_view');
+            }else {
+                $resposta = "nao encontrou";
+            }
+
+            return $resposta;
+        }
+        exit ();
+    }
+    function consumidorRgAjax() {
+        Configure::write('debug', 0);
+        $this->autoRender = false;
+
+        if ($this->RequestHandler->isAjax()) {
+            $consumidor = $this->Consumidor->findByRg($this->data['rg']);
+            if($consumidor['Consumidor']['id']) {
+                $this->data = $consumidor;
+                $this->set(compact('consumidor'));
+                $resposta =  $this->render('/elements/consumidores_view');
+            }
+            return $resposta;
+        }
+        exit ();
+    }
     function endereco_cep() {
         $cep_num = $this->data['Consumidor']['cep']; //Recupera o cep informado no formulário
 

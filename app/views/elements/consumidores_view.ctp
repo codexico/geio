@@ -1,7 +1,7 @@
 <!-- .titulo -->
 <div class="titulo">
     <?php echo $html->image('bullet_titulo.gif')?>
-    <h1>Visualizar Consumidor</h1>
+    <h1>Dados do Consumidor</h1>
 </div>
 <div class="clear"></div>
 
@@ -11,7 +11,6 @@
     <?php echo $html->link('Excluir Consumidor', array('action' => 'delete', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5'),
             sprintf(__('Are you sure you want to delete # %s?', true), $consumidor['Consumidor']['id'])); ?>
     <?php echo $html->link('Editar Consumidor', array('action' => 'edit', $consumidor['Consumidor']['id']), array('class' => 'btn_azul floatRight mgr5')); ?>
-    <?php echo $html->link('Incluir Consumidor', array('action' => 'add'), array('class' => 'btn_azul floatRight mgr5')); ?>
 </div>
 
 <?php $session->flash(); ?>

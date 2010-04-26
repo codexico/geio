@@ -3,6 +3,7 @@
 /* @var $html HtmlHelper */
 /* @var $form FormHelper */
 /* @var $javascript JavascriptHelper */
+$javascript->link(array('consumidores_index'), false);//usa jquery
 ?>
 <!-- .titulo -->
 <div class="titulo">
@@ -11,14 +12,40 @@
 </div>
 <div class="clear"></div>
 
-<!-- .botoes
+<?php /*
 <div class="botoes">
 	<?php echo $html->link('Inserir Consumidor', array('action' => 'add'), array('class' => 'btn_azul floatRight')); ?>
 </div>
- -->
-<?php $session->flash('auth'); ?>
-<?php $session->flash(); ?>
+ */ ?>
 
+<?php $session->flash(); ?>
+<?php /*
+<div class="consumidores form">
+    <fieldset>
+        <legend><?php __('Pesquisar por RG');?></legend>
+        <?php
+        echo $form->input('rg', array('label' => 'RG', 'div' => 'input text mgt20'));
+        echo $form->button('PESQUISAR', array('id' => 'pesquisarrg','class'=>'submit'));
+        ?>
+    </fieldset>
+</div>
+*/ ?>
+<div class="consumidores form mgt20">
+    <fieldset>
+        <legend><?php __('Pesquisar por CPF');?></legend>
+        <?php
+        echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' => 'input text mgt20'));
+        echo $form->button('PESQUISAR', array('id' => 'pesquisarcpf','class'=>'submit'));
+        ?>
+    </fieldset>
+</div>
+<div class="clear"></div>
+<br />
+<div id="consumidorencontrado">
+    <?php /* view/elements/consumidorencontrado */?>
+</div>
+<br />
+<div class="clear"></div>
 
 <div class="consumidores index">
 

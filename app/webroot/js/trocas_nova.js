@@ -64,7 +64,7 @@ $(document).ready(function() {
         var proximoCupom = formCupom.html();
 
         //troca os indices dos elementos do formulario
-        proximoCupom = proximoCupom.replace(/Cupom\sFiscal\s1/g,"Cupom Fiscal "+(i+1)); //troca legend
+        proximoCupom = proximoCupom.replace(/Cupom\sFiscal\s#1/g,"Cupom Fiscal #"+(i+1)); //troca legend
         proximoCupom = proximoCupom.replace(/CupomFiscal0/g,"CupomFiscal"+i);           //troca id, label
         proximoCupom = proximoCupom.replace(/CupomFiscal\]\[0/g,"CupomFiscal]["+i);     //troca name
 
