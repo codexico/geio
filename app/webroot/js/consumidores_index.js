@@ -1,5 +1,9 @@
-
 jQuery(document).ready(function($) {
+
+$("#procurar").hide();
+    $("#mostraProcurar").click(function(){
+        $("#procurar").toggle();
+    })
 
     //persquisar consumidor por cpf
     $('#pesquisarcpf').click(function(){
