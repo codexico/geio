@@ -7,12 +7,12 @@
 
 <div class="consumidores form mgt20">
 
-        <?php if(!$consumidor['Consumidor']['id']) :
-			$legend = "Cadastrar Consumidor";
-		else:
-			$legend = "Consumidor Encontrado";
-		endif;
-		?>
+    <?php if(!$consumidor['Consumidor']['id']) :
+        $legend = "Cadastrar Consumidor";
+    else:
+        $legend = "Consumidor Encontrado";
+    endif;
+    ?>
     <?php
     if($consumidor['Consumidor']['id']):
         echo $form->create('Consumidor');
@@ -57,31 +57,31 @@
         echo '</div>';
 
         echo '<div class="duas_colunas">';
-			echo $form->input('estado_civil', array('options' => array(
-					'solteiro'=>'Solteiro',
-					'casado'=>'Casado',
-					'viúvo'=>'Viúvo',
-					'separado'=>'Separado'
-			),
-			'selected' => $this->data['Consumidor']['estado_civil'],
-			'empty' => true,
-			'div' => 'input meio_input'));
-	
-	
-			echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
-					'nenhum'=>'nenhum',
-					'1º Grau'=>'1º Grau',
-					'2º Grau'=>'2º Grau',
-					'Técnico'=>'Técnico',
-					'Universitário'=>'Univesitário',
-					'Mestrado'=>'Mestrado',
-					'Doutorado'=>'Doutorado',
-					'Pós'=>'Pós',
-					'MBA'=>'MBA'
-			),
-			'selected' => $this->data['Consumidor']['grau_de_instrucao'],
-			'empty' => true,
-			'div' => 'input meio_input'));
+        echo $form->input('estado_civil', array('options' => array(
+                'solteiro'=>'Solteiro',
+                'casado'=>'Casado',
+                'viúvo'=>'Viúvo',
+                'separado'=>'Separado'
+        ),
+        'selected' => $this->data['Consumidor']['estado_civil'],
+        'empty' => true,
+        'div' => 'input meio_input'));
+
+
+        echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
+                'nenhum'=>'nenhum',
+                '1º Grau'=>'1º Grau',
+                '2º Grau'=>'2º Grau',
+                'Técnico'=>'Técnico',
+                'Universitário'=>'Univesitário',
+                'Mestrado'=>'Mestrado',
+                'Doutorado'=>'Doutorado',
+                'Pós'=>'Pós',
+                'MBA'=>'MBA'
+        ),
+        'selected' => $this->data['Consumidor']['grau_de_instrucao'],
+        'empty' => true,
+        'div' => 'input meio_input'));
         echo '</div>';
 
 
@@ -116,17 +116,17 @@
         );
 
         echo '<div class="duas_colunas">';
-			echo $form->input('numero', array('label'=>'Número', 'div'=>'input meio_input'));
-			echo $form->input('complemento', array('div'=>'input meio_input'));
+        echo $form->input('numero', array('label'=>'Número', 'div'=>'input meio_input'));
+        echo $form->input('complemento', array('div'=>'input meio_input'));
         echo '</div>';
 
         echo $form->input('bairro');
 
         echo '<div class="duas_colunas">';
-			echo $form->input('estado', array('options' => $estados,
-			'empty'=>'Selecione',
-			'div' => 'input meio_input'));
-			echo $form->input('cidade', array('div'=>'input meio_input'));
+        echo $form->input('estado', array('options' => $estados,
+        'empty'=>'Selecione',
+        'div' => 'input meio_input'));
+        echo $form->input('cidade', array('div'=>'input meio_input'));
         echo '</div>';
 
         echo $form->input('pais', array('options' => $paises,
@@ -136,17 +136,22 @@
 
     <?php
     if($consumidor['Consumidor']['id']):
-		echo '<div class="linha-botoes">';
-			echo '<div class="submit_botoes">';
-			echo $html->link('Aceitar e ir para o cadastro de Cupons',
-			array('controller'=>'trocas','action' => 'nova', $consumidor['Consumidor']['id']), array('class'=>'btn_azul'));
-			echo '</div>';			
-
-			echo $form->end(array('label'=>'EDITAR E IR PARA CUPONS','class'=>'submit', 'div'=>'submit submit_botoes'));
-		echo '</div>';
-		echo '<div class="clear"></div>';
+        if(!$consumidor['Consumidor']['deleted']) : ?>
+    <div class="linha-botoes">
+        <div class="submit_botoes">
+                    <?php echo $html->link('Aceitar e ir para o cadastro de Cupons',
+                    array('controller'=>'trocas','action' => 'nova', $consumidor['Consumidor']['id']), array('class'=>'btn_azul'));
+                    ?>
+        </div>
+                <?php echo $form->end(array('label'=>'EDITAR E IR PARA CUPONS','class'=>'submit', 'div'=>'submit submit_botoes')); ?>
+    </div>
+    <div class="clear"></div>
+        <?php else: ?>
+    <div class="message">Consumidor desativado</div>
+        <?php endif;
     else:
         echo $form->end(array('label'=>'SALVAR E IR PARA CUPONS','class'=>'submit'));
+
     endif;
     ?>
 

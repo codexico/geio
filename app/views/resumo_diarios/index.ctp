@@ -60,11 +60,6 @@
             }
             ?>
         <tr<?php echo $class;?>>
-                <?php /*
-			<td>
-				<?php echo $resumoDiario['ResumoDiario']['id']; ?>
-			</td>
-                */ ?>
             <td class="txtCenter">
                     <?php echo $html->link(date('d/m/Y', strtotime($resumoDiario['ResumoDiario']['dia'])) , array('controller' => 'relatorios', 'action' => 'detalhe_dia',$resumoDiario['ResumoDiario']['dia'])); ?>
             </td>
@@ -104,12 +99,6 @@
                     <?php echo $number->currency($resumoDiario['ResumoDiario']['ticket_medio_cupom_fiscal'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $ticket_medio_cupom_fiscal_sum += $resumoDiario['ResumoDiario']['ticket_medio_cupom_fiscal']; ?>
             </td>
-                <?php /*
-			<td class="actions">
-				<?php echo $html->link(__('View', true), array('action' => 'view', $resumoDiario['ResumoDiario']['id'])); ?>                    
-				<?php echo $html->link(__('Edit', true), array('action' => 'edit', $resumoDiario['ResumoDiario']['id'])); ?>
-				<?php echo $html->link(__('Delete', true), array('action' => 'delete', $resumoDiario['ResumoDiario']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $resumoDiario['ResumoDiario']['id'])); ?>                     
-			</td>*/?>
         </tr>
         <?php endforeach; ?>
 
@@ -117,37 +106,41 @@
             <th>
                 <?php echo "TOTAL"; ?>
             </th>
-            <?php /*
-			<th>
-				<?php echo ''; ?>
-			</th>
-            */?>
             <th class="txtCenter">
-                <?php echo $qtd_consumidores_sum; ?>
+                <?php /* echo $qtd_consumidores_sum; */ ?>
+                <?php echo $totais[0]['qtd_consumidores_total']; ?>
             </th>
             <th class="txtCenter">
-                <?php echo $qtd_consumidores_novos_sum; ?>
+                <?php /* echo $qtd_consumidores_novos_sum; */ ?>
+                <?php echo $totais[0]['qtd_consumidores_novos_total']; ?>
             </th>
             <th class="txtCenter">
-                <?php echo $qtd_cupons_fiscais_sum; ?>
+                <?php /* echo $qtd_cupons_fiscais_sum; */ ?>
+                <?php echo $totais[0]['qtd_cupons_fiscais_total']; ?>
             </th>
             <th class="txtCenter">
-                <?php echo $qtd_cupons_promocionais_sum; ?>
+                <?php /* echo $qtd_cupons_promocionais_sum; */ ?>
+                <?php echo $totais[0]['qtd_cupons_promocionais_total']; ?>
             </th>
             <th class="txtCenter">
-                <?php echo $valor_total_sum; ?>
+                <?php /* echo $valor_total_sum; */ ?>
+                <?php echo $number->currency($totais[0]['valor_total_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
             <th class="txtCenter">
-                <?php echo $valor_bandeira_sum; ?>
+                <?php /* echo $valor_bandeira_sum; */ ?>
+                <?php echo $number->currency($totais[0]['valor_bandeira_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
             <th class="txtCenter">
-                <?php echo $valor_outros_sum; ?>
+                <?php /* echo $valor_outros_sum; */ ?>
+                <?php echo $number->currency($totais[0]['valor_outros_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
             <th class="txtCenter">
-                <?php echo $number->currency($ticket_medio_consumidor_sum/$i,'EUR',array('before'=>'','after'=>'')); ?>
+                <?php /* echo $number->currency($ticket_medio_consumidor_sum/$i,'EUR',array('before'=>'','after'=>'')); */ ?>
+                <?php echo $number->currency($totais[0]['valor_total_total']/$totais[0]['qtd_consumidores_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
             <th class="txtCenter">
-                <?php echo $number->currency($ticket_medio_cupom_fiscal_sum/$i,'EUR',array('before'=>'','after'=>'')); ?>
+                <?php /* echo $number->currency($ticket_medio_cupom_fiscal_sum/$i,'EUR',array('before'=>'','after'=>'')); */ ?>
+                <?php echo $number->currency($totais[0]['valor_total_total']/$totais[0]['qtd_cupons_fiscais_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
         </tr>
     </table>

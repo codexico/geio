@@ -17,7 +17,6 @@ $javascript->link(array('consumidor_pesquisar'), false);//usa jquery
 </div>
 -->
 <?php $session->flash('Impressora'); ?>
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
 
 <div class="consumidores form">

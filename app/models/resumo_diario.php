@@ -195,5 +195,20 @@ class ResumoDiario extends AppModel {
         //$this->_cronResumoDiario($dia);
     }
 
+    function totais() {
+        return $this->find('first', array(
+                'fields' => array(
+                        "SUM(qtd_consumidores) AS 'qtd_consumidores_total'",
+                        "SUM(qtd_consumidores_novos) AS 'qtd_consumidores_novos_total'",
+                        "SUM(qtd_cupons_fiscais) AS 'qtd_cupons_fiscais_total'",
+                        "SUM(qtd_cupons_promocionais) AS 'qtd_cupons_promocionais_total'",
+                        "SUM(ticket_medio_consumidor) AS 'ticket_medio_consumidor_total'",
+                        "SUM(ticket_medio_cupom_fiscal) AS 'ticket_medio_cupom_fiscal_total'",
+                        "SUM(valor_total) AS 'valor_total_total'",
+                        "SUM(valor_bandeira) AS 'valor_bandeira_total'",
+                        "SUM(valor_outros) AS 'valor_outros_total'",
+        )));
+    }
+
 }
 ?>
