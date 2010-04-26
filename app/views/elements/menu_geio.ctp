@@ -60,8 +60,6 @@
         <!-- INICIO -->
         <div class="menu-navegacao" id="aba_inicio">
             <p>
-                Colocaremos a principio alguns tópicos de ajuda e alerta como: Como utilizar este sistema,
-                atenção durante o cadatro de consumidores, como reportar problemas, contatos úteis (telefones e emails)...
             </p>
         </div>
 
@@ -110,7 +108,9 @@
 
         <!-- MAILING -->
         <div class="menu-navegacao" id="aba_mailing">
-            <p>Já tenho conteúdo definido, mas esta parte Chico irá desenvolver durante a campanha</p>
+            <p>
+                
+            </p>
         </div>
 
         <!-- RELATORIOS -->

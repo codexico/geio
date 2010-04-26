@@ -201,8 +201,8 @@ form input.submit, .form input.submit{
 
 #menu .menu-content .menu-navegacao{
 	width:950px;
-	min-height:66px;
-	_height:66px;
+	min-height:70px;/*min-height:66px;*/
+	_height:70px;/*_height:66px;*/
 	float:left;
 	padding-top:15px;
 	padding-bottom:15px;
