@@ -52,7 +52,7 @@ class ConsumidoresController extends AppController {
         $relatorio = $this->CupomFiscal->_buscaRelatorioConsumidor($id);//debug($relatorio);
         $this->paginate = array(
                 'conditions' => array('CupomFiscal.consumidor_id' => $id),
-                'limit' => 5,
+                'limit' => 20,
                 'extra'=>$id,
         );
         $cupom_fiscais = $this->paginate('CupomFiscal');//debug($cupom_fiscais[0]);
