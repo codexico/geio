@@ -7,7 +7,7 @@
 $javascript->link(array("prototype.js", "funcoes.js"), false);
 
 //
-$javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false para ir em <head>
+$javascript->link(array('consumidor_novo'), false);// false para ir em <head>
 ?>
 
 <div class="consumidores form mgt20">
