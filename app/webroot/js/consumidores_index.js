@@ -15,7 +15,8 @@ $("#procurar").hide();
             data: "data[cpf]="+cpf,
             success: function(xhr) {
                 if(xhr != "nao encontrou"){
-                    mostrarConsumidor(xhr);
+                    //mostrarConsumidor(xhr);
+                    window.location = "consumidores/view/"+xhr;
                 }else{
                     consumidorNaoEncontrado();
                 }

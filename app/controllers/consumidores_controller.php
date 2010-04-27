@@ -291,17 +291,15 @@ class ConsumidoresController extends AppController {
     function consumidorCpfAjax() {
         Configure::write('debug', 0);
         $this->autoRender = false;
-
+        $resposta = "nao encontrou";
         if ($this->RequestHandler->isAjax()) {
             $consumidor = $this->Consumidor->findByCpf($this->data['cpf']);
             if($consumidor['Consumidor']['id']) {
-                $this->data = $consumidor;
-                $this->set(compact('consumidor'));
-                $resposta =  $this->render('/elements/consumidores_view');
-            }else {
-                $resposta = "nao encontrou";
+                //$this->data = $consumidor;
+                //$this->set(compact('consumidor'));
+                //$resposta =  $this->render('/elements/consumidores_view');
+                $resposta = $consumidor['Consumidor']['id'];
             }
-
             return $resposta;
         }
         exit ();
