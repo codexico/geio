@@ -54,7 +54,7 @@
             ?>
         <tr<?php echo $class;?>>
             <td>
-                    <?php echo $html->link($detalhe['TrocasDia']['consumidor_nome'], array('action' => 'view', 'controller' =>'consumidores', $dia)); ?>
+                    <?php echo $html->link($detalhe['TrocasDia']['consumidor_nome'], array('action' => 'view', 'controller' =>'consumidores', $detalhe['TrocasDia']['consumidor_id'])); ?>
             </td>
             <td class="txtCenter">
                     <?php echo $detalhe['TrocasDia']['sum_cf']; ?>

@@ -94,8 +94,8 @@ $(document).ready(function() {
         restoOutros = new Number(0);
         restoBandeira = new Number(0);
         count_CF = 0;
-        regrasValor = 100;
-        regrasBandeiraValor = 2;
+        regrasValor = $('#regras-valor').val();
+        regrasBandeiraValor = $('#bandeira-qtd').val();
         c = 0;
         restoOutros +=  parseFloat($('#saldo_outros').val());//alert(restoOutros);
         restoBandeira +=  parseFloat($('#saldo_bandeira').val());//alert(restoBandeira);

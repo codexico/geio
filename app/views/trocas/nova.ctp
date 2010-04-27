@@ -37,6 +37,8 @@ echo $this->element('consumidor');
     echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'], 'class' => "novatroca",
     //'onsubmit'=>'enviar();return false;'
     ));
+        echo $form->hidden('bandeira-qtd', array('value'=>Configure::read('Regras.Bandeira.valor'), 'name'=>'bandeira-qtd', 'id'=>'bandeira-qtd' ) );
+        echo $form->hidden('regras-valor', array('value'=>Configure::read('Regras.Valor'), 'name'=>'regras-valor', 'id'=>'regras-valor' ) );
     if( Configure::read('Regras.Saldo.true') ) {
         echo $form->hidden('juntar_saldos', array('value'=>'true', 'name'=>'data[Troca][juntar_saldos]', 'id'=>'juntar_saldos' ) );
         echo $form->hidden('saldo_bandeira', array('value'=>$consumidor['Consumidor']['saldo_bandeira'], 'name'=>'saldo_bandeira', 'id'=>'saldo_bandeira' ) );

@@ -12,7 +12,7 @@
  * @global int $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Valor'] =  100;
+$config['Regras.Valor'] =  50;
 
 
 /**
@@ -44,7 +44,7 @@ $config['Regras.Bandeira.nome'] =  'VISA';
  * @global int $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Bandeira.valor'] =  2;
+$config['Regras.Bandeira.valor'] =  3;
 
 
 /**
@@ -53,7 +53,7 @@ $config['Regras.Bandeira.valor'] =  2;
  * @global boolean $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.true'] = TRUE;
+$config['Regras.Brinde.true'] = FALSE;
 /**
  * Máximo de brindes que um consumidor pode retirar
  *
