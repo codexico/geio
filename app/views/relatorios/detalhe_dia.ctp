@@ -40,9 +40,9 @@
             <th class="txtCenter"><?php echo $paginator->sort('Cupons Fiscais Trocados','qtd_cf', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
             <th class="txtCenter"><?php echo $paginator->sort('Cupons Promocionais Impressos','qtd_cp', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
             <th class="txtCenter"><?php echo $paginator->sort('Média de Consumo','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Consumo Total','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Consumo Bandeira','valor_bandeira', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Consumo Outros','valor_outros', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Consumo Total (R$)','valor_total', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Consumo Bandeira (R$)','valor_bandeira', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Consumo Outros (R$)','valor_outros', array('url' =>  array( 'action'=>'detalhe_dia/'.$dia) ) );?></th>
         </tr>
         <?php
         $i = 0;
@@ -63,16 +63,16 @@
                     <?php echo $detalhe['TrocasDia']['sum_cp']; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $number->currency($detalhe['TrocasDia']['avg_valor_total'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['avg_valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $number->currency($detalhe['TrocasDia']['sum_valor_total'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['sum_valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td>
-                    <?php echo $number->currency($detalhe['TrocasDia']['sum_bandeira'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['sum_bandeira'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
             <td class="txtCenter">
-                    <?php echo $number->currency($detalhe['TrocasDia']['sum_outros'],'EUR',array('before'=>'R$ ','after'=>'')); ?>
+                    <?php echo $number->currency($detalhe['TrocasDia']['sum_outros'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
         </tr>
         <?php endforeach; ?>
