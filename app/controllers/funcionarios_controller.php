@@ -34,7 +34,7 @@ class FuncionariosController extends AppController {
             }
         }
         $lojas = $this->Funcionario->Loja->find('list', array('fields' => array('Loja.nome_fantasia')));
-        $lojas = array_merge(array('empty'=>''), $lojas );
+        $lojas = array_merge(array(''=>''), $lojas );
         $this->set(compact('lojas'));
 
         /*

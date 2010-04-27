@@ -17,6 +17,10 @@ class Funcionario extends AppModel {
                             'required' => true,
                             'message' => 'Favor preencher o RG'),
 
+            'loja_id' => array('rule' => 'notempty',
+                            'required' => true,
+                            'message' => 'Escolha uma loja ou "Shopping"'),
+
             'email' => array('rule' => array('email'),
                             'required' => false,
                             'allowEmpty' => true,
