@@ -9,7 +9,8 @@ $javascript->link(array("prototype.js", "funcoes.js"), false);
 //
 $javascript->link(array('jquery-1.4.2.min', 'consumidor_novo'), false);// false para ir em <head>
 ?>
-<div class="consumidores form">
+
+<div class="consumidores form mgt20">
     <?php echo $form->create('Consumidor', array('action' => 'novo', 'onsubmit'=>'return confirm("Confirma?")'));?>
     <fieldset>
         <legend><?php __('Adicionar Novo Consumidor');?></legend>
