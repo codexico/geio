@@ -1,4 +1,8 @@
 <?php
+/**
+ * @property Promotor $Promotor
+ * @property Troca $Troca
+ */
 class PromotoresController extends AppController {
 
     var $name = 'Promotores';
@@ -28,6 +32,21 @@ class PromotoresController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
         $this->set('promotor', $promotor);
+
+        //extras
+        $this->loadModel('Troca');
+        $this->Troca->recursive = -1;
+        $relatorio = $this->Troca->_buscaRelatorioPromotor($id);//debug($relatorio);
+
+        $this->paginate = array(
+                'conditions' => array('Troca.promotor_id' => $id),
+                'limit' => 5,
+                'extra'=>$id,
+            'group'=>'consumidor_id',
+            'contain'=>'Consumidor'
+        );
+        $trocas = $this->paginate('Troca');//debug($trocas[0]);
+        $this->set(compact('trocas','relatorio') );
     }
 
     function add() {
