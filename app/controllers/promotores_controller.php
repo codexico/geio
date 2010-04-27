@@ -6,7 +6,7 @@
 class PromotoresController extends AppController {
 
     var $name = 'Promotores';
-    var $helpers = array('Html', 'Form', 'Number');
+    var $helpers = array('Html', 'Form', 'Number','Paginacao');
 
     var $uses = array('Promotor','User');
 
@@ -40,10 +40,11 @@ class PromotoresController extends AppController {
 
         $this->paginate = array(
                 'conditions' => array('Troca.promotor_id' => $id),
-                'limit' => 5,
+                'limit' => 20,
                 'extra'=>$id,
-            'group'=>'consumidor_id',
-            'contain'=>'Consumidor'
+            //'group'=>'consumidor_id',
+            'contain'=>'Consumidor',
+            'order' => 'Troca.created DESC'
         );
         $trocas = $this->paginate('Troca');//debug($trocas[0]);
         $this->set(compact('trocas','relatorio') );
