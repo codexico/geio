@@ -212,7 +212,7 @@
 
                     <?php echo $html->image("ico_view.gif", array(
                     "alt" => "Visualizar",
-                    'url' => array('action' => 'view', $troca['Troca']['id'])
+                    'url' => array('action' => 'view', 'controller' =>'trocas', $troca['Troca']['id'])
                     )); ?>
 
                     <?php /* echo $html->image("ico_edit.gif", array(
