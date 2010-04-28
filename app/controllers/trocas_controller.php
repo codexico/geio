@@ -175,7 +175,7 @@ class TrocasController extends AppController {
                 $this->Session->setFlash(__('A Troca não foi efetuda. Verifique os erros por favor.', true));
             }
         }
-        $lojas = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.nome_fantasia'),'conditions'=>array('Loja.id > '=>'0')));
+        $lojas = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.nome_fantasia'),'conditions'=>array('Loja.id > '=>'1')));
         $lojas_razao_social = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.razao_social')));
         $this->set(compact('lojas', 'lojas_razao_social'));
     }
