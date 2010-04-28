@@ -27,6 +27,8 @@ class AppController extends Controller {
         //This is important as often the default routing has this action as the home page for you application.
         $this->Auth->allowedActions = array('display');
 
+        //$this->Auth->allow('*');//inicio
+
     }
 
 

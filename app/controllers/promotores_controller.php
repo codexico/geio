@@ -12,7 +12,7 @@ class PromotoresController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allowedActions = array('trocas');
+        //$this->Auth->allow('*');
     }
 
 

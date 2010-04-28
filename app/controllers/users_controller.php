@@ -7,6 +7,7 @@ class UsersController extends AppController {
     function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('login', 'logout');
+        //$this->Auth->allow('*');
     }
 
 
@@ -53,7 +54,7 @@ class UsersController extends AppController {
         }
         $this->set('user', $user);
     }
-    /*
+    
     function add() {
         if (!empty($this->data)) {
             $this->User->create();
@@ -68,7 +69,7 @@ class UsersController extends AppController {
         $this->set(compact('groups'));
 
     }
-    */
+    
     function edit($id = null) {
         if (!$id && empty($this->data)) {
             $this->Session->setFlash(__('Invalid User', true));
@@ -145,12 +146,12 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Trocas/escolher_brinde');
         $this->Acl->allow($group, 'controllers/Trocas/concluida');
         $this->Acl->allow($group, 'controllers/CupomPromocionais/cupomPdf');
-        $this->Acl->allow($group, 'controllers/consumidores/novo');
-        $this->Acl->allow($group, 'controllers/consumidores/edit');
-        $this->Acl->allow($group, 'controllers/consumidores/pesquisar');
-        $this->Acl->allow($group, 'controllers/consumidores/pesquisarRgAjax');
-        $this->Acl->allow($group, 'controllers/consumidores/pesquisarCpfAjax');
-        $this->Acl->allow($group, 'controllers/consumidores/endereco_cep');
+        $this->Acl->allow($group, 'controllers/Consumidores/novo');
+        $this->Acl->allow($group, 'controllers/Consumidores/edit');
+        $this->Acl->allow($group, 'controllers/Consumidores/pesquisar');
+        $this->Acl->allow($group, 'controllers/Consumidores/pesquisarRgAjax');
+        $this->Acl->allow($group, 'controllers/Consumidores/pesquisarCpfAjax');
+        $this->Acl->allow($group, 'controllers/Consumidores/endereco_cep');
     }
 
 
