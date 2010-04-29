@@ -1,4 +1,8 @@
 <?php
+/**
+ * @property Consumidor $Consumidor
+ * @property Funcionario $Funcionario
+ */
 class Consumidor extends AppModel {
 
     var $name = 'Consumidor';
@@ -17,7 +21,12 @@ class Consumidor extends AppModel {
                                             'last' => true),
                             'cpf-2' => array(
                                             'rule' => 'isUnique',
-                                            'message' => 'Cpf já cadastrado')
+                                            'message' => 'Cpf já cadastrado',
+                                            'last' => true),
+                            'cpf-3' => array(
+                                                            'rule'          => 'validateCpfProibido',
+                                                            'message' => 'Cpf proibido nesta campanha'
+            ),
             ),
 
             'rg' => array('rule' => 'notempty',
@@ -64,6 +73,24 @@ class Consumidor extends AppModel {
             ),
             'numero' => array('rule' => 'notEmpty')
     );
+    /**
+     * Funcionarios e Promotores nao podem ser Consumidores
+     *
+     * @param <type> $data
+     * @return boolean
+     */
+    function validateCpfProibido() {
+
+        $this->Funcionario = ClassRegistry::init('Funcionario');
+        $this->Funcionario->recursive = -1;
+        $this->Promotor = ClassRegistry::init('Promotor');
+        $this->Promotor->recursive = -1;
+        debug($this->Promotor->findByCpf($this->data['Consumidor']['cpf']));
+        if ($this->Funcionario->findByCpf($this->data['Consumidor']['cpf']) || $this->Promotor->findByCpf($this->data['Consumidor']['cpf'])) {
+            return false;
+        }
+        return true;
+    }
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
     var $hasMany = array(
