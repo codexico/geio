@@ -495,5 +495,16 @@ class CupomFiscal extends AppModel {
         }
         return array('valorBandeira'=>$valorBandeira,'valorOutros'=>$valorOutros);
     }
+
+
+
+    function _lojasTotais() {
+        return $this->find('first', array(
+                'fields' => array(
+                        'COUNT(CupomFiscal.codigo) AS sum_cf',
+                        'SUM(CupomFiscal.valor) AS sum_valor',
+                        'AVG(CupomFiscal.valor) AS avg_valor'
+        )));
+    }
 }
 ?>

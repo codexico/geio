@@ -112,45 +112,23 @@
 			</td>*/?>
         </tr>
         <?php endforeach; ?>
-        <!--
-                <tr>
-                    <th>
-        <?php echo "TOTAL"; ?>
-                    </th>
-        <?php /*
-			<th>
-				<?php echo ''; ?>
-			</th>
-        */?>
-                    <th class="txtCenter">
-        <?php echo $qtd_consumidores_sum; ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $qtd_consumidores_novos_sum; ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $qtd_cupons_fiscais_sum; ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $qtd_cupons_promocionais_sum; ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $valor_total_sum; ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $valor_bandeira_sum; ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $valor_outros_sum; ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $number->currency($ticket_medio_consumidor_sum/$i,'EUR',array('before'=>'R$ ','after'=>'')); ?>
-                    </th>
-                    <th class="txtCenter">
-        <?php echo $number->currency($ticket_medio_cupom_fiscal_sum/$i,'EUR',array('before'=>'R$ ','after'=>'')); ?>
-                    </th>
-                </tr>
-        -->
+
+        <tr>
+            <th class="txtCenter">
+                <?php echo "TOTAL"; ?>
+            </th>
+            <th class="txtCenter">
+            </th>
+            <th class="txtCenter">
+                <?php echo $totais['CupomFiscal']['sum_cf']; ?>
+            </th>
+            <th class="txtCenter">
+                <?php echo $number->currency($totais['CupomFiscal']['sum_valor'],'EUR',array('before'=>'','after'=>'')); ?>
+            </th>
+            <th class="txtCenter">
+                <?php echo $number->currency($totais['CupomFiscal']['avg_valor'],'EUR',array('before'=>'','after'=>'')); ?>
+            </th>
+        </tr>
     </table>
 
     <!-- .paginacao -->

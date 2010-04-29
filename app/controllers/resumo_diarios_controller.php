@@ -24,7 +24,7 @@ class ResumoDiariosController extends AppController {
         $this->ResumoDiario->recursive = 0;
         $this->set('resumoDiarios', $this->paginate());
         
-        $this->set('totais', $this->ResumoDiario->totais() );
+        $this->set('totais', $this->ResumoDiario->_totais() );
     }
 
 }

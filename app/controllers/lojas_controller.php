@@ -30,6 +30,9 @@ class LojasController extends AppController {
                         'recursive' => 0));
 
         $this->set('resumoDiarios', $this->paginate('CupomFiscal') );
+
+        $this->set('totais', $this->CupomFiscal->_lojasTotais());
+
     }
 
 

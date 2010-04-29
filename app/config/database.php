@@ -100,16 +100,6 @@ class DATABASE_CONFIG {
 //            'encoding' => 'utf8',
 //    );
 
-//    var $default = array(
-//            'driver' => 'mysql',
-//            'persistent' => false,
-//            'host' => 'localhost',
-//            'login' => 'root',
-//            'password' => '',
-//            'database' => 'geio',
-//            'prefix' => 'shoppingteste_',
-//            'encoding' => 'utf8',
-//    );
     var $default = array(
             'driver' => 'mysql',
             'persistent' => false,
@@ -117,9 +107,19 @@ class DATABASE_CONFIG {
             'login' => 'root',
             'password' => '',
             'database' => 'geio',
-            'prefix' => 'geioshopping_',
+            'prefix' => 'shoppingteste_',
             'encoding' => 'utf8',
     );
+//    var $default = array(
+//            'driver' => 'mysql',
+//            'persistent' => false,
+//            'host' => 'localhost',
+//            'login' => 'root',
+//            'password' => '',
+//            'database' => 'geio',
+//            'prefix' => 'geioshopping_',
+//            'encoding' => 'utf8',
+//    );
 //
 //    var $test = array(
 //            'driver' => 'mysql',

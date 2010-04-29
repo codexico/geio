@@ -195,7 +195,7 @@ class ResumoDiario extends AppModel {
         //$this->_cronResumoDiario($dia);
     }
 
-    function totais() {
+    function _totais() {
         return $this->find('first', array(
                 'fields' => array(
                         "SUM(qtd_consumidores) AS 'qtd_consumidores_total'",
