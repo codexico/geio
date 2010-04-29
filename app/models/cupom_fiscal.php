@@ -7,11 +7,10 @@ class CupomFiscal extends AppModel {
 
     var $name = 'CupomFiscal';
     var $validate = array(
-//            'codigo' => array(
-//                            'rule' => 'isUnique',
-//                            'message' => 'Este cupom já foi cadastrado'
-//            ),
-
+            //'codigo' => array(
+            //                'rule' => 'isUnique',
+            //                'message' => 'Este cupom já foi cadastrado'
+            //),
             'codigo' => array('notempty'),
             //'troca_id' => array('numeric'),
             'loja_id' => array('numeric'),
@@ -19,7 +18,7 @@ class CupomFiscal extends AppModel {
             'valor' => array(
                             'rule' => '/^([0-9])+((,|\.)[0-9]{2})?$/i',
                             'message' => 'Formato correto: 00000,00'
-            //'rule' => array('decimal', 2)
+                            //'rule' => array('decimal', 2)
             ),
     );
 
@@ -498,6 +497,11 @@ class CupomFiscal extends AppModel {
 
 
 
+    /**
+     * Totais na tabela /lojas/resumo_diario
+     *
+     * @return array
+     */
     function _lojasTotais() {
         return $this->find('first', array(
                 'fields' => array(
