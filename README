@@ -1,3 +1,78 @@
+Software para gerenciamento de campanhas de shopping centers.
+
+
+Instalação do banco de dados:
+============================
+Se for um banco de dados exclusivo não precisa de prefixo, senão escolher um prefixo.
+
+Com prefixo:
+Alterar os arquivos estrutura_.sql, profissoes_.sql, locais_.sql, enderecos_.sql
+(dica: sed -i 's/prefixo_/shoppingteste_/g' enderecos_.sql)
+
+- Rodar os sqls na ordem
+estrutura_.sql
+profissoes_.sql
+locais_.sql
+enderecos_.sql (este é muito grande,
+-se for na locaweb pelo phpmyadmin dá para zipar e ficar enviando várias vezes até acabar
+ou usar o Mysql Query Browser,
+-se já existir um outros sistema instalado no mesmo banco pode-se apenas copiar essa tabela:
+"DROP TABLE shoppingnovo_enderecos; CREATE TABLE shoppingnovo_enderecos SELECT * FROM shoppingantigo_enderecos"
+-se for no localhost usar o comando: "mysql -h localhost -u root noemdobanco < arquivo.sql"
+Referência: http://conexaohouse.com.br/comando-para-importar-arquivo-sql-muito-extenso-ou-nao/)
+
+- Enviar também qualquer outro sql que estiver disponível, ex: lojas, consumidores, funcionarios...)
+
+
+
+Instalação do sistema:
+=====================
+
+1) Copiar todo o conteúdo para o diretório desejado.
+
+2) Alterar os arquivos app/config/database.php, app/config/core.php e app/config/regras.php
+
+app/config/database.php
+- incluir as configurações do banco de dados
+
+app/config/core.php
+- trocar o valor da linha 152: (dica para gerar salt no linux: "cat /dev/urandom| tr -dc '0-9a-zA-Z'|head -c 40;echo")
+        Configure::write('Security.salt', 'uQb0vUahJuui1JgLdP5oeG2NrzhC36nYkKxzlGJl');
+- deixar o debug=2 na linha 41
+	Configure::write('debug', 2);
+
+app/config/regras.php
+- colocar as regras da campanha
+
+
+3) Cadastrar grupos iniciais e primeiro user.
+Nos arquivos:
+app/app_controller.php
+app/controllers/groups_controller.php
+app/controllers/users_controller.php
+Descomentar a linha:
+        //$this->Auth->allow('*');//configuracao inicial
+
+Acessar o endereço groups/add e acrescentar os grupos na ordem:
+admin
+cliente
+promotor
+Acessar o endereço users/add e acrescentar o primeiro usuário no Grupo admin.
+
+Acessar o endereço groups/build_acl(pode demorar um pouco) e depois o endereço users/initDB.
+
+Comentar as linhas anteriormente descomentadas:
+        //$this->Auth->allow('*');//configuracao inicial
+
+Acessar o endereço logout.
+
+4) Pronto, agora é só acessar com o admin criado anteriormente. Para criar outros usuários acesse promotores/add e usuarios/add.
+
+
+
+Sobre o cakephp:
+===============
+
 CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
 
 The Cake Software Foundation - promoting development related to CakePHP

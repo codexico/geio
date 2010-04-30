@@ -21,7 +21,7 @@ $config['Regras.Valor'] =  50;
  * @global boolean $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Saldo.true'] =  TRUE;
+$config['Regras.Saldo.true'] =  FALSE;
 
 
 /**

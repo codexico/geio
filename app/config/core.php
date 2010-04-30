@@ -149,7 +149,8 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'uQb0vUahJuui1JgLdP5oeG2NrzhC36nYkKxzlGJl');
+	//Configure::write('Security.salt', 'uQb0vUahJuui1JgLdP5oeG2NrzhC36nYkKxzlGJl');
+	Configure::write('Security.salt', 'aUSqPiqemauadRMYe0q8eCPa6sZWLR0r4BIVYXlo');
 	//dica para gerar salt no linux: "cat /dev/urandom| tr -dc '0-9a-zA-Z'|head -c 40;echo"
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
