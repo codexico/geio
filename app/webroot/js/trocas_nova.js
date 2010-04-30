@@ -97,8 +97,11 @@ $(document).ready(function() {
         regrasValor = $('#regras-valor').val();
         regrasBandeiraValor = $('#bandeira-qtd').val();
         c = 0;
-        restoOutros +=  parseFloat($('#saldo_outros').val());//alert(restoOutros);
-        restoBandeira +=  parseFloat($('#saldo_bandeira').val());//alert(restoBandeira);
+
+        if($('#saldo_outros').val() != undefined){
+            restoOutros +=  parseFloat($('#saldo_outros').val());//alert(restoOutros);
+            restoBandeira +=  parseFloat($('#saldo_bandeira').val());//alert(restoBandeira);
+        }
 
         $("li.cupom").each(function(){
             count_CF++;
@@ -115,7 +118,7 @@ $(document).ready(function() {
             }
         })
 
-        restoBandeira += valorBandeira;
+        restoBandeira += parseFloat(valorBandeira);
         if (restoBandeira >= regrasValor) {
             c += ( Math.floor(restoBandeira/regrasValor) )*regrasBandeiraValor ;
             restoBandeira = restoBandeira%regrasValor

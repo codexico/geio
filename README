@@ -17,7 +17,8 @@ enderecos_.sql (este é muito grande,
 -se for na locaweb pelo phpmyadmin dá para zipar e ficar enviando várias vezes até acabar
 ou usar o Mysql Query Browser,
 -se já existir um outros sistema instalado no mesmo banco pode-se apenas copiar essa tabela:
-"DROP TABLE shoppingnovo_enderecos; CREATE TABLE shoppingnovo_enderecos SELECT * FROM shoppingantigo_enderecos"
+"DROP TABLE shoppingnovo_enderecos;
+CREATE TABLE shoppingnovo_enderecos SELECT * FROM shoppingantigo_enderecos;"
 -se for no localhost usar o comando: "mysql -h localhost -u root noemdobanco < arquivo.sql"
 Referência: http://conexaohouse.com.br/comando-para-importar-arquivo-sql-muito-extenso-ou-nao/)
 
