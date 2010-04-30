@@ -66,7 +66,12 @@ Comentar as linhas anteriormente descomentadas:
 
 Acessar o endereço logout.
 
-4) Pronto, agora é só acessar com o admin criado anteriormente. Para criar outros usuários acesse promotores/add e usuarios/add.
+4)Alterar o arquivo app/config/core.php
+app/config/core.php
+- deixar o debug=0 (zero) na linha 41
+	Configure::write('debug', 0);
+
+5) Pronto, agora é só acessar com o admin criado anteriormente. Para criar outros usuários acesse promotores/add e usuarios/add.
 
 
 

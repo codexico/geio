@@ -89,16 +89,16 @@ class DATABASE_CONFIG {
 //            'encoding' => 'utf8',
 //    );
 
-    var $default = array(
-            'driver' => 'mysql',
-            'persistent' => false,
-            'host' => '187.45.196.152',
-            'login' => 'geio',
-            'password' => 'qui20fa10',
-            'database' => 'geio',
-            'prefix' => 'geioshopping_',
-            'encoding' => 'utf8',
-    );
+//    var $default = array(
+//            'driver' => 'mysql',
+//            'persistent' => false,
+//            'host' => '187.45.196.152',
+//            'login' => 'geio',
+//            'password' => 'qui20fa10',
+//            'database' => 'geio',
+//            'prefix' => 'geioshopping_',
+//            'encoding' => 'utf8',
+//    );
 
 //    var $default = array(
 //            'driver' => 'mysql',
@@ -121,16 +121,16 @@ class DATABASE_CONFIG {
 //            'prefix' => 'shoppingmaua_',
 //            'encoding' => 'utf8',
 //    );
-//    var $default = array(
-//            'driver' => 'mysql',
-//            'persistent' => false,
-//            'host' => 'localhost',
-//            'login' => 'root',
-//            'password' => '',
-//            'database' => 'geio',
-//            'prefix' => 'geioshopping_',
-//            'encoding' => 'utf8',
-//    );
+    var $default = array(
+            'driver' => 'mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            'login' => 'root',
+            'password' => '',
+            'database' => 'geio',
+            'prefix' => 'geioshopping_',
+            'encoding' => 'utf8',
+    );
 //
 //    var $test = array(
 //            'driver' => 'mysql',
