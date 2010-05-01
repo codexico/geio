@@ -11,7 +11,7 @@ class DiaTroca extends AppModel {
     function getMaxDia(){
         $maxDia = $this->field('dia', array(), 'dia DESC');//debug($maxDia);
         if(!$maxDia) {
-            $maxDia =  date('Y-m-d', strtotime(Configure::read('Campanha.Inicio') . " -21 days"));//inicio da campanha
+            $maxDia =  date('Y-m-d', strtotime(Configure::read('Campanha.Inicio') . " -1 days"));//inicio da campanha
         }//debug($maxDia);
         return $maxDia;
     }

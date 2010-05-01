@@ -19,7 +19,9 @@ ou usar o Mysql Query Browser,
 -se já existir um outros sistema instalado no mesmo banco pode-se apenas copiar essa tabela:
 "DROP TABLE shoppingnovo_enderecos;
 CREATE TABLE shoppingnovo_enderecos SELECT * FROM shoppingantigo_enderecos;"
--se for no localhost usar o comando: "mysql -h localhost -u root noemdobanco < arquivo.sql"
+-se for no localhost usar o comando:
+no windows (prompt do mysql): "source C:\endereco\do\arquivo\enderecos_.sql"
+ou em linha de comando: "mysql -h localhost -u root noemdobanco < arquivo.sql"
 Referência: http://conexaohouse.com.br/comando-para-importar-arquivo-sql-muito-extenso-ou-nao/)
 
 - Enviar também qualquer outro sql que estiver disponível, ex: lojas, consumidores, funcionarios...)
@@ -71,6 +73,8 @@ Acessar o endereço logout.
 app/config/core.php
 - deixar o debug=0 (zero) na linha 41
 	Configure::write('debug', 0);
+
+5) Alterar a data de inicio da campanha em app/config/custom.php na última linha.
 
 5) Pronto, agora é só acessar com o admin criado anteriormente. Para criar outros usuários acesse promotores/add e usuarios/add.
 
