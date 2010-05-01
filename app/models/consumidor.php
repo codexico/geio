@@ -24,9 +24,9 @@ class Consumidor extends AppModel {
                                             'message' => 'Cpf já cadastrado',
                                             'last' => true),
                             'cpf-3' => array(
-                                                            'rule'          => 'validateCpfProibido',
-                                                            'message' => 'Cpf proibido nesta campanha'
-            ),
+                                            'rule' => 'validateCpfProibido',
+                                            'message' => 'Cpf proibido nesta campanha'
+                            ),
             ),
 
             'rg' => array('rule' => 'notempty',
@@ -85,7 +85,7 @@ class Consumidor extends AppModel {
         $this->Funcionario->recursive = -1;
         $this->Promotor = ClassRegistry::init('Promotor');
         $this->Promotor->recursive = -1;
-        debug($this->Promotor->findByCpf($this->data['Consumidor']['cpf']));
+        //debug($this->Promotor->findByCpf($this->data['Consumidor']['cpf']));
         if ($this->Funcionario->findByCpf($this->data['Consumidor']['cpf']) || $this->Promotor->findByCpf($this->data['Consumidor']['cpf'])) {
             return false;
         }
