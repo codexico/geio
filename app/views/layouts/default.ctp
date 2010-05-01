@@ -10,6 +10,7 @@
             ?>
         </title>
         <script src="<?php echo $this->webroot.JS_URL; ?>jquery-1.4.2.min.js" type="text/javascript"></script>
+        <script src="<?php echo $this->webroot.JS_URL; ?>jquery.maskedinput-1.2.2.min.js" type="text/javascript"></script>
         <?php
         echo $html->meta('icon');
 

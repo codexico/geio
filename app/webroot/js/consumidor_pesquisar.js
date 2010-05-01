@@ -64,4 +64,14 @@ jQuery(document).ready(function($) {
     });
 
 
+   $("#ConsumidorCel").live('focus', function(){
+       $(this).mask("(99) 9999-9999");
+   })
+   $("#ConsumidorTel").live('focus', function(){
+       $(this).mask("(99) 9999-9999");
+   })
+
+
+
+
 })

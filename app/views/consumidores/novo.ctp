@@ -20,9 +20,9 @@ $javascript->link(array('consumidor_novo'), false);// false para ir em <head>
 
         echo $form->input('rg', array('label' => 'RG'));
         echo $form->input('cpf', array('label' => 'CPF (somente números)'));
-        echo $form->input('cel', array('label' => 'Celular (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+        echo $form->input('cel', array('label' => 'Celular'));
 
-        echo $form->input('tel', array('label' => 'Telefone (formatos: XXXX-XXXX, (XX) XXXX-XXXX, +XX (XX) XXXX-XXXX )'));
+        echo $form->input('tel', array('label' => 'Telefone'));
         echo $form->input('email');
 
 
