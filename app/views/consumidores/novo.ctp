@@ -122,7 +122,7 @@ $javascript->link(array('consumidor_novo'), false);// false para ir em <head>
 
         ?>
     </fieldset>
-    <?php echo $form->end('Salvar e ir para o Cadastro de Cupons');?>
+    <?php echo $form->end(array('label'=>'Salvar e ir para o Cadastro de Cupons','class'=>'submit', 'div'=>'submit submit_botoes'));?>
 </div>
 
 

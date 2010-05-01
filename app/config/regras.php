@@ -23,7 +23,7 @@ $config['Regras.CupomPromocional.true'] = FALSE;
  * @global boolean $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.true'] = TRUE;
+$config['Regras.Brinde.true'] = FALSE;
 
 
 
@@ -32,12 +32,27 @@ $config['Regras.Brinde.true'] = TRUE;
 // Saldo das trocas
 ///////////////////
 /**
+ * True se usa os saldos, false se não usa
+ *
+ * @global <type> $GLOBALS['config']
+ * @name $config 
+ */
+$config['Regras.Saldo.true'] =  FALSE;
+/**
  * True se acumula os saldos, False se descarta o saldo
+ * Ex: Casos em que o saldo não é utilizado porém ainda é guardado para estatísticas
  *
  * @global boolean $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Saldo.true'] =  FALSE;
+$config['Regras.Saldo.acumular'] =  TRUE;
+/**
+ * True se gasta os saldos acumulados, false se não gasta
+ *
+ * @global <type> $GLOBALS['config']
+ * @name $config
+ */
+$config['Regras.Saldo.gastar'] =  FALSE;
 
 
 

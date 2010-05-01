@@ -160,12 +160,11 @@ class TrocasController extends AppController {
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));
 
-                if( Configure::read('Regras.Saldo.true') ) {//debug($valoresCP);
+                if( Configure::read('Regras.Saldo.acumular') ) {//debug($valoresCP);
                     $this->_atualizaSaldo($valores);
                 }
 
                 if( Configure::read('Regras.Brinde.true') ) {
-                    //TODO:redireciona para algo do brinde
                     $this->redirect(array('controller'=>'trocas', 'action' => 'escolher_brinde/' . $this->Troca->id),null,true);
                 }else {
                     $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
@@ -289,7 +288,7 @@ class TrocasController extends AppController {
         $c = $valorOutros = $valorBandeira = $restoOutros = $restoBandeira = 0;
         $regras = Configure::read('Regras');//debug($regras);
 
-        if($regras['Saldo']['true']) {
+        if($regras['Saldo']['gastar']) {
             $restoBandeira = $this->Troca->Consumidor->data['Consumidor']['saldo_bandeira'];//debug('saldo_bandeira anterior = ' . $restoBandeira );
             $restoOutros = $this->Troca->Consumidor->data['Consumidor']['saldo_outros'];//debug('saldo_outros anterior = ' . $restoOutros);
         }
@@ -330,6 +329,11 @@ class TrocasController extends AppController {
         $this->data['Troca']['valor_bandeira'] = $valorBandeira;
         $this->data['Troca']['valor_outros'] = $valorOutros;
         $this->data['Troca']['qtd_cp'] = (int)$c;
+
+        if($regras['Saldo']['acumular']) {
+            $restoBandeira += $this->Troca->Consumidor->data['Consumidor']['saldo_bandeira'];
+            $restoOutros += $this->Troca->Consumidor->data['Consumidor']['saldo_outros'];
+        }
 
         return array(
                 'valorOutros' => $valorOutros,
