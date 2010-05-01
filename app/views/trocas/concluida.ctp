@@ -7,18 +7,18 @@
 ?>
 <!-- .titulo -->
 <div class="titulo">
-	<?php echo $html->image('bullet_titulo.gif')?>
-	<h1>Dados da Troca</h1>
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Dados da Troca</h1>
 </div>
 <div class="clear"></div>
 <div class="botoes">
-<?php
-if( Configure::read('Regras.Brinde.true') ) {
-    echo "Consumidor ganhou ".$troca['Troca']['qtd_premios']." brindes.";
-}else{
-    echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']), array('class'=>'btn_azul'));
-}
-?>
+    <?php
+    if( Configure::read('Regras.Brinde.true') ) {
+        echo "Consumidor ganhou ".$troca['Troca']['qtd_premios']." brindes.";
+    }elseif (Configure::read('Regras.CupomPromocional.true')) {
+        echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']), array('class'=>'btn_azul'));
+    }
+    ?>
 </div>
 <div class="trocas view">
 
@@ -64,8 +64,8 @@ if( Configure::read('Regras.Brinde.true') ) {
 <div class="clear"></div>
 <!-- .titulo -->
 <div class="titulo">
-	<?php echo $html->image('bullet_titulo.gif')?>
-	<h1>Dados do Consumidor</h1>
+    <?php echo $html->image('bullet_titulo.gif')?>
+    <h1>Dados do Consumidor</h1>
 </div>
 <div class="clear"></div>
 <?php
