@@ -24,11 +24,11 @@
         <div id="container">
             <div id="header">
                 <div class="logotipo">
-			<?php echo $html->link(
-					$html->image('logotipo_geio.jpg', array('alt'=> __("GEIO - Início", true))),
-					'/', null, null, false
-				);
-			?>
+                    <?php echo $html->link(
+                    $html->image('logotipo_geio.jpg', array('alt'=> __("GEIO - Início", true))),
+                    '/', null, null, false
+                    );
+                    ?>
                 </div>
                 <div class="painel_logado">
                     <!--<h5><?php echo $html->link(__('LOGIN', true), '/login'); ?></h5>-->
@@ -48,17 +48,24 @@
                 </div>
             </div>
 
-            
+
             <?php
             echo $this->element('menu_geio');
             ?>
+            <?php /* Diego, coloquei o flash dentro do content, acho q assim resolve os problemas
+                <?php $session->flash('auth'); ?>
+
+                <?php $session->flash(); ?> */?>
+
+            <div id="content">
 
                 <?php $session->flash('auth'); ?>
 
                 <?php $session->flash(); ?>
 
-            <div id="content">
                 <?php echo $content_for_layout; ?>
+                
+                <div class="clear"></div>
             </div>
             <div id="footer">
                 <div class="footer_conteudo">
