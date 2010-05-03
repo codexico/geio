@@ -102,6 +102,29 @@ form input.submit, .form input.submit{
 .floatRight{float:right};
 .floatLeft{float:left};
 .txtCenter{text-align:center;}
+.w5{width:5%;}
+.w10{width:10%;}
+.w15{width:15%;}
+.w20{width:20%;}
+.w21{width:21%;}
+.w25{width:25%;}
+.w30{width:30%;}
+.w35{width:35%;}
+.w38{width:38%;}
+.w40{width:40%;}
+.w45{width:45%;}
+.w50{width:50%;}
+.w55{width:55%;}
+.w58{width:58%;}
+.w60{width:60%;}
+.w65{width:65%;}
+.w70{width:70%;}
+.w75{width:75%;}
+.w80{width:80%;}
+.w85{width:85%;}
+.w90{width:90%;}
+.w95{width:95%;}
+.w100{width:100%;}
 
 /* CONTAINER */
 #container {
@@ -201,8 +224,8 @@ form input.submit, .form input.submit{
 
 #menu .menu-content .menu-navegacao{
 	width:950px;
-	min-height:70px;/*min-height:66px;*/
-	_height:70px;/*_height:66px;*/
+	min-height:70px;
+	_height:70px;
 	float:left;
 	padding-top:15px;
 	padding-bottom:15px;
@@ -548,18 +571,14 @@ form input.submit, .form input.submit{
 }
 
 #content .index .paginacao .pagin_numeros li{
-        list-style: none;
+	list-style: none;
 	float:left;
 }
 
 #content .index .paginacao .pagin_numeros li.current{
 	padding:8px 13px 7px 13px;
-        color:#ffffff;
+	color:#ffffff;
 	background-color:#0073a1;
-
-}
-
-#content .index .paginacao .pagin_numeros a.current{
 }
 
 #content .index .paginacao .pagin_numeros a.current:hover{
@@ -628,30 +647,6 @@ form input.submit, .form input.submit{
 #content table tr .actions img{
 	margin-right:5px;
 }
-
-.w5{width:5%;}
-.w10{width:10%;}
-.w15{width:15%;}
-.w20{width:20%;}
-.w21{width:21%;}
-.w25{width:25%;}
-.w30{width:30%;}
-.w35{width:35%;}
-.w38{width:38%;}
-.w40{width:40%;}
-.w45{width:45%;}
-.w50{width:50%;}
-.w55{width:55%;}
-.w58{width:58%;}
-.w60{width:60%;}
-.w65{width:65%;}
-.w70{width:70%;}
-.w75{width:75%;}
-.w80{width:80%;}
-.w85{width:85%;}
-.w90{width:90%;}
-.w95{width:95%;}
-.w100{width:100%;}
 
 /* CONTENT - VISUALIZAR */
 #content .view dl{
@@ -865,3 +860,59 @@ form input.submit, .form input.submit{
 	text-transform:uppercase;
 }
 
+
+/* FILTROS */
+.filtro{
+	border-bottom:1px solid #e0e0e0;
+	margin-bottom:20px;
+	padding-bottom:10px;
+}
+
+.filtro fieldset legend{
+	width:948px;
+	*width:950px;
+	font-size:10px;
+	font-weight:bold;
+	color:#333939;
+	text-transform:uppercase;
+	*margin-left:-7px;
+	_margin-right:-7px;
+	border-bottom:1px solid #e0e0e0;
+}
+
+.filtro fieldset .input{
+	width:200px;
+	margin-left:10px;
+	margin-top:10px;
+	display:inline;
+	float:left;
+}
+
+.filtro fieldset .input input{
+	width:198px;
+	border:1px solid #e0e0e0;
+	margin-top:5px;
+}
+
+.filtro fieldset .input input:focus, .filtro fieldset .input input.sffocus{
+	border:1px solid #0073a1;
+}
+
+.filtro input.submit{
+	width:auto;
+	height:auto;
+	font-weight:bold;
+	font-size:12px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	color:#FFFFFF;
+	padding:1px 7px 0px 7px;
+	padding:1px 10px 1px 10px \9;
+	*padding:0;
+	background-color:#0073a1;
+	border:0;
+	margin-top:31px;
+	margin-top:32px \9;
+	*margin-top:33px;
+	margin-left:20px;
+}

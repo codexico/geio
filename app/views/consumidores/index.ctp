@@ -30,24 +30,20 @@ $javascript->link(array('consumidores_index'), false);//usa jquery
     </fieldset>
 </div>
 */ ?>
-<form><!-- criar estilo para o botao abaixo para nao precisar desse <form> -->
-    <?php echo $form->button('Procurar', array('id' => 'mostraProcurar','class'=>'submit')); ?>
-</form>
-<div class="consumidores form mgt20" id="procurar">
-    <fieldset>
-        <legend><?php __('Pesquisar por CPF');?></legend>
-        <?php
-        echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' => 'input text mgt20'));
-        echo $form->button('PESQUISAR', array('id' => 'pesquisarcpf','class'=>'submit'));
-        ?>
-    </fieldset>
-    <br />
+
+<div class="filtro">
     <div id="consumidorencontrado">
         <?php /* view/elements/consumidorencontrado */?>
     </div>
+    <fieldset>
+        <legend>Filtre seus resultados</legend>
+        <?php
+        echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' => 'input text'));
+        echo $form->button('PESQUISAR', array('id' => 'pesquisarcpf','class'=>'submit'));
+        ?>
+    </fieldset>
 </div>
-<div class="clear"></div>
-<br />
+
 <div class="clear"></div>
 
 <div class="consumidores index">

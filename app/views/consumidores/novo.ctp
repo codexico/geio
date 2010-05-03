@@ -16,52 +16,53 @@ $javascript->link(array('consumidor_novo'), false);// false para ir em <head>
         <legend><?php __('Adicionar Novo Consumidor');?></legend>
         <?php
 
-        echo $form->input('nome');
+        echo $form->input('nome', array('div' => 'input text mgt20'));
 
-        echo $form->input('rg', array('label' => 'RG'));
-        echo $form->input('cpf', array('label' => 'CPF (somente números)'));
-        echo $form->input('cel', array('label' => 'Celular'));
+        echo '<div class="duas_colunas">';
+        echo $form->input('rg', array('label' => 'RG', 'div' =>'input text meio_input'));
+        echo $form->input('cpf', array('label' => 'CPF (somente números)', 'div' =>'input text meio_input'));
+        echo '</div>';
 
-        echo $form->input('tel', array('label' => 'Telefone'));
-        echo $form->input('email');
+        echo '<div class="duas_colunas">';
+        echo $form->input('tel', array('label' => 'Telefone', 'div' =>'input text meio_input'));
+        echo $form->input('cel', array('label' => 'Celular', 'div' =>'input text meio_input'));
+        echo '</div>';
+
+        echo $form->input('email', array('label' => 'E-mail'));
 
 
-        //echo $form->input('sexo');
+        echo '<div class="duas_colunas">';
         echo $form->input('sexo', array('options' => array(
                 'masculino'=>'masculino',
                 'feminino'=>'feminino',
                 'gls'=>'gls'
         ),
-        'selected'=>$this->data['Consumidor']['sexo'],
-        'empty' => true));
+        'selected' => $this->data['Consumidor']['sexo'],
+        'empty' => true,
+        'div' => 'input meio_input'));
 
-?>
+        echo '<div class="input select">';
+        echo '<label for="ConsumidorNascimentoDay">Nascimento</label>';
+        echo $form->day('nascimento', '', array('class'=>'select_dia'), true);
+        echo $form->month('nascimento', '', array('class'=>'select_mes'), true);
+        echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano'));
+        echo '</div>';
+        echo '</div>';
 
-		<div class="input select">
-			<label for="ConsumidorNascimentoDay">Nascimento</label>
-			 <?php echo $form->day('nascimento', '', array('class'=>'select_dia'), true); ?>
-			 <?php echo $form->month('nascimento', '', array('class'=>'select_mes'), true); ?>
-			 <?php echo $form->year('nascimento', 1900, 2010, true, array('class'=>'select_ano')); ?>
-		</div>
 
-<?php
-
-        //echo $form->input('estado_civil');
-        $estado_civil ='';
-        if(isset ($this->data['Consumidor']['estado_civil'])){$estado_civil = $this->data['Consumidor']['estado_civil'];}
+        echo '<div class="duas_colunas">';
         echo $form->input('estado_civil', array('options' => array(
-                'solteiro'=>'solteiro',
-                'casado'=>'casado',
-                'viúvo'=>'viúvo',
-                'separado'=>'separado'
+                'solteiro'=>'Solteiro',
+                'casado'=>'Casado',
+                'viúvo'=>'Viúvo',
+                'separado'=>'Separado'
         ),
-        'selected'=>$estado_civil,
-        'empty' => true));
+        'selected' => $this->data['Consumidor']['estado_civil'],
+        'empty' => true,
+        'div' => 'input meio_input'));
 
-        //echo $form->input('grau_de_instrucao');
-        $grau_de_instrucao ='';
-        if(isset ($this->data['Consumidor']['grau_de_instrucao'])){$grau_de_instrucao = $this->data['Consumidor']['grau_de_instrucao'];}
-        echo $form->input('grau_de_instrucao', array('options' => array(
+
+        echo $form->input('grau_de_instrucao', array('label' => 'Grau de Instru&ccedil;&atilde;o', 'options' => array(
                 'nenhum'=>'nenhum',
                 '1º Grau'=>'1º Grau',
                 '2º Grau'=>'2º Grau',
@@ -72,8 +73,10 @@ $javascript->link(array('consumidor_novo'), false);// false para ir em <head>
                 'Pós'=>'Pós',
                 'MBA'=>'MBA'
         ),
-        'selected'=>$grau_de_instrucao,
-        'empty' => true));
+        'selected' => $this->data['Consumidor']['grau_de_instrucao'],
+        'empty' => true,
+        'div' => 'input meio_input'));
+        echo '</div>';
 
         echo $form->input('profissao');
 
@@ -106,15 +109,19 @@ $javascript->link(array('consumidor_novo'), false);// false para ir em <head>
         )
         );
 
-        $opcoes=array('label'=>'Número',
-                'style'=>'width: 60px');
-        echo $form->input('numero', $opcoes);
-        echo $form->input('complemento', array('style'=>'width: 200px'));
-        echo $form->input('bairro', array('style'=>'width: 200px'));
-        echo $form->input('cidade', array('style'=>'width: 200px'));
+        echo '<div class="duas_colunas">';
+        echo $form->input('numero', array('label'=>'Número', 'div'=>'input meio_input'));
+        echo $form->input('complemento', array('div'=>'input meio_input'));
+        echo '</div>';
 
+        echo $form->input('bairro');
+
+        echo '<div class="duas_colunas">';
         echo $form->input('estado', array('options' => $estados,
-        'empty'=>'Selecione'));
+        'empty'=>'Selecione',
+        'div' => 'input meio_input'));
+        echo $form->input('cidade', array('div'=>'input meio_input'));
+        echo '</div>';
 
 
         echo $form->input('pais', array('options' => $paises,
