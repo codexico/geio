@@ -21,9 +21,17 @@
  		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('username', array('div' => 'input text mgt20', 'label' => 'Nome de Usu&aacute;rio'));
-		echo $form->input('password');
-		echo $form->input('group_id');
+		echo $form->input('username', array('div' => 'input text mgt20', 'label' => 'Login'));
+
+
+        //That effectively eliminates the annoying Auth habit of hashing your password.
+
+        echo '<div class="duas_colunas">';
+	        echo $form->input('User.passwd', array('label' => 'Senha', 'div' =>'input text meio_input'));
+			echo $form->input('User.passwd_confirm', array('type' => 'password', 'label' => 'Repita a senha', 'div' =>'input text meio_input'));
+        echo '</div>';
+
+		//echo $form->input('password');
 	?>
 	</fieldset>
     <?php echo $form->end(array('label'=>'ENVIAR','class'=>'submit'));?>

@@ -72,15 +72,15 @@ class UsersController extends AppController {
     
     function edit($id = null) {
         if (!$id && empty($this->data)) {
-            $this->Session->setFlash(__('Invalid User', true));
+            $this->Session->setFlash(__('Id do User Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
         if (!empty($this->data)) {
             if ($this->User->save($this->data)) {
-                $this->Session->setFlash(__('The User has been saved', true));
+                $this->Session->setFlash(__('User editado com sucesso.', true));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('Ocorreu algum erro. Tente novamente por favor.', true));
             }
         }
         if (empty($this->data)) {
@@ -96,7 +96,7 @@ class UsersController extends AppController {
 
     function delete($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid id for User', true));
+            $this->Session->setFlash(__('Id do User Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
 //        if ($this->User->del($id)) {
