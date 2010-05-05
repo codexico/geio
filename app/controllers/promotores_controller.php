@@ -27,7 +27,7 @@ class PromotoresController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
         $promotor = $this->Promotor->read(null, $id);
-        if(!$promotor){
+        if(!$promotor) {
             $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
@@ -42,9 +42,9 @@ class PromotoresController extends AppController {
                 'conditions' => array('Troca.promotor_id' => $id),
                 'limit' => 20,
                 'extra'=>$id,
-            //'group'=>'consumidor_id',
-            'contain'=>'Consumidor',
-            'order' => 'Troca.created DESC'
+                //'group'=>'consumidor_id',
+                'contain'=>'Consumidor',
+                'order' => 'Troca.created DESC'
         );
         $trocas = $this->paginate('Troca');//debug($trocas[0]);
         $this->set(compact('trocas','relatorio') );
@@ -91,6 +91,36 @@ class PromotoresController extends AppController {
         }
     }
 
+    function senha($id = null) {
+        if (!$id && empty($this->data)) {
+            $this->Session->setFlash(__('Id de Promotor Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        if (!empty($this->data)) {
+            $this->Promotor->recursive = 0;
+            $promotor = $this->Promotor->read(null, $id);//debug($promotor);
+            $this->set('promotor', $promotor);
+            $this->data['User']['username'] = $promotor['User']['username'];
+            $this->data['User']['group_id'] = $promotor['User']['group_id'];
+            if ($this->User->save($this->data)) {
+                $this->Session->setFlash(__('Senha trocada com sucesso.', true));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Ocorreu algum erro. Tente novamente.', true));
+            }
+        }
+        if (empty($this->data)) {
+            $this->Promotor->recursive = 0;
+            $promotor = $this->Promotor->read(null, $id);//debug($promotor);
+            $this->set('promotor', $promotor);
+            if(!$promotor) {
+                $this->Session->setFlash(__('Id do Promotor Inválido', true));
+                $this->redirect(array('action' => 'index'));
+            }
+            $this->data = $promotor;
+        }
+    }
+
     function delete($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Id de Promotor Inválido', true));
@@ -100,11 +130,11 @@ class PromotoresController extends AppController {
         //nao existe um deleteAll() para deletar User e Promotor ao mesmo tempo?
         //$promotor = $this->Promotor->findById($id);
         $promotor = $this->Promotor->read(null, $id);
-        if(!$promotor){
+        if(!$promotor) {
             $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
-        
+
         //if ($this->Promotor->del($id)) {
 //        if ($this->Promotor->del($id) && $this->User->del($promotor['User']['id'])) {
 //
@@ -134,7 +164,7 @@ class PromotoresController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
-    function trocas($id){
+    function trocas($id) {
         if (!$id) {
             $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
@@ -142,7 +172,7 @@ class PromotoresController extends AppController {
 
         //$this->set('promotor', $this->Promotor->read(null, $id));
         $promotor = $this->Promotor->read(null, $id);
-        if(!$promotor){
+        if(!$promotor) {
             $this->Session->setFlash(__('Id de Promotor Inválido', true));
             $this->redirect(array('action' => 'index'));
         }

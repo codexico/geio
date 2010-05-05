@@ -1,3 +1,6 @@
+<?php
+//debug($this->data['Promotor']);
+?>
 <!-- .titulo -->
 <div class="titulo">
 	<?php echo $html->image('bullet_titulo.gif')?>
@@ -7,7 +10,10 @@
 
 <!-- .botoes -->
 <div class="botoes">
-	<?php echo $html->link('Voltar', '/promotores', array('class'=>'btn_cinza floatRight')); ?>
+	<?php echo $html->link('Voltar', '/promotores', array('class'=>'btn_cinza floatRight mgr5')); ?>
+	<?php echo $html->link('Trocar Senha', '/promotores/senha/'.$this->data['Promotor']['id'], array('class'=>'btn_cinza floatRight mgr5')); ?>
+    <?php echo $html->link('Excluir Usuario', array('action' => 'delete', $form->value('Usuario.id')), array('class'=>'btn_azul floatRight mgr5'),
+            sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Usuario.id'))); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
@@ -20,7 +26,7 @@
  		<legend>Dados Gerais</legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Login'));
+		echo $form->input('nome', array('div' => 'input text mgt20', 'label' => 'Nome Completo'));
 		echo $form->input('email', array('label' => 'E-mail'));
 
         echo '<div class="duas_colunas">';

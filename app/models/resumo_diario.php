@@ -84,7 +84,7 @@ class ResumoDiario extends AppModel {
 
         $this->Troca = ClassRegistry::init('Troca');
         $this->Troca->recursive = -1;
-        $trocas = $this->Troca->findAll( $conditions_data_troca);//debug($trocas);
+        $trocas = $this->Troca->findAll( $conditions_data_troca);debug($trocas);
 
         $this->TrocasDia = ClassRegistry::init('TrocasDia');
         $this->TrocasDia->useTable = true;

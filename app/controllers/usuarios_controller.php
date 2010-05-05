@@ -8,7 +8,7 @@ class UsuariosController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        //$this->Auth->allowedActions = array('index', 'view');
+        $this->Auth->allowedActions = array('senha');
     }
     
 
@@ -70,6 +70,37 @@ class UsuariosController extends AppController {
             $this->data = $usuario;
         }
     }
+
+    function senha($id = null) {
+        if (!$id && empty($this->data)) {
+            $this->Session->setFlash(__('Id de Usuario Inválido', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        if (!empty($this->data)) {
+            $this->Usuario->recursive = 0;
+            $usuario = $this->Usuario->read(null, $id);//debug($usuario);
+            $this->set('usuario', $usuario);
+            $this->data['User']['username'] = $usuario['User']['username'];
+            $this->data['User']['group_id'] = $usuario['User']['group_id'];
+            if ($this->User->save($this->data)) {
+                $this->Session->setFlash(__('Senha trocada com sucesso.', true));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Ocorreu algum erro. Tente novamente.', true));
+            }
+        }
+        if (empty($this->data)) {
+            $this->Usuario->recursive = 0;
+            $usuario = $this->Usuario->read(null, $id);//debug($usuario);
+            $this->set('usuario', $usuario);
+            if(!$usuario) {
+                $this->Session->setFlash(__('Id do Usuario Inválido', true));
+                $this->redirect(array('action' => 'index'));
+            }
+            $this->data = $usuario;
+        }
+    }
+
 
     function delete($id = null) {
         if (!$id) {

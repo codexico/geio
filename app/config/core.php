@@ -149,7 +149,8 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'uQb0vUahJuui1JgLdP5oeG2NrzhC36nYkKxzlGJl');
+	//Configure::write('Security.salt', 'cpoCuXIYgyoW0DJomoMJVNI26aKfuPJqab8IH1n2');//maua
+	Configure::write('Security.salt', 'uQb0vUahJuui1JgLdP5oeG2NrzhC36nYkKxzlGJl');//geio
 	//Configure::write('Security.salt', 'aUSqPiqemauadRMYe0q8eCPa6sZWLR0r4BIVYXlo');
 	//dica para gerar salt no linux: "cat /dev/urandom| tr -dc '0-9a-zA-Z'|head -c 40;echo"
 /**

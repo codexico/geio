@@ -10,9 +10,7 @@
 	<?php echo $html->link('Voltar', '/promotores', array('class'=>'btn_cinza floatRight')); ?>
 </div>
 
-<?php $session->flash('auth'); ?>
 <?php $session->flash(); ?>
-
 
 <div class="promotores form">
     <?php echo $form->create('Promotor');?>

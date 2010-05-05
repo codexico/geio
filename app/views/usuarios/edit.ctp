@@ -8,7 +8,9 @@
 <!-- .botoes -->
 <div class="botoes">
     <?php echo $html->link('Voltar', '/usuarios', array('class'=>'btn_cinza floatRight')); ?>
-    <?php echo $html->link('Excluir Usuario', array('action' => 'delete', $form->value('Usuario.id')), array('class'=>'btn_azul floatRight mgr5'), sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Usuario.id'))); ?>
+	<?php echo $html->link('Trocar Senha', '/usuarios/senha/'.$this->data['Usuario']['id'], array('class'=>'btn_cinza floatRight mgr5')); ?>
+    <?php echo $html->link('Excluir Usuario', array('action' => 'delete', $form->value('Usuario.id')), array('class'=>'btn_azul floatRight mgr5'),
+            sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Usuario.id'))); ?>
 </div>
 
 <?php $session->flash('auth'); ?>
