@@ -41,10 +41,6 @@
                 <li><a href="#aba_administracao_grupo1">ADMINISTRA&Ccedil;&Atilde;O</a></li>
                 <?php endif; ?>
 
-                <?php if ($session->read('Auth.User.group_id') == 2) : ?>
-                <li><a href="#aba_administracao_grupo2">ADMINISTRA&Ccedil;&Atilde;O</a></li>
-                <?php endif; ?>
-
                 <?php if ($session->read('Auth.User.group_id') == 3) : ?>
                 <li><a href="#aba_pesquisa_grupo3">PESQUISAR</a></li>
                 <?php endif; ?>

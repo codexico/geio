@@ -22,6 +22,7 @@ class ResumoDiariosController extends AppController {
         $this->ResumoDiario->atualizar();
 
         $this->ResumoDiario->recursive = 0;
+        $this->paginate = array('order'=>' dia DESC');
         $this->set('resumoDiarios', $this->paginate());
         
         $this->set('totais', $this->ResumoDiario->_totais() );

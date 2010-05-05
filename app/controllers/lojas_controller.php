@@ -24,7 +24,7 @@ class LojasController extends AppController {
                                 'COUNT(CupomFiscal.codigo) AS sum_cf','AVG(CupomFiscal.valor) AS avg_valor','SUM(CupomFiscal.valor) AS sum_valor',
                                 'CupomFiscal.loja_id','Loja.nome_fantasia'),
                         'group' => array('date_FORMAT(`CupomFiscal`.`data_compra`, "%Y-%m-%d")','Loja.nome_fantasia'),
-                        'order' => array('Loja.nome_fantasia' => 'asc','`CupomFiscal`.`data_compra`'=>'asc'),
+                        'order' => array('Loja.nome_fantasia' => 'ASC','`CupomFiscal`.`data_compra`'=>'DESC'),
                         'limit'=>20,
                         'passit' => $this->passedArgs, // pass via $extra
                         'recursive' => 0));

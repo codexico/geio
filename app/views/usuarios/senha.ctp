@@ -15,7 +15,6 @@
 <!-- .botoes -->
 <div class="botoes">
 	<?php echo $html->link('Voltar', '/usuarios', array('class'=>'btn_cinza floatRight mgr5')); ?>
-	<?php echo $html->link('Trocar Senha', '/usuarios/senha/'.$usuario['Usuario']['id'], array('class'=>'btn_cinza floatRight mgr5')); ?>
 </div>
 
 <?php $session->flash(); ?>

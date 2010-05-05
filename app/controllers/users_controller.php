@@ -130,13 +130,43 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers');
         //$this->Acl->deny($group, 'controllers/Trocas/nova');
 
-        //usuarios do sistema
+        //usuarios do sistema (clientes)
         $group->id = 2;
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/logout');
+        /* Aba ADMINISTRACAO
+        $this->Acl->allow($group, 'controllers/Consumidores/index');
+        $this->Acl->allow($group, 'controllers/Consumidores/view');
+        $this->Acl->allow($group, 'controllers/Consumidores/consumidorCpfAjax');
+        $this->Acl->allow($group, 'controllers/Consumidores/consumidorRgAjax');
+        $this->Acl->allow($group, 'controllers/CupomFiscais');
+        $this->Acl->allow($group, 'controllers/Funcionarios');
+        $this->Acl->allow($group, 'controllers/Lojas');
+        $this->Acl->allow($group, 'controllers/Brindes');
+        $this->Acl->allow($group, 'controllers/Entradas');
+        $this->Acl->allow($group, 'controllers/Trocas');
         $this->Acl->allow($group, 'controllers/Promotores');
-        $this->Acl->allow($group, 'controllers/Trocas/index');
+        $this->Acl->allow($group, 'controllers/Usuarios/index');
+        $this->Acl->allow($group, 'controllers/Usuarios/view');
+        $this->Acl->allow($group, 'controllers/Users/index');
+        $this->Acl->allow($group, 'controllers/Users/view');
+        $this->Acl->allow($group, 'controllers/CupomPromocionais');
+         *
+         */
+        //ABA RELATÓRIOS
+        $this->Acl->allow($group, 'controllers/Trocas/hoje');
+        $this->Acl->allow($group, 'controllers/Trocas/ontem');
+        $this->Acl->allow($group, 'controllers/Trocas/semana');
+        $this->Acl->allow($group, 'controllers/Trocas/mes');
+        $this->Acl->allow($group, 'controllers/ResumoDiarios');
+        $this->Acl->allow($group, 'controllers/Lojas/resumo_diario');
+        $this->Acl->allow($group, 'controllers/Relatorios/detalhe_dia');
+        //links internos dos relatorios
+        $this->Acl->allow($group, 'controllers/Consumidores/view');
+        $this->Acl->allow($group, 'controllers/CupomFiscais/view');
         $this->Acl->allow($group, 'controllers/Trocas/view');
+        $this->Acl->allow($group, 'controllers/Lojas/view');
+        $this->Acl->allow($group, 'controllers/Promotores/view');
 
         //promotores
         $group->id = 3;

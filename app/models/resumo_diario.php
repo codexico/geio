@@ -84,7 +84,7 @@ class ResumoDiario extends AppModel {
 
         $this->Troca = ClassRegistry::init('Troca');
         $this->Troca->recursive = -1;
-        $trocas = $this->Troca->findAll( $conditions_data_troca);debug($trocas);
+        $trocas = $this->Troca->findAll( $conditions_data_troca);//debug($trocas);
 
         $this->TrocasDia = ClassRegistry::init('TrocasDia');
         $this->TrocasDia->useTable = true;
@@ -134,34 +134,38 @@ class ResumoDiario extends AppModel {
         $resumodiario['ResumoDiario']['qtd_consumidores_novos'] = $this->TrocasDia->find('count', $conditions_num_consumidores_novos_bandeira );
 
         //qtd_cupons_fiscais
-        $qtd_cf = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.qtd_cf) AS 'total_qtd_cf'")));//debug($qtd_cf);
-        if(is_null($qtd_cf['TrocasDia']['total_qtd_cf'])) {
+        $qtd_cf = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.qtd_cf) AS 'total_qtd_cf'")));//debug($qtd_cf);
+        if(!isset($qtd_cf[0]['TrocasDia']['total_qtd_cf'])) {
             $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = 0;
         }else {
-            $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = $qtd_cf['TrocasDia']['total_qtd_cf'];
+            if(is_null($qtd_cf[0]['TrocasDia']['total_qtd_cf'])) {
+                $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = 0;
+            }else {
+                $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = $qtd_cf[0]['TrocasDia']['total_qtd_cf'];
+            }
         }
 
         //qtd_cupons_promocionais
-        $qtd_cp = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.qtd_cp) AS 'total_qtd_cp'")));
-        $resumodiario['ResumoDiario']['qtd_cupons_promocionais'] = $qtd_cp['TrocasDia']['total_qtd_cp'];
+        $qtd_cp = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.qtd_cp) AS 'total_qtd_cp'")));//debug($qtd_cp);
+        $resumodiario['ResumoDiario']['qtd_cupons_promocionais'] = $qtd_cp[0]['TrocasDia']['total_qtd_cp'];
 
         //valor_total 	float
-        $valor_total = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.valor_total) AS 'valor_total'")));
-        if(is_null($valor_total['TrocasDia']['valor_total'])) $valor_total['TrocasDia']['valor_total'] = 0;
-        if(is_null($valor_total['TrocasDia']['valor_total'])) {
+        $valor_total = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_total) AS 'valor_total'")));//debug($valor_total);
+        //if(is_null($valor_total['TrocasDia']['valor_total'])) $valor_total['TrocasDia']['valor_total'] = 0;
+        if(is_null($valor_total[0]['TrocasDia']['valor_total'])) {
             $resumodiario['ResumoDiario']['valor_total'] = 0;
         }else {
-            $resumodiario['ResumoDiario']['valor_total'] = $valor_total['TrocasDia']['valor_total'];
+            $resumodiario['ResumoDiario']['valor_total'] = $valor_total[0]['TrocasDia']['valor_total'];
         }
 
         //valor_bandeira 	float
-        $valor_bandeira = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.valor_bandeira) AS 'valor_bandeira'")));
-        $resumodiario['ResumoDiario']['valor_bandeira'] = $valor_bandeira['TrocasDia']['valor_bandeira'];
+        $valor_bandeira = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_bandeira) AS 'valor_bandeira'")));
+        $resumodiario['ResumoDiario']['valor_bandeira'] = $valor_bandeira[0]['TrocasDia']['valor_bandeira'];
         //debug('$valor_bandeira = '.$valor_bandeira[0]['valor_bandeira']);
 
         //valor-outros 	float
-        $valor_outros = $this->TrocasDia->find('first', array('fields'=>array("SUM(TrocasDia.valor_outros) AS 'valor_outros'")));
-        $resumodiario['ResumoDiario']['valor_outros'] = $valor_outros['TrocasDia']['valor_outros'];
+        $valor_outros = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_outros) AS 'valor_outros'")));
+        $resumodiario['ResumoDiario']['valor_outros'] = $valor_outros[0]['TrocasDia']['valor_outros'];
         //debug('$valor_outros = '.$valor_outros[0]['valor_outros']);
 
         //ticket_medio_consumidor
@@ -196,7 +200,7 @@ class ResumoDiario extends AppModel {
     }
 
     function _totais() {
-        return $this->find('first', array(
+        $totais = $this->find('all', array(
                 'fields' => array(
                         "SUM(qtd_consumidores) AS 'qtd_consumidores_total'",
                         "SUM(qtd_consumidores_novos) AS 'qtd_consumidores_novos_total'",
@@ -208,6 +212,7 @@ class ResumoDiario extends AppModel {
                         "SUM(valor_bandeira) AS 'valor_bandeira_total'",
                         "SUM(valor_outros) AS 'valor_outros_total'",
         )));
+        return $totais[0];
     }
 
 }
