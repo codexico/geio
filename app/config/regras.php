@@ -5,6 +5,11 @@
  * Regras da campanha
  */
 
+/////////
+//CAMPANHA
+/////////
+$config['Campanha.Inicio'] =  date('Y-m-d', strtotime("1 May 2010"));
+
 
 ////////////////////
 // Tipo de premiacao

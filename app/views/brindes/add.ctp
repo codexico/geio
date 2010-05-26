@@ -28,7 +28,7 @@
 <div class="duas_colunas">
         <?php
         echo $form->input('valor', array('label' => 'Valor', 'div' =>'input text meio_input'));
-        echo $form->input('consumidor_max', array('label' => 'M&aacute;ximo de Consumidores', 'div' =>'input text meio_input'));
+        echo $form->input('consumidor_max', array('label' => 'M&aacute;ximo de Brides por Consumidor', 'div' =>'input text meio_input'));
 
         ?>
 </div>

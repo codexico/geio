@@ -65,14 +65,14 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y - H:m',strtotime($brinde['Brinde']['created'])); ?>
+				<?php echo date('d/m/Y - H:i',strtotime($brinde['Brinde']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>
 		<div <?php if ($i % 2 == 0) echo $class;?>>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y - H:m',strtotime($brinde['Brinde']['modified'])); ?>
+				<?php echo date('d/m/Y - H:i',strtotime($brinde['Brinde']['modified'])); ?>
 				&nbsp;
 			</dd>
 		</div>

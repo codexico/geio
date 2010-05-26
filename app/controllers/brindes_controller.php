@@ -41,7 +41,7 @@ class BrindesController extends AppController {
         }
         if (!empty($this->data)) {
             if ($this->Brinde->save($this->data)) {
-                $this->Session->setFlash(__('Brinde salvo com sucesso!', true));
+                $this->Session->setFlash(__('Brinde editado com sucesso!', true));
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('O Brinde não pode ser salvo. Tente novamente por favor.', true));

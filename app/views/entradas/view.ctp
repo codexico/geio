@@ -32,12 +32,12 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo date('d/m/Y - H:m',strtotime($entrada['Entrada']['created'])); ?>
+			<?php echo date('d/m/Y - H:i',strtotime($entrada['Entrada']['created'])); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo date('d/m/Y - H:m',strtotime($entrada['Entrada']['modified'])); ?>
+			<?php echo date('d/m/Y - H:i',strtotime($entrada['Entrada']['modified'])); ?>
 			&nbsp;
 		</dd>
 	</dl>

@@ -1,6 +1,6 @@
 
 <div class="relatorio">
-    <p><?php echo "Total de trocas de hoje: " . $relatorio['count_trocas']; ?></p>
+    <p><?php echo "Total de trocas: " . $relatorio['count_trocas']; ?></p>
     <p><?php echo "Número de Consumidores Novos: " . $relatorio['num_consumidores_novos']; ?></p>
     <p><?php echo "Número de Consumidores Atendidos: " . $relatorio['num_consumidores_atendidos']; ?></p>
     <p><?php echo "Número de Cupons Fiscais trocados: " . $relatorio['num_cupons_fiscais']; ?></p>

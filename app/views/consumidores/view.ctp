@@ -278,7 +278,7 @@
                 <?php echo ($cupomFiscal['CupomFiscal']['bandeira']=='') ? 'Cash' : $cupomFiscal['CupomFiscal']['bandeira'] ; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo date('d/m/Y - H:m',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
+                    <?php echo date('d/m/Y - H:i',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
             </td>
         </tr>
         <?php endforeach; ?>

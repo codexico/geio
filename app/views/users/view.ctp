@@ -44,14 +44,14 @@
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y - H:m',strtotime($user['User']['created'])); ?>
+				<?php echo date('d/m/Y - H:i',strtotime($user['User']['created'])); ?>
 				&nbsp;
 			</dd>
 		</div>	
 		<div <?php if ($i % 2 == 0) echo $class;?>>	
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo date('d/m/Y - H:m',strtotime($user['User']['modified'])); ?>
+				<?php echo date('d/m/Y - H:i',strtotime($user['User']['modified'])); ?>
 				&nbsp;
 			</dd>
 		</div>

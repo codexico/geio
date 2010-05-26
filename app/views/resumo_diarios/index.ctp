@@ -5,6 +5,7 @@
 /* @var $javascript JavascriptHelper */
 /* @var $cakePtbr CakePtbr.FormatacaoHelper */
 /* @var $paginator PaginatorHelper */
+//debug($resumoDiarios);
 ?>
 <!-- .titulo -->
 <div class="titulo">

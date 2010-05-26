@@ -63,9 +63,9 @@ class ResumoDiario extends AppModel {
                       `consumidor_nome` varchar(255) NOT NULL,
                       `consumidor_created` date NOT NULL,
                       `qtd_cf` int(3) DEFAULT NULL,
-                      `valor_total` double DEFAULT '0',
-                      `valor_bandeira` float DEFAULT '0',
-                      `valor_outros` float DEFAULT '0',
+                      `valor_total` float(10,2) DEFAULT '0',
+                      `valor_bandeira` float(10,2) DEFAULT '0',
+                      `valor_outros` float(10,2) DEFAULT '0',
                       `qtd_cp` int(5) DEFAULT '0',
 
                       PRIMARY KEY (`id`)
@@ -150,7 +150,8 @@ class ResumoDiario extends AppModel {
         $resumodiario['ResumoDiario']['qtd_cupons_promocionais'] = $qtd_cp[0]['TrocasDia']['total_qtd_cp'];
 
         //valor_total 	float
-        $valor_total = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_total) AS 'valor_total'")));//debug($valor_total);
+        $valor_total = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_total) AS 'valor_total'")));
+        //debug($valor_total);
         //if(is_null($valor_total['TrocasDia']['valor_total'])) $valor_total['TrocasDia']['valor_total'] = 0;
         if(is_null($valor_total[0]['TrocasDia']['valor_total'])) {
             $resumodiario['ResumoDiario']['valor_total'] = 0;
@@ -160,19 +161,27 @@ class ResumoDiario extends AppModel {
 
         //valor_bandeira 	float
         $valor_bandeira = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_bandeira) AS 'valor_bandeira'")));
-        $resumodiario['ResumoDiario']['valor_bandeira'] = $valor_bandeira[0]['TrocasDia']['valor_bandeira'];
+        if(is_null($valor_bandeira[0]['TrocasDia']['valor_bandeira'])) {
+            $resumodiario['ResumoDiario']['valor_bandeira'] = 0;
+        }else {
+            $resumodiario['ResumoDiario']['valor_bandeira'] = $valor_bandeira[0]['TrocasDia']['valor_bandeira'];
+        }
         //debug('$valor_bandeira = '.$valor_bandeira[0]['valor_bandeira']);
 
         //valor-outros 	float
         $valor_outros = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_outros) AS 'valor_outros'")));
-        $resumodiario['ResumoDiario']['valor_outros'] = $valor_outros[0]['TrocasDia']['valor_outros'];
+        if(is_null($valor_outros[0]['TrocasDia']['valor_outros'])) {
+            $resumodiario['ResumoDiario']['valor_outros'] = 0;
+        }else {
+            $resumodiario['ResumoDiario']['valor_outros'] = $valor_outros[0]['TrocasDia']['valor_outros'];
+        }
         //debug('$valor_outros = '.$valor_outros[0]['valor_outros']);
 
         //ticket_medio_consumidor
         if($resumodiario['ResumoDiario']['valor_total'] == 0 || $resumodiario['ResumoDiario']['qtd_consumidores'] == 0) {
             $resumodiario['ResumoDiario']['ticket_medio_consumidor'] = 0;
         }else {
-            $resumodiario['ResumoDiario']['ticket_medio_consumidor'] = $resumodiario['ResumoDiario']['valor_total']/$resumodiario['ResumoDiario']['qtd_consumidores'];
+            $resumodiario['ResumoDiario']['ticket_medio_consumidor'] = number_format($resumodiario['ResumoDiario']['valor_total']/$resumodiario['ResumoDiario']['qtd_consumidores'],2, '.', '');
             //debug('$ticket_medio_consumidor = '.$ticket_medio_consumidor);
         }
 
@@ -180,7 +189,7 @@ class ResumoDiario extends AppModel {
         if($resumodiario['ResumoDiario']['valor_total'] == 0 || $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] == 0) {
             $resumodiario['ResumoDiario']['ticket_medio_cupom_fiscal'] = 0;
         }else {
-            $resumodiario['ResumoDiario']['ticket_medio_cupom_fiscal'] = $resumodiario['ResumoDiario']['valor_total']/$resumodiario['ResumoDiario']['qtd_cupons_fiscais'];
+            $resumodiario['ResumoDiario']['ticket_medio_cupom_fiscal'] = number_format($resumodiario['ResumoDiario']['valor_total']/$resumodiario['ResumoDiario']['qtd_cupons_fiscais'],2, '.', '');
             //debug('$ticket_medio_cupom_fiscal = '.$ticket_medio_cupom_fiscal);
         }
 

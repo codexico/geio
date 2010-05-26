@@ -20,12 +20,4 @@ $config['PASSWORD_CONTATO'] =  'xxxx';
 $config['WEBMASTER_EMAIL'] =  'asdf@gmail.com';
 
 
-
-/////////
-//CAMPANHA
-/////////
-$config['Regras.Valor'] =  100;
-$config['Campanha.Inicio'] =  date('Y-m-d', strtotime("1 May 2010"));
-
-
 ?>

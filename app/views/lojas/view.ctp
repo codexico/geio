@@ -107,14 +107,14 @@
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-                <?php echo date('d/m/Y - H:m',strtotime($loja['Loja']['created'])); ?>
+                <?php echo date('d/m/Y - H:i',strtotime($loja['Loja']['created'])); ?>
                 &nbsp;
             </dd>
         </div>
         <div <?php if ($i % 2 == 0) echo $class;?>>
             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
             <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-                <?php echo date('d/m/Y - H:m',strtotime($loja['Loja']['modified'])); ?>
+                <?php echo date('d/m/Y - H:i',strtotime($loja['Loja']['modified'])); ?>
                 &nbsp;
             </dd>
         </div>
@@ -207,7 +207,7 @@
                 <?php echo ($cupomFiscal['CupomFiscal']['bandeira']=='') ? 'Cash' : $cupomFiscal['CupomFiscal']['bandeira'] ; ?>
             </td>
             <td class="txtCenter">
-                    <?php echo date('d/m/Y - H:m',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
+                    <?php echo date('d/m/Y - H:i',strtotime($cupomFiscal['CupomFiscal']['created'])); ?>
             </td>
         </tr>
         <?php endforeach; ?>

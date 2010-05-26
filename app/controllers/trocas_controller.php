@@ -156,6 +156,9 @@ class TrocasController extends AppController {
                 $valores = $this->_calculaCupomPromocional();//debug($valoresCP);
             }
             //debug($this->data);
+            $this->data['Troca']['valor_total'] = str_replace(',','.',$this->data['Troca']['valor_total']);
+            $this->data['Troca']['valor_bandeira'] = str_replace(',','.',$this->data['Troca']['valor_bandeira']);
+            $this->data['Troca']['valor_outros'] = str_replace(',','.',$this->data['Troca']['valor_outros']);
             $this->Troca->create();
             if ($this->Troca->saveall($this->data, array('validate'=>'first'))) {//valida antes os cupoms
                 $this->Session->setFlash(__('Troca efetuada com sucesso!', true));
@@ -292,7 +295,6 @@ class TrocasController extends AppController {
             $restoBandeira = $this->Troca->Consumidor->data['Consumidor']['saldo_bandeira'];//debug('saldo_bandeira anterior = ' . $restoBandeira );
             $restoOutros = $this->Troca->Consumidor->data['Consumidor']['saldo_outros'];//debug('saldo_outros anterior = ' . $restoOutros);
         }
-
         //soma os valores dos cupons fiscais enviados
         $valores = $this->CupomFiscal->_somaValorCFs($this->data['CupomFiscal']);
         $valorBandeira = $valores['valorBandeira'];
@@ -413,8 +415,8 @@ class TrocasController extends AppController {
         $data_consumidor = array(
                 'Consumidor' => array(
                         'updated' => false,
-                        'saldo_outros' => $valoresCP['restoOutros'],
-                        'saldo_bandeira' => $valoresCP['restoBandeira']
+                        'saldo_outros' => str_replace(',','.',$valoresCP['restoOutros']),
+                        'saldo_bandeira' => str_replace(',','.',$valoresCP['restoBandeira'])
         ));
         $params_consumidor = array(
                 'validate' => false,
