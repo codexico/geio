@@ -37,12 +37,22 @@ echo $this->element('consumidor');
     echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'], 'class' => "novatroca",
     //'onsubmit'=>'enviar();return false;'
     ));
+        echo $form->hidden('bandeira_nome', array('value'=>Configure::read('Regras.Bandeira.nome'), 'name'=>'bandeira_nome', 'id'=>'bandeira_nome' ) );
         echo $form->hidden('bandeira-qtd', array('value'=>Configure::read('Regras.Bandeira.valor'), 'name'=>'bandeira-qtd', 'id'=>'bandeira-qtd' ) );
         echo $form->hidden('regras-valor', array('value'=>Configure::read('Regras.Valor'), 'name'=>'regras-valor', 'id'=>'regras-valor' ) );
         echo $form->hidden('juntar_saldos', array('value'=>'true', 'name'=>'data[Troca][juntar_saldos]', 'id'=>'juntar_saldos' ) );
     if( Configure::read('Regras.Saldo.true') ) {
         echo $form->hidden('saldo_bandeira', array('value'=>$consumidor['Consumidor']['saldo_bandeira'], 'name'=>'saldo_bandeira', 'id'=>'saldo_bandeira' ) );
         echo $form->hidden('saldo_outros', array('value'=>$consumidor['Consumidor']['saldo_outros'], 'name'=>'saldo_outros', 'id'=>'saldo_outros' ) );
+    }else{
+        echo $form->hidden('saldo', array('value'=>'false', 'name'=>'saldo', 'id'=>'saldo' ) );
+    }
+    if( Configure::read('Regras.Brinde.true') ) {
+        echo $form->hidden('brinde', array('value'=>'true', 'name'=>'brinde', 'id'=>'brinde' ) );
+        echo $form->hidden('brinde_preco', array('value'=>Configure::read('Regras.Brinde.preco'), 'name'=>'brinde_preco', 'id'=>'brinde_preco' ) );
+        echo $form->hidden('brinde_max', array('value'=>Configure::read('Regras.Brinde.max'), 'name'=>'brinde_max', 'id'=>'brinde_max' ) );
+    }else{
+        echo $form->hidden('brinde', array('value'=>'false', 'name'=>'brinde', 'id'=>'brinde' ) );
     }
     ?>
     <fieldset>

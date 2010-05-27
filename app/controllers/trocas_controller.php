@@ -181,6 +181,7 @@ class TrocasController extends AppController {
         $lojas_razao_social = $this->Troca->CupomFiscal->Loja->find('list', array('fields' => array('Loja.razao_social')));
         $this->set(compact('lojas', 'lojas_razao_social'));
     }
+
     function escolher_brinde($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Troca inválida', true));
@@ -197,10 +198,7 @@ class TrocasController extends AppController {
         $this->Brinde->recursive = -1;
         $estoques = $this->Brinde->find('list',array('fields'=>array('id','estoque_atual') ));//debug($estoques);
 
-        $brindes_disponiveis = $troca['Troca']['qtd_premios'];
-        if(Configure::read('Regras.Brinde.max')  < ( $troca['Troca']['qtd_premios'] + $consumidor['Consumidor']['brinde_count']) ) {
-            $brindes_disponiveis = Configure::read('Regras.Brinde.max') - $consumidor['Consumidor']['brinde_count'];
-        }
+        $brindes_disponiveis = $this->Brinde->_brindes_disponiveis( $troca['Troca']['qtd_premios'], $consumidor['Consumidor']['brinde_count']);
 
         if (!empty($this->data)) { //debug($this->data);
             $estoqueSuficiente = true;
@@ -244,6 +242,7 @@ class TrocasController extends AppController {
         $brindes = $this->Brinde->find('list');//debug($brindes);
         $this->set(compact('brindes','estoques','premios','troca', 'consumidor','brindes_disponiveis'));
     }
+    
     function concluida($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Troca inválida', true));

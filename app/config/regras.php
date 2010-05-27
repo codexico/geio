@@ -28,7 +28,14 @@ $config['Regras.CupomPromocional.true'] = FALSE;
  * @global boolean $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.true'] = FALSE;
+$config['Regras.Brinde.true'] = TRUE;
+/**
+ * True se o Consumidor deve pagar um valor para receber o Brinde, false se é grátis
+ *
+ * @global boolean $GLOBALS['config']
+ * @name $config['Regras.Brinde.Pagar.true']
+ */
+$config['Regras.Brinde.Pagar.true'] = TRUE;
 
 
 
@@ -94,7 +101,8 @@ $config['Regras.Bandeira.nome'] =  'VISA';
  */
 $config['Regras.Valor'] =  50;
 /**
- * Quantidade de cupons por 'Regras.Valor'
+ * Quantidade de cupons e/ou brindes gerados se a troca foi com a Bandeira, a cada 'Regras.Valor'
+ * Por default é gerado apenas 1 cupom e/ou brinde se a troca não for com bandeira
  *
  * @global int $GLOBALS['config']
  * @name $config
@@ -108,6 +116,15 @@ $config['Regras.Bandeira.valor'] =  3;
  */
 $config['Regras.Brinde.max'] = 4;
 
+/**
+ * Valor que o Consumidor deve pagar para receber o Brinde
+ *
+ * @since namorados 2010
+ * @see $config['Regras.Brinde.Pagar.true']
+ * @global int $GLOBALS['config']
+ * @name $config
+ */
+$config['Regras.Brinde.preco'] = 20;
 
 
 ?>
