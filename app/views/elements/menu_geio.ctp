@@ -1,3 +1,10 @@
+<?php
+/**
+ * Menu do sistema.
+ *
+ * Mostra as abas e ações de acordo com o tipo do usuário
+ */
+?>
 <script type="text/javascript">
     jQuery(document).ready(function($) {//usar assim para não dar conflito com outras bibliotecas
         // abas
@@ -41,11 +48,11 @@
                 <li><a href="#aba_administracao_grupo1">ADMINISTRA&Ccedil;&Atilde;O</a></li>
                 <?php endif; ?>
 
-                <?php if ($session->read('Auth.User.group_id') == 3) : ?>
+                <?php if ($session->read('Auth.User.group_id') == 3) : /* somente promotores cadastram trocas */ ?>
                 <li><a href="#aba_pesquisa_grupo3">PESQUISAR</a></li>
                 <?php endif; ?>
 
-                <?php if ($session->read('Auth.User.group_id') != 3) : ?>
+                <?php if ( ($session->read('Auth.User.group_id') == 1) || $session->read('Auth.User.group_id') == 2 ) : ?>
                 <li><a href="#aba_mailing">MAILING</a></li>
                 <li><a href="#aba_relatorios">RELAT&Oacute;RIOS</a></li>
                 <?php endif; ?>
@@ -69,13 +76,16 @@
             </ul>
             <ul>
                 <li><?php echo $html->link('Lojas', array('action' => 'index', 'controller'=>'lojas')); ?> </li>
+                
+                    <?php if (Configure::read('Regras.Brinde.true')) : ?>
                 <li><?php echo $html->link('Brindes', array('action' => 'index', 'controller'=>'brindes'));?></li>
                 <li><?php echo $html->link('Estoque', array('action' => 'index', 'controller'=>'entradas'));?></li>
+                    <?php endif; ?>
             </ul>
             <ul>
                 <li><?php echo $html->link('Trocas', array('action' => 'index', 'controller'=>'trocas')); ?> </li>
                 <li><?php echo $html->link('Promotores', array('action' => 'index', 'controller'=>'promotores')); ?> </li>
-                <li><?php echo $html->link('Usuários', array('action' => 'index', 'controller'=>'usuarios')); ?> </li>
+                <li><?php echo $html->link('Clientes', array('action' => 'index', 'controller'=>'usuarios')); ?> </li>
             </ul>
             <ul>
                 <li><?php echo $html->link('Listar todos', array('action' => 'index', 'controller'=>'users')); ?> </li>
@@ -84,7 +94,7 @@
         <?php endif; ?>
 
         <?php if ($session->read('Auth.User.group_id') == 2) : ?>
-        <!-- ADMINISTRAÇÃO GRUPO: USUARIOS -->
+        <!-- ADMINISTRAÇÃO GRUPO: USUARIOS/CLIENTES -->
         <div class="menu-navegacao" id="aba_administracao_grupo2">
             <ul class="first">
                 <li><?php echo $html->link('Consumidores', array('action' => 'index', 'controller'=>'consumidores'));?></li>
@@ -105,7 +115,7 @@
         <!-- MAILING -->
         <div class="menu-navegacao" id="aba_mailing">
             <p>
-                
+
             </p>
         </div>
 

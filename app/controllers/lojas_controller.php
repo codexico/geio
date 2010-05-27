@@ -56,7 +56,7 @@ class LojasController extends AppController {
                 'conditions' => array('loja_id' => $id),
                 //'contain' => array('Consumidor'),
                 'limit' => 50,
-            'extra'=>$id,
+                'extra'=>$id,
                 //'group' => array('consumidor_id')
                 //'recursive' => 1
         );

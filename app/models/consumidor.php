@@ -9,7 +9,6 @@ class Consumidor extends AppModel {
 
     var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData', 'SoftDeletable' => array('find'=>false) );
     //var $actsAs = array('CakePtbr.Validacao', 'CakePtbr.AjusteData', 'SoftDeletable');
-
     var $validate = array(
             'nome' => array('notempty'),
 

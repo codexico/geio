@@ -6,6 +6,7 @@
 class CupomFiscal extends AppModel {
 
     var $name = 'CupomFiscal';
+
     var $validate = array(
             //'codigo' => array(
             //                'rule' => 'isUnique',

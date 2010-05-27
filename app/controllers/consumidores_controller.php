@@ -7,7 +7,6 @@ class ConsumidoresController extends AppController {
         *
         * $uses
         * Permite o acesso deste controller aos models adicionais "Bairro", "Endereco", "Cidade", "Estado" e "Paise".
-        * Curiosamente se não colocar "Cliente" em primeiro, dá erro ao listar clientes (app/cliente/index).
         *
         * $components
         * O componente RequestHandler é usado para se obter informações adicionais sobre as requisições HTTP feitas a sua aplicação CakePHP.
@@ -26,7 +25,6 @@ class ConsumidoresController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        //$this->Auth->allowedActions = array('edit');
     }
 
     function index() {
