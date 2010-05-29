@@ -41,7 +41,16 @@
             <th class="w5 txtCenter"><?php echo $paginator->sort('id');?></th>
             <th class="w30"><?php echo $paginator->sort('consumidor','Consumidor.nome');?></th>
             <th class="w15 txtCenter"><?php echo $paginator->sort('Valor (R$)', 'valor_total');?></th>
+            <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <th class="w20 txtCenter"><?php echo $paginator->sort('Cupons Promocionais','qtd_cp');?></th>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <th class="w20 txtCenter"><?php echo $paginator->sort('Brindes','qtd_premios');?></th>
+            <th class="w20 txtCenter"><?php echo $paginator->sort('Brindes Trocados','qtd_trocados');?></th>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <th class="w20 txtCenter"><?php echo $paginator->sort('Valor (R$)','qtd_trocados');?></th>
+            <?php endif; ?>
             <th class="w15"><?php echo $paginator->sort('promotor','Promotor.nome');?></th>
         </tr>
         <?php
@@ -54,7 +63,7 @@
             ?>
         <tr<?php echo $class;?>>
             <td>
-                    <?php echo date('d/m/Y H:i:s', strtotime($troca['Troca']['created']) ); ?>
+                    <?php echo date('d/m/Y H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
             <td class="txtCenter">
                     <?php echo $html->link($troca['Troca']['id'], array('action' => 'view/'.$troca['Troca']['id'])); ?>
@@ -65,9 +74,24 @@
             <td class="txtCenter">
                     <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
+            <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <td class="txtCenter">
                     <?php echo $troca['Troca']['qtd_cp']; ?>
             </td>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <td class="txtCenter">
+                    <?php echo $troca['Troca']['qtd_premios']; ?>
+            </td>
+            <td class="txtCenter">
+                    <?php echo $troca['Troca']['qtd_premios_trocados']; ?>
+            </td>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <td class="txtCenter">
+                    <?php echo $number->currency($troca['Troca']['qtd_premios_trocados']*Configure::read('Regras.Brinde.preco'),'EUR',array('before'=>'','after'=>'')); ?>
+            </td>
+            <?php endif; ?>
             <td>
                     <?php echo $html->link($troca['Promotor']['nome'], array('action' => 'view', 'controller' =>'promotores', $troca['Promotor']['id'])); ?>
             </td>
@@ -87,9 +111,24 @@
             <th class="txtCenter">
                 <?php echo $number->currency($relatorio['valor_cupons_fiscais'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
+            <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <th class="txtCenter">
                 <?php echo $relatorio['num_cupons_promocionais']; ?>
             </th>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <th class="txtCenter">
+                <?php echo $relatorio['num_premios']; ?>
+            </th>
+            <th class="txtCenter">
+                <?php echo $relatorio['num_premios_trocados']; ?>
+            </th>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <th class="txtCenter">
+                <?php echo $number->currency($relatorio['num_premios_trocados']*Configure::read('Regras.Brinde.preco'),'EUR',array('before'=>'','after'=>'')); ?>
+            </th>
+            <?php endif; ?>
             <th>
                 <?php echo " "; ?>
             </th>

@@ -65,42 +65,63 @@ class CupomFiscal extends AppModel {
             $conditions_data_consumidor = array("Consumidor.created > " => $inicio);
             $conditions_data_cf = array("CupomFiscal.created > " => $inicio);
             $conditions_data_cp = array("CupomPromocional.created > " => $inicio);
+            $conditions_data_premio = array("Premio.created > " => $inicio);
         }else {
             $conditions_data_troca = array("Troca.created BETWEEN ? AND ?" => array($inicio,$fim));
             $conditions_data_consumidor = array("Consumidor.created BETWEEN ? AND ?" => array($inicio,$fim));
             $conditions_data_cf = array("CupomFiscal.created BETWEEN ? AND ?" => array($inicio,$fim));
             $conditions_data_cp = array("CupomPromocional.created BETWEEN ? AND ?" => array($inicio,$fim));
+            $conditions_data_premio = array("Premio.created BETWEEN ? AND ?" => array($inicio,$fim));
         }
         //.total de trocas efetuadas
-        $relatorio['count_trocas'] = $this->Troca->find('count', array('conditions' => $conditions_data_troca));
+        $relatorio['count_trocas'] = $this->Troca->find('count', array('conditions' => $conditions_data_troca, 'recursive' => -1));
         //.Numero consumidores atendidos
         $conditions_num_consumidores_atendidos = array(
                 'fields' => "COUNT(DISTINCT Troca.consumidor_id) AS 'count'",
-                'conditions' => $conditions_data_troca
+                'conditions' => $conditions_data_troca,
+                'recursive' => -1
         );
         $relatorio['num_consumidores_atendidos'] = $this->Troca->find('count', $conditions_num_consumidores_atendidos );
         //.Cupons Fiscais Diarios (R$)
         $conditions_valor_cupons_fiscais = array(
                 'fields' => "SUM(CupomFiscal.valor) AS 'total'",
-                'conditions' => $conditions_data_troca
+                'conditions' => $conditions_data_troca,
+                'recursive' => 0
         );
         $valor_cupons_fiscais = $this->find('first', $conditions_valor_cupons_fiscais);
         $relatorio['valor_cupons_fiscais'] = $valor_cupons_fiscais['CupomFiscal']['total'];//alias
         //.Numero consumidores novos
         $conditions_num_consumidores_novos = array(
-                'conditions' => $conditions_data_consumidor
+                'conditions' => $conditions_data_consumidor,
+                'recursive' => -1
         );
         $relatorio['num_consumidores_novos'] = $this->Consumidor->find('count', $conditions_num_consumidores_novos);
         //.Numero de cupons fiscais trocados
         $conditions_num_cupons_fiscais = array(
-                'conditions' => $conditions_data_cf
+                'conditions' => $conditions_data_cf,
+                'recursive' => -1
         );
         $relatorio['num_cupons_fiscais'] = $this->Troca->CupomFiscal->find('count', $conditions_num_cupons_fiscais);
         //.Quantidade de cupons promocionais impressos
         $conditions_num_cupons_promocionais = array(
-                'conditions' => $conditions_data_cp
+                'conditions' => $conditions_data_cp,
+                'recursive' => -1
         );
         $relatorio['num_cupons_promocionais'] = $this->Troca->CupomPromocional->find('count', $conditions_num_cupons_promocionais);
+        //.Quantidade de premios
+        $conditions_num_premios = array(
+                'conditions' => $conditions_data_premio,
+                'recursive' => -1
+        );
+        $relatorio['num_premios'] = $this->Troca->Premio->find('count', $conditions_num_premios);
+        //.Quantidade de premios trocados
+        $conditions_num_premios_trocados = array(
+                'fields' => "SUM(Troca.qtd_premios_trocados) AS 'total'",
+                'conditions' => $conditions_data_troca,
+                'recursive' => -1
+        );
+        $num_premios_trocados = $this->Troca->find('first', $conditions_num_premios_trocados);
+        $relatorio['num_premios_trocados'] = $num_premios_trocados[0]['total'];
         //medias
         $relatorio['media'] = $relatorio['media_valor_troca'] = 0; //para evitar divisao por zero a seguir
         if($relatorio['count_trocas'] != 0) {
@@ -124,9 +145,6 @@ class CupomFiscal extends AppModel {
 
         return $relatorio;
     }
-
-
-
 
 
 

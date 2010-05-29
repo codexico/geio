@@ -36,7 +36,7 @@ $config['Regras.Brinde.true'] = TRUE;
  * @global boolean $GLOBALS['config']
  * @name $config['Regras.Brinde.Pagar.true']
  */
-$config['Regras.Brinde.Pagar.true'] = TRUE;
+$config['Regras.Brinde.Pagar'] = TRUE;
 
 
 
