@@ -110,10 +110,12 @@ class CupomFiscal extends AppModel {
         $relatorio['num_cupons_promocionais'] = $this->Troca->CupomPromocional->find('count', $conditions_num_cupons_promocionais);
         //.Quantidade de premios
         $conditions_num_premios = array(
-                'conditions' => $conditions_data_premio,
+                'fields' => "SUM(Troca.qtd_premios) AS 'total'",
+                'conditions' => $conditions_data_troca,
                 'recursive' => -1
         );
-        $relatorio['num_premios'] = $this->Troca->Premio->find('count', $conditions_num_premios);
+        $num_premios = $this->Troca->find('first', $conditions_num_premios);
+        $relatorio['num_premios'] = $num_premios[0]['total'];
         //.Quantidade de premios trocados
         $conditions_num_premios_trocados = array(
                 'fields' => "SUM(Troca.qtd_premios_trocados) AS 'total'",
