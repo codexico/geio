@@ -256,7 +256,7 @@ class TrocasController extends AppController {
                 }
             }else {
                 $this->Session->setFlash(__('Quantidade escolhida maior que estoque atual. Escolha outro Brinde.', true));
-                    $this->redirect(array('controller'=>'trocas', 'action' => 'escolher_brinde/' . $this->Troca->id),null,true);
+                $this->redirect(array('controller'=>'trocas', 'action' => 'escolher_brinde/' . $this->Troca->id),null,true);
             }
         }
     }
@@ -466,6 +466,7 @@ class TrocasController extends AppController {
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
                 'limit' => 50,
+                'order' => 'Troca.created DESC',
                 'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
@@ -482,6 +483,7 @@ class TrocasController extends AppController {
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
                 'limit' => 50,
+                'order' => 'Troca.created DESC',
                 'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
@@ -499,6 +501,7 @@ class TrocasController extends AppController {
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
                 'limit' => 50,
+                'order' => 'Troca.created DESC',
                 'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
@@ -517,6 +520,7 @@ class TrocasController extends AppController {
         $this->paginate = array(
                 'conditions' => $conditions_data_troca,
                 'limit' => 50,
+                'order' => 'Troca.created DESC',
                 'recursive' => 0
         );
         $trocas = $this->paginate('Troca');
