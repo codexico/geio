@@ -1,5 +1,6 @@
 <?php
 //debug($relatorio);
+//TODO: criar um element para a tabela
 ?>
 <!-- .titulo -->
 <div class="titulo">
