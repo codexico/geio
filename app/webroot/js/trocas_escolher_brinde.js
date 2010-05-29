@@ -12,8 +12,8 @@ jQuery(document).ready(function($) {
         })//alert(total)
 
         TrocaQtdBrindes = parseInt($('#TrocaQtdBrindes').val());
-        if(total != TrocaQtdBrindes){
-            alert('Total de brindes deve ser igual a '+ TrocaQtdBrindes);
+        if(total > TrocaQtdBrindes){
+            alert('Total de brindes deve ser menor ou igual a '+ TrocaQtdBrindes);
             return false;
         }else{//alert('ok')
             return true;

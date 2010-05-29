@@ -32,6 +32,7 @@ $config['Regras.Brinde.true'] = TRUE;
 /**
  * True se o Consumidor deve pagar um valor para receber o Brinde, false se é grátis
  *
+ * @since namorados 2010
  * @global boolean $GLOBALS['config']
  * @name $config['Regras.Brinde.Pagar.true']
  */
@@ -78,7 +79,7 @@ $config['Regras.Saldo.gastar'] =  FALSE;
  * @global boolean $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Bandeira.true'] = TRUE;
+$config['Regras.Bandeira.true'] = FALSE;
 /**
  * Nome da bandeira patrocinadora
  *
@@ -107,24 +108,24 @@ $config['Regras.Valor'] =  50;
  * @global int $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Bandeira.valor'] =  3;
+$config['Regras.Bandeira.valor'] =  1;
 /**
  * Máximo de brindes que um consumidor pode retirar
  *
  * @global int $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.max'] = 4;
+$config['Regras.Brinde.max'] = 999;
 
 /**
- * Valor que o Consumidor deve pagar para receber o Brinde
+ * Valor que o Consumidor deve pagar para receber o Brinde, em R$
  *
  * @since namorados 2010
  * @see $config['Regras.Brinde.Pagar.true']
  * @global int $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.preco'] = 20;
+$config['Regras.Brinde.preco'] = 10;
 
 
 ?>

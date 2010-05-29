@@ -32,7 +32,7 @@ class TrocasController extends AppController {
         //$this->set('troca', $this->Troca->read(null, $id));
         $this->Troca->recursive = 0;
         $troca = $this->Troca->read(null, $id);//debug($troca);
-        if(!$troca){
+        if(!$troca) {
             $this->Session->setFlash(__('Id da Troca Inválido', true));
             $this->redirect(array('action' => 'index'));
         }
@@ -200,55 +200,73 @@ class TrocasController extends AppController {
 
         $brindes_disponiveis = $this->Brinde->_brindes_disponiveis( $troca['Troca']['qtd_premios'], $consumidor['Consumidor']['brinde_count']);
 
+        $brindes = $this->Brinde->find('list');//debug($brindes);
+        $this->set(compact('brindes','estoques','premios','troca', 'consumidor','brindes_disponiveis'));
+    }
+
+
+    function salvar_brinde($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(__('Troca inválida', true));
+            $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
+        }
+
+        $this->Troca->recursive = 1;
+        $troca = $this->Troca->read(null, $id);//debug($troca);
+
+        $brindes_disponiveis = $this->Brinde->_brindes_disponiveis( $troca['Troca']['qtd_premios'], $troca['Consumidor']['brinde_count']);
+        $this->Brinde->recursive = -1;
+        $estoques = $this->Brinde->find('list',array('fields'=>array('id','estoque_atual') ));//debug($estoques);
+
         if (!empty($this->data)) { //debug($this->data);
             $estoqueSuficiente = true;
             $i=$j=0;
-            foreach ($this->data['Premio']['foreign_key'] as $key => $value) {
+            foreach ($this->data['Premio']['foreign_key'] as $foreign_key => $qtd) {
 
-                if( ($value > $estoques[$key]) && $estoqueSuficiente ) {
+                if( ($qtd > $estoques[$foreign_key]) && $estoqueSuficiente ) {
                     $estoqueSuficiente = false;
                 }
 
-                for($k=0;$k<$value;$k++) {
-                    $premios[$i]["Premio"]['foreign_key'] = $key;
+                for($k=0; $k<$qtd; $k++) {
+                    $premios[$i]["Premio"]['foreign_key'] = $foreign_key;
                     $premios[$i]["Premio"]['model'] = 'Brinde';
+                    $premios[$i]["Premio"]['troca_id'] = $id;
+                    $premios[$i]["Premio"]['consumidor_id'] = $troca['Consumidor']['id'];
+                    $premios[$i]["Premio"]['promotor_id'] = $troca['Promotor']['id'];
                     $i++;
                 }
-                if($value >= 1) {//monta os brindes para atualizar o estoque
-                    $brindes[$j]['brinde_id'] = $key;
-                    $brindes[$j]['qtd'] = ((int)$value )*(-1);//subtrair do estoque
+                if($qtd >= 1) {//se foi escolhido um brindde do tipo, coloca no array para atualizar o estoque
+                    $brindes[$j]['brinde_id'] = $foreign_key;
+                    $brindes[$j]['qtd'] = ((int)$qtd )*(-1);//subtrair do estoque
                     $j++;
                 }
             } //debug($premios);debug($brindes);
 
             if( $estoqueSuficiente ) {
                 if ($this->Troca->Premio->saveAll($premios)) {
-                    $this->Troca->Consumidor->_atualizarBrindeCount($consumidor['Consumidor']['id'],$brindes_disponiveis);
-
-                    foreach($brindes as $brinde) {
-                        $this->Brinde->_atualizarEstoque($brinde);
-                    }
+                    $this->Troca->atualizarQtdPremiosTrocados(count($premios));
+                    $this->Troca->Consumidor->_atualizarBrindeCount($troca['Consumidor']['id'],$brindes_disponiveis);
+                    $this->Brinde->_atualizarAllEstoque($brindes);
 
                     $this->Session->setFlash(__('Troca concluída com sucesso.', true));
                     $this->redirect(array('controller'=>'trocas', 'action' => 'concluida/' . $this->Troca->id),null,true);
                 } else {
                     $this->Session->setFlash(__('Ocorreu algum erro, tente novamente por favor.', true));
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'escolher_brinde/' . $this->Troca->id),null,true);
                 }
             }else {
                 $this->Session->setFlash(__('Quantidade escolhida maior que estoque atual. Escolha outro Brinde.', true));
+                    $this->redirect(array('controller'=>'trocas', 'action' => 'escolher_brinde/' . $this->Troca->id),null,true);
             }
         }
-
-        $brindes = $this->Brinde->find('list');//debug($brindes);
-        $this->set(compact('brindes','estoques','premios','troca', 'consumidor','brindes_disponiveis'));
     }
-    
+
     function concluida($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Troca inválida', true));
             $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
         }
-        $this->Troca->recursive = 1;
+        $this->Troca->recursive = 0;
         $troca = $this->Troca->read(null, $id);//debug($troca);
 
         $consumidor['Consumidor'] = $troca['Consumidor'];//debug($consumidor);
@@ -344,6 +362,13 @@ class TrocasController extends AppController {
                 'qtd_CP' => (int)$c);
     }
 
+    /**
+     * Soma os cupons fiscais de acordo com o tipo de compra e calcula a quantidade de premios
+     * e o resto
+     * TODO: mudar essa funcao para o model Premio?
+     *
+     * @return array    array associativo(valorOutros, restoOutros, valorBandeira, restoBandeira, qtd_premios)
+     */
     function _calculaPremio() {
         $c = $valorOutros = $valorBandeira = $restoOutros = $restoBandeira = 0;
         $regras = Configure::read('Regras');//debug($regras);
@@ -378,16 +403,16 @@ class TrocasController extends AppController {
             }//debug('rd = ' . $restoOutros .' rb = ' . $restoBandeira .' c = ' . $c);
         }
 
-        //criar os Premios
-        for ($i = 0; $i < $c; $i++) {
-            $this->data['Premio'][$i]['promotor_id'] = $this->data['Troca']['promotor_id'];
-            $this->data['Premio'][$i]['consumidor_id'] = $this->data['Troca']['consumidor_id'];
-
+        //TODO: quando refatorar para unir cupompromocional e brindes como Premios
+        //pode ser necessario o incluir os premios ja ao salvar a troca
+//        for ($i = 0; $i < $c; $i++) {//criar os Premios
+//            $this->data['Premio'][$i]['promotor_id'] = $this->data['Troca']['promotor_id'];
+//            $this->data['Premio'][$i]['consumidor_id'] = $this->data['Troca']['consumidor_id'];
 //            if( Configure::read('Regras.Brinde.true') ) {
 //                $this->data['Premio'][$i]['model']='';
 //                $this->data['Premio'][$i]['foreign_key']='';
 //            }
-        }
+//        }
         //dados extras para colocar na troca e economizar processamento nos SELECTs
         $this->data['Troca']['qtd_cf'] = count($this->data['CupomFiscal']);
         $this->data['Troca']['valor_total'] = $valorBandeira +  $valorOutros;

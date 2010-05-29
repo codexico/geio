@@ -24,7 +24,7 @@ if( Configure::read('Regras.Brinde.true') ) {
     echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']));
 }
 echo "<div class='form'>";
-    echo $form->create('Troca', array('action'=> 'escolher_brinde/'.$this->params['pass'][0]));
+    echo $form->create('Troca', array('action'=> 'salvar_brinde/'.$this->params['pass'][0]));
 
     echo $form->hidden('qtd_brindes', array('value'=>$brindesDisponiveis));
 

@@ -108,5 +108,12 @@ class Troca extends AppModel {
         return $relatorio_trocas[0];
     }
 
+    function atualizarQtdPremiosTrocados($qtd_premios_trocados){
+//        $this->recursive = -1;
+//        $this->id = $data['brinde_id'];
+//        $brinde = $this->read();
+        return $this->saveField('qtd_premios_trocados', $qtd_premios_trocados);
+    }
+
 }
 ?>

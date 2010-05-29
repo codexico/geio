@@ -11,10 +11,10 @@
     <h1>Dados da Troca</h1>
 </div>
 <div class="clear"></div>
-<div class="botoes">
+<div class="message">
     <?php
     if( Configure::read('Regras.Brinde.true') ) {
-        echo "Consumidor ganhou ".$troca['Troca']['qtd_premios']." brindes.";
+        echo "Consumidor trocou ".$troca['Troca']['qtd_premios_trocados']." de ".$troca['Troca']['qtd_premios']." brindes.";
     }elseif (Configure::read('Regras.CupomPromocional.true')) {
         echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']), array('class'=>'btn_azul'));
     }
@@ -29,11 +29,20 @@
             <?php echo "R$ " . $troca['Troca']['valor_total']; ?>
             &nbsp;
         </dd>
+        <?php if (Configure::read('Regras.CupomPromocional.true')) : ?>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('N° Cupons Promocionais'); ?></dt>
         <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-            <?php echo $troca['Troca']['qtd_cp']; ?>
+                <?php echo $troca['Troca']['qtd_cp']; ?>
             &nbsp;
         </dd>
+        <?php endif; ?>
+        <?php if (Configure::read('Regras.Brinde.true')) : ?>
+        <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('N° Brindes'); ?></dt>
+        <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                <?php echo $troca['Troca']['qtd_premios_trocados']; ?>
+            &nbsp;
+        </dd>
+        <?php endif; ?>
         <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('N° Cupons Fiscais'); ?></dt>
         <dd<?php if ($i++ % 2 == 0) echo $class;?>>
             <?php echo $troca['Troca']['qtd_cf']; ?>
