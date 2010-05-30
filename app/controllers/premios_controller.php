@@ -60,16 +60,5 @@ class PremiosController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
-    function dia($dia = null) {
-        if($dia) {
-            $this->DiaTroca = ClassRegistry::init('DiaTroca');
-            if($this->DiaTroca->_diaexiste($dia)) {
-
-            }else{
-                $this->Session->setFlash('Dia inválido');
-            }
-        }
-    }
-
 }
 ?>
