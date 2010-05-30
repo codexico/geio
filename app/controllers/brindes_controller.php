@@ -24,6 +24,7 @@ class BrindesController extends AppController {
 
     function add() {
         if (!empty($this->data)) {
+            $this->data['Brinde']['valor'] = Configure::read('Regras.Brinde.preco');
             $this->Brinde->create();
             if ($this->Brinde->save($this->data)) {
                 $this->Session->setFlash(__('Brinde salvo com sucesso!', true));

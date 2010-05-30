@@ -11,7 +11,7 @@ class TrocasController extends AppController {
     var $name = 'Trocas';
     var $helpers = array('Html', 'Form', 'Javascript', 'CakePtbr.Formatacao');
 
-    var $uses = array('Troca','CupomPromocional', 'CupomFiscal','Brinde');
+    var $uses = array('Troca','CupomPromocional', 'CupomFiscal','Brinde', 'Premio');
 
 
     function beforeFilter() {
@@ -475,6 +475,12 @@ class TrocasController extends AppController {
         $relatorio = $this->Troca->CupomFiscal->_buscaRelatorioTrocas($inicio);
 
         $this->set(compact('trocas','relatorio'));
+
+        if( Configure::read('Regras.Brinde.true') ) {
+            $this->Premio = ClassRegistry::init('Premio');
+            $premios_dia = $this->Premio->_premiosPeriodo($inicio);//debug($premios_dia);
+            $this->set('premios_dia', $premios_dia);
+        }
     }
 
     function semana() {
@@ -493,6 +499,13 @@ class TrocasController extends AppController {
 
         $this->set(compact('trocas','relatorio'));
 
+        if( Configure::read('Regras.Brinde.true') ) {
+            $this->Premio = ClassRegistry::init('Premio');
+            $fim =  date('Y-m-d', strtotime("-0 days"));
+            $premios_dia = $this->Premio->_premiosPeriodo($inicio, $fim);//debug($premios_dia);
+            $this->set('premios_dia', $premios_dia);
+        }
+
     }
 
     function mes() {
@@ -510,6 +523,13 @@ class TrocasController extends AppController {
         $relatorio = $this->Troca->CupomFiscal->_buscaRelatorioTrocas($inicio);
 
         $this->set(compact('trocas','relatorio'));
+
+        if( Configure::read('Regras.Brinde.true') ) {
+            $this->Premio = ClassRegistry::init('Premio');
+            $fim =  date('Y-m-d', strtotime("-0 days"));
+            $premios_dia = $this->Premio->_premiosPeriodo($inicio, $fim);//debug($premios_dia);
+            $this->set('premios_dia', $premios_dia);
+        }
     }
 
 
@@ -529,6 +549,13 @@ class TrocasController extends AppController {
         $relatorio = $this->Troca->CupomFiscal->_buscaRelatorioTrocas($inicio);
 
         $this->set(compact('trocas','relatorio'));
+        
+        if( Configure::read('Regras.Brinde.true') ) {
+            $this->Premio = ClassRegistry::init('Premio');
+            $fim =  date('Y-m-d', strtotime("-0 days"));
+            $premios_dia = $this->Premio->_premiosPeriodo($inicio, $fim);//debug($premios_dia);
+            $this->set('premios_dia', $premios_dia);
+        }
         /*
         //buscar trocas de ontem
         $inicio = date('Y-m-d', strtotime("-1 days"));

@@ -20,7 +20,11 @@
     <br />
     <hr />
     <br />
-
+    <?php
+        if( Configure::read('Regras.Brinde.true') ) {
+            echo $this->element('premios_relatorio');
+        }
+    ?>
     <!-- .pagina_atual -->
     <div class="pagina_atual">
         <div class="pagina_atual_conteudo">

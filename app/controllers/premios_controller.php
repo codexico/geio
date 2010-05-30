@@ -1,64 +1,75 @@
 <?php
 class PremiosController extends AppController {
 
-	var $name = 'Premios';
-	var $helpers = array('Html', 'Form');
+    var $name = 'Premios';
+    var $helpers = array('Html', 'Form','Javascript');
 
-	function index() {
-		$this->Premio->recursive = 0;
-		$this->set('premios', $this->paginate());
-	}
+    function index() {
+        $this->Premio->recursive = 0;
+        $this->set('premios', $this->paginate());
+    }
 
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid Premio', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('premio', $this->Premio->read(null, $id));
-	}
+    function view($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid Premio', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('premio', $this->Premio->read(null, $id));
+    }
 
-	function add() {
-		if (!empty($this->data)) {
-			$this->Premio->create();
-			if ($this->Premio->save($this->data)) {
-				$this->Session->setFlash(__('The Premio has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The Premio could not be saved. Please, try again.', true));
-			}
-		}
-	}
+    function add() {
+        if (!empty($this->data)) {
+            $this->Premio->create();
+            if ($this->Premio->save($this->data)) {
+                $this->Session->setFlash(__('The Premio has been saved', true));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The Premio could not be saved. Please, try again.', true));
+            }
+        }
+    }
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Premio', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->Premio->save($this->data)) {
-				$this->Session->setFlash(__('The Premio has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The Premio could not be saved. Please, try again.', true));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Premio->read(null, $id);
-		}
-	}
+    function edit($id = null) {
+        if (!$id && empty($this->data)) {
+            $this->Session->setFlash(__('Invalid Premio', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        if (!empty($this->data)) {
+            if ($this->Premio->save($this->data)) {
+                $this->Session->setFlash(__('The Premio has been saved', true));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The Premio could not be saved. Please, try again.', true));
+            }
+        }
+        if (empty($this->data)) {
+            $this->data = $this->Premio->read(null, $id);
+        }
+    }
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Premio', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		if ($this->Premio->del($id)) {
-			$this->Session->setFlash(__('Premio deleted', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('The Premio could not be deleted. Please, try again.', true));
-		$this->redirect(array('action' => 'index'));
-	}
+    function delete($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid id for Premio', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        if ($this->Premio->del($id)) {
+            $this->Session->setFlash(__('Premio deleted', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('The Premio could not be deleted. Please, try again.', true));
+        $this->redirect(array('action' => 'index'));
+    }
+
+    function dia($dia = null) {
+        if($dia) {
+            $this->DiaTroca = ClassRegistry::init('DiaTroca');
+            if($this->DiaTroca->_diaexiste($dia)) {
+
+            }else{
+                $this->Session->setFlash('Dia inválido');
+            }
+        }
+    }
 
 }
 ?>

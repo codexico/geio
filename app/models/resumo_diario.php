@@ -252,7 +252,8 @@ class ResumoDiario extends AppModel {
                         "SUM(qtd_premios) AS 'qtd_premios_total'",
                         "SUM(qtd_premios_trocados) AS 'qtd_premios_trocados_total'",
                         "SUM(valor_premios) AS 'valor_premios_total'",
-        )));
+        ), 'recursive'=>-1
+            ));
         return $totais[0];
     }
 
