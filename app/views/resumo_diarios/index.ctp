@@ -36,10 +36,19 @@
             <th class="txtCenter"><?php echo $paginator->sort('Consumidores Atendidos','qtd_consumidores');?></th>
             <th class="txtCenter"><?php echo $paginator->sort('Consumidores Novos','qtd_consumidores_novos');?></th>
             <th class="txtCenter"><?php echo $paginator->sort('Cupons Fiscais Trocados','qtd_cupons_fiscais');?></th>
+            <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <th class="txtCenter"><?php echo $paginator->sort('Cupons Promocionais Impressos','qtd_cupons_promocionais');?></th>
+            <?php endif; ?>
             <th class="txtCenter"><?php echo $paginator->sort('R$','valor_total');?></th>
             <th class="txtCenter"><?php echo $paginator->sort('R$ Bandeira','valor_bandeira');?></th>
             <th class="txtCenter"><?php echo $paginator->sort('R$ Outros','valor_outros');?></th>
+            <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <th class="w20 txtCenter"><?php echo $paginator->sort('Brindes','qtd_premios');?></th>
+            <th class="w20 txtCenter"><?php echo $paginator->sort('Brindes Trocados','qtd_trocados');?></th>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <th class="w20 txtCenter"><?php echo $paginator->sort('Valor (R$)','valor_premios');?></th>
+            <?php endif; ?>
             <th class="txtCenter"><?php echo $paginator->sort('ticket_medio_consumidor');?></th>
             <th class="txtCenter"><?php echo $paginator->sort('Ticket Médio Shopping','ticket_medio_cupom_fiscal');?></th>
         </tr>
@@ -76,10 +85,12 @@
                     <?php echo $resumoDiario['ResumoDiario']['qtd_cupons_fiscais']; ?>
                     <?php $qtd_cupons_fiscais_sum += $resumoDiario['ResumoDiario']['qtd_cupons_fiscais']; ?>
             </td>
+            <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <td class="txtCenter">
                     <?php echo $resumoDiario['ResumoDiario']['qtd_cupons_promocionais']; ?>
                     <?php $qtd_cupons_promocionais_sum += $resumoDiario['ResumoDiario']['qtd_cupons_promocionais']; ?>
             </td>
+            <?php endif; ?>
             <td class="txtCenter">
                     <?php echo  $number->currency($resumoDiario['ResumoDiario']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $valor_total_sum += $resumoDiario['ResumoDiario']['valor_total']; ?>
@@ -92,6 +103,19 @@
                     <?php echo  $number->currency($resumoDiario['ResumoDiario']['valor_outros'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $valor_outros_sum += $resumoDiario['ResumoDiario']['valor_outros']; ?>
             </td>
+            <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <td class="txtCenter">
+                    <?php echo $resumoDiario['ResumoDiario']['qtd_premios']; ?>
+            </td>
+            <td class="txtCenter">
+                    <?php echo $resumoDiario['ResumoDiario']['qtd_premios_trocados']; ?>
+            </td>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <td class="txtCenter">
+                    <?php echo  $number->currency($resumoDiario['ResumoDiario']['valor_premios'],'EUR',array('before'=>'','after'=>'')); ?>
+            </td>
+            <?php endif; ?>
             <td class="txtCenter">
                     <?php echo $number->currency($resumoDiario['ResumoDiario']['ticket_medio_consumidor'],'EUR',array('before'=>'','after'=>'')); ?>
                     <?php $ticket_medio_consumidor_sum += $resumoDiario['ResumoDiario']['ticket_medio_consumidor']; ?>
@@ -119,10 +143,12 @@
                 <?php /* echo $qtd_cupons_fiscais_sum; */ ?>
                 <?php echo $totais[0]['qtd_cupons_fiscais_total']; ?>
             </th>
+            <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <th class="txtCenter">
                 <?php /* echo $qtd_cupons_promocionais_sum; */ ?>
                 <?php echo $totais[0]['qtd_cupons_promocionais_total']; ?>
             </th>
+            <?php endif; ?>
             <th class="txtCenter">
                 <?php /* echo $valor_total_sum; */ ?>
                 <?php echo $number->currency($totais[0]['valor_total_total'],'EUR',array('before'=>'','after'=>'')); ?>
@@ -135,6 +161,19 @@
                 <?php /* echo $valor_outros_sum; */ ?>
                 <?php echo $number->currency($totais[0]['valor_outros_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </th>
+            <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <th class="txtCenter">
+                <?php echo $totais[0]['qtd_premios_total']; ?>
+            </th>
+            <th class="txtCenter">
+                <?php echo $totais[0]['qtd_premios_trocados_total']; ?>
+            </th>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <th class="txtCenter">
+                <?php echo $number->currency($totais[0]['valor_premios_total'],'EUR',array('before'=>'','after'=>'')); ?>
+            </th>
+            <?php endif; ?>
             <th class="txtCenter">
                 <?php /* echo $number->currency($ticket_medio_consumidor_sum/$i,'EUR',array('before'=>'','after'=>'')); */ ?>
                 <?php echo $number->currency($totais[0]['valor_total_total']/$totais[0]['qtd_consumidores_total'],'EUR',array('before'=>'','after'=>'')); ?>

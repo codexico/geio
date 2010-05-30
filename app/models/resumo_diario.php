@@ -62,11 +62,14 @@ class ResumoDiario extends AppModel {
                       `consumidor_id` int(11) NOT NULL,
                       `consumidor_nome` varchar(255) NOT NULL,
                       `consumidor_created` date NOT NULL,
-                      `qtd_cf` int(3) DEFAULT NULL,
+                      `qtd_cf` int(5) DEFAULT NULL,
                       `valor_total` float(10,2) DEFAULT '0',
                       `valor_bandeira` float(10,2) DEFAULT '0',
                       `valor_outros` float(10,2) DEFAULT '0',
-                      `qtd_cp` int(5) DEFAULT '0',
+                      `qtd_cp` int(7) DEFAULT '0',
+                      `qtd_premios` int(7) DEFAULT '0',
+                      `qtd_premios_trocados` int(7) DEFAULT '0',
+                      `valor_premios` float(10,2) DEFAULT '0',
 
                       PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
@@ -107,7 +110,7 @@ class ResumoDiario extends AppModel {
     }
 
     /**
-     * insere o resumo das trocas de um determinado dia na tabela RESUMODIARIO
+     * insere o resumo das trocas de um determinado dia na tabela resumo_diarios
      *
      * @param <type> $dia
      */
@@ -122,6 +125,7 @@ class ResumoDiario extends AppModel {
         $resumodiario['ResumoDiario']['dia'] = $dia;
 
         //qtd_consumidores = select distinct
+        $this->TrocasDia->recursive = -1;
         $resumodiario['ResumoDiario']['qtd_consumidores'] = $this->TrocasDia->find('count', "COUNT(DISTINCT TrocasDia.consumidor_id) AS 'count'");
         if(is_null($resumodiario['ResumoDiario']['qtd_consumidores'])) $resumodiario['ResumoDiario']['qtd_consumidores'] = 0;
 
@@ -134,6 +138,7 @@ class ResumoDiario extends AppModel {
         $resumodiario['ResumoDiario']['qtd_consumidores_novos'] = $this->TrocasDia->find('count', $conditions_num_consumidores_novos_bandeira );
 
         //qtd_cupons_fiscais
+        $this->TrocasDia->recursive = -1;
         $qtd_cf = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.qtd_cf) AS 'total_qtd_cf'")));//debug($qtd_cf);
         if(!isset($qtd_cf[0]['TrocasDia']['total_qtd_cf'])) {
             $resumodiario['ResumoDiario']['qtd_cupons_fiscais'] = 0;
@@ -146,10 +151,12 @@ class ResumoDiario extends AppModel {
         }
 
         //qtd_cupons_promocionais
+        $this->TrocasDia->recursive = -1;
         $qtd_cp = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.qtd_cp) AS 'total_qtd_cp'")));//debug($qtd_cp);
         $resumodiario['ResumoDiario']['qtd_cupons_promocionais'] = $qtd_cp[0]['TrocasDia']['total_qtd_cp'];
 
         //valor_total 	float
+        $this->TrocasDia->recursive = -1;
         $valor_total = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_total) AS 'valor_total'")));
         //debug($valor_total);
         //if(is_null($valor_total['TrocasDia']['valor_total'])) $valor_total['TrocasDia']['valor_total'] = 0;
@@ -160,6 +167,7 @@ class ResumoDiario extends AppModel {
         }
 
         //valor_bandeira 	float
+        $this->TrocasDia->recursive = -1;
         $valor_bandeira = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_bandeira) AS 'valor_bandeira'")));
         if(is_null($valor_bandeira[0]['TrocasDia']['valor_bandeira'])) {
             $resumodiario['ResumoDiario']['valor_bandeira'] = 0;
@@ -169,6 +177,7 @@ class ResumoDiario extends AppModel {
         //debug('$valor_bandeira = '.$valor_bandeira[0]['valor_bandeira']);
 
         //valor-outros 	float
+        $this->TrocasDia->recursive = -1;
         $valor_outros = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_outros) AS 'valor_outros'")));
         if(is_null($valor_outros[0]['TrocasDia']['valor_outros'])) {
             $resumodiario['ResumoDiario']['valor_outros'] = 0;
@@ -192,6 +201,26 @@ class ResumoDiario extends AppModel {
             $resumodiario['ResumoDiario']['ticket_medio_cupom_fiscal'] = number_format($resumodiario['ResumoDiario']['valor_total']/$resumodiario['ResumoDiario']['qtd_cupons_fiscais'],2, '.', '');
             //debug('$ticket_medio_cupom_fiscal = '.$ticket_medio_cupom_fiscal);
         }
+
+
+
+        //qtd_premios
+        $this->TrocasDia->recursive = -1;
+        $qtd_premios = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.qtd_premios) AS 'total_qtd_premios'")));//debug($qtd_cp);
+        $resumodiario['ResumoDiario']['qtd_premios'] = $qtd_premios[0]['TrocasDia']['total_qtd_premios'];
+        //qtd_premios_trocados
+        $this->TrocasDia->recursive = -1;
+        $qtd_premios_trocados = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.qtd_premios_trocados) AS 'total_qtd_premios_trocados'")));//debug($qtd_cp);
+        $resumodiario['ResumoDiario']['qtd_premios_trocados'] = $qtd_premios_trocados[0]['TrocasDia']['total_qtd_premios_trocados'];
+        //valor-premios 	float
+        $this->TrocasDia->recursive = -1;
+        $valor_premios = $this->TrocasDia->find('all', array('fields'=>array("SUM(TrocasDia.valor_premios) AS 'valor_premios'")));
+        if(is_null($valor_premios[0]['TrocasDia']['valor_premios'])) {
+            $resumodiario['ResumoDiario']['valor_premios'] = 0;
+        }else {
+            $resumodiario['ResumoDiario']['valor_premios'] = $valor_premios[0]['TrocasDia']['valor_premios'];
+        }
+
 
         //debug($resumodiario);
         $this->id = false;//para permitir multiples inserts
@@ -220,6 +249,9 @@ class ResumoDiario extends AppModel {
                         "SUM(valor_total) AS 'valor_total_total'",
                         "SUM(valor_bandeira) AS 'valor_bandeira_total'",
                         "SUM(valor_outros) AS 'valor_outros_total'",
+                        "SUM(qtd_premios) AS 'qtd_premios_total'",
+                        "SUM(qtd_premios_trocados) AS 'qtd_premios_trocados_total'",
+                        "SUM(valor_premios) AS 'valor_premios_total'",
         )));
         return $totais[0];
     }

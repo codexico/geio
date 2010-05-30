@@ -8,7 +8,7 @@
 /////////
 //CAMPANHA
 /////////
-$config['Campanha.Inicio'] =  date('Y-m-d', strtotime("1 May 2010"));
+$config['Campanha.Inicio'] =  date('Y-m-d', strtotime("27 May 2010"));
 
 
 ////////////////////

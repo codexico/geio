@@ -112,7 +112,8 @@ class Troca extends AppModel {
 //        $this->recursive = -1;
 //        $this->id = $data['brinde_id'];
 //        $brinde = $this->read();
-        return $this->saveField('qtd_premios_trocados', $qtd_premios_trocados);
+        $this->saveField('qtd_premios_trocados', $qtd_premios_trocados);
+        $this->saveField('valor_premios', $qtd_premios_trocados*Configure::read('Regras.Brinde.preco'));
     }
 
 }
