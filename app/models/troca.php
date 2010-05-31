@@ -87,7 +87,8 @@ class Troca extends AppModel {
                         "AVG(Troca.qtd_cf) AS 'media_cf'", "AVG(Troca.qtd_cp) AS 'media_cp'",
                         "AVG(Troca.qtd_premios) AS 'media_brindes'",
                 ),
-                'conditions' => array('Troca.promotor_id'=>$id)
+                'conditions' => array('Troca.promotor_id'=>$id),
+            'recursive'=>-1
         );
         $relatorio_trocas = $this->find('first', $conditions_trocas);//debug($relatorio_trocas);
 

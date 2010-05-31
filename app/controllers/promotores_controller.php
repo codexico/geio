@@ -34,7 +34,7 @@ class PromotoresController extends AppController {
         $this->set('promotor', $promotor);
 
         //extras
-        $this->loadModel('Troca');
+        $this->Troca = ClassRegistry::init('Troca');
         $this->Troca->recursive = -1;
         $relatorio = $this->Troca->_buscaRelatorioPromotor($id);//debug($relatorio);
 
@@ -42,7 +42,6 @@ class PromotoresController extends AppController {
                 'conditions' => array('Troca.promotor_id' => $id),
                 'limit' => 20,
                 'extra'=>$id,
-                //'group'=>'consumidor_id',
                 'contain'=>'Consumidor',
                 'order' => 'Troca.created DESC'
         );
