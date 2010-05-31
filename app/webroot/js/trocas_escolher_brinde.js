@@ -15,8 +15,14 @@ jQuery(document).ready(function($) {
         if(total > TrocaQtdBrindes){
             alert('Total de brindes deve ser menor ou igual a '+ TrocaQtdBrindes);
             return false;
-        }else{//alert('ok')
-            return true;
+        }else{
+            BrindePreco =  parseFloat($('#brinde_preco').val());//alert(restoBandeira);
+            precoTotal = parseFloat(BrindePreco*total).toFixed(2)
+            message = ""
+            message += "Valor a receber: ";
+            message += "\n\t R$ ";
+            message += precoTotal
+            return confirm(message);
         }
         return false;
     })

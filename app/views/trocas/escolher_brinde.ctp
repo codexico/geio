@@ -24,9 +24,10 @@ if( Configure::read('Regras.Brinde.true') ) {
     echo $html->link('Gerar Cupons Promocionais', array('controller'=>'CupomPromocionais', 'action' => 'cupomPdf',$troca['Troca']['id']));
 }
 echo "<div class='form'>";
-    echo $form->create('Troca', array('action'=> 'salvar_brinde/'.$this->params['pass'][0]));
+    echo $form->create('Troca', array('action'=> 'salvar_brinde/'.$this->params['pass'][0],'id'=>'salvar_brinde') );
 
     echo $form->hidden('qtd_brindes', array('value'=>$brindesDisponiveis));
+        echo $form->hidden('brinde_preco', array('value'=>Configure::read('Regras.Brinde.preco'), 'name'=>'brinde_preco', 'id'=>'brinde_preco' ) );
 
 	//debug($brindes);
 	echo "<fieldset>";

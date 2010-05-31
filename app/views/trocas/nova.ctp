@@ -37,6 +37,12 @@ echo $this->element('consumidor');
     echo $form->create('Troca', array('action'=> 'nova/'.$consumidor['Consumidor']['id'], 'class' => "novatroca",
     //'onsubmit'=>'enviar();return false;'
     ));
+    if( Configure::read('Regras.Bandeira.true') ) {
+        echo $form->hidden('bandeira', array('value'=>'true', 'name'=>'bandeira', 'id'=>'bandeira' ) );
+    }else{
+        echo $form->hidden('bandeira', array('value'=>'false', 'name'=>'bandeira', 'id'=>'bandeira' ) );
+
+    }
         echo $form->hidden('bandeira_nome', array('value'=>Configure::read('Regras.Bandeira.nome'), 'name'=>'bandeira_nome', 'id'=>'bandeira_nome' ) );
         echo $form->hidden('bandeira-qtd', array('value'=>Configure::read('Regras.Bandeira.valor'), 'name'=>'bandeira-qtd', 'id'=>'bandeira-qtd' ) );
         echo $form->hidden('regras-valor', array('value'=>Configure::read('Regras.Valor'), 'name'=>'regras-valor', 'id'=>'regras-valor' ) );

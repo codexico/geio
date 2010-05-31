@@ -52,8 +52,15 @@ $(document).ready(function() {
     var regrasBandeiraValor = $('#bandeira-qtd').val();
     var restoOutros =  parseFloat($('#saldo_outros').val());//alert(restoOutros);
     var restoBandeira =  parseFloat($('#saldo_bandeira').val());//alert(restoBandeira);
-    
+
+    var valortotal = new Number(0);
+    var restototal =  parseFloat($('#saldo_outros').val()) + parseFloat($('#saldo_bandeira').val());
     var bandeiraNome = $('#bandeira_nome').val();
+
+    var bandeira = true;
+    if($('#bandeira').val() == 'false'){
+        bandeira = false;
+    }
 
     var brinde = $('#brinde').val();
 
@@ -138,6 +145,9 @@ $(document).ready(function() {
         count_CF = 0;//Total de cupons fiscais
         c = 0;//Número de cupons promocionais
 
+        valortotal = new Number(0);
+        restototal = new Number(0);
+
         if($('#saldo_outros').val() != undefined){
             restoOutros +=  parseFloat($('#saldo_outros').val());//alert(restoOutros);
             restoBandeira +=  parseFloat($('#saldo_bandeira').val());//alert(restoBandeira);
@@ -149,29 +159,37 @@ $(document).ready(function() {
             if( isNaN( parseFloat(valor) ) ){
                 valor = 0
             }
-            bandeira = ($(this).find("[name*=bandeira]").val());
+            bandeira_cupom = ($(this).find("[name*=bandeira]").val());
 
-            if(bandeira.toUpperCase() == bandeiraNome){
+            if(bandeira_cupom.toUpperCase() == bandeiraNome){
                 valorBandeira += parseFloat(valor);//alert(valorBandeira);
             }else{
                 valorOutros += parseFloat(valor);
             }
         })
 
-        restoBandeira += parseFloat(valorBandeira);
-        if (restoBandeira >= regrasValor) {
-            c += ( Math.floor(restoBandeira/regrasValor) )*regrasBandeiraValor ;
-            restoBandeira = restoBandeira%regrasValor
+        if(bandeira){
+            restoBandeira += parseFloat(valorBandeira);
+            if (restoBandeira >= regrasValor) {
+                c += ( Math.floor(restoBandeira/regrasValor) )*regrasBandeiraValor ;
+                restoBandeira = restoBandeira%regrasValor
+            }
+            //alert('restoBandeira = '+restoBandeira + " c = " + c )
+            restoOutros += valorOutros ;
+            if (restoOutros >= regrasValor) {
+                c += ( Math.floor(restoOutros/regrasValor) );
+                restoOutros = restoOutros%regrasValor
+            }
+            restoBandeira = restoBandeira.toFixed(2);//transforma em string
+            restoOutros = restoOutros.toFixed(2);//alert(restoOutros);;alert(typeof(restoOutros));
+        
+        }else{
+            valortotal = (parseFloat(valorBandeira)+parseFloat(valorOutros))
+            if (valortotal >= regrasValor) {
+                c += ( Math.floor(valortotal/regrasValor) );  
+                restototal = valortotal%regrasValor
+            }
         }
-        //alert('restoBandeira = '+restoBandeira + " c = " + c )
-        restoOutros += valorOutros ;
-        if (restoOutros >= regrasValor) {
-            c += ( Math.floor(restoOutros/regrasValor) );
-            restoOutros = restoOutros%regrasValor
-        }
-
-        restoBandeira = restoBandeira.toFixed(2);//transforma em string
-        restoOutros = restoOutros.toFixed(2);//alert(restoOutros);;alert(typeof(restoOutros));
     }
 
     function _mensagemCalcularCupomPromocional(){
@@ -215,33 +233,50 @@ $(document).ready(function() {
         regra = "";
         regra += "\n Regra da campanha:";
         regra += "\n\tA cada R$"+regrasValor.toFixed(2)+" em cupons fiscais:"
-        regra += "\n\n\t\tCom a bandeira da promoção = "+regrasBandeiraValor+" Brindes"
-        regra += "\n\t\tOutras formas de pagamento = 1 Brinde";
+        if(bandeira){
+            regra += "\n\n\t\tCom a bandeira da promoção = \t"+regrasBandeiraValor+" Brindes"
+            regra += "\n\t\tOutras formas de pagamento = ";
+        }
+        regra += "\t1 Brinde";
 
         resultado = "";
         resultado += "\nTotal de cupons fiscais= "+ count_CF;
         resultado += "\nNúmero de brindes = "+ c;
 
-        cupomMinimo = regrasValor-restoBandeira;
-        cupomMinimo = cupomMinimo.toFixed(2);
-        if ( (parseFloat(restoOutros)+parseFloat(restoBandeira)) >= regrasValor) {
-            message = "";
-            message = "\n\nCréditos:\n";
-            message += "\nR$ " + restoBandeira + " em créditos da Bandeira";
-            message += "\nR$ " + restoOutros + " em créditos normais";
-            message += "\n\n* Sobraram Créditos suficientes para um Brinde extra se juntar os créditos de bandeira e comum.";
-            message += "\n\nAtenção: Cadastrar outro cupom fiscal de no mínimo R$" + cupomMinimo+" em créditos da Bandeira";
-            message += "\npode gerar mais "+ regrasBandeiraValor +" Brinde(s)";
-            alert(regra+linha+resultado+message);
+        if(bandeira){
+            cupomMinimo = regrasValor-restoBandeira;
+            cupomMinimo = cupomMinimo.toFixed(2);
+            if ( (parseFloat(restoOutros)+parseFloat(restoBandeira)) >= regrasValor) {
+                message = "";
+                message = "\n\nCréditos:\n";
+                if(bandeira){
+                    message += "\nR$ " + restoBandeira + " em créditos da Bandeira";
+                    message += "\nR$ " + restoOutros + " em créditos normais";
+                    message += "\n\n* Sobraram Créditos suficientes para um Brinde extra se juntar os créditos de bandeira e comum.";
+                    message += "\n\nAtenção: Cadastrar outro cupom fiscal de no mínimo R$" + cupomMinimo+" em créditos da Bandeira";
+                    message += "\npode gerar mais "+ regrasBandeiraValor +" Brinde(s)";
+                }else{
+                    restoTotal = (parseFloat(restoOutros)+parseFloat(restoBandeira)).toFixed(2);
+                    message += "\nR$ " + restoTotal + " em créditos";
+
+                }
+                alert(regra+linha+resultado+message);
+            }else{
+                message = "";
+                message = "\n\nSobraram Créditos:\n";
+                message += "\n\t R$" + restoBandeira + " em créditos da Bandeira";
+                message += "\n\t R$" + restoOutros + " em créditos normais";
+                message += "\n\nAtenção: Cadastrar outro cupom fiscal de no mínimo R$" + cupomMinimo +" em créditos da Bandeira";
+                message += "\npode gerar mais "+ regrasBandeiraValor +" Brinde(s)";
+                alert(regra+linha+resultado+message);
+            }
         }else{
             message = "";
-            message = "\n\nSobraram Créditos:\n";
-            message += "\n\t R$" + restoBandeira + " em créditos da Bandeira";
-            message += "\n\t R$" + restoOutros + " em créditos normais";
-            message += "\n\nAtenção: Cadastrar outro cupom fiscal de no mínimo R$" + cupomMinimo +" em créditos da Bandeira";
-            message += "\npode gerar mais "+ regrasBandeiraValor +" Brinde(s)";
-            alert(regra+linha+resultado+message);
+            message += "\n\nSobraram ";
+            message += parseFloat(restototal).toFixed(2);
+            message += " em Créditos\n";
         }
+        alert(regra+linha+resultado+message);
     }
 
 
