@@ -32,25 +32,25 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <?php /*<th><?php echo $paginator->sort('id');?></th> */?>
-            <th class="txtCenter"><?php echo $paginator->sort('Data','dia');?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Consumidores Atendidos','qtd_consumidores');?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Consumidores Novos','qtd_consumidores_novos');?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Cupons Fiscais Trocados','qtd_cupons_fiscais');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Data','dia');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Consumi dores','qtd_consumidores');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Consumi dores Novos','qtd_consumidores_novos');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Fiscais Trocados','qtd_cupons_fiscais');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor (R$)','valor_total');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Bandeira (R$)','valor_bandeira');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Outros (R$)','valor_outros');?></th>
             <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
-            <th class="txtCenter"><?php echo $paginator->sort('Cupons Promocionais Impressos','qtd_cupons_promocionais');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Promocionais Impressos','qtd_cupons_promocionais');?></th>
             <?php endif; ?>
-            <th class="txtCenter"><?php echo $paginator->sort('R$','valor_total');?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('R$ Bandeira','valor_bandeira');?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('R$ Outros','valor_outros');?></th>
             <?php if( Configure::read('Regras.Brinde.true') ) : ?>
-            <th class="w20 txtCenter"><?php echo $paginator->sort('Brindes','qtd_premios');?></th>
-            <th class="w20 txtCenter"><?php echo $paginator->sort('Brindes Trocados','qtd_trocados');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Brindes','qtd_premios');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Brindes Trocados','qtd_trocados');?></th>
             <?php endif; ?>
             <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
-            <th class="w20 txtCenter"><?php echo $paginator->sort('Valor (R$)','valor_premios');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor (R$)','valor_premios');?></th>
             <?php endif; ?>
-            <th class="txtCenter"><?php echo $paginator->sort('ticket_medio_consumidor');?></th>
-            <th class="txtCenter"><?php echo $paginator->sort('Ticket Médio Shopping','ticket_medio_cupom_fiscal');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Ticket Médio Consu midor (R$)','ticket_medio_consumidor');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Ticket  Médio Shopping (R$)','ticket_medio_cupom_fiscal');?></th>
         </tr>
         <?php
         $qtd_consumidores_sum = 0;
