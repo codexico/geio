@@ -32,13 +32,22 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th class="w20"><?php echo $paginator->sort('Promotor','Promotor.nome');?></th>
+            <th class="w10"><?php echo $paginator->sort('Promotor','Promotor.nome');?></th>
             <th class="w20"><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
             <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Fiscais','qtd_cf');?></th>
+            <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Promo','qtd_cp');?></th>
-            <th class="w10 txtCenter"><?php echo $paginator->sort('Valor Total (R$)','valor_total');?></th>
-            <th class="w10 txtCenter"><?php echo $paginator->sort('Valor Bandeira (R$)','valor_bandeira');?></th>
-            <th class="w10 txtCenter"><?php echo $paginator->sort('Valor Outros (R$)','valor_outros');?></th>
+            <?php endif; ?>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Total (R$)','valor_total');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Bandeira (R$)','valor_bandeira');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Outros (R$)','valor_outros');?></th>
+            <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Brindes','qtd_premios');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Brindes Trocados','qtd_trocados');?></th>
+            <?php endif; ?>
+            <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor (R$)','qtd_trocados');?></th>
+            <?php endif; ?>
             <th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
             <th class="w5 actions"></th>
         </tr>
@@ -60,9 +69,24 @@
             <td class="txtCenter">
                     <?php echo $troca['Troca']['qtd_cf']; ?>
             </td>
+                <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <td class="txtCenter">
                     <?php echo $troca['Troca']['qtd_cp']; ?>
             </td>
+                <?php endif; ?>
+                <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <td class="txtCenter">
+                        <?php echo $troca['Troca']['qtd_premios']; ?>
+            </td>
+            <td class="txtCenter">
+                        <?php echo $troca['Troca']['qtd_premios_trocados']; ?>
+            </td>
+                <?php endif; ?>
+                <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <td class="txtCenter">
+                        <?php echo $number->currency($troca['Troca']['qtd_premios_trocados']*Configure::read('Regras.Brinde.preco'),'EUR',array('before'=>'','after'=>'')); ?>
+            </td>
+                <?php endif; ?>
             <td class="txtCenter">
                     <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>

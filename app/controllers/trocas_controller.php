@@ -21,6 +21,9 @@ class TrocasController extends AppController {
 
     function index() {
         $this->Troca->recursive = 0;
+        $this->paginate = array(
+                'order' => 'Troca.created DESC',
+        );
         $this->set('trocas', $this->paginate());
     }
 
