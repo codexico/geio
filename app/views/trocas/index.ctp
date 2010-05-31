@@ -74,6 +74,15 @@
                     <?php echo $troca['Troca']['qtd_cp']; ?>
             </td>
                 <?php endif; ?>
+            <td class="txtCenter">
+                    <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
+            </td>
+            <td class="txtCenter">
+                    <?php echo $number->currency($troca['Troca']['valor_bandeira'],'EUR',array('before'=>'','after'=>'')); ?>
+            </td>
+            <td class="txtCenter">
+                    <?php echo $number->currency($troca['Troca']['valor_outros'],'EUR',array('before'=>'','after'=>'')); ?>
+            </td>
                 <?php if( Configure::read('Regras.Brinde.true') ) : ?>
             <td class="txtCenter">
                         <?php echo $troca['Troca']['qtd_premios']; ?>
@@ -87,15 +96,6 @@
                         <?php echo $number->currency($troca['Troca']['qtd_premios_trocados']*Configure::read('Regras.Brinde.preco'),'EUR',array('before'=>'','after'=>'')); ?>
             </td>
                 <?php endif; ?>
-            <td class="txtCenter">
-                    <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
-            </td>
-            <td class="txtCenter">
-                    <?php echo $number->currency($troca['Troca']['valor_bandeira'],'EUR',array('before'=>'','after'=>'')); ?>
-            </td>
-            <td class="txtCenter">
-                    <?php echo $number->currency($troca['Troca']['valor_outros'],'EUR',array('before'=>'','after'=>'')); ?>
-            </td>
             <td class="txtCenter">
                     <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
