@@ -9,81 +9,83 @@
  */
 class Troca extends AppModel {
 
-	var $name = 'Troca';
-        
- var $actsAs = array('Containable');
+    var $name = 'Troca';
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	var $belongsTo = array(
-		'Promotor' => array(
-			'className' => 'Promotor',
-			'foreignKey' => 'promotor_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Consumidor' => array(
-			'className' => 'Consumidor',
-			'foreignKey' => 'consumidor_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
+    var $actsAs = array('Containable');
 
-	var $hasMany = array(
-		'CupomFiscal' => array(
-			'className' => 'CupomFiscal',
-			'foreignKey' => 'troca_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'CupomPromocional' => array(
-			'className' => 'CupomPromocional',
-			'foreignKey' => 'troca_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Premio' => array(
-			'className' => 'Premio',
-			'foreignKey' => 'troca_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+    //The Associations below have been created with all possible keys, those that are not needed can be removed
+    var $belongsTo = array(
+            'Promotor' => array(
+                            'className' => 'Promotor',
+                            'foreignKey' => 'promotor_id',
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => ''
+            ),
+            'Consumidor' => array(
+                            'className' => 'Consumidor',
+                            'foreignKey' => 'consumidor_id',
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => ''
+            )
+    );
+
+    var $hasMany = array(
+            'CupomFiscal' => array(
+                            'className' => 'CupomFiscal',
+                            'foreignKey' => 'troca_id',
+                            'dependent' => false,
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => '',
+                            'limit' => '',
+                            'offset' => '',
+                            'exclusive' => '',
+                            'finderQuery' => '',
+                            'counterQuery' => ''
+            ),
+            'CupomPromocional' => array(
+                            'className' => 'CupomPromocional',
+                            'foreignKey' => 'troca_id',
+                            'dependent' => false,
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => '',
+                            'limit' => '',
+                            'offset' => '',
+                            'exclusive' => '',
+                            'finderQuery' => '',
+                            'counterQuery' => ''
+            ),
+            'Premio' => array(
+                            'className' => 'Premio',
+                            'foreignKey' => 'troca_id',
+                            'dependent' => false,
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => '',
+                            'limit' => '',
+                            'offset' => '',
+                            'exclusive' => '',
+                            'finderQuery' => '',
+                            'counterQuery' => ''
+            )
+    );
 
 
     function _buscaRelatorioPromotor($id) {
         $relatorio = array();
 
         $conditions_trocas = array(
-                'fields' => array("SUM(Troca.valor_total) AS 'total'", 
-                    "COUNT(DISTINCT (Troca.id) ) AS 'total_trocas'", "COUNT(DISTINCT (Troca.consumidor_id) ) AS 'total_consumidores'",
-                        "SUM(Troca.qtd_cf) AS 'total_cf'", "SUM(Troca.qtd_cp) AS 'total_cp'", "SUM(Troca.qtd_premios) AS 'total_brindes'",
+                'fields' => array("SUM(Troca.valor_total) AS 'total'",
+                        "COUNT(DISTINCT (Troca.id) ) AS 'total_trocas'", "COUNT(DISTINCT (Troca.consumidor_id) ) AS 'total_consumidores'",
+                        "SUM(Troca.qtd_cf) AS 'total_cf'", "SUM(Troca.qtd_cp) AS 'total_cp'",
                         "SUM(Troca.valor_bandeira) AS 'total_bandeira'", "SUM(Troca.valor_outros) AS 'total_outros'",
+                        "SUM(Troca.qtd_premios) AS 'total_brindes'", "SUM(Troca.qtd_premios_trocados) AS 'total_brindes_trocados'", "SUM(Troca.valor_premios) AS 'valor_premios'",
                         "AVG(Troca.valor_total) AS 'media_total'", "AVG(Troca.valor_bandeira) AS 'media_bandeira'", "AVG(Troca.valor_outros) AS 'media_outros'",
-                    "AVG(Troca.qtd_cf) AS 'media_cf'", "AVG(Troca.qtd_cp) AS 'media_cp'", "AVG(Troca.qtd_premios) AS 'media_brindes'",
+                        "AVG(Troca.qtd_cf) AS 'media_cf'", "AVG(Troca.qtd_cp) AS 'media_cp'",
+                        "AVG(Troca.qtd_premios) AS 'media_brindes'",
                 ),
                 'conditions' => array('Troca.promotor_id'=>$id)
         );
@@ -108,7 +110,7 @@ class Troca extends AppModel {
         return $relatorio_trocas[0];
     }
 
-    function atualizarQtdPremiosTrocados($qtd_premios_trocados){
+    function atualizarQtdPremiosTrocados($qtd_premios_trocados) {
 //        $this->recursive = -1;
 //        $this->id = $data['brinde_id'];
 //        $brinde = $this->read();

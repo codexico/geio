@@ -137,11 +137,19 @@
     <p><?php echo "Número de Cupons Fiscais trocados: " . $relatorio['total_cf']; ?></p>
     <p><?php echo "Média de Cupons Fiscais por Troca: " . $number->format($relatorio['media_cf'],array('places'=>2,'decimals'=>',','thousands'=>'.','before'=>'')); ?></p>
     <br />
+    <?php if( Configure::read('Regras.Brinde.true') ) : ?>
     <p><?php echo "Número de Brindes: " . $relatorio['total_brindes']; ?></p>
     <p><?php echo "Média de Brindes por Troca: " . $number->format($relatorio['media_brindes'],array('places'=>2,'decimals'=>',','thousands'=>'.','before'=>'')); ?></p>
+    <?php endif; ?>
+    <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+    <p><?php echo "Número de Brindes Trocados: " . $relatorio['total_brindes_trocados']; ?></p>
+    <p><?php echo "Valor Recebido: " . $number->currency(($relatorio['valor_premios']),'EUR',array('before'=>'R$ ','after'=>'')); ?></p>
+    <?php endif; ?>
     <br />
+    <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
     <p><?php echo "Número de Cupons Promocionais: " . $relatorio['total_cp']; ?></p>
     <p><?php echo "Média de Cupons Promocionais por Troca: " . $number->format($relatorio['media_cp'],array('places'=>2,'decimals'=>',','thousands'=>'.','before'=>'')); ?></p>
+    <?php endif; ?>
 </div>
 <div class="clear"></div>
 
@@ -169,12 +177,21 @@
     <?php $paginator->options(array('url' => $this->passedArgs)); ?>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th class="w20"><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
+            <th class=""><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
             <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Fiscais','qtd_cf');?></th>
+                <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Promo','qtd_cp');?></th>
-            <th class="w10 txtCenter"><?php echo $paginator->sort('Valor Total (R$)','valor_total');?></th>
-            <th class="w10 txtCenter"><?php echo $paginator->sort('Valor Bandeira (R$)','valor_bandeira');?></th>
-            <th class="w10 txtCenter"><?php echo $paginator->sort('Valor Outros (R$)','valor_outros');?></th>
+                <?php endif; ?>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Total (R$)','valor_total');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Bandeira (R$)','valor_bandeira');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor Outros (R$)','valor_outros');?></th>
+                <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Brindes','qtd_premios');?></th>
+                <?php endif; ?>
+                <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Brindes Trocados','qtd_premios_trocados');?></th>
+            <th class="w5 txtCenter"><?php echo $paginator->sort('Valor (R$)','valor_premios');?></th>
+                <?php endif; ?>
             <th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
             <th class="w5 actions"></th>
         </tr>
@@ -193,9 +210,11 @@
             <td class="txtCenter">
                     <?php echo $troca['Troca']['qtd_cf']; ?>
             </td>
+                <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <td class="txtCenter">
                     <?php echo $troca['Troca']['qtd_cp']; ?>
             </td>
+                <?php endif; ?>
             <td class="txtCenter">
                     <?php echo $number->currency($troca['Troca']['valor_total'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
@@ -205,6 +224,19 @@
             <td class="txtCenter">
                     <?php echo $number->currency($troca['Troca']['valor_outros'],'EUR',array('before'=>'','after'=>'')); ?>
             </td>
+                <?php if( Configure::read('Regras.Brinde.true') ) : ?>
+            <td class="txtCenter">
+                        <?php echo $troca['Troca']['qtd_premios']; ?>
+            </td>
+            <td class="txtCenter">
+                        <?php echo $troca['Troca']['qtd_premios_trocados']; ?>
+            </td>
+                <?php endif; ?>
+                <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
+            <td class="txtCenter">
+                        <?php echo $troca['Troca']['valor_premios']; ?>
+            </td>
+                <?php endif; ?>
             <td class="txtCenter">
                     <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
