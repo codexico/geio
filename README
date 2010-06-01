@@ -33,6 +33,8 @@ Instalação do sistema:
 
 1) Copiar todo o conteúdo para o diretório desejado.
 
+2) Apagar o conteúdo das pastas app/tmp/cache/models, app/tmp/cache/persistent, app/tmp/cache/views, mas não as próprias pastas.
+
 2) Alterar os arquivos app/config/database.php, app/config/core.php e app/config/regras.php
 
 app/config/database.php

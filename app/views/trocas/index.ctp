@@ -32,8 +32,8 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th class="w10"><?php echo $paginator->sort('Promotor','Promotor.nome');?></th>
-            <th class="w20"><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
+            <th class="w15"><?php echo $paginator->sort('Promotor','Promotor.nome');?></th>
+            <th class="w25"><?php echo $paginator->sort('Consumidor','Consumidor.nome');?></th>
             <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Fiscais','qtd_cf');?></th>
             <?php if( Configure::read('Regras.CupomPromocional.true') ) : ?>
             <th class="w5 txtCenter"><?php echo $paginator->sort('Cupons Promo','qtd_cp');?></th>
@@ -48,7 +48,7 @@
             <?php if( Configure::read('Regras.Brinde.Pagar') ) : ?>
             <th class="w5 txtCenter"><?php echo $paginator->sort('Valor (R$)','qtd_trocados');?></th>
             <?php endif; ?>
-            <th class="w15 txtCenter"><?php echo $paginator->sort('created');?></th>
+            <th class="w10 txtCenter"><?php echo $paginator->sort('created');?></th>
             <th class="w5 actions"></th>
         </tr>
         <?php
@@ -97,7 +97,7 @@
             </td>
                 <?php endif; ?>
             <td class="txtCenter">
-                    <?php echo date('d/m/Y - H:i', strtotime($troca['Troca']['created']) ); ?>
+                    <?php echo date('d/m/Y H:i', strtotime($troca['Troca']['created']) ); ?>
             </td>
             <td class="actions">
 
