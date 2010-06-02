@@ -115,7 +115,7 @@ $config['Regras.Bandeira.valor'] =  1;
  * @global int $GLOBALS['config']
  * @name $config
  */
-$config['Regras.Brinde.max'] = 999;
+$config['Regras.Brinde.max'] = 3;
 
 /**
  * Valor que o Consumidor deve pagar para receber o Brinde, em R$
