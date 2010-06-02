@@ -63,6 +63,9 @@ $(document).ready(function() {
     }
 
     var brinde = $('#brinde').val();
+    var brindesDisponiveis = new Number(0);
+    if (brinde) brindesDisponiveis = $('#brindesDisponiveis').val();
+    if(brindesDisponiveis < 1) $('form.novatroca').hide();
 
     /**
      * clone do primeiro form da pagina
@@ -128,6 +131,9 @@ $(document).ready(function() {
         _calculaTroca();
         
         if (brinde){
+            //alert($('#brindesDisponiveis').html())
+            brindesDisponiveis = $('#brindesDisponiveis').val();
+            //alert(brindesDisponiveis)
             _mensagemCalcularBrinde();
         }else{
             _mensagemCalcularCupomPromocional();
@@ -242,6 +248,11 @@ $(document).ready(function() {
         resultado = "";
         resultado += "\nTotal de cupons fiscais= "+ count_CF;
         resultado += "\nNúmero de brindes = "+ c;
+        if(brindesDisponiveis > 0){
+            resultado += "\nO Consumidor pode receber no máximo " + brindesDisponiveis + " brindes";
+        }else{
+            resultado += "\nO Consumidor não pode mais receber brindes!";
+        }
 
         if(bandeira){
             cupomMinimo = regrasValor-restoBandeira;

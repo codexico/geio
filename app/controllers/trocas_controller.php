@@ -135,7 +135,9 @@ class TrocasController extends AppController {
                     'conditions' => array( 'Promotor.user_id' => $this->Auth->user('id') )
             ));//debug($promotor);
 
-            $this->set(compact('consumidor', 'promotor'));
+        $brindes_disponiveis = $this->Brinde->_brindes_disponiveis( Configure::read('Regras.Brinde.max'), $consumidor['Consumidor']['brinde_count']);
+
+            $this->set(compact('consumidor', 'promotor', 'brindes_disponiveis'));
         }else {
             $this->Session->setFlash('Pesquise o Consumidor antes de fazer a Troca');
             $this->redirect(array('controller'=>'Consumidores', 'action' => 'pesquisar'));
