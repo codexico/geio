@@ -60,7 +60,7 @@ class Premio extends AppModel {
         }
 
         $this->Behaviors->attach('Containable');
-        $totais = $this->find('all', array(
+        $premios = $this->find('all', array(
                 'conditions'=> $conditions_data_premio,
                 'fields' => array(
                         "COUNT(Premio.id) AS 'qtd_premios_total'",
@@ -71,9 +71,27 @@ class Premio extends AppModel {
                 'group' => array('Premio.foreign_key'),
                 'contain'=>'Brinde'
         ));//debug($totais);
-        return $totais;
-
+        return $premios;
     }
 
+    function _premiosPeriodoTotais($dia, $fim = null ) {
+
+        $conditions_data_premio = array("DATE_FORMAT(Premio.created , '%Y-%m-%d' ) = " => $dia);
+        if($fim){
+            $conditions_data_premio = array("DATE_FORMAT(Premio.created , '%Y-%m-%d' ) BETWEEN ? AND ? " => array($dia,$fim));
+        }
+
+        $this->Behaviors->attach('Containable');
+        $somas = $this->find('first', array(
+                'conditions'=> $conditions_data_premio,
+                'fields' => array(
+                        "COUNT(Premio.id) AS 'qtd_premios_total'",
+                        "SUM(Brinde.valor) AS 'premios_valor_total'"
+                ),
+                //'group' => array('Premio.foreign_key'),
+                'contain'=>'Brinde'
+        ));//debug($totais);
+        return $somas;
+    }
 }
 ?>

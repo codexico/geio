@@ -5,6 +5,7 @@
  * @property CupomFiscal $CupomFiscal
  * @property Consumidor $Consumidor
  * @property Brinde $Brinde
+ * @property Premio $Premio
  */
 class TrocasController extends AppController {
 
@@ -485,6 +486,8 @@ class TrocasController extends AppController {
             $this->Premio = ClassRegistry::init('Premio');
             $premios_dia = $this->Premio->_premiosPeriodo($inicio);//debug($premios_dia);
             $this->set('premios_dia', $premios_dia);
+            $totais_premios = $this->Premio->_premiosPeriodoTotais($inicio);//debug($totais_premios);
+            $this->set( 'totais_premios', $totais_premios );
         }
     }
 
@@ -509,6 +512,8 @@ class TrocasController extends AppController {
             $fim =  date('Y-m-d', strtotime("-0 days"));
             $premios_dia = $this->Premio->_premiosPeriodo($inicio, $fim);//debug($premios_dia);
             $this->set('premios_dia', $premios_dia);
+            $totais_premios = $this->Premio->_premiosPeriodoTotais($inicio, $fim);//debug($totais_premios);
+            $this->set( 'totais_premios', $totais_premios );
         }
 
     }
@@ -533,7 +538,9 @@ class TrocasController extends AppController {
             $this->Premio = ClassRegistry::init('Premio');
             $fim =  date('Y-m-d', strtotime("-0 days"));
             $premios_dia = $this->Premio->_premiosPeriodo($inicio, $fim);//debug($premios_dia);
-            $this->set('premios_dia', $premios_dia);
+            $this->set( 'premios_dia', $premios_dia );
+            $totais_premios = $this->Premio->_premiosPeriodoTotais($inicio, $fim);//debug($totais_premios);
+            $this->set( 'totais_premios', $totais_premios );
         }
     }
 
@@ -560,6 +567,8 @@ class TrocasController extends AppController {
             $fim =  date('Y-m-d', strtotime("-0 days"));
             $premios_dia = $this->Premio->_premiosPeriodo($inicio, $fim);//debug($premios_dia);
             $this->set('premios_dia', $premios_dia);
+            $totais_premios = $this->Premio->_premiosPeriodoTotais($inicio, $fim);//debug($totais_premios);
+            $this->set( 'totais_premios', $totais_premios );
         }
         /*
         //buscar trocas de ontem

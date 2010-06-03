@@ -1,4 +1,3 @@
-
 <div class="relatorio">
     <table cellpadding="0" cellspacing="0">
         <tr>
@@ -13,6 +12,11 @@
             <td class="txtCenter"><?php echo $premio[0]['premios_valor']; ?></td>
         </tr>
         <?php endforeach; ?>
+        <tr>
+            <th class="txtCenter">Total</th>
+            <th class="txtCenter"><?php echo $totais_premios[0]['qtd_premios_total']; ?></th>
+            <th class="txtCenter"><?php echo $totais_premios[0]['premios_valor_total']; ?></th>
+        </tr>
     </table>
 
 </div>
