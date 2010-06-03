@@ -88,6 +88,14 @@
             </td>
         </tr>
         <?php endforeach; ?>
+            <th class="txtCenter">Total</th>
+            <th class="txtCenter"><?php echo $totais['qtd_brindes_total'];?></th>
+            <!-- Será usado qd tiver controle de premiacao para cada tipo de brinde
+            <th class="txtCenter"><?php echo $paginator->sort('valor');?></th>
+            <th class="txtCenter"><?php echo $paginator->sort('Max. Consumidores', 'consumidor_max');?></th>
+            -->
+            <th class="txtCenter"><?php echo $totais['estoque_atual_total'];?></th>
+            <th class="actions"></th>
     </table>
 
     <!-- .paginacao -->

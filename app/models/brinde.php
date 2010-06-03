@@ -58,5 +58,22 @@ class Brinde extends AppModel {
         }
         return $qtd_premios;
     }
+
+    /**
+     * Totais para mostrar no fim da tabela
+     *
+     * @since namorados 2010
+     * @return array
+     */
+    function _totais_brindes(){
+        $totais = $this->find('first',array(
+                'fields' => array(
+                        "COUNT(Brinde.id) AS 'qtd_brindes_total'",
+                        "SUM(Brinde.estoque_atual) AS 'estoque_atual_total'"
+                ),
+            'recursive' => -1
+        ));//debug($relatorio);
+        return $totais[0];
+    }
 }
 ?>

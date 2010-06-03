@@ -11,6 +11,7 @@ class BrindesController extends AppController {
     function index() {
         $this->Brinde->recursive = 0;
         $this->set('brindes', $this->paginate(array('Brinde.deleted' => 0)));
+        $this->set('totais', $this->Brinde->_totais_brindes() );
     }
 
     function view($id = null) {
