@@ -64,6 +64,13 @@
             </td>
         </tr>
         <?php endforeach; ?>
+        <tr>
+            <th class="txtCenter">Total</th>
+            <th class="txtCenter"><?php echo $totais['qtd_entradas_total'];?></th>
+            <th class="txtCenter"><?php echo $totais['quantidade_total'];?></th>
+            <th class="txtCenter">&nbsp;</th>
+            <th class="actions">&nbsp;</th>
+        </tr>
     </table>
 
     <!-- .paginacao -->

@@ -13,6 +13,7 @@ class EntradasController extends AppController {
     function index() {
         $this->Entrada->recursive = 0;
         $this->set('entradas', $this->paginate());
+        $this->set('totais', $this->Entrada->_totais_entradas() );
     }
 
     function view($id = null) {

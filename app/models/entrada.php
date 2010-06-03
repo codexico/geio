@@ -22,5 +22,22 @@ class Entrada extends AppModel {
 		)
 	);
 
+    /**
+     * Totais para mostrar no fim da tabela
+     *
+     * @since namorados 2010
+     * @return array
+     */
+    function _totais_entradas(){
+        $totais = $this->find('first',array(
+                'fields' => array(
+                        "COUNT(Entrada.id) AS 'qtd_entradas_total'",
+                        "SUM(Entrada.qtd) AS 'quantidade_total'"
+                ),
+            'recursive' => -1
+        ));debug($totais);
+        return $totais[0];
+    }
+
 }
 ?>
